@@ -1,215 +1,658 @@
-<div class="compiler-section">
-    <h2>Python Compiler</h2>
-    <p>Write and execute Python code directly in your browser!</p>
-    
-    <div class="compiler-container">
-        <div class="editor-container">
-            <label for="python-code">Python Code:</label>
-            <textarea id="python-code" placeholder="Enter your Python code here...">print("Hello, World!")</textarea>
-        </div>
-        
-        <div class="controls">
-            <button id="run-btn" class="btn btn-primary">▶️ Run Code</button>
-            <button id="clear-btn" class="btn btn-danger">🗑️ Clear</button>
-            <button id="example-btn" class="btn btn-secondary">📝 Load Example</button>
-        </div>
-        
-        <div class="output-container">
-            <h3>Output:</h3>
-            <pre id="output">Ready to run Python code...</pre>
-        </div>
+<div class="compiler-wrap">
+
+  <!-- Memphis geometric accents -->
+  <div class="memphis-dots" aria-hidden="true">
+    <span class="md-1"></span>
+    <span class="md-2"></span>
+    <span class="md-3"></span>
+  </div>
+
+  <!-- VS Code window chrome -->
+  <div class="compiler-topbar">
+    <div class="topbar-left">
+      <span class="win-dot red"  title="Close"></span>
+      <span class="win-dot yel"  title="Minimise"></span>
+      <span class="win-dot grn"  title="Maximise"></span>
+      <span class="topbar-file">&#128013; main.py</span>
     </div>
-</div>
+    <div class="topbar-right">
+      <span class="xp-badge" id="compilerXP">&#9889; XP&nbsp;0</span>
+    </div>
+  </div>
 
+  <!-- Editor -->
+  <div class="editor-panel">
+    <div class="line-numbers" id="lineNumbers" aria-hidden="true">1</div>
+    <textarea
+      id="python-code"
+      spellcheck="false"
+      autocorrect="off"
+      autocapitalize="off"
+      placeholder="# Write Python here…"
+    >print("Hello, World!")
+</textarea>
+  </div>
+
+  <!-- Controls -->
+  <div class="compiler-controls">
+    <button id="run-btn"  class="ctl-btn primary" title="Run (Ctrl+Enter)">&#9654; Run</button>
+    <button id="clear-btn" class="ctl-btn danger"  title="Clear editor">&#10005; Clear</button>
+
+    <div class="examples-wrap">
+      <button id="example-toggle" class="ctl-btn ghost">&#8230; Examples &#9660;</button>
+      <ul class="examples-drop" id="examplesDrop">
+        <li data-ex="hello">Hello World</li>
+        <li data-ex="vars">Variables &amp; Math</li>
+        <li data-ex="list">List Operations</li>
+        <li data-ex="loop">For Loop</li>
+        <li data-ex="func">Functions</li>
+        <li data-ex="class">OOP Class</li>
+        <li data-ex="fib">Fibonacci</li>
+      </ul>
+    </div>
+
+    <div class="run-stats">
+      <span id="runCount">0 runs</span>
+      <span id="lineCount">1 line</span>
+    </div>
+  </div>
+
+  <!-- Terminal output -->
+  <div class="terminal-panel">
+    <div class="terminal-hdr">
+      <span class="term-label">&#9658; OUTPUT</span>
+      <div class="term-actions">
+        <span id="execTime" class="exec-time"></span>
+        <button id="copy-out" class="term-btn" title="Copy output">&#10064; Copy</button>
+        <button id="clear-out" class="term-btn" title="Clear output">&#10005;</button>
+      </div>
+    </div>
+    <pre id="output" class="terminal-out">Ready to run Python code…</pre>
+  </div>
+
+</div><!-- /.compiler-wrap -->
+
+<!-- ─────────────────────────────────────────────────
+     Styles — scoped to .compiler-wrap
+───────────────────────────────────────────────── -->
 <style>
-.compiler-section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+/* ── Compiler root ─── */
+.compiler-wrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #30363d;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  font-family: var(--font-ui, 'Segoe UI', sans-serif);
+  background: #0d1117;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.compiler-container {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    margin-top: 20px;
+/* ── Memphis dots ─── */
+.memphis-dots {
+  position: absolute;
+  top: 0; right: 0;
+  width: 100px; height: 100px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.memphis-dots span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.12;
+}
+.md-1 { width:60px; height:60px; background:#00d4aa; top:-20px; right:-20px; }
+.md-2 { width:35px; height:35px; background:#7c3aed; top:30px; right:10px; }
+.md-3 { width:20px; height:20px; background:#ffd700; top:10px; right:55px; }
+
+/* ── Topbar (window chrome) ─── */
+.compiler-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #161b22;
+  padding: 10px 16px;
+  border-bottom: 1px solid #21262d;
+  position: relative;
+  z-index: 1;
 }
 
-body.dark .compiler-container {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+
+.win-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: default;
+  transition: filter 0.15s;
+}
+.win-dot:hover { filter: brightness(1.4); }
+.win-dot.red { background: #ff5f56; }
+.win-dot.yel { background: #ffbd2e; }
+.win-dot.grn { background: #27c93f; }
+
+.topbar-file {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82em;
+  color: #8b949e;
+  margin-left: 4px;
+  letter-spacing: 0.2px;
 }
 
-.editor-container {
-    margin-bottom: 20px;
+/* XP gamification badge */
+.xp-badge {
+  background: linear-gradient(90deg, #00d4aa22, #7c3aed22);
+  border: 1px solid #00d4aa55;
+  color: #00d4aa;
+  font-size: 0.78em;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
 }
 
-.editor-container label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #2c3e50;
+.xp-badge.flash {
+  background: linear-gradient(90deg, #00d4aa44, #7c3aed44);
+  border-color: #00d4aa;
+  box-shadow: 0 0 12px #00d4aa55;
 }
 
-body.dark .editor-container label {
-    color: #e0e0e0;
+/* ── Editor panel ─── */
+.editor-panel {
+  display: flex;
+  position: relative;
+  background: #0d1117;
+  border-bottom: 1px solid #21262d;
+}
+
+.line-numbers {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #444c56;
+  text-align: right;
+  padding: 14px 10px 14px 14px;
+  user-select: none;
+  min-width: 42px;
+  white-space: pre;
+  border-right: 1px solid #21262d;
+  background: #0d1117;
 }
 
 #python-code {
-    width: 100%;
-    height: 250px;
-    padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    resize: vertical;
-    background-color: #f8f9fa;
-    color: #333;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-body.dark #python-code {
-    background-color: #2a2a2a;
-    color: #e0e0e0;
-    border-color: #444;
+  flex: 1;
+  min-height: 220px;
+  max-height: 420px;
+  padding: 14px 16px;
+  background: transparent;
+  color: #e6edf3;
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 13.5px;
+  line-height: 1.65;
+  border: none;
+  outline: none;
+  resize: vertical;
+  tab-size: 4;
+  caret-color: #00d4aa;
+  overflow-y: auto;
 }
 
 #python-code:focus {
-    outline: none;
-    border-color: #007acc;
-    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+  box-shadow: inset 2px 0 0 #00d4aa;
 }
 
-body.dark #python-code:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+/* ── Controls bar ─── */
+.compiler-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+  flex-wrap: wrap;
 }
 
-.controls {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+.ctl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.83em;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.3px;
+  transition: all 0.16s ease;
+  white-space: nowrap;
 }
 
-.btn {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.ctl-btn.primary {
+  background: #238636;
+  border-color: #2ea043;
+  color: #ffffff;
+}
+.ctl-btn.primary:hover {
+  background: #2ea043;
+  box-shadow: 0 0 12px #2ea04355;
+  transform: translateY(-1px);
+}
+.ctl-btn.primary:active { transform: scale(0.97); }
+
+.ctl-btn.danger {
+  background: transparent;
+  border-color: #f85149;
+  color: #f85149;
+}
+.ctl-btn.danger:hover { background: #f8514918; transform: translateY(-1px); }
+
+.ctl-btn.ghost {
+  background: transparent;
+  border-color: #30363d;
+  color: #8b949e;
+  position: relative;
+}
+.ctl-btn.ghost:hover { border-color: #8b949e; color: #e6edf3; }
+
+/* Examples dropdown */
+.examples-wrap { position: relative; }
+
+.examples-drop {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  list-style: none;
+  padding: 6px 0;
+  min-width: 180px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
-.btn-primary {
-    background-color: #007acc;
-    color: white;
+.examples-drop.open { display: block; }
+
+.examples-drop li {
+  padding: 8px 16px;
+  font-size: 0.83em;
+  font-family: var(--font-mono, monospace);
+  color: #8b949e;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.examples-drop li:hover {
+  background: #21262d;
+  color: #00d4aa;
+  padding-left: 20px;
 }
 
-.btn-primary:hover {
-    background-color: #005a9c;
-    transform: translateY(-1px);
+/* Run stats */
+.run-stats {
+  margin-left: auto;
+  display: flex;
+  gap: 14px;
+  font-size: 0.78em;
+  font-family: var(--font-mono, monospace);
+  color: #444c56;
 }
 
-.btn-danger {
-    background-color: #e74c3c;
-    color: white;
+/* ── Terminal output ─── */
+.terminal-panel {
+  background: #010409;
 }
 
-.btn-danger:hover {
-    background-color: #c0392b;
-    transform: translateY(-1px);
+.terminal-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: #0d1117;
+  border-bottom: 1px solid #21262d;
 }
 
-.btn-secondary {
-    background-color: #6c757d;
-    color: white;
+.term-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75em;
+  font-weight: 700;
+  color: #444c56;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.btn-secondary:hover {
-    background-color: #545b62;
-    transform: translateY(-1px);
+.term-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.output-container {
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    min-height: 120px;
-    background-color: #f8f9fa;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+.exec-time {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75em;
+  color: #444c56;
 }
 
-body.dark .output-container {
-    background-color: #2a2a2a;
-    border-color: #444;
+.term-btn {
+  background: transparent;
+  border: 1px solid #21262d;
+  color: #444c56;
+  font-size: 0.75em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono, monospace);
+}
+.term-btn:hover { border-color: #30363d; color: #8b949e; }
+
+.terminal-out {
+  margin: 0;
+  padding: 14px 18px;
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #3fb950;
+  min-height: 110px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
-.output-container h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #2c3e50;
-    font-size: 16px;
+.terminal-out.out-error { color: #f85149; }
+.terminal-out.out-info  { color: #58a6ff; }
+.terminal-out.out-ready { color: #444c56; }
+
+/* Running spinner */
+.terminal-out.out-running { color: #d29922; }
+.terminal-out.out-running::before {
+  content: '⠋ ';
+  animation: spin-frames 0.6s steps(8) infinite;
+}
+@keyframes spin-frames {
+  0%   { content: '⠋ '; }
+  12%  { content: '⠙ '; }
+  25%  { content: '⠹ '; }
+  37%  { content: '⠸ '; }
+  50%  { content: '⠼ '; }
+  62%  { content: '⠴ '; }
+  75%  { content: '⠦ '; }
+  87%  { content: '⠧ '; }
+  100% { content: '⠇ '; }
 }
 
-body.dark .output-container h3 {
-    color: #e0e0e0;
-}
-
-#output {
-    margin: 0;
-    white-space: pre-wrap;
-    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #333;
-    min-height: 80px;
-}
-
-body.dark #output {
-    color: #e0e0e0;
-}
-
-.output-success {
-    color: #28a745 !important;
-}
-
-.output-error {
-    color: #dc3545 !important;
-}
-
-.output-info {
-    color: #17a2b8 !important;
-}
-
-.loading {
-    color: #6c757d !important;
-    font-style: italic;
-}
-
-@media (max-width: 768px) {
-    .compiler-section {
-        padding: 15px;
-    }
-    
-    .compiler-container {
-        padding: 20px;
-    }
-    
-    .controls {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
+/* ── Responsive ─── */
+@media (max-width: 600px) {
+  .compiler-controls { gap: 6px; }
+  .ctl-btn { padding: 6px 12px; font-size: 0.8em; }
+  .run-stats { display: none; }
 }
 </style>
+
+<!-- ─────────────────────────────────────────────────
+     Script — auto-executes when topic is loaded
+     (enhanced-script.js calls executeScripts() after innerHTML)
+───────────────────────────────────────────────── -->
+<script>
+(function () {
+  /* ── Example snippets ─── */
+  const EXAMPLES = {
+    hello: `print("Hello, World!")
+print("Welcome to Python! 🐍")`,
+    vars: `# Variables & Math
+name = "Python"
+version = 3.12
+year = 1991
+
+print(f"Language: {name}")
+print(f"Version: {version}")
+print(f"Created: {year}")
+print(f"Age: {2025 - year} years old")`,
+    list: `# List Operations
+fruits = ["apple", "banana", "cherry", "mango"]
+
+print("All fruits:", fruits)
+print("First:", fruits[0])
+print("Last:", fruits[-1])
+
+fruits.append("orange")
+fruits.remove("banana")
+print("After changes:", fruits)
+print("Count:", len(fruits))`,
+    loop: `# For Loop Patterns
+# Range loop
+for i in range(1, 6):
+    print(f"Count: {i}")
+
+# Loop over list
+colors = ["red", "green", "blue"]
+for color in colors:
+    print(f"Color → {color}")
+
+# Enumerate
+for idx, val in enumerate(colors, 1):
+    print(f"  {idx}. {val}")`,
+    func: `# Functions
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(greet("World"))
+print(greet("Python", "Hey"))
+
+for n in range(1, 8):
+    print(f"{n}! = {factorial(n)}")`,
+    class: `# Object-Oriented Programming
+class Animal:
+    def __init__(self, name, sound):
+        self.name = name
+        self.sound = sound
+
+    def speak(self):
+        return f"{self.name} says {self.sound}!"
+
+    def __str__(self):
+        return f"Animal({self.name})"
+
+dog = Animal("Dog", "Woof")
+cat = Animal("Cat", "Meow")
+
+print(dog.speak())
+print(cat.speak())
+print(str(dog))`,
+    fib: `# Fibonacci Sequence
+def fibonacci(n):
+    a, b = 0, 1
+    result = []
+    for _ in range(n):
+        result.append(a)
+        a, b = b, a + b
+    return result
+
+fib = fibonacci(12)
+print("Fibonacci sequence:")
+print(fib)
+
+# With index
+for i, val in enumerate(fib):
+    bar = "█" * (val if val < 30 else 29)
+    print(f"F({i:2d}) = {val:4d}  {bar}")`,
+  };
+
+  /* ── State ─── */
+  let runCount   = parseInt(localStorage.getItem('compilerRuns') || '0');
+  let totalXP    = parseInt(localStorage.getItem('compilerXP')   || '0');
+  let skulptReady = typeof Sk !== 'undefined';
+
+  /* ── DOM refs ─── */
+  const codeEl     = document.getElementById('python-code');
+  const outputEl   = document.getElementById('output');
+  const runBtn     = document.getElementById('run-btn');
+  const clearBtn   = document.getElementById('clear-btn');
+  const exToggle   = document.getElementById('example-toggle');
+  const exDrop     = document.getElementById('examplesDrop');
+  const copyOutBtn = document.getElementById('copy-out');
+  const clearOutBtn= document.getElementById('clear-out');
+  const runCountEl = document.getElementById('runCount');
+  const lineCountEl= document.getElementById('lineCount');
+  const lineNumsEl = document.getElementById('lineNumbers');
+  const xpBadgeEl  = document.getElementById('compilerXP');
+  const execTimeEl = document.getElementById('execTime');
+
+  /* ── Line numbers ─── */
+  function updateLineNumbers() {
+    const lines = codeEl.value.split('\n').length;
+    lineNumsEl.textContent = Array.from({length: lines}, (_, i) => i + 1).join('\n');
+    if (lineCountEl) lineCountEl.textContent = lines + (lines === 1 ? ' line' : ' lines');
+  }
+
+  /* ── XP system ─── */
+  function addXP(amount) {
+    totalXP += amount;
+    localStorage.setItem('compilerXP', totalXP);
+    if (xpBadgeEl) {
+      xpBadgeEl.textContent = '⚡ XP ' + totalXP;
+      xpBadgeEl.classList.add('flash');
+      setTimeout(() => xpBadgeEl.classList.remove('flash'), 800);
+    }
+  }
+
+  /* ── Update run count ─── */
+  function updateRunCount() {
+    runCount++;
+    localStorage.setItem('compilerRuns', runCount);
+    if (runCountEl) runCountEl.textContent = runCount + (runCount === 1 ? ' run' : ' runs');
+  }
+
+  /* ── Set output state ─── */
+  function setOutput(text, state) {
+    outputEl.textContent = text;
+    outputEl.className = 'terminal-out out-' + state;
+  }
+
+  /* ── Run code ─── */
+  function runCode() {
+    const code = codeEl.value.trim();
+    if (!code) { setOutput('No code to run.', 'info'); return; }
+
+    if (typeof Sk === 'undefined') {
+      setOutput('Skulpt not loaded. Check your internet connection and refresh.', 'error');
+      return;
+    }
+
+    setOutput('Running…', 'running');
+    updateRunCount();
+
+    let outputBuffer = '';
+    const startTime = performance.now();
+
+    Sk.configure({
+      output: function (text) { outputBuffer += text; },
+      read: function (x) {
+        if (Sk.builtinFiles?.files?.[x] === undefined)
+          throw "File not found: '" + x + "'";
+        return Sk.builtinFiles.files[x];
+      },
+      execLimit: 10000,
+    });
+
+    Sk.misceval.asyncToPromise(function () {
+      return Sk.importMainWithBody('<stdin>', false, code, true);
+    }).then(function () {
+      const ms = Math.round(performance.now() - startTime);
+      setOutput(outputBuffer || '(no output)', 'success');
+      if (execTimeEl) execTimeEl.textContent = ms + 'ms';
+      addXP(5 + Math.floor(code.split('\n').length / 5));
+      // global achievement hook
+      if (typeof awardAchievement === 'function') awardAchievement('compiler');
+    }).catch(function (err) {
+      const ms = Math.round(performance.now() - startTime);
+      setOutput('Error: ' + (err.toString() || 'Unknown error'), 'error');
+      if (execTimeEl) execTimeEl.textContent = ms + 'ms';
+    });
+  }
+
+  /* ── Clear editor ─── */
+  function clearEditor() {
+    codeEl.value = '';
+    updateLineNumbers();
+    codeEl.focus();
+  }
+
+  /* ── Examples dropdown ─── */
+  exToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    exDrop.classList.toggle('open');
+  });
+
+  document.addEventListener('click', function () {
+    exDrop.classList.remove('open');
+  });
+
+  exDrop.querySelectorAll('li').forEach(function (li) {
+    li.addEventListener('click', function () {
+      const key = this.getAttribute('data-ex');
+      if (EXAMPLES[key]) {
+        codeEl.value = EXAMPLES[key];
+        updateLineNumbers();
+        exDrop.classList.remove('open');
+        codeEl.focus();
+      }
+    });
+  });
+
+  /* ── Copy output ─── */
+  if (copyOutBtn) {
+    copyOutBtn.addEventListener('click', function () {
+      navigator.clipboard.writeText(outputEl.textContent || '').then(function () {
+        copyOutBtn.textContent = '✓ Copied';
+        setTimeout(function () { copyOutBtn.textContent = '⎘ Copy'; }, 1500);
+      });
+    });
+  }
+
+  /* ── Clear output ─── */
+  if (clearOutBtn) {
+    clearOutBtn.addEventListener('click', function () {
+      setOutput('Ready to run Python code…', 'ready');
+      if (execTimeEl) execTimeEl.textContent = '';
+    });
+  }
+
+  /* ── Tab key → insert spaces ─── */
+  codeEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const s = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.substring(0, s) + '    ' + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = s + 4;
+      updateLineNumbers();
+    }
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      runCode();
+    }
+  });
+
+  codeEl.addEventListener('input', updateLineNumbers);
+  runBtn.addEventListener('click', runCode);
+  clearBtn.addEventListener('click', clearEditor);
+
+  /* ── Init ─── */
+  updateLineNumbers();
+  if (runCountEl) runCountEl.textContent = runCount + (runCount === 1 ? ' run' : ' runs');
+  if (xpBadgeEl)  xpBadgeEl.textContent  = '⚡ XP ' + totalXP;
+
+})();
+</script>

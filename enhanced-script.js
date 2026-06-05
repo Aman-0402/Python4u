@@ -1,5 +1,17 @@
 // Enhanced Python eBook Script with Achievements and Progress Tracking
 
+// Re-execute <script> tags injected via innerHTML (browser skips them by default)
+function executeScripts(container) {
+  container.querySelectorAll('script').forEach(function (oldScript) {
+    var newScript = document.createElement('script');
+    Array.from(oldScript.attributes).forEach(function (attr) {
+      newScript.setAttribute(attr.name, attr.value);
+    });
+    newScript.textContent = oldScript.textContent;
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+}
+
 // Achievement system
 const achievements = {
   firstVisit: { name: 'First Steps', description: 'Welcome to Python eBook!', icon: '🎉' },
@@ -233,16 +245,27 @@ function enhanceTopicLinks() {
           .then(data => {
             if (content) {
               content.innerHTML = data;
-              
+
+              // Execute <script> tags injected via innerHTML
+              executeScripts(content);
+
+              // Close sidebar, expand content
+              const sidebar = document.getElementById('sidebar');
+              if (sidebar) sidebar.classList.add('closed');
+              document.body.classList.add('sidebar-collapsed');
+
+              // Scroll to top
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+
               // Mark topic as completed
               markTopicCompleted(file);
-              
-              // Add success animation
-              content.style.animation = 'fadeIn 0.5s ease-in-out';
-              setTimeout(() => content.style.animation = '', 500);
+
+              content.style.animation = 'none';
+              requestAnimationFrame(() => {
+                content.style.animation = 'fadeIn 0.4s ease-out both';
+              });
             }
-            
-            // Initialize compiler if compiler.html is loaded
+
             if (file === 'compiler.html') {
               awardAchievement('compiler');
             }
