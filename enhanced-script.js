@@ -1,5 +1,61 @@
 // Enhanced Python eBook Script with Achievements and Progress Tracking
 
+// Wrap each <pre> in IDE window chrome + inject copy button
+function addCopyButtons(container) {
+  // Code blocks
+  container.querySelectorAll('pre').forEach(function (pre) {
+    if (pre.closest('.code-wrapper')) return;
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'code-wrapper';
+
+    var header = document.createElement('div');
+    header.className = 'code-header';
+    header.innerHTML =
+      '<span class="term-dots">' +
+        '<span class="dot-r">&#11044;</span>' +
+        '<span class="dot-y">&#11044;</span>' +
+        '<span class="dot-g">&#11044;</span>' +
+      '</span>' +
+      '<span class="code-fname">main.py</span>';
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', function () {
+      var codeEl = pre.querySelector('code');
+      var text = codeEl ? codeEl.innerText : pre.innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = '✓ Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1800);
+      });
+    });
+
+    header.appendChild(btn);
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(header);
+    wrapper.appendChild(pre);
+  });
+
+  // Output blocks — add "▶ Output" header
+  container.querySelectorAll('.output-block').forEach(function (block) {
+    if (block.closest('.output-wrapper')) return;
+    var wrapper = document.createElement('div');
+    wrapper.className = 'output-wrapper';
+    var header = document.createElement('div');
+    header.className = 'output-header';
+    header.innerHTML = '<span>&#9654;</span><span>Output</span>';
+    block.parentNode.insertBefore(wrapper, block);
+    wrapper.appendChild(header);
+    wrapper.appendChild(block);
+  });
+}
+
 // Re-execute <script> tags injected via innerHTML (browser skips them by default)
 function executeScripts(container) {
   container.querySelectorAll('script').forEach(function (oldScript) {
@@ -248,6 +304,7 @@ function enhanceTopicLinks() {
 
               // Execute <script> tags injected via innerHTML
               executeScripts(content);
+              addCopyButtons(content);
 
               // Close sidebar, expand content
               const sidebar = document.getElementById('sidebar');

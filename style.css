@@ -317,6 +317,79 @@ pre {
   position: relative;
 }
 
+/* ── Code wrapper — IDE window chrome ───────────────── */
+.code-wrapper {
+  margin: 1.2em 0;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid #30363d;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1c2128;
+  border-bottom: 1px solid #30363d;
+  padding: 7px 14px;
+}
+
+.term-dots {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.dot-r { color: #ff5f56; font-size: 13px; line-height: 1; }
+.dot-y { color: #ffbd2e; font-size: 13px; line-height: 1; }
+.dot-g { color: #27c93f; font-size: 13px; line-height: 1; }
+
+.code-fname {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  color: #8b949e;
+  letter-spacing: 0.2px;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  background: #21262d;
+  color: #8b949e;
+  border: 1px solid #444c56;
+  border-radius: 6px;
+  padding: 3px 11px;
+  font-size: 0.75em;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.copy-btn:hover {
+  background: #30363d;
+  color: #e6edf3;
+  border-color: #8b949e;
+}
+
+.copy-btn.copied {
+  background: #2ea043;
+  color: #fff;
+  border-color: transparent;
+}
+
+/* pre inside wrapper: reset spacing/border (header handles chrome) */
+.code-wrapper pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.code-wrapper pre::before { display: none; }
+
 pre::before {
   content: '● ● ●';
   position: absolute;
@@ -334,8 +407,43 @@ pre code {
   padding: 0;
   color: inherit;
   font-size: inherit;
-  padding-top: 1.4em;
   display: block;
+}
+
+/* standalone pre (no wrapper): keep top padding for ::before dots */
+pre:not(.code-wrapper pre) code {
+  padding-top: 1.4em;
+}
+
+/* ── Output wrapper — terminal chrome ───────────────── */
+.output-wrapper {
+  margin: 0.8em 0;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid #30363d;
+  border-left: 3px solid var(--xp-green, #2ea043);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.output-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+  padding: 5px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.75em;
+  font-weight: 600;
+  color: #3fb950;
+  letter-spacing: 0.4px;
+}
+
+.output-wrapper .output-block {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  border-left: none;
 }
 
 code {
@@ -396,6 +504,7 @@ body.dark .code-block {
   font-size: 0.88em;
   color: #3fb950;
   margin: 0.8em 0;
+  white-space: pre-wrap;
 }
 
 body.dark .output-block {
