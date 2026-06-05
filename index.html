@@ -1,5 +1,5 @@
-<!DOCTYPE html>  
-<html lang="en"> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,14 +8,33 @@
   <link rel="stylesheet" href="style.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Hero Section Styles */
+    /* ── Design tokens ───────────────────────────────────── */
+    :root {
+      --r-md:  12px;
+      --r-lg:  16px;
+      --r-xl:  22px;
+      --sp-xs: 8px;
+      --sp-sm: 16px;
+      --sp-md: 28px;
+      --sp-lg: 44px;
+      --sp-xl: 68px;
+      --clr-primary:      #667eea;
+      --clr-primary-dark: #764ba2;
+      --clr-accent:       #ffd700;
+      --clr-text:         #1a1a2e;
+      --clr-muted:        #5a6070;
+      --shadow-card:      0 2px 12px rgba(0,0,0,0.07);
+      --shadow-card-hover:0 10px 28px rgba(0,0,0,0.13);
+    }
+
+    /* ── Hero ────────────────────────────────────────────── */
     .hero-container {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
       color: white;
-      padding: 60px 20px;
+      padding: var(--sp-xl) var(--sp-lg);
       text-align: center;
-      border-radius: 20px;
-      margin-bottom: 40px;
+      border-radius: var(--r-xl);
+      margin-bottom: var(--sp-lg);
       position: relative;
       overflow: hidden;
     }
@@ -23,269 +42,242 @@
     .hero-container::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
       pointer-events: none;
     }
 
     .hero-title {
-      font-size: 3.5em;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      animation: bounceIn 1s ease-out;
+      font-size: clamp(2em, 5vw, 3.4em);
+      font-weight: 800;
+      margin: 0 0 14px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      animation: bounceIn 0.8s ease-out both;
+      will-change: transform, opacity;
     }
 
     .hero-subtitle {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-      opacity: 0.9;
-      animation: fadeInUp 1s ease-out 0.3s both;
+      font-size: clamp(1em, 2vw, 1.2em);
+      margin: 0;
+      opacity: 0.88;
+      font-weight: 400;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+      will-change: transform, opacity;
     }
 
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 30px 0;
-      animation: fadeInUp 1s ease-out 0.6s both;
-    }
-
-    .stat-item {
+    /* ── Main image ──────────────────────────────────────── */
+    .main-image-wrap {
+      margin: var(--sp-lg) 0;
       text-align: center;
     }
 
-    .stat-number {
-      font-size: 2.5em;
-      font-weight: bold;
-      display: block;
-      color: #ffd700;
+    .main-image-wrap img {
+      width: 90%;
+      max-width: 860px;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: var(--r-xl);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+      transition: transform 0.35s ease;
+      display: inline-block;
     }
 
-    .stat-label {
-      font-size: 0.9em;
-      opacity: 0.8;
+    .main-image-wrap img:hover {
+      transform: scale(1.018);
     }
 
-    /* Interactive Cards */
+    /* ── Feature cards ───────────────────────────────────── */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin: 40px 0;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--sp-md);
+      margin: var(--sp-lg) 0;
+      align-items: stretch;
     }
 
     .feature-card {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: var(--r-lg);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-card);
+      border: 1.5px solid rgba(102,126,234,0.12);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
       cursor: pointer;
       position: relative;
       overflow: hidden;
     }
 
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .feature-card:hover::before {
-      left: 100%;
+    body.dark .feature-card {
+      background: #1b1b2e;
+      border-color: rgba(255,255,255,0.06);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.32);
     }
 
     .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(102,126,234,0.38);
     }
 
-    body.dark .feature-card {
-      background: #1e1e1e;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    body.dark .feature-card:hover {
+      border-color: rgba(137,211,255,0.28);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    /* Shimmer sweep on hover */
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+      transition: left 0.45s ease;
+      pointer-events: none;
+    }
+
+    .feature-card:hover::after {
+      left: 130%;
     }
 
     .feature-icon {
-      font-size: 3em;
-      margin-bottom: 20px;
-      color: #667eea;
-      transition: transform 0.3s ease;
+      font-size: 2.4em;
+      margin-bottom: 14px;
+      display: block;
+      transition: transform 0.22s ease;
     }
 
     .feature-card:hover .feature-icon {
-      transform: scale(1.1) rotate(5deg);
+      transform: scale(1.12) rotate(4deg);
     }
 
     .feature-title {
-      font-size: 1.4em;
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: #333;
+      font-size: 1.1em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--clr-text);
+      letter-spacing: -0.2px;
     }
 
     body.dark .feature-title {
-      color: #e0e0e0;
+      color: #e8e8f0;
     }
 
     .feature-description {
-      color: #666;
-      line-height: 1.6;
+      color: var(--clr-muted);
+      line-height: 1.65;
+      font-size: 0.92em;
+      flex: 1;
     }
 
     body.dark .feature-description {
-      color: #ccc;
+      color: #8888aa;
     }
 
-    /* Progress Section */
-    .progress-section {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      color: white;
-      padding: 40px;
-      border-radius: 20px;
-      margin: 40px 0;
-      text-align: center;
-    }
-
-    .progress-title {
-      font-size: 2em;
-      margin-bottom: 30px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 20px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 20px 0;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #ffd700, #ffed4e);
-      width: 0%;
-      transition: width 2s ease;
-      border-radius: 10px;
-    }
-
-    /* Floating Python */
-    .floating-python {
-      position: absolute;
-      font-size: 2em;
-      animation: float 6s ease-in-out infinite;
-      opacity: 0.7;
-    }
-
-    .python-1 { top: 20%; left: 10%; animation-delay: 0s; }
-    .python-2 { top: 60%; right: 15%; animation-delay: 2s; }
-    .python-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
-
-    /* Animations */
-    @keyframes bounceIn {
-      0% { transform: scale(0.3); opacity: 0; }
-      50% { transform: scale(1.05); }
-      70% { transform: scale(0.9); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      0% { transform: translateY(30px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    /* Quick Start Section */
+    /* ── Quick Start ─────────────────────────────────────── */
     .quick-start {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      background: linear-gradient(135deg, #4facfe 0%, #00c9ff 100%);
       color: white;
-      padding: 40px;
-      border-radius: 20px;
-      margin: 40px 0;
+      padding: var(--sp-lg) var(--sp-md);
+      border-radius: var(--r-xl);
+      margin: var(--sp-lg) 0;
       text-align: center;
+    }
+
+    .quick-start h2 {
+      font-size: clamp(1.3em, 3vw, 1.8em);
+      font-weight: 700;
+      margin: 0 0 var(--sp-xs);
+    }
+
+    .quick-start p {
+      opacity: 0.9;
+      margin: 0 0 var(--sp-md);
+      font-size: 1.05em;
     }
 
     .quick-start-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: white;
-      color: #4facfe;
-      padding: 15px 30px;
+      color: #2188d0;
+      padding: 13px 28px;
       border-radius: 50px;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-      margin: 20px 10px;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      font-weight: 700;
+      font-size: 1em;
+      margin: 6px 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
 
     .quick-start-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.22);
     }
 
-    /* Fun Quote */
+    /* ── Fun Quote ───────────────────────────────────────── */
     .fun-quote {
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-      padding: 30px;
-      border-radius: 15px;
-      margin: 40px 0;
+      background: linear-gradient(135deg, #fff4e6 0%, #ffe8d2 100%);
+      border: 1.5px solid rgba(244,162,97,0.22);
+      padding: 28px var(--sp-md);
+      border-radius: var(--r-xl);
+      margin: var(--sp-lg) 0;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
 
     body.dark .fun-quote {
-      background: linear-gradient(135deg, #2e2e2e 0%, #4a4a4a 100%);
+      background: linear-gradient(135deg, #2a2218 0%, #3a2e20 100%);
+      border-color: rgba(244,162,97,0.14);
     }
 
     .quote-text {
-      font-size: 1.5em;
+      font-size: clamp(1.05em, 2.5vw, 1.3em);
       font-style: italic;
-      margin-bottom: 15px;
-      color: #333;
+      margin: 0 0 10px;
+      color: #444;
+      line-height: 1.6;
     }
 
-    body.dark .quote-text {
-      color: #e0e0e0;
-    }
+    body.dark .quote-text { color: #ddd; }
 
     .quote-author {
-      font-weight: bold;
-      color: #666;
+      font-weight: 600;
+      color: #888;
+      font-size: 0.88em;
+      letter-spacing: 0.3px;
     }
 
-    body.dark .quote-author {
-      color: #ccc;
+    body.dark .quote-author { color: #aaa; }
+
+    /* ── Animations ──────────────────────────────────────── */
+    @keyframes bounceIn {
+      0%   { transform: scale(0.72); opacity: 0; }
+      60%  { transform: scale(1.04); }
+      80%  { transform: scale(0.97); }
+      100% { transform: scale(1);    opacity: 1; }
     }
 
-    /* Responsive Design */
+    @keyframes fadeInUp {
+      from { transform: translateY(22px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
     @media (max-width: 768px) {
-      .hero-title { font-size: 2.5em; }
-      .hero-stats { flex-direction: column; gap: 20px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .floating-python { display: none; }
+      .features-grid      { grid-template-columns: 1fr; gap: 16px; }
+      .quick-start-btn    { display: block; margin: 8px auto; max-width: 230px; }
+      .main-image-wrap img{ width: 100%; }
+      .hero-container     { padding: var(--sp-lg) var(--sp-sm); }
     }
   </style>
 </head>
-<body>
+<body class="sidebar-collapsed">
   <!-- Header -->
   <header class="header">
     <div class="menu-icon" id="menuBtn">&#9776;</div>
@@ -311,25 +303,27 @@
       <li><a href="#" class="topic-link" data-file="database.html">🗄️ Introduction to Database Connectivity</a></li>
       <li><a href="#" class="topic-link" data-file="quiz.html">🎯 Quiz</a></li>
       <li><a href="#" class="topic-link" data-file="mock.html">📋 Mock Exam Question Type</a></li>
-      <li><a href="#" class="topic-link" data-file="project.html">🎓 Capstone Mini Project</a></li> 
-      <li><a href="#" class="topic-link" data-file="fullstackproject.html">🌍 Full Stack Project</a></li> 
-      <li><a href="#" class="topic-link" data-file="revision-cert.html">🏆 Revision & IBM Certification Practice Tests</a></li>
+      <li><a href="#" class="topic-link" data-file="project.html">🎓 Capstone Mini Project</a></li>
+      <li><a href="#" class="topic-link" data-file="fullstackproject.html">🌍 Full Stack Project</a></li>
+      <li><a href="#" class="topic-link" data-file="revision-cert.html">🏆 Revision &amp; IBM Certification Practice Tests</a></li>
       <li><a href="#" class="topic-link" data-file="follow.html">Contributors</a></li>
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main class="content" id="content">
-     <!-- Fun Quote -->
-     <div class="fun-quote">
+
+    <!-- Fun Quote -->
+    <div class="fun-quote">
       <p class="quote-text">"I'm not just a snake... I'm an interpreter of dreams and bugs!" 🐛</p>
-      <p class="quote-author">- Python Your Best Friends</p>
+      <p class="quote-author">— Python, Your Best Friend</p>
     </div>
 
     <!-- Main Image -->
-    <div style="margin-top: 40px; text-align: center;">
-      <img src="python.png" alt="Funny Python" style="width: 80%; max-height: 600px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s ease;" id="mainImage">
+    <div class="main-image-wrap">
+      <img src="python.png" alt="Python eBook hero illustration" id="mainImage">
     </div>
+
     <!-- Hero Section -->
     <div class="hero-container">
       <h1 class="hero-title">Welcome to Python Mastery! 🚀</h1>
@@ -339,57 +333,50 @@
     <!-- Features Grid -->
     <div class="features-grid">
       <div class="feature-card" onclick="loadTopic('compiler.html')">
-        <div class="feature-icon">🚀</div>
+        <span class="feature-icon">🚀</span>
         <h3 class="feature-title">Live Python Compiler</h3>
         <p class="feature-description">Write and run Python code directly in your browser. No setup required!</p>
       </div>
 
       <div class="feature-card" onclick="loadTopic('introduction.html')">
-        <div class="feature-icon">📚</div>
+        <span class="feature-icon">📚</span>
         <h3 class="feature-title">Comprehensive Learning</h3>
         <p class="feature-description">From basics to advanced concepts, everything you need to master Python.</p>
       </div>
 
       <div class="feature-card" onclick="loadTopic('quiz.html')">
-        <div class="feature-icon">🎯</div>
+        <span class="feature-icon">🎯</span>
         <h3 class="feature-title">Interactive Quizzes</h3>
         <p class="feature-description">Test your knowledge with fun, interactive quizzes and challenges.</p>
       </div>
 
       <div class="feature-card" onclick="loadTopic('project.html')">
-        <div class="feature-icon">🎓</div>
+        <span class="feature-icon">🎓</span>
         <h3 class="feature-title">Real Projects</h3>
         <p class="feature-description">Build real-world projects to apply what you've learned.</p>
       </div>
 
       <div class="feature-card" onclick="loadTopic('mock.html')">
-        <div class="feature-icon">📋</div>
+        <span class="feature-icon">📋</span>
         <h3 class="feature-title">Mock Exams</h3>
-        <p class="feature-description">Prepare for certifications with realistic mock exams.</p>
+        <p class="feature-description">Prepare for certifications with realistic exam-style questions.</p>
       </div>
 
       <div class="feature-card" onclick="loadTopic('revision-cert.html')">
-        <div class="feature-icon">🏆</div>
+        <span class="feature-icon">🏆</span>
         <h3 class="feature-title">IBM Certification</h3>
         <p class="feature-description">Practice tests specifically designed for IBM Python certification.</p>
       </div>
     </div>
-    <div class="feature-card" onclick="window.open('https://drive.google.com/file/d/1KrN8O4jeWsqP4DD__KxqpexL3eRlHFnz/preview', '_blank')">
-  <div class="feature-icon">📋</div>
-  <h3 class="feature-title">Mock Exams</h3>
-  <p class="feature-description">Prepare for certifications with realistic mock exams.</p>
-</div>
-
-
 
     <!-- Quick Start Section -->
     <div class="quick-start">
       <h2>Ready to Start Your Python Journey?</h2>
       <p>Choose your path and begin learning today!</p>
-      <a href="#" class="quick-start-btn" onclick="loadTopic('introduction.html')">
+      <a href="#" class="quick-start-btn" onclick="loadTopic('introduction.html'); return false;">
         <i class="fas fa-play"></i> Start Learning
       </a>
-      <a href="#" class="quick-start-btn" onclick="loadTopic('compiler.html')">
+      <a href="#" class="quick-start-btn" onclick="loadTopic('compiler.html'); return false;">
         <i class="fas fa-code"></i> Try Compiler
       </a>
     </div>
@@ -397,75 +384,7 @@
   </main>
 
   <script src="script.js"></script>
-  <script src="enhanced-script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    // Enhanced functionality for the main page
-    function loadTopic(topicFile) {
-      const link = document.querySelector(`[data-file="${topicFile}"]`);
-      if (link) {
-        link.click();
-      }
-    }
-
-    // Progress tracking
-    function updateProgress() {
-      const completed = localStorage.getItem('completedTopics') || 0;
-      const total = 18;
-      const percent = Math.round((completed / total) * 100);
-      
-      document.getElementById('completedTopics').textContent = completed;
-      document.getElementById('progressPercent').textContent = percent + '%';
-      document.getElementById('progressBar').style.width = percent + '%';
-    }
-
-    // Animate progress bar on load
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        updateProgress();
-      }, 500);
-    });
-
-    // Add click effects to feature cards
-    document.querySelectorAll('.feature-card').forEach(card => {
-      card.addEventListener('click', function() {
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          this.style.transform = '';
-        }, 150);
-      });
-    });
-
-    // Add hover effect to main image
-    document.getElementById('mainImage').addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.02)';
-    });
-
-    document.getElementById('mainImage').addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
-    });
-
-    // Welcome message
-    window.addEventListener('load', () => {
-      if (!localStorage.getItem('hasVisited')) {
-        setTimeout(() => {
-          Swal.fire({
-            title: 'Welcome to Python eBook! 🐍',
-            text: 'Ready to start your Python journey?',
-            icon: 'success',
-            confirmButtonText: 'Let\'s Go!',
-            background: '#f0f8ff',
-            backdrop: `
-              rgba(0,0,123,0.4)
-              url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='50' font-size='5' text-anchor='middle'%3E🐍%3C/text%3E%3C/svg%3E")
-              left top
-              no-repeat
-            `
-          });
-        }, 1000);
-        localStorage.setItem('hasVisited', 'true');
-      }
-    });
-  </script>
+  <script src="enhanced-script.js"></script>
 </body>
 </html>

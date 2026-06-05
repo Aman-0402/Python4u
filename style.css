@@ -135,18 +135,11 @@ body.dark .sidebar ul li a:hover {
   transform: translateX(-100%);
 }
 
-body.sidebar-collapsed .content {
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 80px;
-  margin-bottom: 20px;
-}
-
 /* Content */
 .content {
   margin-left: 280px;
-  margin-top: 80px;
-  margin-right: 20px;
+  margin-top: 4px;
+  margin-right: 16px;
   margin-bottom: 20px;
   padding: 2rem;
   transition: margin-left 0.3s ease;
@@ -162,27 +155,27 @@ body.dark .content {
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
-/* When sidebar is collapsed */
+/* Sidebar collapsed — content expands to fill space */
 body.sidebar-collapsed .content {
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 80px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 4px;
   margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
   .content {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 80px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 4px;
     margin-bottom: 10px;
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
 
   body.sidebar-collapsed .content {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 80px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 4px;
     margin-bottom: 10px;
   }
 
