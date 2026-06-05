@@ -273,63 +273,51 @@ function enhanceTopicLinks() {
       e.preventDefault();
       const file = link.getAttribute('data-file');
 
-      // Add loading animation
-      if (content) {
-        content.innerHTML = `
-          <div style="text-align: center; padding: 50px;">
-            <div style="font-size: 3em; margin-bottom: 20px;">🐍</div>
-            <div style="font-size: 1.5em; margin-bottom: 10px;">Loading...</div>
-            <div style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #4CAF50; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
-          </div>
-          <style>
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          </style>
-        `;
-      }
-
       if (file) {
+        // Fade-out current content before fetching
+        if (content) content.classList.add('content-loading');
+
         fetch(`topics/${file}`)
           .then(res => res.text())
           .then(data => {
-            if (content) {
-              content.innerHTML = data;
+            // Wait for fade-out (180ms matches CSS transition), then swap
+            setTimeout(function () {
+              if (content) {
+                content.innerHTML = data;
 
-              // Execute <script> tags injected via innerHTML
-              executeScripts(content);
-              addCopyButtons(content);
+                // Execute <script> tags injected via innerHTML
+                executeScripts(content);
+                addCopyButtons(content);
 
-              // Close sidebar, expand content
-              const sidebar = document.getElementById('sidebar');
-              if (sidebar) sidebar.classList.add('closed');
-              document.body.classList.add('sidebar-collapsed');
+                // Close sidebar, expand content
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar) sidebar.classList.add('closed');
+                document.body.classList.add('sidebar-collapsed');
 
-              // Scroll to top
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Remove loading class → triggers fade-in via CSS transition
+                content.classList.remove('content-loading');
 
-              // Mark topic as completed
-              markTopicCompleted(file);
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
-              content.style.animation = 'none';
-              requestAnimationFrame(() => {
-                content.style.animation = 'fadeIn 0.4s ease-out both';
-              });
-            }
+                // Mark topic as completed
+                markTopicCompleted(file);
+              }
 
-            if (file === 'compiler.html') {
-              awardAchievement('compiler');
-            }
+              if (file === 'compiler.html') {
+                awardAchievement('compiler');
+              }
+            }, 180);
           })
           .catch(() => {
             if (content) {
+              content.classList.remove('content-loading');
               content.innerHTML = `
-                <div style="text-align: center; padding: 50px;">
-                  <div style="font-size: 3em; margin-bottom: 20px;">😔</div>
+                <div style="text-align:center;padding:50px;">
+                  <div style="font-size:3em;margin-bottom:20px;">&#128532;</div>
                   <h2>Oops! Something went wrong</h2>
-                  <p>Sorry, the topic "${file}" could not be loaded.</p>
-                  <button onclick="location.reload()" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Try Again</button>
+                  <p>Could not load the topic "${file}".</p>
+                  <button type="button" onclick="location.reload()" style="padding:10px 20px;background:#4CAF50;color:white;border:none;border-radius:5px;cursor:pointer;">Try Again</button>
                 </div>
               `;
             }
