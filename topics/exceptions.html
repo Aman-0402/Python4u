@@ -1,447 +1,569 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chapter 7: Exception Handling and Debugging</title>
-</head>
-<body>
-  <div class="hero-section">
-    <h1>🛠️ Chapter 7: Exception Handling and Debugging in Python</h1>
-    <p>Learn how to write safer and more reliable programs! In this chapter, you'll explore how to handle errors gracefully using try-except blocks, raise custom exceptions, and use debugging techniques to find and fix bugs in your code efficiently. 🐞🧰</p>
-  </div>
-  
+<!-- ── Chapter 7: Exception Handling & Debugging ── -->
+<style>
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
 
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  color: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
 
-  <div class="section">
-    <h2>🚨 Why Exception Handling Matters</h2>
-    <blockquote>
-      “To err is human… but to handle it smartly is Pythonic!” 🧠🐍
-    </blockquote>
-    <p>Even if your code is perfect, users might:</p>
-    <ul>
-      <li>Enter wrong input (<code>ValueError</code>)</li>
-      <li>Try dividing by zero (<code>ZeroDivisionError</code>)</li>
-      <li>Refer to files that don't exist (<code>FileNotFoundError</code>)</li>
-    </ul>
-    <p>Python lets you handle these problems without crashing your app.</p>
-  </div>
-  <div class="section">
-    <h2>⚡ What is an Exception?</h2>
-    <p>An exception is a runtime error — something bad that happens while the program is running.</p>
-    
-    <h3>👇 Examples of Common Exceptions:</h3>
-    <pre><code>print(10 / 0)       # ❌ ZeroDivisionError
-  int("abc")          # ❌ ValueError
-  open("nope.txt")    # ❌ FileNotFoundError</code></pre>
-  </div>
-  
-  <div class="section">
-    <h2>🛡️ How to Handle Exceptions: try - except</h2>
-    
-    <h3>✅ Basic Syntax:</h3>
-    <pre><code>try:
-      risky_code()
-  except ErrorType:
-      handle_it()</code></pre>
-    
-    <h3>🧪 Example 1: Divide by zero</h3>
-    <pre><code>try:
-      print(10 / 0)
-  except ZeroDivisionError:
-      print("Cannot divide by zero!")</code></pre>
-    <p><strong>🖨️ Output:</strong> Cannot divide by zero!</p>
-    
-    <h3>🧪 Example 2: Invalid input</h3>
-    <pre><code>try:
-      num = int(input("Enter a number: "))
-  except ValueError:
-      print("Oops! That's not a valid number.")</code></pre>
-    
-    <h3>🧪 Example 3: File not found</h3>
-    <pre><code>try:
-      f = open("data.txt", "r")
-  except FileNotFoundError:
-      print("File not found. Please check the name.")</code></pre>
-    
-    <h3>✅ Using Multiple except Blocks</h3>
-    <pre><code>try:
-      x = int(input("Enter a number: "))
-      result = 10 / x
-  except ValueError:
-      print("Please enter a valid number.")
-  except ZeroDivisionError:
-      print("Can't divide by zero!")</code></pre>
-    
-    <h3>🎁 Bonus: finally Block</h3>
-    <p>Runs no matter what — useful to close files or clean up.</p>
-    <pre><code>try:
-      f = open("myfile.txt")
-  except FileNotFoundError:
-      print("Missing file!")
-  finally:
-      print("This block runs no matter what.")</code></pre>
+/* ── Exception type badges ─── */
+.exc-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(239,68,68,0.12);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.25);
+  margin: 2px 4px 2px 0;
+}
 
-    <div class="joke">
-      😅 You: “What’s your age?”<br>
-      User: “Two cats and a banana.” 🐱🍌<br>
-      Your code: 💀 dies with ValueError
+/* ── Flow diagram ─── */
+.flow-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 1.2em 0;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.flow-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.flow-kw {
+  min-width: 90px;
+  padding: 10px 14px;
+  font-weight: 700;
+  border-radius: var(--r-md) 0 0 var(--r-md);
+  display: flex;
+  align-items: center;
+}
+
+.flow-desc {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  border-left: none;
+  display: flex;
+  align-items: center;
+}
+
+.flow-try    .flow-kw { background: rgba(0,212,170,0.18); color: #00d4aa; border: 1px solid rgba(0,212,170,0.3); }
+.flow-try    .flow-desc{ background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.15); color: var(--text); }
+.flow-except .flow-kw { background: rgba(239,68,68,0.18); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+.flow-except .flow-desc{ background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); color: var(--text); }
+.flow-else   .flow-kw { background: rgba(167,139,250,0.18); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+.flow-else   .flow-desc{ background: rgba(167,139,250,0.06); border: 1px solid rgba(167,139,250,0.15); color: var(--text); }
+.flow-finally .flow-kw { background: rgba(245,158,11,0.18); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.flow-finally .flow-desc{ background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.15); color: var(--text); }
+
+/* ── Debug tool cards ─── */
+.debug-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 1.2em 0;
+}
+
+.debug-card {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r-lg);
+  padding: 16px;
+  background: var(--surface);
+  text-align: center;
+}
+
+body.dark .debug-card { background: rgba(33,38,45,0.8); }
+.debug-card .d-icon { font-size: 1.8em; display: block; margin-bottom: 8px; }
+.debug-card h4 { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent); margin-bottom: 6px; }
+.debug-card p  { font-size: 0.8em; color: var(--text-muted); margin: 0; }
+.debug-card-2 { border-top-color: #a78bfa; }
+.debug-card-2 h4 { color: #a78bfa; }
+.debug-card-3 { border-top-color: #f59e0b; }
+.debug-card-3 h4 { color: #f59e0b; }
+
+/* ── Answers ─── */
+.answer { display: none; }
+.practice-gap { margin-top: 1.2em; }
+
+/* ── Completion ─── */
+.completion-banner {
+  text-align: center;
+  margin-top: 2.5em;
+  padding: 1.8em;
+  background: linear-gradient(135deg, #0d1117, #161b22);
+  border: 1px solid #30363d;
+  border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl, 18px);
+  color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85em;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+</style>
+
+<!-- ── Chapter header ─── -->
+<div class="chapter-header">
+  <span class="chapter-badge">&#9888;&#65039; Chapter 07</span>
+  <h1>Exception Handling &amp; Debugging</h1>
+  <p>Programs crash. Users lie. Files vanish. Handle it gracefully or look like Tom after the anvil.</p>
+</div>
+
+<!-- ── Hero ─── -->
+<div class="hero-section">
+  <div class="hero-icon-lg">&#128163;</div>
+  <h1>&#128163; When Things Go Wrong</h1>
+  <p>Every program will crash eventually. The question is: does it crash with a helpful message, or does it explode like one of Wile E. Coyote's ACME gadgets?</p>
+</div>
+
+<!-- ── Section 1: What is an exception ─── -->
+<div class="card-section">
+  <h2>&#9889; 1. What is an Exception?</h2>
+  <p>Exception = <span class="highlight">runtime error</span>. Code is valid Python. It just blew up while running, usually due to bad data or missing resources.</p>
+
+  <div class="analogy-box">
+    <h3>&#128049; Tom's Division Problem</h3>
+    <p>Tom chases Jerry at speed ÷ distance. If distance = 0 (Jerry teleports), Python screams <code>ZeroDivisionError</code>. Tom's program crashes. Jerry laughs. Classic.</p>
+  </div>
+
+  <h3>&#128165; Common Exceptions</h3>
+  <table>
+    <thead><tr><th>Exception</th><th>When it happens</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><span class="exc-badge">ZeroDivisionError</span></td><td>Divide by zero</td><td><code>10 / 0</code></td></tr>
+      <tr><td><span class="exc-badge">ValueError</span></td><td>Wrong value type</td><td><code>int("abc")</code></td></tr>
+      <tr><td><span class="exc-badge">TypeError</span></td><td>Wrong type used</td><td><code>"hi" + 5</code></td></tr>
+      <tr><td><span class="exc-badge">FileNotFoundError</span></td><td>File doesn't exist</td><td><code>open("ghost.txt")</code></td></tr>
+      <tr><td><span class="exc-badge">IndexError</span></td><td>List index out of range</td><td><code>[1,2][9]</code></td></tr>
+      <tr><td><span class="exc-badge">KeyError</span></td><td>Dict key not found</td><td><code>{"a":1}["b"]</code></td></tr>
+      <tr><td><span class="exc-badge">AttributeError</span></td><td>Object has no attribute</td><td><code>"hi".jump()</code></td></tr>
+      <tr><td><span class="exc-badge">NameError</span></td><td>Variable not defined</td><td><code>print(cheese)</code></td></tr>
+    </tbody>
+  </table>
+
+  <pre><code>print(10 / 0)       # ZeroDivisionError: division by zero
+int("banana")        # ValueError: invalid literal for int()
+open("nope.txt")     # FileNotFoundError: No such file</code></pre>
+</div>
+
+<!-- ── Section 2: try/except ─── -->
+<div class="card-section">
+  <h2>&#128737;&#65039; 2. try / except — Catching the Crash</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-row flow-try">
+      <div class="flow-kw">try:</div>
+      <div class="flow-desc">Run code that might crash</div>
+    </div>
+    <div class="flow-row flow-except">
+      <div class="flow-kw">except:</div>
+      <div class="flow-desc">Run this if it crashes</div>
+    </div>
+    <div class="flow-row flow-else">
+      <div class="flow-kw">else:</div>
+      <div class="flow-desc">Run this ONLY if no crash</div>
+    </div>
+    <div class="flow-row flow-finally">
+      <div class="flow-kw">finally:</div>
+      <div class="flow-desc">Run this ALWAYS (cleanup)</div>
     </div>
   </div>
 
-  <div class="section">
-    <h2>🛡️ Python to the Rescue: try...except</h2>
-    <pre><code>try:
-    x = int(input("Enter a number: "))
-    print(100 / x)
+  <h3>&#128049; Homer's Donut Division</h3>
+  <pre><code>try:
+    donuts = 12
+    people = 0
+    each = donuts / people
+    print(f"Each person gets {each} donuts")
 except ZeroDivisionError:
-    print("Oops! Can't divide by 0.")
-except ValueError:
-    print("That was not a number!")</code></pre>
-
-    <h3>🧪 Output:</h3>
-    <pre><code>Enter a number: 0
-Oops! Can't divide by 0.</code></pre>
-  </div>
-
-  <div class="section">
-    <h2>🔁 Multiple except Blocks</h2>
-    <pre><code>try:
-    num = int(input("Enter number: "))
-    result = 10 / num
-except ValueError:
-    print("Only numbers allowed!")
-except ZeroDivisionError:
-    print("Don't divide by 0, please.")</code></pre>
-  </div>
-
-  <div class="section">
-    <h2>🧼 finally: Always Executes</h2>
-    <pre><code>try:
-    f = open("file.txt", "r")
-    data = f.read()
-except FileNotFoundError:
-    print("File missing!")
-finally:
-    print("Closing program.")</code></pre>
-    <p>Even if there’s an error, <code>finally</code> block runs — like brushing your teeth before bed 😄</p>
-  </div>
-
-  <div class="section">
-    <h2>🛠️ else: Runs only if no exception</h2>
-    <pre><code>try:
-    x = 5
-    y = 2
-    result = x / y
-except:
-    print("Something went wrong.")
-else:
-    print("Everything worked fine!")</code></pre>
-  </div>
-
-  <div class="section">
-    <h2>🔧 Real-World Scenario: Login System</h2>
-    <pre><code>try:
-    username = input("Username: ")
-    if username == "":
-        raise ValueError("Username can't be blank")
-    print("Welcome,", username)
+    print("Marge: Nobody home. All donuts are Homer's anyway.")
 except ValueError as e:
-    print("Error:", e)</code></pre>
+    print(f"Input error: {e}")</code></pre>
+
+  <div class="output-block">Marge: Nobody home. All donuts are Homer's anyway.</div>
+
+  <h3>&#128270; Catching exception detail with <code>as e</code></h3>
+  <pre><code>try:
+    age = int("two cats and a banana")
+except ValueError as e:
+    print(f"Scooby Doo tried to enter his age: {e}")</code></pre>
+
+  <div class="output-block">Scooby Doo tried to enter his age: invalid literal for int() with base 10: 'two cats and a banana'</div>
+</div>
+
+<!-- ── Section 3: multiple except ─── -->
+<div class="card-section">
+  <h2>&#128260; 3. Multiple except Blocks</h2>
+  <p>One <code>try</code>, many <code>except</code>. Each handles a different failure. Like SpongeBob's Krusty Krab order desk — different complaints, different responses.</p>
+
+  <pre><code>def krusty_krab_order(item, quantity):
+    try:
+        menu = {"Krabby Patty": 3.99, "Kelp Shake": 1.99}
+        price = menu[item]                    # KeyError if item not in menu
+        total = price * int(quantity)         # ValueError if quantity not a number
+        result = total / 0                    # pretend tax calc crashes
+        return f"Total: ${total:.2f}"
+    except KeyError:
+        return f"Sorry, '{item}' not on menu. Try a Krabby Patty."
+    except ValueError:
+        return f"Quantity must be a number. '{quantity}' is not food math."
+    except ZeroDivisionError:
+        return "Tax system broken. Blame Squidward."
+
+print(krusty_krab_order("Pizza", 2))
+print(krusty_krab_order("Krabby Patty", "lots"))
+print(krusty_krab_order("Krabby Patty", 2))</code></pre>
+
+  <div class="output-block">Sorry, 'Pizza' not on menu. Try a Krabby Patty.
+Quantity must be a number. 'lots' is not food math.
+Tax system broken. Blame Squidward.</div>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span>Use <strong>specific exceptions first</strong>, then broad ones. <code>except Exception</code> catches everything — useful as last resort, bad as first resort. Like catching all animals with one net.</span>
+  </div>
+</div>
+
+<!-- ── Section 4: else + finally ─── -->
+<div class="card-section">
+  <h2>&#9989; 4. else &amp; finally</h2>
+
+  <h3>&#128193; Mr. Bean's File Reader</h3>
+  <pre><code>try:
+    with open("shopping_list.txt", "r") as f:
+        items = f.read()
+except FileNotFoundError:
+    print("Mr. Bean: lost the list again. Classic.")
+else:
+    print("List found!")
+    print(items)        # only runs if NO exception
+finally:
+    print("Mr. Bean wanders off regardless.")    # ALWAYS runs</code></pre>
+
+  <div class="output-block">Mr. Bean: lost the list again. Classic.
+Mr. Bean wanders off regardless.</div>
+
+  <table>
+    <thead><tr><th>Block</th><th>When it runs</th><th>Use for</th></tr></thead>
+    <tbody>
+      <tr><td><code>try</code></td><td>Always (attempts this first)</td><td>Risky code</td></tr>
+      <tr><td><code>except</code></td><td>Only on matching error</td><td>Handle crash</td></tr>
+      <tr><td><code>else</code></td><td>Only if NO exception</td><td>Success path</td></tr>
+      <tr><td><code>finally</code></td><td>Always, no matter what</td><td>Cleanup (close files, etc.)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Section 5: raise ─── -->
+<div class="card-section">
+  <h2>&#128165; 5. raise — Throw Your Own Exceptions</h2>
+  <p>Use <code>raise</code> to trigger exceptions yourself when inputs violate rules. Wile E. Coyote manually throws an ACME bomb — same idea, slightly less destructive.</p>
+
+  <pre><code>def set_speed(speed):
+    if speed < 0:
+        raise ValueError("Speed can't be negative. Wile E. Coyote moves FORWARD.")
+    if speed > 1000:
+        raise ValueError("That's Road Runner speed. Not physically possible.")
+    return f"Speed set to {speed} mph"
+
+try:
+    print(set_speed(500))
+    print(set_speed(-10))
+except ValueError as e:
+    print(f"Speed Error: {e}")</code></pre>
+
+  <div class="output-block">Speed set to 500 mph
+Speed Error: Speed can't be negative. Wile E. Coyote moves FORWARD.</div>
+
+  <h3>&#129704; Custom Exception Classes</h3>
+  <p>Inherit from <code>Exception</code> to create meaningful, domain-specific errors.</p>
+
+  <pre><code>class CartoonLogicError(Exception):
+    """When cartoon physics violate real physics."""
+    pass
+
+class InsufficientACMEBudget(Exception):
+    """Wile E. can't afford the gadget."""
+    def __init__(self, item, cost, budget):
+        super().__init__(f"Can't buy '{item}' (costs ${cost}, budget ${budget})")
+        self.item = item
+
+def buy_acme(item, cost, budget):
+    if cost > budget:
+        raise InsufficientACMEBudget(item, cost, budget)
+    return f"Purchased: {item}"
+
+try:
+    print(buy_acme("Giant Magnet", 500, 50))
+except InsufficientACMEBudget as e:
+    print(f"ACME Store: {e}")</code></pre>
+
+  <div class="output-block">ACME Store: Can't buy 'Giant Magnet' (costs $500, budget $50)</div>
+</div>
+
+<!-- ── Section 6: Debugging ─── -->
+<div class="card-section">
+  <h2>&#128270; 6. Debugging — Finding the Bug</h2>
+  <p>Exception handling prevents crashes. Debugging finds WHY something's wrong. Different skills, both necessary.</p>
+
+  <div class="debug-grid">
+    <div class="debug-card">
+      <span class="d-icon">&#128172;</span>
+      <h4>print() Debug</h4>
+      <p>Oldest trick. Works everywhere. No setup needed. Indiana Jones level — crude but effective.</p>
+    </div>
+    <div class="debug-card debug-card-2">
+      <span class="d-icon">&#128295;</span>
+      <h4>assert</h4>
+      <p>Verify assumptions mid-code. Raises <code>AssertionError</code> if condition false. Good for sanity checks.</p>
+    </div>
+    <div class="debug-card debug-card-3">
+      <span class="d-icon">&#128187;</span>
+      <h4>VS Code Debugger</h4>
+      <p>Breakpoints, step-through, watch variables. The professional way. Set up once, save hours.</p>
+    </div>
   </div>
 
-  <div class="quiz-section">
-    <h2>🧠 QUIZ TIME!</h2>
-  
-    <div class="quiz-question">
-      <p>Q1. What happens when an exception is not handled?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Python skips the error</li>
-        <li onclick="checkAnswer(this, 'correct')">b) The program crashes</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) It retries the code</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) Nothing happens</li>
-      </ul>
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q2. What will this print?</p>
-      <pre><code>try:
-      x = 10 / 0
-  except ZeroDivisionError:
-      print("Math Error")</code></pre>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Nothing</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) 0</li>
-        <li onclick="checkAnswer(this, 'correct')">c) Math Error</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) Syntax Error</li>
-      </ul>
+  <h3>&#128172; print() Debugging — Quick &amp; Dirty</h3>
+  <pre><code>def calculate_tip(bill, percent):
+    print(f"DEBUG: bill={bill}, type={type(bill)}")    # inspect inputs
+    print(f"DEBUG: percent={percent}")
+    tip = bill * (percent / 100)
+    print(f"DEBUG: tip calculated = {tip}")
+    return tip
 
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q3. What is the output?</p>
-      <pre><code>try:
-      int("xyz")
-  except ValueError:
-      print("Invalid!")</code></pre>
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q4. Which keyword ensures code runs no matter what?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) try</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) ensure</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) always</li>
-        <li onclick="checkAnswer(this, 'correct')">d) finally</li>
-      </ul>
-    </div>
+total = calculate_tip("50", 15)    # bug: bill is string!
+print(f"Tip: ${total}")</code></pre>
+
+  <div class="output-block">DEBUG: bill=50, type=&lt;class 'str'&gt;
+DEBUG: percent=15
+Traceback...
+TypeError: can't multiply sequence by non-int of type 'float'</div>
+
+  <p>Print revealed the bug — <code>bill</code> is a string, not a number. Fix: <code>bill = float(bill)</code>.</p>
+
+  <h3>&#9940; assert — Indiana Jones Floor Check</h3>
+  <pre><code># Indiana Jones checks the floor BEFORE stepping
+def calculate_discount(price, discount_pct):
+    assert isinstance(price, (int, float)), f"Price must be number, got {type(price)}"
+    assert 0 <= discount_pct <= 100, "Discount must be between 0 and 100"
+
+    return price - (price * discount_pct / 100)
+
+print(calculate_discount(100, 25))     # 75.0
+print(calculate_discount(100, 150))    # AssertionError: Discount must be between 0 and 100</code></pre>
+
+  <div class="output-block">75.0
+AssertionError: Discount must be between 0 and 100</div>
+
+  <div class="callout warning">
+    <span>&#9888;&#65039;</span>
+    <span><code>assert</code> statements are disabled when Python runs with <code>-O</code> (optimise) flag. Use them for dev/testing, not production input validation.</span>
   </div>
 
-  <div class="section">
-    <h2>🚨 Part 2: Debugging Tips 🕵️</h2>
-    
-    <h3>🔎 What is Debugging?</h3>
-    <p>Debugging is the process of identifying, analyzing, and fixing errors (bugs) in your program.</p>
-    <p>Every coder, from beginner to pro, faces bugs. The key difference? Pros debug efficiently.</p>
-  </div>
-  
-  <div class="section">
-    <h2>🧰 Common Tools & Techniques for Debugging in Python</h2>
-    
-    <div class="subsection">
-      <h3>1. print() Debugging – Old But Gold 💬</h3>
-      <p>The simplest and most effective way is adding print() statements in your code to check values.</p>
-      
-      <h4>✅ Example:</h4>
-      <pre><code>def calculate_area(length, width):
-      print("Length:", length)   # Debug line
-      print("Width:", width)     # Debug line
-      return length * width
-  
-  print("Area:", calculate_area(5, 2))</code></pre>
-      <h4>🖨️ Output:</h4>
-      <pre>Length: 5
-  Width: 2
-  Area: 10</pre>
-      <p>You can use print to trace variable values, check flow, or isolate logic bugs.</p>
-    </div>
-  
-    <div class="subsection">
-      <h3>2. Using IDE Debuggers 🧠 (VS Code, PyCharm, Thonny)</h3>
-      <p>Modern editors have visual debuggers where you can:</p>
-      <ul>
-        <li>Set breakpoints</li>
-        <li>Step through code line by line</li>
-        <li>Inspect variable values during execution</li>
-      </ul>
-      <h4>✅ Recommended if you're using:</h4>
-      <ul>
-        <li>Thonny – perfect for beginners</li>
-        <li>VS Code / PyCharm – powerful for pros</li>
-      </ul>
-    </div>
-  
-    <div class="subsection">
-      <h3>3. The pdb Module – Python's Built-in Debugger</h3>
-      <p>Python includes a command-line debugger called pdb.</p>
-      
-      <h4>🔍 Example:</h4>
-      <pre><code>import pdb
-  
-  def add(x, y):
-      pdb.set_trace()  # Debugger will pause here
-      return x + y
-  
-  print(add(10, 5))</code></pre>
-      <p>🧭 At the prompt ((Pdb)), you can type commands like:</p>
-      <ul>
-        <li><code>n</code> → next line</li>
-        <li><code>c</code> → continue</li>
-        <li><code>p x</code> → print value of x</li>
-        <li><code>q</code> → quit debugger</li>
-      </ul>
-    </div>
-  
-    <div class="subsection">
-      <h3>🧪 Bonus Technique: assert – Quick Checks</h3>
-      <p>Use assert to catch issues early by testing assumptions.</p>
-      <pre><code>def divide(a, b):
-      assert b != 0, "b should not be zero!"  # Throws AssertionError if condition fails
-      return a / b</code></pre>
-      <p>If you call:</p>
-      <pre><code>divide(10, 0)</code></pre>
-      <h4>🛑 Output:</h4>
-      <pre>AssertionError: b should not be zero!</pre>
-      <p>Use assert when you want to ensure certain conditions hold true during development/testing.</p>
-    </div>
-  </div>
-  
-  <div class="section">
-    <h3>🧠 Pro Debugging Strategy</h3>
-    <p>✅ Combine all tools:</p>
+  <h3>&#128187; VS Code Debugger — 3 Steps</h3>
+  <table>
+    <thead><tr><th>Step</th><th>Action</th><th>Shortcut</th></tr></thead>
+    <tbody>
+      <tr><td>1. Set breakpoint</td><td>Click left gutter next to line number → red dot appears</td><td>F9</td></tr>
+      <tr><td>2. Start debug</td><td>Press F5 or click Run → Start Debugging</td><td>F5</td></tr>
+      <tr><td>3. Step through</td><td>Step over (next line), Step into (enter function), Continue</td><td>F10 / F11 / F5</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Quiz ─── -->
+<div class="card-section">
+  <h2>&#127918; Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. <code>int("banana")</code> raises which exception?</p>
     <ul>
-      <li>Use print() for quick tracing</li>
-      <li>Use assert for validation</li>
-      <li>Use pdb/IDE for detailed inspection</li>
+      <li onclick="checkAnswer(this,'wrong')">a) TypeError</li>
+      <li onclick="checkAnswer(this,'correct')">b) ValueError</li>
+      <li onclick="checkAnswer(this,'wrong')">c) SyntaxError</li>
+      <li onclick="checkAnswer(this,'wrong')">d) NameError</li>
     </ul>
   </div>
-  
-  <div class="section">
-    <h3>🧩 Real-Life Debugging Example</h3>
-    <pre><code>def calculate_discount(price, discount_percent):
-      # Problem: returns wrong value sometimes
-      print("Debug Info:", price, discount_percent)
-      assert discount_percent <= 100, "Discount can't be over 100%"
-      return price - (price * discount_percent / 100)
-  
-  print(calculate_discount(100, 25))  # ✅ 75
-  print(calculate_discount(100, 150)) # ❌ triggers assert</code></pre>
+
+  <div class="quiz-question">
+    <p>2. Which block runs ONLY when no exception occurs?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) finally</li>
+      <li onclick="checkAnswer(this,'wrong')">b) except</li>
+      <li onclick="checkAnswer(this,'correct')">c) else</li>
+      <li onclick="checkAnswer(this,'wrong')">d) try</li>
+    </ul>
   </div>
 
-  <div class="quiz-section">
-    <h2>🧠 QUIZ TIME! (Debugging Edition)</h2>
-  
-    <div class="quiz-question">
-      <p>Q1. What does assert do?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Loops over errors</li>
-        <li onclick="checkAnswer(this, 'correct')">b) Stops program if condition is False</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) Continues the program always</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) None</li>
-      </ul>
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q2. Which tool allows step-by-step debugging?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) print</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) while loop</li>
-        <li onclick="checkAnswer(this, 'correct')">c) IDE Debugger</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) for loop</li>
-      </ul>
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q3. What does pdb.set_trace() do?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Deletes a variable</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) Prints a message</li>
-        <li onclick="checkAnswer(this, 'correct')">c) Starts an interactive debugger</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) None of these</li>
-      </ul>
- 
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q4. What's the best tool for quick bug tracing?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) import os</li>
-        <li onclick="checkAnswer(this, 'correct')">b) print()</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) exec()</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) traceback</li>
-      </ul>
-    </div>
+  <div class="quiz-question">
+    <p>3. What does <code>raise ValueError("bad input")</code> do?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Prints "bad input"</li>
+      <li onclick="checkAnswer(this,'wrong')">b) Ignores the error</li>
+      <li onclick="checkAnswer(this,'correct')">c) Triggers a ValueError with that message</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Creates a new variable</li>
+    </ul>
   </div>
 
-  <div class="challenge-section">
-    <h2>🛠️ Challenge Task</h2>
-    <p>Fix this buggy code using debugging tools:</p>
-    
-    <pre><code>def calc_total(price, tax):
-      return price + price * tax  # Something's off here
-  
-  print(calc_total("100", 0.1))  # TypeError?</code></pre>
-    
-    <div class="hint">
-      <h3>🧩 Hint:</h3>
-      <p>Use <code>print()</code> and <code>assert</code> to check data types.</p>
-    </div>
-    
-    <div class="solution" style="display: none;">
-      <h3>💡 Solution:</h3>
-      <pre><code>def calc_total(price, tax):
-      # Debugging with print and assert
-      print("Price type:", type(price))
-      print("Tax type:", type(tax))
-      assert isinstance(price, (int, float)), "Price must be numeric"
-      assert isinstance(tax, (int, float)), "Tax must be numeric"
-      
-      # Convert price to float if it's a string
-      if isinstance(price, str):
-          price = float(price)
-      
-      return price + price * tax
-  
-  print(calc_total("100", 0.1))  # Now works: 110.0</code></pre>
-      <p>🔍 <strong>Key Fixes:</strong></p>
-      <ol>
-        <li>Added type checking with <code>assert</code></li>
-        <li>Added <code>print()</code> statements to verify types</li>
-        <li>Converted string input to float</li>
-        <li>Handled the type mismatch that caused the original TypeError</li>
-      </ol>
-    </div>
-    <button onclick="toggleSolution(this)">Show Solution</button>
+  <div class="quiz-question">
+    <p>4. What prints here?</p>
+    <pre><code>try:
+    print(1 / 0)
+except ZeroDivisionError:
+    print("Boom")
+finally:
+    print("Done")</code></pre>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Boom</li>
+      <li onclick="checkAnswer(this,'wrong')">b) Done</li>
+      <li onclick="checkAnswer(this,'correct')">c) Boom then Done</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing</li>
+    </ul>
   </div>
 
-  <div class="quiz">
-    <h2>🎯 Quiz Time!</h2>
-    <div class="quiz-question">
-        <p>1. What is an exception?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) A virus</li>
-          <li onclick="checkAnswer(this, 'correct')">b) A runtime error</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) A Python command</li>
-        </ul>
-      </div>
-      
-      <div class="quiz-question">
-        <p>2. Which block is always executed?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) try</li>
-          <li onclick="checkAnswer(this, 'wrong')">b) except</li>
-          <li onclick="checkAnswer(this, 'correct')">c) finally</li>
-        </ul>
-      </div>
-      
-      <div class="quiz-question">
-        <p>3. What does this code print?</p>
-        <pre>try:
-          print(1 / 0)
-      except:
-          print("Error!")
-      finally:
-          print("Done.")</pre>
-        <ul>
-          <li onclick="checkAnswer(this, 'correct')">a) Error!</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) 0</li>
-        </ul>
-      </div>
+  <div class="quiz-question">
+    <p>5. <code>assert x > 0</code> raises what when x = -5?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) ValueError</li>
+      <li onclick="checkAnswer(this,'correct')">b) AssertionError</li>
+      <li onclick="checkAnswer(this,'wrong')">c) RuntimeError</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── Challenges ─── -->
+<div class="card-section">
+  <h2>&#129514; Coding Challenges</h2>
+
+  <div class="practice-zone">
+    <strong>&#128640; Challenge 1: Wile E. Coyote Safe Division</strong><br>
+    Write <code>safe_divide(a, b)</code>. Handle <code>ZeroDivisionError</code> and <code>TypeError</code>. Return the result or a funny error message.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def safe_divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return "Can't divide by zero. Even ACME doesn't sell division by nothing."
+    except TypeError:
+        return f"Both must be numbers. Got {type(a).__name__} and {type(b).__name__}."
+
+print(safe_divide(10, 2))       # 5.0
+print(safe_divide(10, 0))       # Can't divide...
+print(safe_divide("ten", 2))    # Both must be numbers...</code></pre>
   </div>
 
-  <div class="challenge">
-    <h2>🧠 Challenge Task</h2>
-    <p>Write a program that:</p>
-    <ol>
-      <li>Takes two numbers from the user</li>
-      <li>Divides them</li>
-      <li>Catches <code>ZeroDivisionError</code> and <code>ValueError</code></li>
-      <li>Prints result only if no error</li>
-    </ol>
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 2: Scooby Snack Validator</strong><br>
+    Write <code>request_snacks(name, count)</code>. Raise <code>ValueError</code> if count &lt; 1 or count &gt; 10. Raise custom <code>UnauthorizedSnackError</code> if name is "Scrappy-Doo" (nobody likes Scrappy).
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>class UnauthorizedSnackError(Exception):
+    pass
+
+def request_snacks(name, count):
+    if name == "Scrappy-Doo":
+        raise UnauthorizedSnackError("No snacks for Scrappy. Gang voted.")
+    if not 1 <= count <= 10:
+        raise ValueError(f"Count must be 1-10, not {count}.")
+    return f"{name} gets {count} Scooby Snack(s)! Scooby-Dooby-Doo!"
+
+for name, n in [("Shaggy", 5), ("Scrappy-Doo", 3), ("Scooby", 99)]:
+    try:
+        print(request_snacks(name, n))
+    except UnauthorizedSnackError as e:
+        print(f"Denied: {e}")
+    except ValueError as e:
+        print(f"Invalid count: {e}")</code></pre>
   </div>
 
-  <div class="section">
-    <h2>🧾 Summary Table</h2>
-    <table>
-      <tr><th>Keyword</th><th>Purpose</th></tr>
-      <tr><td>try</td><td>Wrap code that might error</td></tr>
-      <tr><td>except</td><td>Handle specific error</td></tr>
-      <tr><td>else</td><td>Runs only if no error occurs</td></tr>
-      <tr><td>finally</td><td>Always runs (cleanup, closing files etc.)</td></tr>
-      <tr><td>raise</td><td>Throw custom error manually</td></tr>
-      <tr><td>assert</td><td>Check conditions and raise error if false</td></tr>
-    </table>
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 3: Homer's Donut Shop</strong><br>
+    Ask user for item name and quantity. Catch <code>ValueError</code> (non-numeric quantity) + <code>KeyError</code> (item not in menu). Use <code>else</code> to print total, <code>finally</code> to print "Thanks for visiting!"
   </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>menu = {
+    "donut":    1.50,
+    "burger":   4.99,
+    "hotdog":   2.50,
+    "duff beer": 3.00,
+}
 
-</body>
-</html>
+item = input("What do you want? ").lower()
+qty  = input("How many? ")
+
+try:
+    price = menu[item]         # KeyError if not found
+    count = int(qty)           # ValueError if not a number
+    total = price * count
+except KeyError:
+    print(f"'{item}' not on the menu. Try: {list(menu.keys())}")
+except ValueError:
+    print(f"'{qty}' is not a valid number. Homer is confused.")
+else:
+    print(f"Total: ${total:.2f}. Mmmmm... {item}.")
+finally:
+    print("Thanks for visiting Homer's Donut Shop!")</code></pre>
+  </div>
+</div>
+
+<!-- ── Summary ─── -->
+<div class="summary-box">
+  <h3>&#9997;&#65039; Chapter Summary</h3>
+  <table>
+    <thead><tr><th>Keyword</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>try</code></td><td>Wrap code that might crash</td></tr>
+      <tr><td><code>except ErrorType</code></td><td>Handle specific crash</td></tr>
+      <tr><td><code>except ErrorType as e</code></td><td>Handle + access error message</td></tr>
+      <tr><td><code>else</code></td><td>Run only if no exception occurred</td></tr>
+      <tr><td><code>finally</code></td><td>Always runs — cleanup code</td></tr>
+      <tr><td><code>raise</code></td><td>Manually trigger exception</td></tr>
+      <tr><td><code>assert cond, msg</code></td><td>Crash if condition is False</td></tr>
+      <tr><td>Custom Exception</td><td>Class inheriting from <code>Exception</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Completion ─── -->
+<div class="completion-banner">
+  <h3>&#127881; Chapter 7 Complete!</h3>
+  <p>Your code no longer crashes silently. It crashes loudly, helpfully, and with good error messages. Progress.</p>
+  <span class="next-badge">&#9654; Next: Object-Oriented Programming</span>
+</div>
