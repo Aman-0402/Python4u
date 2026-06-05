@@ -1,0 +1,455 @@
+<!-- ── Chapter 0: Setup & Installation ── -->
+<style>
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ── OS tabs ─── */
+.os-tabs { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
+
+.os-tab {
+  padding: 8px 18px;
+  border-radius: 10px 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: var(--surface);
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s;
+  user-select: none;
+}
+
+.os-tab.active {
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  border-color: var(--accent, #00d4aa);
+}
+
+.os-panel {
+  display: none;
+  border: 1px solid var(--border);
+  border-radius: 0 var(--r-lg) var(--r-lg) var(--r-lg);
+  padding: 20px;
+  background: var(--surface);
+}
+
+body.dark .os-panel { background: rgba(33,38,45,0.8); }
+.os-panel.active { display: block; }
+
+/* ── Extension cards ─── */
+.ext-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 1.2em 0;
+}
+
+.ext-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent, #00d4aa);
+  border-radius: var(--r-lg);
+  padding: 14px 16px;
+  background: var(--surface);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ext-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+body.dark .ext-card { background: rgba(33,38,45,0.8); }
+
+.ext-card-must  { border-left-color: #ef4444; }
+.ext-card-great { border-left-color: #f59e0b; }
+.ext-card-nice  { border-left-color: #a78bfa; }
+
+.ext-name { font-family: var(--font-mono); font-size: 0.88em; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.ext-publisher { font-size: 0.75em; color: var(--text-muted); margin-bottom: 6px; }
+.ext-desc { font-size: 0.82em; color: var(--text-muted); line-height: 1.5; }
+
+.ext-badge {
+  display: inline-block;
+  font-size: 0.68em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.badge-must  { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+.badge-great { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.badge-nice  { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+
+/* ── Step counter ─── */
+.steps { list-style: none; padding: 0; counter-reset: step-counter; }
+.steps li {
+  counter-increment: step-counter;
+  padding: 12px 16px 12px 52px;
+  position: relative;
+  border-left: 2px solid var(--border);
+  margin-bottom: 10px;
+}
+.steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: -16px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.82em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Version check result ─── */
+.version-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(46,160,67,0.12);
+  border: 1px solid rgba(46,160,67,0.3);
+  color: #3fb950;
+  border-radius: var(--r-md);
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  margin: 8px 0;
+}
+
+.completion-banner {
+  text-align: center;
+  margin-top: 2.5em;
+  padding: 1.8em;
+  background: linear-gradient(135deg, #0d1117, #161b22);
+  border: 1px solid #30363d;
+  border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl, 18px);
+  color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85em;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+@media (max-width: 600px) { .ext-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- ── Chapter header ─── -->
+<div class="chapter-header">
+  <span class="chapter-badge">&#128295; Chapter 00</span>
+  <h1>Setup &amp; Installation</h1>
+  <p>Get Python + VS Code running on your machine. Skip this and suffer later. Your choice.</p>
+</div>
+
+<!-- ── Hero ─── -->
+<div class="hero-section">
+  <div class="hero-icon-lg">&#128295;</div>
+  <h1>&#128295; Before You Write Python, Install Python</h1>
+  <p>Even Iron Man had to set up his suit before flying. No shortcuts here. Ten minutes now, zero pain forever.</p>
+</div>
+
+<!-- ── Section 1: Install Python ─── -->
+<div class="card-section">
+  <h2>&#128013; 1. Install Python</h2>
+  <p>Download from the official source only. Not your neighbour's USB. Not some random site.</p>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span>Always install <strong>Python 3.10+</strong>. Python 2 is dead. Don't dig it up.</span>
+  </div>
+
+  <!-- OS Tabs -->
+  <div class="os-tabs">
+    <button type="button" class="os-tab active" onclick="switchOS(this,'win')">&#129695; Windows</button>
+    <button type="button" class="os-tab" onclick="switchOS(this,'mac')">&#127822; macOS</button>
+    <button type="button" class="os-tab" onclick="switchOS(this,'linux')">&#128039; Linux</button>
+  </div>
+
+  <!-- Windows -->
+  <div class="os-panel active" id="os-win">
+    <ol class="steps">
+      <li>Open browser → go to <strong>python.org/downloads</strong></li>
+      <li>Click <strong>"Download Python 3.x.x"</strong> (big yellow button)</li>
+      <li>Run the installer <code>.exe</code></li>
+      <li><strong>&#9888;&#65039; CRITICAL:</strong> tick <strong>"Add Python to PATH"</strong> at the bottom before clicking Install</li>
+      <li>Click <strong>Install Now</strong> → wait → Done</li>
+    </ol>
+    <div class="callout warning">
+      <span>&#9888;&#65039;</span>
+      <span>Missed the "Add to PATH" checkbox? Uninstall, reinstall, tick it. Or Google "add Python to PATH manually" — your call.</span>
+    </div>
+  </div>
+
+  <!-- macOS -->
+  <div class="os-panel" id="os-mac">
+    <ol class="steps">
+      <li>Option A — Official installer: <strong>python.org/downloads</strong> → download <code>.pkg</code> → run it</li>
+      <li>Option B (recommended) — use Homebrew:
+        <pre><code>brew install python3</code></pre>
+      </li>
+      <li>macOS ships Python 2.7 as <code>python</code>. Always use <code>python3</code> command</li>
+    </ol>
+  </div>
+
+  <!-- Linux -->
+  <div class="os-panel" id="os-linux">
+    <ol class="steps">
+      <li>Python 3 is usually pre-installed. Check first (see Section 2)</li>
+      <li>If missing, Ubuntu/Debian:
+        <pre><code>sudo apt update
+sudo apt install python3 python3-pip</code></pre>
+      </li>
+      <li>Fedora/RHEL:
+        <pre><code>sudo dnf install python3</code></pre>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- ── Section 2: Check version ─── -->
+<div class="card-section">
+  <h2>&#128270; 2. Verify Python is Installed</h2>
+  <p>Open terminal (CMD / PowerShell / Terminal) and run:</p>
+
+  <pre><code>python --version</code></pre>
+
+  <p>If that gives an error, try:</p>
+  <pre><code>python3 --version</code></pre>
+
+  <p>Expected output (version number will vary):</p>
+  <div class="output-block">Python 3.12.4</div>
+
+  <div class="version-ok">&#9989; If you see Python 3.x.x — you're good. Close this tab. Stop worrying.</div>
+
+  <h3>&#128230; Check pip (package installer)</h3>
+  <pre><code>pip --version</code></pre>
+
+  <div class="output-block">pip 24.0 from C:\Python312\Lib\site-packages\pip (python 3.12)</div>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span><code>pip</code> installs third-party libraries. <code>pip install numpy</code>, <code>pip install flask</code> etc. You'll use it constantly.</span>
+  </div>
+
+  <h3>&#9654; Quick test — run Python interactively</h3>
+  <pre><code>python</code></pre>
+
+  <p>Type this in the <code>&gt;&gt;&gt;</code> prompt:</p>
+  <pre><code>print("Hello, World!")
+exit()</code></pre>
+
+  <div class="output-block">Hello, World!</div>
+</div>
+
+<!-- ── Section 3: VS Code ─── -->
+<div class="card-section">
+  <h2>&#128187; 3. Install VS Code</h2>
+  <p>VS Code = best free editor for Python. Lightweight, extensible, not cursed like Notepad.</p>
+
+  <ol class="steps">
+    <li>Go to <strong>code.visualstudio.com</strong></li>
+    <li>Download for your OS → run installer</li>
+    <li>Open VS Code → press <code>Ctrl+Shift+X</code> to open Extensions panel</li>
+    <li>Search and install extensions listed below</li>
+  </ol>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span>To open a folder in VS Code: <code>File → Open Folder</code> or drag folder onto VS Code window. Always open the <em>project folder</em>, not individual files.</span>
+  </div>
+</div>
+
+<!-- ── Section 4: Extensions ─── -->
+<div class="card-section">
+  <h2>&#129520; 4. Essential VS Code Extensions</h2>
+
+  <p>
+    <span class="ext-badge badge-must">Must Have</span>
+    <span class="ext-badge badge-great">Highly Recommended</span>
+    <span class="ext-badge badge-nice">Nice to Have</span>
+  </p>
+
+  <div class="ext-grid">
+
+    <div class="ext-card ext-card-must">
+      <span class="ext-badge badge-must">Must Have</span>
+      <div class="ext-name">Python</div>
+      <div class="ext-publisher">Microsoft</div>
+      <div class="ext-desc">Core Python support. IntelliSense, debugging, linting, run buttons. Without this VS Code is just Notepad with themes.</div>
+    </div>
+
+    <div class="ext-card ext-card-must">
+      <span class="ext-badge badge-must">Must Have</span>
+      <div class="ext-name">Pylance</div>
+      <div class="ext-publisher">Microsoft</div>
+      <div class="ext-desc">Fast type checking and auto-complete. Catches bugs before you run the code. Installed alongside Python extension usually.</div>
+    </div>
+
+    <div class="ext-card ext-card-must">
+      <span class="ext-badge badge-must">Must Have</span>
+      <div class="ext-name">Python Debugger</div>
+      <div class="ext-publisher">Microsoft</div>
+      <div class="ext-desc">Step through code line by line. Set breakpoints. See variable values mid-run. Essential when your code lies to you.</div>
+    </div>
+
+    <div class="ext-card ext-card-great">
+      <span class="ext-badge badge-great">Highly Recommended</span>
+      <div class="ext-name">Error Lens</div>
+      <div class="ext-publisher">Alexander</div>
+      <div class="ext-desc">Shows errors and warnings inline — right next to the broken line. No more hunting through the Problems panel.</div>
+    </div>
+
+    <div class="ext-card ext-card-great">
+      <span class="ext-badge badge-great">Highly Recommended</span>
+      <div class="ext-name">Python Indent</div>
+      <div class="ext-publisher">Kevin Rose</div>
+      <div class="ext-desc">Auto-fixes Python indentation on Enter. Python is whitespace-sensitive — wrong indent = error. This saves sanity.</div>
+    </div>
+
+    <div class="ext-card ext-card-great">
+      <span class="ext-badge badge-great">Highly Recommended</span>
+      <div class="ext-name">autopep8</div>
+      <div class="ext-publisher">Microsoft</div>
+      <div class="ext-desc">Auto-formats Python code to PEP 8 standard on save. Your code will look professional even when you don't feel it.</div>
+    </div>
+
+    <div class="ext-card ext-card-great">
+      <span class="ext-badge badge-great">Highly Recommended</span>
+      <div class="ext-name">GitLens</div>
+      <div class="ext-publisher">GitKraken</div>
+      <div class="ext-desc">See git blame, history, and changes inline. Know who broke what and when. Spoiler: it's always you.</div>
+    </div>
+
+    <div class="ext-card ext-card-nice">
+      <span class="ext-badge badge-nice">Nice to Have</span>
+      <div class="ext-name">Material Icon Theme</div>
+      <div class="ext-publisher">Philipp Kief</div>
+      <div class="ext-desc">Nice file icons in the Explorer. <code>.py</code> files get a Python icon. <code>.json</code> gets JSON icon. Small thing, big joy.</div>
+    </div>
+
+    <div class="ext-card ext-card-nice">
+      <span class="ext-badge badge-nice">Nice to Have</span>
+      <div class="ext-name">Code Runner</div>
+      <div class="ext-publisher">Jun Han</div>
+      <div class="ext-desc">Run any code file with one click (or <code>Ctrl+Alt+N</code>). Quick test without opening terminal.</div>
+    </div>
+
+    <div class="ext-card ext-card-nice">
+      <span class="ext-badge badge-nice">Nice to Have</span>
+      <div class="ext-name">Jupyter</div>
+      <div class="ext-publisher">Microsoft</div>
+      <div class="ext-desc">Run <code>.ipynb</code> notebooks inside VS Code. Needed for data science chapters (NumPy, pandas, matplotlib).</div>
+    </div>
+
+    <div class="ext-card ext-card-nice">
+      <span class="ext-badge badge-nice">Nice to Have</span>
+      <div class="ext-name">Rainbow CSV</div>
+      <div class="ext-publisher">mechatroner</div>
+      <div class="ext-desc">Colour-codes CSV columns. Useful when working with data files in pandas chapters.</div>
+    </div>
+
+    <div class="ext-card ext-card-nice">
+      <span class="ext-badge badge-nice">Nice to Have</span>
+      <div class="ext-name">indent-rainbow</div>
+      <div class="ext-publisher">oderwat</div>
+      <div class="ext-desc">Colours each indentation level differently. Python-specific lifesaver — spot misaligned blocks instantly.</div>
+    </div>
+
+  </div>
+
+  <h3>&#128270; How to install extension</h3>
+  <ol class="steps">
+    <li>Press <code>Ctrl + Shift + X</code> in VS Code</li>
+    <li>Type extension name in search box</li>
+    <li>Click <strong>Install</strong> button</li>
+    <li>Done — no restart needed for most extensions</li>
+  </ol>
+</div>
+
+<!-- ── Section 5: First file ─── -->
+<div class="card-section">
+  <h2>&#9654; 5. Write Your First Python File</h2>
+
+  <ol class="steps">
+    <li>Open VS Code → <code>File → New File</code></li>
+    <li>Save as <code>hello.py</code> (the <code>.py</code> extension activates Python mode)</li>
+    <li>Type the code below</li>
+    <li>Press <code>Ctrl + F5</code> to run (or click the &#9654; button top-right)</li>
+  </ol>
+
+  <pre><code>print("Hello, World!")
+print("Python is installed. Tom would be proud.")
+print(f"Python version check: use  python --version  in terminal")</code></pre>
+
+  <div class="output-block">Hello, World!
+Python is installed. Tom would be proud.
+Python version check: use  python --version  in terminal</div>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span>No output? Check the <strong>Python interpreter</strong> in VS Code bottom bar — it must point to your installed Python 3.x. Click it to change.</span>
+  </div>
+</div>
+
+<!-- ── Quick reference ─── -->
+<div class="summary-box">
+  <h3>&#9997;&#65039; Setup Checklist</h3>
+  <table>
+    <thead><tr><th>Task</th><th>Command / Action</th><th>Expected Result</th></tr></thead>
+    <tbody>
+      <tr><td>Check Python</td><td><code>python --version</code></td><td><code>Python 3.x.x</code></td></tr>
+      <tr><td>Check pip</td><td><code>pip --version</code></td><td><code>pip 24.x ...</code></td></tr>
+      <tr><td>Run Python shell</td><td><code>python</code></td><td><code>&gt;&gt;&gt;</code> prompt appears</td></tr>
+      <tr><td>Install package</td><td><code>pip install numpy</code></td><td>Downloads + installs</td></tr>
+      <tr><td>Run .py file</td><td><code>python hello.py</code></td><td>Output in terminal</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Completion ─── -->
+<div class="completion-banner">
+  <h3>&#127881; Setup Complete!</h3>
+  <p>Python installed. VS Code ready. Extensions loaded. You look like a developer now.</p>
+  <span class="next-badge">&#9654; Next: Introduction to Python</span>
+</div>
+
+<script>
+function switchOS(tab, id) {
+  document.querySelectorAll('.os-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.os-panel').forEach(function(p){ p.classList.remove('active'); });
+  tab.classList.add('active');
+  var panel = document.getElementById('os-' + id);
+  if (panel) panel.classList.add('active');
+}
+</script>
