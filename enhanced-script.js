@@ -239,15 +239,10 @@ function initializeEnhancedFeatures() {
 
 // Enhanced dark mode toggle
 function enhanceDarkModeToggle() {
-  const toggleTheme = document.getElementById('toggleTheme');
-  if (toggleTheme) {
-    toggleTheme.addEventListener('click', () => {
-      // Add rotation animation
-      toggleTheme.style.transform = 'rotate(180deg)';
-      setTimeout(() => toggleTheme.style.transform = '', 300);
-      
-      // Award achievement for dark mode
-      if (document.body.classList.contains('dark')) {
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('change', function () {
+      if (themeToggle.checked) {
         awardAchievement('darkMode');
       }
     });
