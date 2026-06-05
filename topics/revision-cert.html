@@ -1,3 +1,36 @@
+<!-- ── Revision & Certification ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #2ea043, #0ea5e9);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">&#127941; Revision</span>
+  <h1>Revision &amp; Certification</h1>
+  <p>Full chapter review. Every concept. Every question. Your final stretch before the certificate.</p>
+</div>
+
 <h1>Chapter 1: Introduction to Python</h1>
 <div class="quiz-question">
     <p><strong>Question 1</strong></p>
@@ -11,7 +44,7 @@
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: You can pass positional arguments in any order. ❌</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -52,7 +85,7 @@ greet(25, "Alice")     # ❌ Incorrect meaning, wrong assignment</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C<br>You can use both positional and keyword arguments in a single function call.</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -83,7 +116,7 @@ greet(25, "Alice")     # ❌ Incorrect meaning, wrong assignment</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: eval</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -119,7 +152,7 @@ greet(25, "Alice")     # ❌ Incorrect meaning, wrong assignment</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A. lambda</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -154,7 +187,7 @@ print(square(5))  # Outputs 25</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: a b c = 1000 2000 3000</h4>
         
         <h4>🧠 Explanation of Each Option:</h4>
@@ -197,7 +230,7 @@ print(square(5))  # Outputs 25</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C. x y z = 5 10 15</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -247,7 +280,7 @@ SyntaxError: invalid syntax</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: i, ii, iii, iv, v, vi</h4>
         
         <h4>🧠 Explanation: Order of Precedence in Python (from highest to lowest):</h4>
@@ -296,7 +329,7 @@ SyntaxError: invalid syntax</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A. i, ii, iii, iv</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -342,7 +375,7 @@ str1[::-1]</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: dlrowolleh</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -402,7 +435,7 @@ print(text[::2])</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A. PtoRc</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -497,7 +530,7 @@ text[3:8:2]   # 'hoR' (from index 3-7, every 2nd)</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C. 4</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -553,7 +586,7 @@ Floor of 4.5 = 4</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C. 3</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -616,7 +649,7 @@ Floor of 3.333... = 3</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D. None of the above</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -684,7 +717,7 @@ d >> 5  # Output: Right shift with 5</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A. __add__()</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -759,7 +792,7 @@ v3 = v1 + v2  # Uses __add__ method</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) |</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -834,7 +867,7 @@ print(bin(result.value))  # Output: 0b11</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) &</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -908,7 +941,7 @@ print(bin(result.value))  # Output: 0b1000</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D) Class</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -979,7 +1012,7 @@ p = Person("Alice")  # Creating an object</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) Set</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1050,7 +1083,7 @@ print(type(fruits))  # Output: &lt;class 'set'&gt;</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) List</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1115,7 +1148,7 @@ print(L)  # Output: [1, 23, 'hello', 1, 'world']</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) Tuple</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1184,7 +1217,7 @@ print(T[1])     # Output: 20 (indexing works)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) float(x)</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1251,7 +1284,7 @@ except ValueError:
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) str(x)</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1330,7 +1363,7 @@ print(str([1,2]))    # "[1, 2]"</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) set()</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1394,7 +1427,7 @@ print(type(numbers))  # Output: &lt;class 'set'&gt;</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) {}</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1466,7 +1499,7 @@ print(type(student))  # Output: &lt;class 'dict'&gt;</code></pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) {}</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1544,7 +1577,7 @@ print(a.issubset(b))
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) True</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1612,7 +1645,7 @@ for i in range(float('inf')):
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D) none of the mentioned</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1666,7 +1699,7 @@ for i in range('10'):
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) Error</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1712,7 +1745,7 @@ while True:
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D) none of the mentioned</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1764,7 +1797,7 @@ else:
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) Error</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1808,7 +1841,7 @@ else:
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) outfile = open("c:\\file.txt", "a")</h4>
         
         <h4>🧠 Explanation:</h4>
@@ -1879,7 +1912,7 @@ outfile.close()
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) file = open("d:\\data.txt", "r")</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -1956,7 +1989,7 @@ for i in ' '.join(string.split()):
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) m, y, , n, a, m, e, , i, s, , x,</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -2004,7 +2037,7 @@ for i in '-'.join(text.split()):
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) h*e*l*l*o*-*w*o*r*l*d*</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -2058,7 +2091,7 @@ print(a)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) ['Ball', 'Apple', 'Cobra']</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -2107,7 +2140,7 @@ print(fruits)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) ['Fig', 'Kiwi', 'Banana']</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -2156,7 +2189,7 @@ print(b)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) 4</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -2217,7 +2250,7 @@ print(max_val)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) 4</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -2265,7 +2298,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C. +0099</h4>
       <h4>🧠 Explanation:</h4>
       <p>
@@ -2290,7 +2323,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. ['A', 'B', 'C']</h4>
       <h4>🧠 Explanation:</h4>
       <p>
@@ -2317,7 +2350,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. 3</h4>
       <h4>🧠 Explanation:</h4>
       <p>
@@ -2344,7 +2377,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D) pip install pandas</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2372,7 +2405,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B) 2 dimensional array</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2405,7 +2438,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C) [1, 3, 2, 1, 3, 2]</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2430,7 +2463,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A) [“Welcome”, “to”, “Python”]</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2456,7 +2489,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D) read_csv</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2484,7 +2517,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C) apply function</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2519,7 +2552,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B) to_text</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2547,7 +2580,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D) All of the above</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2606,7 +2639,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C) Both of the above</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2642,7 +2675,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B) Union</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2687,7 +2720,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B) no, finally cannot be used with except</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2725,7 +2758,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C) more than one</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2758,7 +2791,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C) when no exception occurs</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2801,7 +2834,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C. no, else must come before except</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2829,7 +2862,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. yes, like <code>except (TypeError, SyntaxError)</code></h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2854,7 +2887,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D. always</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2897,7 +2930,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. am</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2943,7 +2976,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. ‘^’</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -2976,7 +3009,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D. newline</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3012,7 +3045,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. exactly 5</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3045,7 +3078,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. ‘^’, ‘$’</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3081,7 +3114,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C. <code>>>> p = re.subn()</code></h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3109,7 +3142,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. [ ]</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3137,7 +3170,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Regression</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3164,7 +3197,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Minimum</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3186,7 +3219,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. Linear relationship</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3207,7 +3240,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D. Independent</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3228,7 +3261,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. re</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3249,7 +3282,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C. re.compile(str)</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3270,7 +3303,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. matches a pattern at the start of the string</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3291,7 +3324,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. matches a pattern at any position in the string</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3315,7 +3348,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. An initial way by which we can get a feel for data</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3335,7 +3368,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D. which.max(x)</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3353,7 +3386,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. True</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3374,7 +3407,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C. Autocorrelation</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3395,7 +3428,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Plt.Plot()</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3424,7 +3457,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D. All Of The Mentioned</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3464,7 +3497,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. Bar</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3496,7 +3529,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Scatter_Matrix</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3533,7 +3566,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. ‘Kde’ For Hexagonal Bin Plots</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3559,7 +3592,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. Lag</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3582,7 +3615,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: Random Forest</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3602,7 +3635,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: The autonomous acquisition of knowledge through the use of computer programs</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3622,7 +3655,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: Random forest are difficult to interpret but often very accurate</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3643,7 +3676,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: Decision trees are prone to be overfit</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3663,7 +3696,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D. Introduction</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3688,7 +3721,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. Decision tree</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3708,7 +3741,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. True</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3730,7 +3763,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Squares</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3752,7 +3785,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: A. Supervised learning</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3774,7 +3807,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Reinforcement learning</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3795,7 +3828,7 @@ print(max_val)  # Output: 10
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B. Reinforcement learning</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -3821,7 +3854,7 @@ print(max_val)  # Output: 10
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D) float('12+34')</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -3879,7 +3912,7 @@ ValueError: could not convert string to float: '12+34'
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) hello</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -3911,7 +3944,7 @@ ValueError: could not convert string to float: '12+34'
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) t[3] = 45</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -3956,7 +3989,7 @@ for x in d.keys():
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) a b c</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4006,7 +4039,7 @@ for i in x:
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) A B C D</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4051,7 +4084,7 @@ for i in range(int(2.0)):
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) 0 1</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4085,7 +4118,7 @@ for i in range(int(2.0)):
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) sets the file’s current position at the offset</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4119,7 +4152,7 @@ data = f.read()  # Starts reading from byte 5
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D) All of the above</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4165,7 +4198,7 @@ data = f.read()  # Starts reading from byte 5
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) Both of the above</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4206,7 +4239,7 @@ df = pd.DataFrame({
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) visual techniques</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4253,7 +4286,7 @@ print(a)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) 0</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4294,7 +4327,7 @@ print(a)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: D) 256</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4327,7 +4360,7 @@ print(a)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) You can pass positional arguments in any order.</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4354,7 +4387,7 @@ print(a)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: C) s1 | [3, 4, 5]</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4383,7 +4416,7 @@ print(a)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) True</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4432,7 +4465,7 @@ else:
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: B) Topper</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4471,7 +4504,7 @@ print(val)
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <h4>✅ Correct Answer: A) 77</h4>
 
         <h4>🧠 Explanation:</h4>
@@ -4504,7 +4537,7 @@ print(val)
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D) This code raises an exception</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -4542,7 +4575,7 @@ print(val)
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: C) 3</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -4587,7 +4620,7 @@ print(val)
     </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: B) II and III</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -4619,7 +4652,7 @@ print(val)
       </ul>
   
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <h4>✅ Correct Answer: D) All of the above</h4>
   
       <h4>🧠 Explanation:</h4>
@@ -4638,5 +4671,10 @@ print(val)
       <p>This flexibility makes DataFrame a powerful structure for data analysis in Pandas.</p>
     </div>
   </div>
-  
-      
+
+<div class="completion-banner">
+  <h3>&#127941; Revision &amp; Certification Complete!</h3>
+  <p>Every chapter. Every concept. Every question. You made it to the end. Python certified.</p>
+  <span class="next-badge">&#9989; You're Done! Share your knowledge.</span>
+</div>
+

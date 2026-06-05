@@ -1,35 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Chapter 10: Data Visualization with matplotlib</title>
-</head>
-<body>
+<!-- ── Chapter 10: Data Visualization ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
 
-  <div class="hero-section">
-    <h1>📊 Chapter 10: Data Visualization with matplotlib</h1>
-    <p>Turn raw data into stunning visuals! In this chapter, you'll learn how to use <code>matplotlib</code> to create line charts, bar graphs, pie charts, and more. Master the art of making your data speak clearly with titles, labels, legends, and styles that bring insights to life. 📈🖼️</p>
-  </div>
-  
+<div class="chapter-header">
+  <span class="chapter-badge">&#128202; Chapter 10</span>
+  <h1>Data Visualization with matplotlib</h1>
+  <p>Turn raw data into stunning visuals — because reading tables is boring.</p>
+</div>
 
-  <h2>🎯 Why Learn Data Visualization?</h2>
-  <p><em>“A graph is worth a thousand numbers.”</em></p>
+<div class="hero-section">
+  <div class="hero-icon-lg">&#128202;</div>
+  <h1>&#128202; Data Visualization with matplotlib</h1>
+  <p>Turn raw data into stunning visuals! Learn to use <code>matplotlib</code> to create line charts, bar graphs, pie charts, and more. 📈🖼️</p>
+</div>
+
+<div class="card-section">
+  <h2>&#127919; Why Learn Data Visualization?</h2>
+  <p><em>"A graph is worth a thousand numbers."</em></p>
   <p>Data is everywhere — but reading tables is boring!</p>
   <ul>
-    <li>• Understand patterns quickly 👁️‍🗨️</li>
-    <li>• Share insights with others 📢</li>
-    <li>• Make decisions based on trends 📉📈</li>
+    <li>Understand patterns quickly &#128065;&#8205;&#128488;</li>
+    <li>Share insights with others &#128226;</li>
+    <li>Make decisions based on trends &#128201;&#128200;</li>
   </ul>
+</div>
 
-  <h2>🖼️ What is matplotlib?</h2>
+<div class="card-section">
+  <h2>&#128444;&#65039; What is matplotlib?</h2>
   <p><code>matplotlib</code> is a powerful plotting library in Python that turns raw data into beautiful charts.</p>
-  <p>It’s like the artist in your Python toolkit 🎨</p>
-
-  <h2>🧰 Installing matplotlib</h2>
+  <p>It's like the artist in your Python toolkit &#127912;</p>
+  <h3>&#9881;&#65039; Installing matplotlib</h3>
   <p>Run this in terminal:</p>
   <pre><code>pip install matplotlib</code></pre>
+</div>
 
-  <h2>✍️ Basic Usage</h2>
+<div class="card-section">
+  <h2>&#9997;&#65039; Basic Usage</h2>
   <pre><code>import matplotlib.pyplot as plt
 x = [1, 2, 3, 4]
 y = [10, 20, 25, 30]
@@ -38,43 +67,25 @@ plt.title("Basic Line Chart")
 plt.xlabel("X Axis")
 plt.ylabel("Y Axis")
 plt.show()</code></pre>
-  <p><strong>Output:</strong> 🟢 A simple line chart with labeled axes and title.</p>
+  <div class="output-block">&#128994; A simple line chart with labeled axes and title.</div>
+</div>
 
-  <h2>🧱 Types of Charts You Can Make</h2>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Chart Type</th>
-      <th>Function</th>
-      <th>Use Case</th>
-    </tr>
-    <tr>
-      <td>Line Chart</td>
-      <td>plot()</td>
-      <td>Track change over time</td>
-    </tr>
-    <tr>
-      <td>Bar Chart</td>
-      <td>bar()</td>
-      <td>Compare categories</td>
-    </tr>
-    <tr>
-      <td>Pie Chart</td>
-      <td>pie()</td>
-      <td>Show parts of a whole</td>
-    </tr>
-    <tr>
-      <td>Histogram</td>
-      <td>hist()</td>
-      <td>Frequency of values</td>
-    </tr>
-    <tr>
-      <td>Scatter Plot</td>
-      <td>scatter()</td>
-      <td>Show relationships</td>
-    </tr>
+<div class="card-section">
+  <h2>&#129521; Types of Charts</h2>
+  <table>
+    <thead><tr><th>Chart Type</th><th>Function</th><th>Use Case</th></tr></thead>
+    <tbody>
+      <tr><td>Line Chart</td><td><code>plot()</code></td><td>Track change over time</td></tr>
+      <tr><td>Bar Chart</td><td><code>bar()</code></td><td>Compare categories</td></tr>
+      <tr><td>Pie Chart</td><td><code>pie()</code></td><td>Show parts of a whole</td></tr>
+      <tr><td>Histogram</td><td><code>hist()</code></td><td>Frequency of values</td></tr>
+      <tr><td>Scatter Plot</td><td><code>scatter()</code></td><td>Show relationships</td></tr>
+    </tbody>
   </table>
+</div>
 
-  <h2>📊 Bar Chart Example</h2>
+<div class="card-section">
+  <h2>&#128202; Bar Chart Example</h2>
   <pre><code>import matplotlib.pyplot as plt
 students = ["Aman", "Elon", "John"]
 marks = [85, 90, 75]
@@ -83,15 +94,19 @@ plt.title("Student Marks")
 plt.xlabel("Names")
 plt.ylabel("Marks")
 plt.show()</code></pre>
+</div>
 
-  <h2>🥧 Pie Chart Example</h2>
+<div class="card-section">
+  <h2>&#129384; Pie Chart Example</h2>
   <pre><code>subjects = ["Math", "Science", "English"]
 time_spent = [5, 3, 2]
 plt.pie(time_spent, labels=subjects, autopct='%1.1f%%')
 plt.title("Time Spent per Subject")
 plt.show()</code></pre>
+</div>
 
-  <h2>📉 Scatter Plot Example</h2>
+<div class="card-section">
+  <h2>&#128201; Scatter Plot Example</h2>
   <pre><code>x = [1, 2, 3, 4, 5]
 y = [2, 4, 1, 8, 7]
 plt.scatter(x, y, color='red')
@@ -99,12 +114,15 @@ plt.title("Scatter Plot")
 plt.xlabel("X values")
 plt.ylabel("Y values")
 plt.show()</code></pre>
-<div class="quiz">
-  <h2>🤪 Funny Analogy</h2>
-  <p>If pandas is your Excel nerd 📊 and NumPy is your math geek 🤓,<br>
-  then matplotlib is your friend who makes PowerPoint slides with cool charts ✨</p>
 
-  <h2>🧠 Quiz Time!</h2>
+  <div class="analogy-box">
+    <p>If pandas is your Excel nerd &#128202; and NumPy is your math geek &#129299;,<br>
+    then matplotlib is your friend who makes PowerPoint slides with cool charts &#10024;</p>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>&#127918; Quiz Time!</h2>
   <div class="quiz-question">
     <p>1. Which library is used for data visualization in Python?</p>
     <ul>
@@ -113,7 +131,6 @@ plt.show()</code></pre>
       <li onclick="checkAnswer(this, 'correct')">c) matplotlib</li>
     </ul>
   </div>
-  
   <div class="quiz-question">
     <p>2. What does plt.plot() create?</p>
     <ul>
@@ -122,7 +139,6 @@ plt.show()</code></pre>
       <li onclick="checkAnswer(this, 'wrong')">c) Pie chart</li>
     </ul>
   </div>
-  
   <div class="quiz-question">
     <p>3. Which function is used to display the chart on screen?</p>
     <ul>
@@ -133,46 +149,31 @@ plt.show()</code></pre>
   </div>
 </div>
 
-  <h2>🎯 Challenge Task:</h2>
+<div class="card-section">
+  <h2>&#127919; Challenge Task</h2>
   <ol>
     <li>Create a bar chart of 5 subjects and marks.</li>
     <li>Make a pie chart showing your weekly activity (study, play, sleep, mobile).</li>
     <li>Try a line chart showing temperature over 7 days.</li>
   </ol>
+</div>
 
-  <h2>🧾 Summary Table</h2>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Chart</th>
-      <th>Function</th>
-      <th>Visual Style</th>
-    </tr>
-    <tr>
-      <td>Line</td>
-      <td>plot()</td>
-      <td>Trendline</td>
-    </tr>
-    <tr>
-      <td>Bar</td>
-      <td>bar()</td>
-      <td>Comparison</td>
-    </tr>
-    <tr>
-      <td>Pie</td>
-      <td>pie()</td>
-      <td>Proportions</td>
-    </tr>
-    <tr>
-      <td>Scatter</td>
-      <td>scatter()</td>
-      <td>Correlation</td>
-    </tr>
-    <tr>
-      <td>Histogram</td>
-      <td>hist()</td>
-      <td>Distribution</td>
-    </tr>
+<div class="summary-box">
+  <h3>&#9997;&#65039; Summary Table</h3>
+  <table>
+    <thead><tr><th>Chart</th><th>Function</th><th>Visual Style</th></tr></thead>
+    <tbody>
+      <tr><td>Line</td><td><code>plot()</code></td><td>Trendline</td></tr>
+      <tr><td>Bar</td><td><code>bar()</code></td><td>Comparison</td></tr>
+      <tr><td>Pie</td><td><code>pie()</code></td><td>Proportions</td></tr>
+      <tr><td>Scatter</td><td><code>scatter()</code></td><td>Correlation</td></tr>
+      <tr><td>Histogram</td><td><code>hist()</code></td><td>Distribution</td></tr>
+    </tbody>
   </table>
+</div>
 
-</body>
-</html>
+<div class="completion-banner">
+  <h3>&#127881; Chapter 10 Complete!</h3>
+  <p>Your data now has a face. A beautiful, chart-shaped face.</p>
+  <span class="next-badge">&#9654; Next: Web APIs &amp; JSON</span>
+</div>

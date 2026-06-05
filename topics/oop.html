@@ -1,11 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Object-Oriented Programming (OOP) in Python</title>
-  </head>
-  <body>
-    <div class="hero-section">
+<!-- ── Chapter 08: OOP in Python ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">&#129504; Chapter 08</span>
+  <h1>Object-Oriented Programming (OOP) in Python</h1>
+  <p>Classes, objects, inheritance, encapsulation, polymorphism, abstraction — all of it.</p>
+</div>
+
+<div class="hero-section">
       <h1>🧠 Chapter 8: Object-Oriented Programming (OOP) in Python</h1>
       <p>Master the art of building powerful and reusable code! In this chapter, you'll dive into Object-Oriented Programming in Python—learning how to create classes, objects, and methods. Understand key concepts like inheritance, encapsulation, polymorphism, and abstraction to organize and manage your code efficiently. 🧱🛠️</p>
     </div>
@@ -28,7 +54,7 @@
     </ul>
 
     <h2>🏗️ OOP Basics: Key Pillars</h2>
-    <table border="1">
+    <table>
       <thead>
         <tr>
           <th>Pillar</th>
@@ -139,7 +165,7 @@ Object is an instance of a class.
   <div class="question">
     <h3>🔸 Q1. Create a class Student with attributes name and roll_number, and a method to display the student's info.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code># Define a Student class without using __init__
       class Student:
           # Method to display student information
@@ -167,7 +193,7 @@ Roll Number: 101</pre>
   <div class="question">
     <h3>🔸 Q2. Create a class Book with title and author. Print book details.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Book:
     def __init__(self, title, author):
         self.title = title
@@ -190,7 +216,7 @@ Author: John Doe</pre>
   <div class="question">
     <h3>🔸 Q3. Modify the Car class to include year and display all car details.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Car:
     def __init__(self, brand, model, year):
         self.brand = brand
@@ -216,7 +242,7 @@ Year: 2022</pre>
   <div class="question">
     <h3>🔸 Q4. Create a Laptop class with a method to print its specifications.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Laptop:
     def __init__(self, brand, processor, ram, storage):
         self.brand = brand
@@ -246,7 +272,7 @@ Storage: 512 GB</pre>
     <h3>🔸 Q5. Build a class BankAccount with deposit and withdraw methods.</h3>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class BankAccount:
     def __init__(self, owner, balance=0):
         self.owner = owner
@@ -407,7 +433,7 @@ user1.show_profile()</code></pre>
   <div class="question">
     <h3>🔹 Q1. Create a Laptop class with brand, model, and price. Initialize with constructor and print details.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Laptop:
     def __init__(self, brand, model, price):
         self.brand = brand
@@ -432,7 +458,7 @@ Price: ₹55000</pre>
   <div class="question">
     <h3>🔹 Q2. Build a Movie class that stores name, genre, and rating.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Movie:
     def __init__(self, name, genre, rating):
         self.name = name
@@ -457,7 +483,7 @@ Rating: 8.8/10</pre>
   <div class="question">
     <h3>🔹 Q3. Modify Student class to include a subject list and print it.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Student:
     def __init__(self, name, roll_number, subjects):
         self.name = name
@@ -485,7 +511,7 @@ Subjects Enrolled:
   <div class="question">
     <h3>🔹 Q4. Create a Product class with discount logic in the constructor.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Product:
     def __init__(self, name, price, discount_percent):
         self.name = name
@@ -513,7 +539,7 @@ Final Price: ₹18000.0</pre>
   <div class="question">
     <h3>🔹 Q5. Create a Rectangle class and calculate area inside a method using constructor values.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Rectangle:
     def __init__(self, length, width):
         self.length = length
@@ -609,7 +635,7 @@ This is encapsulation — exposing only safe methods, and hiding sensitive data.
 
 <h3>🧪 Syntax in Python:</h3>
 <p>Python doesn’t have true "private" variables, but uses convention:</p>
-<table border="1" cellpadding="8">
+<table>
   <thead>
     <tr>
       <th>Modifier</th>
@@ -688,7 +714,7 @@ This is encapsulation — exposing only safe methods, and hiding sensitive data.
   <div class="question">
     <h3>🔐 Q1. Create a User class with private __password and methods to change/check it.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class User:
     def __init__(self, username, password):
         self.username = username
@@ -721,7 +747,7 @@ True</pre>
   <div class="question">
     <h3>💼 Q2. Build an Employee class that hides salary and provides a get_salary() method.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Employee:
     def __init__(self, name, salary):
         self.name = name
@@ -742,7 +768,7 @@ print(f"{emp.name}'s Salary: ₹{emp.get_salary()}")</code></pre>
   <div class="question">
     <h3>🏦 Q3. Modify the Account class to add a private transaction_history list.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Account:
     def __init__(self, owner):
         self.owner = owner
@@ -778,7 +804,7 @@ print(acc.get_history())</code></pre>
   <div class="question">
     <h3>🎓 Q4. Add validation logic in a Student class that hides marks and only allows values between 0–100.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Student:
     def __init__(self, name):
         self.name = name
@@ -809,7 +835,7 @@ Marks must be between 0 and 100.</pre>
   <div class="question">
     <h3>🗳️ Q5. Implement a VotingSystem where age is a protected field, only changeable through a method.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class VotingSystem:
     def __init__(self, name, age):
         self.name = name
@@ -962,7 +988,7 @@ d.bark()
 Bruno the Labrador barks!</code></pre>
 
 <h3>👨‍💻 Types of Inheritance in Python:</h3>
-<table border="1" cellpadding="8">
+<table>
   <thead>
     <tr>
       <th>Type</th>
@@ -1003,7 +1029,7 @@ In a <strong>school management system</strong>:<br>
   <div class="question">
     <h3>🚗 Q1. Create a class Vehicle, and let Car and Bike inherit from it with their own methods.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Vehicle:
     def __init__(self, brand):
         self.brand = brand
@@ -1040,7 +1066,7 @@ Yamaha Bike is riding...</pre>
   <div class="question">
     <h3>🔷 Q2. Create a Shape class and let Rectangle and Circle inherit and implement area().</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>import math
 
 class Shape:
@@ -1079,7 +1105,7 @@ Circle Area: 28.27</pre>
   <div class="question">
     <h3>🏦 Q3. Implement Account → SavingAccount, CurrentAccount with different interest() logic.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Account:
     def __init__(self, balance):
         self.balance = balance
@@ -1111,7 +1137,7 @@ Current Interest: 200.0</pre>
   <div class="question">
     <h3>🔁 Q4. Add super() in a child class to initialize parent attributes.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Person:
     def __init__(self, name):
         self.name = name
@@ -1137,7 +1163,7 @@ e.show()</code></pre>
   <div class="question">
     <h3>🧬 Q5. Create a multilevel inheritance: Organism → Animal → Bird.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Organism:
     def live(self):
         print("Living...")
@@ -1181,7 +1207,7 @@ If you give it a cat, it meows<br>
 </p>
 
 <h3>💡 Key Types in Python:</h3>
-<table border="1" cellpadding="8">
+<table>
   <thead>
     <tr>
       <th>Type</th>
@@ -1258,7 +1284,7 @@ Plane is flying</code></pre>
   <div class="question">
     <h3>🚘 Q1. Create a Vehicle class and override the start() method in Car, Bike.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Vehicle:
     def start(self):
         print("Vehicle is starting...")
@@ -1286,7 +1312,7 @@ Bike engine started. Zoom!</pre>
   <div class="question">
     <h3>📐 Q2. Build a polymorphic function calculate_area() for Circle, Rectangle, and Triangle.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>import math
 
 class Circle:
@@ -1332,7 +1358,7 @@ Area: 10.5</pre>
   <div class="question">
     <h3>📚 Q3. Override __str__() in a custom Book class to return book details.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Book:
     def __init__(self, title, author):
         self.title = title
@@ -1354,7 +1380,7 @@ print(book1)</code></pre>
   <div class="question">
     <h3>🦆 Q4. Use duck typing to allow Robot, Human to both have walk() behavior.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class Human:
     def walk(self):
         print("Human is walking on two legs.")
@@ -1380,7 +1406,7 @@ Robot is walking using wheels.</pre>
   <div class="question">
     <h3>🎵 Q5. Create a MediaPlayer class and override play() in MP3Player, VideoPlayer.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>class MediaPlayer:
     def play(self):
         print("Playing media...")
@@ -1419,7 +1445,7 @@ Playing video 🎬</pre>
       <li onclick="checkAnswer(this, 'wrong')">d) Data hiding</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) Same method acting differently for different objects</p>
       <p>Polymorphism allows objects of different classes to be treated as objects of a common superclass.</p>
     </div>
@@ -1441,7 +1467,7 @@ class B(A):
       <li onclick="checkAnswer(this, 'wrong')">d) Inheritance only</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) Method Overriding</p>
       <p>Class B overrides the show() method from class A, providing its own implementation.</p>
     </div>
@@ -1456,7 +1482,7 @@ class B(A):
       <li onclick="checkAnswer(this, 'wrong')">d) None of the above</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) Object behavior is more important than actual class</p>
       <p>Duck typing focuses on what methods/attributes an object has rather than its actual type.</p>
     </div>
@@ -1479,7 +1505,7 @@ for obj in [A(), B()]:
       <li onclick="checkAnswer(this, 'wrong')">d) B A</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ c) A B</p>
       <p>Demonstrates polymorphism through duck typing - different objects responding to the same method call.</p>
     </div>
@@ -1494,7 +1520,7 @@ for obj in [A(), B()]:
       <li onclick="checkAnswer(this, 'wrong')">d) To hide data</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ c) For flexibility and extensibility</p>
       <p>Polymorphism makes code more flexible and easier to extend with new functionality.</p>
     </div>
@@ -1582,7 +1608,7 @@ Then you can safely handle all payments through Payment without worrying about h
   <div class="question">
     <h3>🔷 Q1. Create an abstract class Shape with area() and implement it in Circle, Square.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>from abc import ABC, abstractmethod
 import math
 
@@ -1619,7 +1645,7 @@ Area: 16</pre>
   <div class="question">
     <h3>📺 Q2. Design an abstract class Appliance with method turn_on() for TV, WashingMachine.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>from abc import ABC, abstractmethod
 
 class Appliance(ABC):
@@ -1651,7 +1677,7 @@ Starting the Washing Machine 🧺</pre>
   <div class="question">
     <h3>👨‍💼 Q3. Implement Employee class with abstract calculate_salary() in FullTimeEmployee, PartTimeEmployee.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>from abc import ABC, abstractmethod
 
 class Employee(ABC):
@@ -1690,7 +1716,7 @@ Part-Time Salary: ₹ 24000</pre>
   <div class="question">
     <h3>📄 Q4. Create a Document base class with open() method; inherit PDF, Word.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>from abc import ABC, abstractmethod
 
 class Document(ABC):
@@ -1722,7 +1748,7 @@ Opening Word document 📝</pre>
   <div class="question">
     <h3>📡 Q5. Build a Sensor abstract class with read_data() method and implement TempSensor, MotionSensor.</h3>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
     <pre><code>from abc import ABC, abstractmethod
 
 class Sensor(ABC):
@@ -1762,7 +1788,7 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
       <li onclick="checkAnswer(this, 'wrong')">d) File compression</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) Hiding internal implementation</p>
       <p>Abstraction focuses on exposing only essential features while hiding implementation details.</p>
     </div>
@@ -1777,7 +1803,7 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
       <li onclick="checkAnswer(this, 'wrong')">d) abstract</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ c) abc</p>
       <p>The 'abc' module (Abstract Base Classes) provides the infrastructure for defining abstract classes.</p>
     </div>
@@ -1795,7 +1821,7 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
       <li onclick="checkAnswer(this, 'wrong')">d) No Output</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) TypeError</p>
       <p>Python raises TypeError when trying to instantiate an abstract class with unimplemented abstract methods.</p>
     </div>
@@ -1810,7 +1836,7 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
       <li onclick="checkAnswer(this, 'wrong')">d) @hidden</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) @abstractmethod</p>
       <p>The @abstractmethod decorator marks a method as abstract, requiring implementation in child classes.</p>
     </div>
@@ -1825,7 +1851,7 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
       <li onclick="checkAnswer(this, 'wrong')">d) Don't need to be defined</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
       <p>✅ b) Must be implemented in child class</p>
       <p>Abstract methods serve as templates that must be implemented by concrete (non-abstract) child classes.</p>
     </div>
@@ -1872,8 +1898,9 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
     </div>
 
 
-    <h2>🧾 Summary Table</h2>
-    <table border="1">
+<div class="summary-box">
+  <h3>&#9997;&#65039; Summary Table</h3>
+    <table>
       <thead>
         <tr>
           <th>Concept</th>
@@ -1911,5 +1938,11 @@ Motion detected at 3:45 PM 🚶‍♂️</pre>
         </tr>
       </tbody>
     </table>
-  </body>
-</html>
+  </div>
+</div>
+
+<div class="completion-banner">
+  <h3>&#127881; Chapter 8 Complete!</h3>
+  <p>Classes, objects, inheritance, encapsulation, polymorphism, abstraction — OOP mastered.</p>
+  <span class="next-badge">&#9654; Next: Libraries (NumPy &amp; pandas)</span>
+</div>

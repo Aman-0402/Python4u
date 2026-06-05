@@ -1,3 +1,36 @@
+<!-- ── Mock Test ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">&#128221; Mock Test</span>
+  <h1>&#128221; Python Mock Exam</h1>
+  <p>Timed exam conditions. Read the code carefully. No hints unless you click Show Answer.</p>
+</div>
+
 <div class="quiz-question">
     <p>1. You need to complete a function that prints a right-angled triangle pattern made of stars (*) with 5 rows. How should you complete the code?</p>
     <pre>def print_triangle():
@@ -14,7 +47,7 @@ print_triangle()</pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
+    <div class="answer">
         <pre><code># Pattern printing using nested loops
     for row in range(1, 6):
         for col in range(row):
@@ -87,7 +120,7 @@ times_tables()
       <li onclick="checkAnswer(this, 'wrong')">D) for num in range(0, 20, 2):</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Complete even number summation function
 def sum_even():
     total = 0
@@ -156,7 +189,7 @@ sum_even_v3 = lambda: print(sum(n for n in range(1,21) if n%2==0))</code></pre>
       <li onclick="checkAnswer(this, 'wrong')">D) results[::-1][:10]</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Get first 10 results in reverse order
 reversed_first_10 = results[9::-1]</code></pre>
 
@@ -206,7 +239,7 @@ reversed_first_10 = results[9::-1]</code></pre>
       <li onclick="checkAnswer(this, 'correct')">D) Both A and B</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Given list
 days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -272,7 +305,7 @@ option_b = days[5:]   # B) Using positive indexing</code></pre>
         <li onclick="checkAnswer(this, 'wrong')">D) A, D, B, C, E</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Correct linear search implementation
 def find_number(numbers, target):  # D) Function definition
     for i in range(len(numbers)):  # A) Loop through list
@@ -352,7 +385,7 @@ def find_number(numbers, target):  # D) Function definition
         <li onclick="checkAnswer(this, 'wrong')">D) str</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Examples of float numbers in Python
 num1 = 3.14
 num2 = 0.5
@@ -417,7 +450,7 @@ print(type(num4))  # &lt;class 'float'&gt;</code></pre>
         <li onclick="checkAnswer(this, 'wrong')">D) dict and tuple</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Examples of arithmetic operations with int and float
 a = 10       # int
 b = 3.5      # float
@@ -525,7 +558,7 @@ while count < 5:
         <li onclick="checkAnswer(this, 'wrong')">D) 5</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Code to analyze
 count = 0
 while count < 5:
@@ -611,7 +644,7 @@ else:
         <li onclick="checkAnswer(this, 'wrong')">D) 4</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># While-else loop example
 i = 3
 while i > 0:
@@ -696,7 +729,7 @@ Done</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) :=</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Equality comparison examples
 x = 5
 y = 5
@@ -762,7 +795,7 @@ print(x == y)  # Output: True</code></pre>
         <li onclick="checkAnswer(this, 'wrong')">D) name = "Aman"</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Valid and invalid assignments in Python
 x = 10            # ✅ Valid
 total = a + b      # ✅ Valid (if a and b exist)
@@ -832,7 +865,7 @@ print(len(S1))
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Example of instance variables
 class Person:
     def __init__(self, name):
@@ -934,7 +967,7 @@ print(c2.wheels)</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Class vs Instance Variable Example
 class Car:
     wheels = 4  # class variable (shared)
@@ -1018,7 +1051,7 @@ print(len(x))</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) None</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># List length example
 x = [1, 2, 3, 4]
 print(len(x))  # Output: 4</code></pre>
@@ -1084,7 +1117,7 @@ print(len(name[3]))</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># String indexing and length example
 name = "Python"
 print(len(name[3]))  # Output: 1</code></pre>
@@ -1145,7 +1178,7 @@ while i <= 3:
         <li onclick="checkAnswer(this, 'wrong')">D) 1 2 3</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># While loop with custom end parameter
 i = 1
 while i <= 3:
@@ -1231,7 +1264,7 @@ A-B-C-D-</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) print(ch, sep="-")</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Printing list elements with separator
 letters = ["A", "B", "C", "D"]
 for ch in letters:
@@ -1304,7 +1337,7 @@ If result = 10/3</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) print("The result is = {:2f}".format(result))</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Floating-point number formatting examples
 result = 10 / 3  # 3.3333333333333335
 
@@ -1405,7 +1438,7 @@ Area = 19.64</pre>
         <li onclick="checkAnswer(this, 'correct')">D) Both B and C</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Floating-point number formatting comparison
 length = 5.678
 width = 3.456
@@ -1481,7 +1514,7 @@ print(greet())</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) Error – x is not defined</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Global variable example
 x = "Python"
 
@@ -1563,7 +1596,7 @@ print(msg)</pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Variable scope example
 msg = "Hello"  # Global variable
 
@@ -1631,7 +1664,7 @@ print(msg)                 # Hi (global changed)</code></pre>
         <li onclick="checkAnswer(this, 'correct')">D) All of the above</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Examples of objects holding references in Python
 
 # 1. List example
@@ -1716,7 +1749,7 @@ print(x)</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># List reference example
 x = [1, 2, 3]  # Original list
 y = x           # y refers to the same list
@@ -1778,7 +1811,7 @@ print(msg[7:18])</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) ython Programm</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># String slicing example
 msg = "Python Programming"
 print(msg[7:18])  # Output: Programming</code></pre>
@@ -1839,7 +1872,7 @@ print(text[:12])</pre>
         <li onclick="checkAnswer(this, 'wrong')">D) Data Scienc</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># String slicing example
 text = "Data Science with Python"
 print(text[:12])  # Output: Data Science</code></pre>
@@ -1902,7 +1935,7 @@ print(fruits * 2)</pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># List multiplication example
 fruits = ["apple", "banana"]
 print(fruits * 2)  # Output: ['apple', 'banana', 'apple', 'banana']</code></pre>
@@ -1976,7 +2009,7 @@ print(len(nums))</pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># List multiplication and length example
 nums = [1, 2]
 nums = nums * 3
@@ -2050,7 +2083,7 @@ end = input("How old are you today?")
         <li onclick="checkAnswer(this, 'wrong')">D) Student class():</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Correct class definition syntax
 class Student:
     pass  # Class body goes here</code></pre>
@@ -2119,7 +2152,7 @@ student1.greet()  # Output: Hello, my name is Alice</code></pre>
         <li onclick="checkAnswer(this, 'wrong')">D) __main__()</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># __init__ method example
 class Student:
     def __init__(self, name):
@@ -2244,7 +2277,7 @@ print(type(UID))
         <li onclick="checkAnswer(this, 'wrong')">D) To call another function automatically</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># __init__ method example
 class Student:
     def __init__(self, name, age):
@@ -2329,7 +2362,7 @@ def __init__(self):
         <li onclick="checkAnswer(this, 'wrong')">D) p = new Person("Aman")</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Correct object instantiation
 class Person:
     def __init__(self, name):
@@ -2407,7 +2440,7 @@ p = Person.from_dict({"name": "Aman"})</code></pre>
         <li onclick="checkAnswer(this, 'wrong')">D) Classes and objects are the same thing in Python.</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Class and object example
 class Car:
     def __init__(self, make, model):
@@ -2497,7 +2530,7 @@ Assuming Car is a class with an __init__() method.</pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Object creation example
 class Car:
     def __init__(self, brand):
@@ -2589,7 +2622,7 @@ num2 = input("Enter second number: ")
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Correct number input and addition
 num1 = input("Enter first number: ")  # e.g., "7"
 num2 = input("Enter second number: ") # e.g., "8"
@@ -2666,7 +2699,7 @@ age = input("Enter your age: ")
         <li onclick="checkAnswer(this, 'wrong')">D) print("You were born in", current_year - age + "!")</li>
     </ul>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Age to birth year calculator
 current_year = 2024
 age = input("Enter your age: ")
@@ -2738,7 +2771,7 @@ print(type(x))</pre>
     </ul>
 
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-<div class="answer" style="display: none;">
+<div class="answer">
     <pre><code># Checking list type
 x = [1, 2, 3]
 print(type(x))  # Output: &lt;class 'list'&gt;</code></pre>
@@ -3311,4 +3344,10 @@ while count < 3:
         <li onclick="checkAnswer(this, 'correct')">C) Start → Middle → End</li>
         <li onclick="checkAnswer(this, 'wrong')">D) Start → End → Middle</li>
     </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>&#127881; Mock Test Complete!</h3>
+  <p>That was the real deal. If you got through it, you're exam-ready.</p>
+  <span class="next-badge">&#9654; Next: Revision &amp; Certification</span>
 </div>

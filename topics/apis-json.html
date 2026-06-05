@@ -1,99 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Chapter 11: Web APIs and JSON</title>
-</head>
-<body>
+<!-- ── Chapter 11: Web APIs & JSON ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
 
-  <h1>🌐 Chapter 11: Introduction to Web APIs and JSON</h1>
+<div class="chapter-header">
+  <span class="chapter-badge">&#127760; Chapter 11</span>
+  <h1>Web APIs &amp; JSON</h1>
+  <p>Make Python talk to the internet. Fetch live data. Build real apps.</p>
+</div>
 
-  <h2>🤔 Why Learn APIs?</h2>
-  <p><em>“APIs are like waiters in a restaurant — they take your order to the kitchen and bring back the food!”</em></p>
+<div class="hero-section">
+  <div class="hero-icon-lg">&#127760;</div>
+  <h1>&#127760; Introduction to Web APIs and JSON</h1>
+  <p>APIs are like waiters in a restaurant — they take your order to the kitchen and bring back the food!</p>
+</div>
+
+<div class="card-section">
+  <h2>&#129300; Why Learn APIs?</h2>
   <ul>
-    <li>Get live weather, news, sports scores 📰</li>
-    <li>Access data from platforms like YouTube, Twitter, or Google 🌍</li>
-    <li>Control smart devices, chatbots, and more 💬</li>
+    <li>Get live weather, news, sports scores &#128240;</li>
+    <li>Access data from platforms like YouTube, Twitter, or Google &#127757;</li>
+    <li>Control smart devices, chatbots, and more &#128172;</li>
   </ul>
+</div>
 
-  <h2>📦 What is an API?</h2>
+<div class="card-section">
+  <h2>&#128230; What is an API?</h2>
   <p>API stands for <strong>Application Programming Interface</strong>. It lets two programs talk to each other.</p>
 
-  <h3>🍔 Real-Life Analogy:</h3>
-  <ul>
-    <li>You 🧑: “I want a pizza!”</li>
-    <li>Waiter 🧑‍🍳 (API): Takes your order to the kitchen.</li>
-    <li>Kitchen 🔥 (Server): Makes the pizza (data).</li>
-    <li>Waiter brings it back to your table.</li>
-  </ul>
-  <p>Same way: <br>
-  🧑 (Your Python app) → 🌐 API → 💾 Server → 🌐 API → 🧑 (Your app gets data!)</p>
+  <div class="analogy-box">
+    <h3>&#127828; Real-Life Analogy</h3>
+    <ul>
+      <li>You &#129489;: "I want a pizza!"</li>
+      <li>Waiter &#129489;&#8205;&#127859; (API): Takes your order to the kitchen.</li>
+      <li>Kitchen &#128293; (Server): Makes the pizza (data).</li>
+      <li>Waiter brings it back to your table.</li>
+    </ul>
+    <p>Same way: Your Python app &#8594; API &#8594; Server &#8594; API &#8594; Your app gets data!</p>
+  </div>
+</div>
 
-  <h2>🔢 What is JSON?</h2>
-  <p><strong>JSON</strong> = JavaScript Object Notation</p>
-  <p>It's the language of data used by most APIs. It's just a text format to send structured data.</p>
+<div class="card-section">
+  <h2>&#128290; What is JSON?</h2>
+  <p><strong>JSON</strong> = JavaScript Object Notation. The language of data used by most APIs — just text formatted as structured data.</p>
 
-  <h3>👇 Example JSON:</h3>
   <pre><code>{
   "name": "Aman",
   "age": 20,
   "subjects": ["Math", "Python", "AI"]
 }</code></pre>
   <p>Looks like a Python dictionary, right? Exactly!</p>
+</div>
 
-  <h2>🛠️ How to Work with APIs in Python</h2>
-  <p>You’ll use a module called <code>requests</code>:</p>
+<div class="card-section">
+  <h2>&#128736;&#65039; How to Work with APIs in Python</h2>
+  <p>You'll use a module called <code>requests</code>:</p>
   <pre><code>pip install requests</code></pre>
 
-  <h3>🔗 Example: Fetching Data from a Free API</h3>
+  <h3>&#128279; Example: Fetching Data from a Free API</h3>
   <pre><code>import requests
 response = requests.get("https://api.agify.io/?name=aman")
 data = response.json()
 print(data)
 print("Predicted Age:", data["age"])</code></pre>
-  <p><strong>Output:</strong><br>
-  {'name': 'aman', 'age': 25, 'count': 100}<br>
-  Predicted Age: 25</p>
+  <div class="output-block">{'name': 'aman', 'age': 25, 'count': 100}
+Predicted Age: 25</div>
+</div>
 
-  <h2>🧰 Useful API Terms</h2>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Term</th>
-      <th>Meaning</th>
-    </tr>
-    <tr>
-      <td>URL</td>
-      <td>Web address of the API</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>Request to fetch data</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>Request to send data</td>
-    </tr>
-    <tr>
-      <td>JSON</td>
-      <td>Format used for request/response</td>
-    </tr>
+<div class="card-section">
+  <h2>&#129521; Useful API Terms</h2>
+  <table>
+    <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>URL</td><td>Web address of the API</td></tr>
+      <tr><td>GET</td><td>Request to fetch data</td></tr>
+      <tr><td>POST</td><td>Request to send data</td></tr>
+      <tr><td>JSON</td><td>Format used for request/response</td></tr>
+    </tbody>
   </table>
 
-  <h2>🤪 Funny Analogy</h2>
-  <p>JSON is like your friend who texts you everything in perfect grammar and bullet points 😎</p>
-  <p>API is the delivery boy between your app and a powerful data warehouse 📦</p>
+  <div class="analogy-box">
+    <p>JSON is like your friend who texts you everything in perfect grammar and bullet points &#128526;</p>
+    <p>API is the delivery boy between your app and a powerful data warehouse &#128230;</p>
+  </div>
+</div>
 
-  <h2>🌦 Real-World Example: Get Weather Info</h2>
+<div class="card-section">
+  <h2>&#127750; Real-World Example: Get Weather Info</h2>
   <pre><code>import requests
 city = "London"
 url = f"http://api.weatherapi.com/v1/current.json?key=your_api_key&q={city}"
 response = requests.get(url)
 data = response.json()
 print("Temperature:", data['current']['temp_c'], "°C")</code></pre>
-  <p><em>(Note: You need an API key 🔑 — sign up free on weatherapi.com)</em></p>
+  <p><em>(Note: You need an API key &#128273; — sign up free on weatherapi.com)</em></p>
+</div>
 
-  <div class="quiz">
-  <h2>🧠 Quiz Time!</h2>
+<div class="card-section">
+  <h2>&#127918; Quiz Time!</h2>
   <div class="quiz-question">
     <p>1. What is an API?</p>
     <ul>
@@ -102,7 +128,6 @@ print("Temperature:", data['current']['temp_c'], "°C")</code></pre>
       <li onclick="checkAnswer(this, 'correct')">c) A bridge between programs</li>
     </ul>
   </div>
-  
   <div class="quiz-question">
     <p>2. What does JSON stand for?</p>
     <ul>
@@ -111,7 +136,6 @@ print("Temperature:", data['current']['temp_c'], "°C")</code></pre>
       <li onclick="checkAnswer(this, 'wrong')">c) Just Some Other Numbers</li>
     </ul>
   </div>
-  
   <div class="quiz-question">
     <p>3. Which Python module is used to work with APIs?</p>
     <ul>
@@ -120,42 +144,33 @@ print("Temperature:", data['current']['temp_c'], "°C")</code></pre>
       <li onclick="checkAnswer(this, 'correct')">c) requests</li>
     </ul>
   </div>
-    </div>
+</div>
 
-  <h2>🎯 Challenge Task:</h2>
+<div class="card-section">
+  <h2>&#127919; Challenge Task</h2>
   <ol>
     <li>Use the Agify API to predict ages for 3 different names.</li>
-    <li>Use a free Joke API (<a href="https://official-joke-api.appspot.com/random_joke">https://official-joke-api.appspot.com/random_joke</a>) to print a random joke.</li>
+    <li>Use a free Joke API (<code>https://official-joke-api.appspot.com/random_joke</code>) to print a random joke.</li>
     <li>Find an API of your interest (e.g. Pokémon, News, COVID) and try fetching data!</li>
   </ol>
+</div>
 
-  <h2>🧾 Summary Table</h2>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Concept</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>API</td>
-      <td>Lets Python talk to web services</td>
-    </tr>
-    <tr>
-      <td>requests</td>
-      <td>Python module to make API calls</td>
-    </tr>
-    <tr>
-      <td>JSON</td>
-      <td>Lightweight format to share data</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>Request method to get data</td>
-    </tr>
-    <tr>
-      <td>.json()</td>
-      <td>Convert API response to dictionary</td>
-    </tr>
+<div class="summary-box">
+  <h3>&#9997;&#65039; Summary Table</h3>
+  <table>
+    <thead><tr><th>Concept</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>API</td><td>Lets Python talk to web services</td></tr>
+      <tr><td><code>requests</code></td><td>Python module to make API calls</td></tr>
+      <tr><td>JSON</td><td>Lightweight format to share data</td></tr>
+      <tr><td>GET</td><td>Request method to get data</td></tr>
+      <tr><td><code>.json()</code></td><td>Convert API response to dictionary</td></tr>
+    </tbody>
   </table>
+</div>
 
-</body>
-</html>
+<div class="completion-banner">
+  <h3>&#127881; Chapter 11 Complete!</h3>
+  <p>Your Python can now talk to the internet. Use this power responsibly.</p>
+  <span class="next-badge">&#9654; Next: Database Connectivity</span>
+</div>

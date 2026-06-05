@@ -333,7 +333,28 @@ document.addEventListener('DOMContentLoaded', () => {
   enhanceDarkModeToggle();
   enhanceSidebarToggle();
   enhanceTopicLinks();
+  showWelcomeDialog();
 });
+
+function showWelcomeDialog() {
+  if (typeof Swal === 'undefined') return;
+  Swal.fire({
+    title: '👋 Welcome, Nidhi Sharma!',
+    html: `
+      <p style="font-size:1.1em;margin:0 0 8px;">Welcome to <strong>Study Me</strong> 🐍</p>
+      <p style="color:#8b949e;font-size:0.95em;margin:0;">Happy you finally started learning AI! 🤖✨</p>
+    `,
+    icon: 'success',
+    confirmButtonText: "Let's Go! 🚀",
+    confirmButtonColor: '#00d4aa',
+    background: '#161b22',
+    color: '#e6edf3',
+    iconColor: '#00d4aa',
+    showClass: { popup: 'animate__animated animate__fadeInDown' },
+    hideClass: { popup: 'animate__animated animate__fadeOutUp' },
+    customClass: { popup: 'welcome-swal-popup' }
+  });
+}
 
 // Export functions for use in main script
 window.loadTopic = loadTopic;

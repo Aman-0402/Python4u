@@ -1,20 +1,57 @@
-<h1>🎓 Project: Student Management System using Flask + SQLite</h1>
+<!-- ── Full Stack Project ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #7c3aed, #0ea5e9);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
 
-<h2>🚀 Goal:</h2>
-<p>
-  Build a web application to <strong>Add</strong>, <strong>View</strong>, <strong>Edit</strong>, and
-  <strong>Delete</strong> student records using:
-</p>
-<ul>
-  <li>Python Flask</li>
-  <li>HTML</li>
-  <li>CSS</li>
-  <li>JavaScript</li>
-  <li>SQLite (via <strong>sqlite3</strong>)</li>
-</ul>
+<div class="chapter-header">
+  <span class="chapter-badge">&#127757; Full Stack</span>
+  <h1>Full Stack Project: Flask + SQLite</h1>
+  <p>Build a complete web app — backend, frontend, and database — in Python.</p>
+</div>
 
-<h2>🏗️ Project Structure (Folder Layout):</h2>
-<pre><code>student_flask_app/
+<div class="hero-section">
+  <div class="hero-icon-lg">&#127757;</div>
+  <h1>&#127757; Student Management System</h1>
+  <p>Build a web application to Add, View, Edit, and Delete student records using Flask + SQLite.</p>
+</div>
+
+<div class="card-section">
+  <h2>&#128640; Goal</h2>
+  <p>Build a web application to <strong>Add</strong>, <strong>View</strong>, <strong>Edit</strong>, and <strong>Delete</strong> student records using:</p>
+  <ul>
+    <li>Python Flask</li>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+    <li>SQLite (via <strong>sqlite3</strong>)</li>
+  </ul>
+</div>
+
+<div class="card-section">
+  <h2>&#128736;&#65039; Project Structure</h2>
+  <pre><code>student_flask_app/
 │
 ├── app.py                      # Main Flask application
 ├── students.db                 # SQLite3 database (auto-created)
@@ -24,48 +61,45 @@
 ├── templates/                  # HTML templates
 │   ├── index.html              # List all students
 │   ├── add.html                # Form to add student
-│   └── edit.html               # Form to edit student
-</code></pre>
-<br>
-<br>
-<h2>🧠 Features:</h2>
-<ul>
-  <li>📝 Add student details (name, roll, class, etc.)</li>
-  <li>📋 View a list of all student records</li>
-  <li>✏️ Edit student information</li>
-  <li>❌ Delete student record with confirmation</li>
-  <li>📦 Data stored in SQLite database</li>
-  <li>🌐 Responsive UI using HTML + CSS</li>
-  <li>⚡ Real-time alerts using JavaScript</li>
-</ul>
-<br>
-<br>
-<h3>🔍 Explanation of Key Files:</h3>
-<ul>
-  <li><strong>app.py:</strong> The core backend with Flask routes for CRUD operations.</li>
-  <li><strong>students.db:</strong> SQLite database file to store student data persistently.</li>
-  <li><strong>templates/index.html:</strong> Displays a table of all students.</li>
-  <li><strong>templates/add.html:</strong> Form to add a new student record.</li>
-  <li><strong>templates/edit.html:</strong> Form to update an existing student.</li>
-  <li><strong>static/style.css:</strong> Custom styling for a clean and modern UI.</li>
-  <li><strong>static/script.js:</strong> JavaScript for alert messages and confirmation prompts.</li>
-</ul>
-<br>
-<br>
-<h3>📌 Technologies Used:</h3>
-<ul>
-  <li>Flask (Backend Framework)</li>
-  <li>SQLite3 (Database)</li>
-  <li>HTML5, CSS3 (Frontend Design)</li>
-  <li>JavaScript (Client-side interactivity)</li>
-</ul>
+│   └── edit.html               # Form to edit student</code></pre>
 
-<h2>🔧 STEP 1: Install Flask</h2>
-<pre><code>pip install flask</code></pre>
-<br>
-<br>
-<h3>🐍 STEP 1:  <strong>app.py</strong> – The Brain of the App (Flask Logic):</h3>
-<pre><code>from flask import Flask, render_template, request, redirect
+  <h3>&#129504; Features</h3>
+  <ul>
+    <li>&#128221; Add student details (name, roll, class, etc.)</li>
+    <li>&#128203; View a list of all student records</li>
+    <li>&#9999;&#65039; Edit student information</li>
+    <li>&#10060; Delete student record with confirmation</li>
+    <li>&#128230; Data stored in SQLite database</li>
+    <li>&#127760; Responsive UI using HTML + CSS</li>
+    <li>&#9889; Real-time alerts using JavaScript</li>
+  </ul>
+
+  <h3>&#128269; Explanation of Key Files</h3>
+  <ul>
+    <li><strong>app.py:</strong> The core backend with Flask routes for CRUD operations.</li>
+    <li><strong>students.db:</strong> SQLite database file to store student data persistently.</li>
+    <li><strong>templates/index.html:</strong> Displays a table of all students.</li>
+    <li><strong>templates/add.html:</strong> Form to add a new student record.</li>
+    <li><strong>templates/edit.html:</strong> Form to update an existing student.</li>
+    <li><strong>static/style.css:</strong> Custom styling for a clean and modern UI.</li>
+    <li><strong>static/script.js:</strong> JavaScript for alert messages and confirmation prompts.</li>
+  </ul>
+
+  <h3>&#128204; Technologies Used</h3>
+  <ul>
+    <li>Flask (Backend Framework)</li>
+    <li>SQLite3 (Database)</li>
+    <li>HTML5, CSS3 (Frontend Design)</li>
+    <li>JavaScript (Client-side interactivity)</li>
+  </ul>
+</div>
+
+<div class="card-section">
+  <h2>&#128295; STEP 1: Install Flask</h2>
+  <pre><code>pip install flask</code></pre>
+
+  <h3>&#128013; STEP 2: app.py — The Brain of the App</h3>
+  <pre><code>from flask import Flask, render_template, request, redirect
 import sqlite3
 
 app = Flask(__name__)
@@ -87,7 +121,7 @@ def init_db():
 
 init_db()
 
-# 📋 Homepage – List All Students
+# Homepage – List All Students
 @app.route('/')
 def index():
     conn = sqlite3.connect("students.db")
@@ -97,7 +131,7 @@ def index():
     conn.close()
     return render_template("index.html", students=students)
 
-# ➕ Add Student
+# Add Student
 @app.route('/add', methods=['GET', 'POST'])
 def add_student():
     if request.method == 'POST':
@@ -112,7 +146,7 @@ def add_student():
         return redirect('/')
     return render_template('add.html')
 
-# ✏️ Edit Student
+# Edit Student
 @app.route('/edit/&lt;int:id&gt;', methods=['GET', 'POST'])
 def edit_student(id):
     conn = sqlite3.connect("students.db")
@@ -130,7 +164,7 @@ def edit_student(id):
     conn.close()
     return render_template('edit.html', student=student)
 
-# 🗑️ Delete Student
+# Delete Student
 @app.route('/delete/&lt;int:id&gt;')
 def delete_student(id):
     conn = sqlite3.connect("students.db")
@@ -140,14 +174,14 @@ def delete_student(id):
     conn.close()
     return redirect('/')
 
-# ▶️ Run App
+# Run App
 if __name__ == '__main__':
-    app.run(debug=True)
-</code></pre>
-<br>
-<br>
-<h3>🖼️ 3. <strong>templates/index.html</strong> – View All Students</h3>
-<pre><code>&lt;!DOCTYPE html&gt;
+    app.run(debug=True)</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>&#128444;&#65039; STEP 3: templates/index.html — View All Students</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Student Management&lt;/title&gt;
@@ -156,8 +190,8 @@ if __name__ == '__main__':
 &lt;/head&gt;
 &lt;body class="container mt-5"&gt;
 
-    &lt;h2&gt;📋 Student List&lt;/h2&gt;
-    &lt;a href="/add" class="btn btn-primary mb-3"&gt;➕ Add Student&lt;/a&gt;
+    &lt;h2&gt;&#128203; Student List&lt;/h2&gt;
+    &lt;a href="/add" class="btn btn-primary mb-3"&gt;&#10133; Add Student&lt;/a&gt;
 
     &lt;table class="table table-bordered table-striped shadow-sm"&gt;
         &lt;thead class="table-dark"&gt;
@@ -171,8 +205,8 @@ if __name__ == '__main__':
                 &lt;td&gt;{{ student[2] }}&lt;/td&gt;
                 &lt;td&gt;{{ student[3] }}&lt;/td&gt;
                 &lt;td&gt;
-                    &lt;a href="/edit/{{ student[0] }}" class="btn btn-sm btn-warning"&gt;✏️ Edit&lt;/a&gt;
-                    &lt;a href="/delete/{{ student[0] }}" class="btn btn-sm btn-danger" onclick="return confirmDelete('{{ student[1] }}')"&gt;🗑️ Delete&lt;/a&gt;
+                    &lt;a href="/edit/{{ student[0] }}" class="btn btn-sm btn-warning"&gt;&#9999;&#65039; Edit&lt;/a&gt;
+                    &lt;a href="/delete/{{ student[0] }}" class="btn btn-sm btn-danger" onclick="return confirmDelete('{{ student[1] }}')"&gt;&#128465;&#65039; Delete&lt;/a&gt;
                 &lt;/td&gt;
             &lt;/tr&gt;
             {% endfor %}
@@ -180,17 +214,17 @@ if __name__ == '__main__':
     &lt;/table&gt;
 
     &lt;footer&gt;
-        &copy; 2025 Student Management App | Made with ❤️
+        &copy; 2025 Student Management App | Made with &#10084;&#65039;
     &lt;/footer&gt;
 
     &lt;script src="{{ url_for('static', filename='script.js') }}"&gt;&lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<br>
-<br>
-<h3>📝 4. <strong>templates/add.html</strong> – Add New Student Form</h3>
-<pre><code>&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>&#128221; STEP 4: templates/add.html — Add New Student</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Add Student&lt;/title&gt;
@@ -198,7 +232,7 @@ if __name__ == '__main__':
     &lt;link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"&gt;
 &lt;/head&gt;
 &lt;body class="container mt-5"&gt;
-    &lt;h2&gt;➕ Add New Student&lt;/h2&gt;
+    &lt;h2&gt;&#10133; Add New Student&lt;/h2&gt;
     &lt;form method="POST"&gt;
         &lt;input type="text" name="name" class="form-control mb-2" placeholder="Name" required&gt;
         &lt;input type="number" name="age" class="form-control mb-2" placeholder="Age" required&gt;
@@ -207,12 +241,12 @@ if __name__ == '__main__':
         &lt;a href="/" class="btn btn-secondary"&gt;Cancel&lt;/a&gt;
     &lt;/form&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<br>
-<br>
-<h3>✏️ 5. <code>templates/edit.html</code> – Edit Student Details</h3>
-<pre><code>&lt;!DOCTYPE html&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>&#9999;&#65039; STEP 5: templates/edit.html — Edit Student</h2>
+  <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Edit Student&lt;/title&gt;
@@ -220,7 +254,7 @@ if __name__ == '__main__':
     &lt;link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"&gt;
 &lt;/head&gt;
 &lt;body class="container mt-5"&gt;
-    &lt;h2&gt;✏️ Edit Student&lt;/h2&gt;
+    &lt;h2&gt;&#9999;&#65039; Edit Student&lt;/h2&gt;
     &lt;form method="POST"&gt;
         &lt;input type="text" name="name" class="form-control mb-2" value="{{ student[1] }}" required&gt;
         &lt;input type="number" name="age" class="form-control mb-2" value="{{ student[2] }}" required&gt;
@@ -229,12 +263,12 @@ if __name__ == '__main__':
         &lt;a href="/" class="btn btn-secondary"&gt;Cancel&lt;/a&gt;
     &lt;/form&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<br>
-<br>
-<h3>🎨 6. <strong>static/style.css</strong> – Custom CSS</h3>
-<pre><code>body {
+&lt;/html&gt;</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>&#127912; STEP 6: static/style.css</h2>
+  <pre><code>body {
     background-color: #f8f9fa;
     font-family: 'Segoe UI', sans-serif;
 }
@@ -257,60 +291,39 @@ footer {
     margin-top: 40px;
     padding: 10px;
     color: #6c757d;
-}
-</code></pre>
-<br>
-<br>
-<h3>⚙️ 7. <strong>static/script.js</strong> – JS for Confirmation Popup</h3>
-<pre><code>function confirmDelete(name) {
+}</code></pre>
+
+  <h3>&#9881;&#65039; STEP 7: static/script.js</h3>
+  <pre><code>function confirmDelete(name) {
     return confirm("Are you sure you want to delete student: " + name + "?");
-}
-</code></pre>
-<br>
-<br>
-<h3>▶️ How to Run the Project</h3>
-<p>Open terminal in your project folder and run the Flask app:</p>
-<pre><code>python app.py</code></pre>
-<p>Then open your browser and go to:</p>
-<pre><code>👉 http://localhost:5000</code></pre>
+}</code></pre>
+</div>
 
-<br>
-<br>
-<h3>🧠 Summary for Students</h3>
-<table class="table table-bordered table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>Feature</th>
-      <th>Route / Code</th>
-      <th>Template</th>
-      <th>SQLite Operation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>View Students</td>
-      <td><strong>/</strong> route</td>
-      <td><strong>index.html</strong></td>
-      <td><strong>SELECT</strong></td>
-    </tr>
-    <tr>
-      <td>Add Student</td>
-      <td><strong>/add</strong></td>
-      <td><strong>add.html</strong></td>
-      <td><strong>INSERT</strong></td>
-    </tr>
-    <tr>
-      <td>Edit Student</td>
-      <td><strong>/edit/&lt;id&gt;</strong></td>
-      <td><strong>edit.html</strong></td>
-      <td><strong>UPDATE</strong></td>
-    </tr>
-    <tr>
-      <td>Delete Student</td>
-      <td><strong>/delete/&lt;id&gt;</strong></td>
-      <td>Button in <strong>index.html</strong></td>
-      <td><strong>DELETE</strong></td>
-    </tr>
-  </tbody>
-</table>
+<div class="card-section">
+  <h2>&#9654;&#65039; How to Run the Project</h2>
+  <p>Open terminal in your project folder and run:</p>
+  <pre><code>python app.py</code></pre>
+  <p>Then open your browser and go to:</p>
+  <pre><code>http://localhost:5000</code></pre>
+</div>
 
+<div class="summary-box">
+  <h3>&#129504; Summary</h3>
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>Route / Code</th><th>Template</th><th>SQLite Operation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>View Students</td><td><strong>/</strong> route</td><td><strong>index.html</strong></td><td><strong>SELECT</strong></td></tr>
+      <tr><td>Add Student</td><td><strong>/add</strong></td><td><strong>add.html</strong></td><td><strong>INSERT</strong></td></tr>
+      <tr><td>Edit Student</td><td><strong>/edit/&lt;id&gt;</strong></td><td><strong>edit.html</strong></td><td><strong>UPDATE</strong></td></tr>
+      <tr><td>Delete Student</td><td><strong>/delete/&lt;id&gt;</strong></td><td>Button in <strong>index.html</strong></td><td><strong>DELETE</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="completion-banner">
+  <h3>&#127881; Full Stack Project Complete!</h3>
+  <p>You built a real web app with a database backend. That's no longer a beginner move.</p>
+  <span class="next-badge">&#9654; Next: Revision &amp; Certification</span>
+</div>

@@ -1,72 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Chapter 12: Database Connectivity in Python</title>
-</head>
-<body>
+<!-- ── Chapter 12: Database Connectivity ── -->
+<style>
+.chapter-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #0ea5e9, #10b981);
+  color: #fff; font-family: var(--font-mono); font-size: 0.72em; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em,3vw,2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+.completion-banner {
+  text-align: center; margin-top: 2.5em; padding: 1.8em;
+  background: linear-gradient(135deg,#0d1117,#161b22);
+  border: 1px solid #30363d; border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl,18px); color: #e6edf3;
+}
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block; margin-top: 10px; background: var(--accent,#00d4aa);
+  color: #0d1117; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.85em; padding: 6px 16px; border-radius: 20px;
+}
+</style>
 
-  <div class="hero-section">
-    <h1>🗃️ Chapter 12: Introduction to Database Connectivity in Python</h1>
-    <p>Learn how to connect your Python applications to real-world databases! In this chapter, you'll explore how to use libraries like <code>sqlite3</code> to create, read, update, and delete data from databases. Understand how SQL and Python work together to build dynamic, data-driven programs. 🛢️🔗</p>
-  </div>
+<div class="chapter-header">
+  <span class="chapter-badge">&#128451; Chapter 12</span>
+  <h1>Database Connectivity in Python</h1>
+  <p>Connect Python to SQLite. Create, read, update, delete. Build data-driven apps.</p>
+</div>
 
-  <h2>🤔 Why Learn Database?</h2>
-  <p><em>“A program without a database is like a library without books.”</em></p>
+<div class="hero-section">
+  <div class="hero-icon-lg">&#128451;</div>
+  <h1>&#128451; Introduction to Database Connectivity</h1>
+  <p>Learn how to connect your Python applications to real-world databases using <code>sqlite3</code>. &#128722;&#128172;</p>
+</div>
+
+<div class="card-section">
+  <h2>&#129300; Why Learn Database?</h2>
+  <p><em>"A program without a database is like a library without books."</em></p>
   <ul>
-    <li>Store user data permanently 📝</li>
-    <li>Build login/signup systems 🔐</li>
-    <li>Create powerful apps like student dashboards, e-commerce sites, chat apps 🛒💬</li>
+    <li>Store user data permanently &#128221;</li>
+    <li>Build login/signup systems &#128272;</li>
+    <li>Create powerful apps like student dashboards, e-commerce sites, chat apps &#128722;&#128172;</li>
   </ul>
 
-  <h2>🧱 What is a Database?</h2>
-  <p>A Database is an organized collection of data. Think of it like a super-smart Excel sheet.</p>
-
-  <h3>🎯 Real-Life Analogy:</h3>
+  <h3>&#127919; Real-Life Analogy</h3>
   <ul>
     <li>Your phone contact list = a database of people</li>
     <li>Google Maps = a database of locations</li>
-    <li>Netflix = a database of shows 🍿</li>
+    <li>Netflix = a database of shows &#127871;</li>
   </ul>
+</div>
 
-  <h2>🗂️ Types of Databases</h2>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Type</th>
-      <th>Example</th>
-      <th>Structure</th>
-    </tr>
-    <tr>
-      <td>Relational</td>
-      <td>MySQL, SQLite</td>
-      <td>Tables 📊</td>
-    </tr>
-    <tr>
-      <td>Non-relational</td>
-      <td>MongoDB</td>
-      <td>JSON-like 📄</td>
-    </tr>
+<div class="card-section">
+  <h2>&#128194; Types of Databases</h2>
+  <table>
+    <thead><tr><th>Type</th><th>Example</th><th>Structure</th></tr></thead>
+    <tbody>
+      <tr><td>Relational</td><td>MySQL, SQLite</td><td>Tables &#128202;</td></tr>
+      <tr><td>Non-relational</td><td>MongoDB</td><td>JSON-like &#128196;</td></tr>
+    </tbody>
   </table>
   <p>We'll use <strong>SQLite</strong> — lightweight, fast, and built-in with Python!</p>
 
-  <h2>🧰 What is SQLite?</h2>
+  <h3>&#9881;&#65039; What is SQLite?</h3>
   <ul>
     <li>Built-in relational database in Python</li>
     <li>Stores data in <code>.db</code> files</li>
     <li>Perfect for learning and small projects</li>
   </ul>
+</div>
 
-  <h2>🔌 Step-by-Step: Connecting Python with SQLite</h2>
+<div class="card-section">
+  <h2>&#128279; Step-by-Step: Connecting Python with SQLite</h2>
   <ol>
-    <li><strong>Import sqlite3 module</strong><br>
-      <code>import sqlite3</code>
-    </li>
-    <li><strong>Connect to a database (or create it)</strong><br>
-      <code>conn = sqlite3.connect('school.db')</code>
-    </li>
-    <li><strong>Create a cursor object</strong><br>
-      <code>cur = conn.cursor()</code>
-    </li>
+    <li><strong>Import sqlite3 module</strong><br><code>import sqlite3</code></li>
+    <li><strong>Connect to a database (or create it)</strong><br><code>conn = sqlite3.connect('school.db')</code></li>
+    <li><strong>Create a cursor object</strong><br><code>cur = conn.cursor()</code></li>
     <li><strong>Create a table</strong>
       <pre><code>cur.execute('''
 CREATE TABLE IF NOT EXISTS student (
@@ -76,43 +88,43 @@ CREATE TABLE IF NOT EXISTS student (
 )
 ''')</code></pre>
     </li>
-    <li><strong>Insert data</strong><br>
+    <li><strong>Insert data</strong>
       <pre><code>cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", ("Aman", 95))
 cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", ("Preet", 88))
 conn.commit()</code></pre>
     </li>
-    <li><strong>Read data</strong><br>
+    <li><strong>Read data</strong>
       <pre><code>cur.execute("SELECT * FROM student")
 rows = cur.fetchall()
 for row in rows:
     print(row)</code></pre>
     </li>
-    <li><strong>Update data</strong><br>
+    <li><strong>Update data</strong>
       <pre><code>cur.execute("UPDATE student SET grade = 92 WHERE name = 'Preet'")
 conn.commit()</code></pre>
     </li>
-    <li><strong>Delete data</strong><br>
+    <li><strong>Delete data</strong>
       <pre><code>cur.execute("DELETE FROM student WHERE name = 'Aman'")
 conn.commit()</code></pre>
     </li>
-    <li><strong>Filter data (WHERE clause)</strong><br>
+    <li><strong>Filter data (WHERE clause)</strong>
       <pre><code>cur.execute("SELECT * FROM student WHERE grade > 90")
 print(cur.fetchall())</code></pre>
     </li>
-    <li><strong>Sort data (ORDER BY)</strong><br>
+    <li><strong>Sort data (ORDER BY)</strong>
       <pre><code>cur.execute("SELECT * FROM student ORDER BY grade DESC")
 print(cur.fetchall())</code></pre>
     </li>
-    <li><strong>Count total rows</strong><br>
+    <li><strong>Count total rows</strong>
       <pre><code>cur.execute("SELECT COUNT(*) FROM student")
 print("Total students:", cur.fetchone()[0])</code></pre>
     </li>
-    <li><strong>Close the connection</strong><br>
-      <code>conn.close()</code>
-    </li>
+    <li><strong>Close the connection</strong><br><code>conn.close()</code></li>
   </ol>
+</div>
 
-  <h2>📦 Full Example</h2>
+<div class="card-section">
+  <h2>&#128230; Full Example</h2>
   <pre><code>import sqlite3
 conn = sqlite3.connect('school.db')
 cur = conn.cursor()
@@ -158,123 +170,106 @@ print("Total students:", cur.fetchone()[0])
 # Close
 conn.close()</code></pre>
 
-  <h2>🤪 Funny Analogy</h2>
-  <p>SQLite is like a tiny notebook your app carries everywhere 🧳📓.<br>
-  It writes and reads whatever you tell it — quietly and efficiently.</p>
-
-  <div class="quiz">
-    <h2>🧠 Quiz Time!</h2>
-    <div class="quiz-question">
-      <p>1. Which module is used in Python for SQLite?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) pymysql</li>
-        <li onclick="checkAnswer(this, 'correct')">b) sqlite3</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) pandaSQL</li>
-      </ul>
-    </div>
-    
-    <div class="quiz-question">
-      <p>2. What does conn.commit() do?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Starts a loop</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) Cancels connection</li>
-        <li onclick="checkAnswer(this, 'correct')">c) Saves changes to database</li>
-      </ul>
-    </div>
-    
-    <div class="quiz-question">
-      <p>3. What function is used to read all rows from a query?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) .read()</li>
-        <li onclick="checkAnswer(this, 'correct')">b) .fetchall()</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) .select()</li>
-      </ul>
-    </div>
-    <div class="quiz-question">
-      <p>4. What does the <code>fetchone()</code> function return?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) All rows as a list</li>
-        <li onclick="checkAnswer(this, 'correct')">b) The first row from the result</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) A list of columns</li>
-      </ul>
-    </div>
-    
-    <div class="quiz-question">
-      <p>5. Which SQL command is used to remove data from a table?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) REMOVE</li>
-        <li onclick="checkAnswer(this, 'correct')">b) DELETE</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) ERASE</li>
-      </ul>
-    </div>
-    
-    <div class="quiz-question">
-      <p>6. What will happen if you forget to use <code>conn.commit()</code> after <code>INSERT</code>?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'correct')">a) The data won’t be saved permanently</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) The program will crash</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) It will insert duplicate data</li>
-      </ul>
-    </div>
-    
-    <div class="quiz-question">
-      <p>7. Which SQL keyword is used to sort the results?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) GROUP BY</li>
-        <li onclick="checkAnswer(this, 'correct')">b) ORDER BY</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) ARRANGE BY</li>
-      </ul>
-    </div>
-    
-    <div class="quiz-question">
-      <p>8. What is the purpose of the <code>WHERE</code> clause in SQL?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'correct')">a) To filter specific rows</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) To change table name</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) To join two tables</li>
-      </ul>
-    </div>
-    
+  <div class="analogy-box">
+    <p>SQLite is like a tiny notebook your app carries everywhere &#129523;&#128211;.<br>
+    It writes and reads whatever you tell it — quietly and efficiently.</p>
   </div>
+</div>
 
-  <h2>🎯 Challenge Task</h2>
+<div class="card-section">
+  <h2>&#127918; Quiz Time!</h2>
+  <div class="quiz-question">
+    <p>1. Which module is used in Python for SQLite?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) pymysql</li>
+      <li onclick="checkAnswer(this, 'correct')">b) sqlite3</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) pandaSQL</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>2. What does conn.commit() do?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) Starts a loop</li>
+      <li onclick="checkAnswer(this, 'wrong')">b) Cancels connection</li>
+      <li onclick="checkAnswer(this, 'correct')">c) Saves changes to database</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>3. What function is used to read all rows from a query?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) .read()</li>
+      <li onclick="checkAnswer(this, 'correct')">b) .fetchall()</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) .select()</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. What does the <code>fetchone()</code> function return?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) All rows as a list</li>
+      <li onclick="checkAnswer(this, 'correct')">b) The first row from the result</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) A list of columns</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. Which SQL command removes data from a table?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) REMOVE</li>
+      <li onclick="checkAnswer(this, 'correct')">b) DELETE</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) ERASE</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>6. What will happen if you forget to use <code>conn.commit()</code> after <code>INSERT</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">a) The data won't be saved permanently</li>
+      <li onclick="checkAnswer(this, 'wrong')">b) The program will crash</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) It will insert duplicate data</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>7. Which SQL keyword is used to sort the results?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) GROUP BY</li>
+      <li onclick="checkAnswer(this, 'correct')">b) ORDER BY</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) ARRANGE BY</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>8. What is the purpose of the <code>WHERE</code> clause in SQL?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">a) To filter specific rows</li>
+      <li onclick="checkAnswer(this, 'wrong')">b) To change table name</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) To join two tables</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>&#127919; Challenge Task</h2>
   <ol>
     <li>Create a table <code>books</code> with columns: title, author, year.</li>
     <li>Insert at least 3 book records.</li>
     <li>Display all book entries using Python.</li>
   </ol>
+</div>
 
-  <h2>🧾 Summary Table</h2>
-  <table border="1" cellpadding="8">
-    <tr>
-      <th>Step</th>
-      <th>What It Does</th>
-    </tr>
-    <tr>
-      <td>sqlite3.connect()</td>
-      <td>Connect to DB file</td>
-    </tr>
-    <tr>
-      <td>cursor()</td>
-      <td>Control the database</td>
-    </tr>
-    <tr>
-      <td>execute()</td>
-      <td>Run SQL commands</td>
-    </tr>
-    <tr>
-      <td>commit()</td>
-      <td>Save changes</td>
-    </tr>
-    <tr>
-      <td>fetchall()</td>
-      <td>Get all results</td>
-    </tr>
-    <tr>
-      <td>close()</td>
-      <td>End connection</td>
-    </tr>
+<div class="summary-box">
+  <h3>&#9997;&#65039; Summary Table</h3>
+  <table>
+    <thead><tr><th>Step</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr><td><code>sqlite3.connect()</code></td><td>Connect to DB file</td></tr>
+      <tr><td><code>cursor()</code></td><td>Control the database</td></tr>
+      <tr><td><code>execute()</code></td><td>Run SQL commands</td></tr>
+      <tr><td><code>commit()</code></td><td>Save changes</td></tr>
+      <tr><td><code>fetchall()</code></td><td>Get all results</td></tr>
+      <tr><td><code>close()</code></td><td>End connection</td></tr>
+    </tbody>
   </table>
+</div>
 
-</body>
-</html>
+<div class="completion-banner">
+  <h3>&#127881; Chapter 12 Complete!</h3>
+  <p>Your data now survives program restarts. That's called persistence. Welcome to real apps.</p>
+  <span class="next-badge">&#9654; Next: Quiz</span>
+</div>
