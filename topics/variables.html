@@ -1,770 +1,563 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 Chapter 2: Variables, Data Types & Operators in Python</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #222;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        body.dark {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        body.dark .container {
-            background: #1e1e1e;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        
-        .hero-section {
-            text-align: center;
-            background: linear-gradient(135deg, #007acc 0%, #005b99 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-        }
-        
-        .hero-section:hover {
-            transform: translateY(-2px);
-        }
-        
-        .hero-section h1 {
-            font-size: 2.5em;
-            margin: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-        
-        .hero-section p {
-            font-size: 1.1em;
-            margin: 10px 0;
-            opacity: 0.9;
-        }
-        
-        .python-logo {
-            width: 80px;
-            height: 80px;
-            margin: 20px auto;
-            display: block;
-            border-radius: 5%;
-            transition: transform 0.3s ease;
-        }
-        
-        .python-logo:hover {
-            transform: scale(1.05);
-        }
-        
-        h2 {
-            color: #007acc;
-            border-bottom: 2px solid #007acc;
-            padding-bottom: 8px;
-            font-size: 1.8em;
-            margin-top: 30px;
-        }
-        
-        body.dark h2 {
-            color: #89d3ff;
-            border-bottom-color: #89d3ff;
-        }
-        
-        h3 {
-            color: #333;
-            font-size: 1.3em;
-            margin-top: 25px;
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border-left: 4px solid #007acc;
-            border-radius: 4px;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark h3 {
-            color: #e0e0e0;
-            background: #2a2a2a;
-            border-left-color: #89d3ff;
-        }
-        
-        h4 {
-            color: #007acc;
-            font-size: 1.1em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        body.dark h4 {
-            color: #89d3ff;
-        }
-        
-        .fun-fact {
-            background: #fff8dc;
-            border-left: 4px solid #f4a261;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 6px;
-            transition: transform 0.3s ease;
-        }
-        
-        .fun-fact:hover {
-            transform: translateX(5px);
-        }
-        
-        body.dark .fun-fact {
-            background: #2e2e2e;
-            border-left-color: #f4a261;
-        }
-        
-        .code-block {
-            background: #f4f4f4;
-            color: #111;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 15px;
-            font-weight: 600;
-            margin: 15px 0;
-            overflow-x: auto;
-            border: 1px solid #ddd;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        body.dark .code-block {
-            background: #1e1e1e;
-            color: #e8e8e8;
-            border-color: #333;
-        }
-        
-        .code-block:hover {
-            background: #eaeaea;
-        }
-        
-        body.dark .code-block:hover {
-            background: #2a2a2a;
-        }
-        
-        pre {
-            margin: 0;
-            font-family: 'Fira Code', 'Courier New', monospace;
-        }
-        
-        code {
-            font-family: 'Fira Code', 'Courier New', monospace;
-            background: #f1f1f1;
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-        
-        body.dark code {
-            background: #333;
-            color: #e8e8e8;
-        }
-        
-        .output-block {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 10px 0;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark .output-block {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-        
-        .analogy-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid #e9ecef;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .analogy-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        body.dark .analogy-box {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s ease;
-        }
-        
-        table:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        body.dark table {
-            background: #1e1e1e;
-        }
-        
-        th {
-            background: #007acc;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        body.dark th {
-            background: #333;
-        }
-        
-        td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #e9ecef;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark td {
-            border-bottom-color: #444;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        body.dark tr:hover td {
-            background: #2a2a2a;
-        }
-        
-        .quiz {
-            background: #fff8dc;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-left: 6px solid #f4a261;
-        }
-        
-        body.dark .quiz {
-            background: #2e2e2e;
-            border-left-color: #f4a261;
-        }
-        
-        .quiz-question {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .quiz-question:hover {
-            transform: translateY(-2px);
-        }
-        
-        body.dark .quiz-question {
-            background: #1e1e1e;
-        }
-        
-        .quiz-question ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .quiz-question li {
-            padding: 10px 15px;
-            margin: 5px 0;
-            background: #e0f7fa;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        
-        .quiz-question li:hover {
-            background: #b2ebf2;
-            transform: translateX(5px);
-        }
-        
-        body.dark .quiz-question li {
-            background: #333;
-        }
-        
-        body.dark .quiz-question li:hover {
-            background: #444;
-        }
-        
-        .challenge-box {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            border: 1px solid #e9ecef;
-            transition: transform 0.3s ease;
-        }
-        
-        .challenge-box:hover {
-            transform: translateY(-2px);
-        }
-        
-        body.dark .challenge-box {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        .summary-box {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 1px solid #e9ecef;
-            transition: transform 0.3s ease;
-        }
-        
-        .summary-box:hover {
-            transform: translateY(-2px);
-        }
-        
-        body.dark .summary-box {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        .summary-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .summary-box li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 25px;
-            transition: transform 0.2s ease;
-        }
-        
-        .summary-box li:hover {
-            transform: translateX(5px);
-        }
-        
-        .summary-box li:before {
-            content: "✅";
-            position: absolute;
-            left: 0;
-        }
-        
-        .emoji {
-            font-size: 1.1em;
-            margin-right: 5px;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #1976d2;
-        }
-        
-        body.dark .highlight {
-            background: linear-gradient(120deg, #1a237e 0%, #283593 100%);
-            color: #90caf9;
-        }
-        
-        blockquote {
-            background: #f8f9fa;
-            border-left: 4px solid #007acc;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-            font-style: italic;
-        }
-        
-        body.dark blockquote {
-            background: #2a2a2a;
-            border-left-color: #89d3ff;
-        }
-        
-        ul, ol {
-            padding-left: 20px;
-        }
-        
-        li {
-            margin: 8px 0;
-        }
-        
-        .show-answer {
-            background: #007acc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .show-answer:hover {
-            background: #005b99;
-        }
-        
-        .answer {
-            margin-top: 15px;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-        
-        .section:hover {
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="hero-section">
-            <h1>🧠 Chapter 2: Variables, Data Types & Operators in Python</h1>
-            <p>Let's dive deeper into how Python stores, understands, and plays with data using variables, data types, and operators. This chapter is your foundation for becoming a Python pro 🧑‍💻.</p>
-        </div>
+<!-- ── Chapter 2: Variables, Data Types & Operators ── -->
+<style>
+/* ── Chapter header ─── */
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
 
-<h3>📦 1. What are Variables?</h3>
-<p>A variable is a named container that holds a value. You can think of it as a label on a box.</p>
+/* ── Chapter badge ─── */
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--accent, #00d4aa), #7c3aed);
+  color: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
 
-<h4>🧠 Syntax:</h4>
-<pre><code>variable_name = value</code></pre>
-<p>✅ Python uses <code>=</code> to assign a value.</p>
+/* ── Data type cards ─── */
+.dtype-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 1.2em 0;
+}
 
-<h4>🧪 Example:</h4>
-<pre><code>name = "Aman"
-age = 22</code></pre>
-<p>Now Python knows you're "Aman" and you're 22 years old. It stores this information just like a notebook stores your notes.</p>
+.dtype-card {
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #d0d7de);
+  border-top: 3px solid var(--accent, #00d4aa);
+  border-radius: var(--r-lg, 14px);
+  padding: 14px 16px;
+  font-size: 0.9em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-<h4>⚠️ Rules for Naming Variables</h4>
-<ul>
-  <li>Must begin with a letter or underscore: <code>_name</code>, <code>age</code></li>
-  <li>Cannot begin with a number: ❌ <code>1name</code></li>
-  <li>Can contain letters, numbers, and underscores: <code>name_1</code></li>
-  <li>Case sensitive: <code>Name</code>, <code>NAME</code>, and <code>name</code> are different</li>
-</ul>
+.dtype-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
 
-<h3>🎨 2. Python Data Types</h3>
-<p>Python can handle many types of data. These are the basic ones:</p>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Data Type</th><th>Description</th><th>Example</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>int</td><td>Whole numbers</td><td>10, -1, 0</td></tr>
-    <tr><td>float</td><td>Decimal numbers</td><td>3.14, 0.5, -2.1</td></tr>
-    <tr><td>str</td><td>Strings (text)</td><td>"Hello", 'Aman'</td></tr>
-    <tr><td>bool</td><td>Boolean values (True/False)</td><td>True, False</td></tr>
-    <tr><td>list</td><td>Ordered collection (arrays)</td><td>[1, 2, 3]</td></tr>
-    <tr><td>tuple</td><td>Immutable list</td><td>(1, 2, 3)</td></tr>
-    <tr><td>dict</td><td>Key-value pairs (like a glossary)</td><td>{"name": "Aman"}</td></tr>
-    <tr><td>set</td><td>Unordered unique values</td><td>{1, 2, 3}</td></tr>
-  </tbody>
-</table>
+body.dark .dtype-card {
+  background: rgba(33,38,45,0.8);
+  border-color: var(--border, #30363d);
+}
 
-<h4>🧪 Real-Life Data Type Examples</h4>
-<pre><code>name = "Aman"           # str
-age = 22                # int
-height = 5.9            # float
-is_student = True       # bool
-skills = ["Python", "JavaScript", "Java"]  # list
-profile = {"name": "Aman", "age": 22}      # dict</code></pre>
+.dtype-card .dtype-tag {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: var(--accent, #00d4aa);
+  font-size: 1.05em;
+  display: block;
+  margin-bottom: 4px;
+}
 
-<h4>🧠 Type Checking in Python</h4>
-<pre><code>print(type(name))    # &lt;class 'str'&gt;
-print(type(age))     # &lt;class 'int'&gt;</code></pre>
+.dtype-card .dtype-desc {
+  color: var(--text-muted, #636c76);
+  font-size: 0.82em;
+  margin-bottom: 6px;
+}
 
-<h3>🔧 3. Operators in Python</h3>
-<p>Python uses operators to perform operations like math, comparison, logic, etc.</p>
+.dtype-card .dtype-ex {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8em;
+  color: #ce9178;
+}
 
-<h4>🧮 A. Arithmetic Operators</h4>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Operator</th><th>Description</th><th>Example</th><th>Result</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>+</td><td>Addition</td><td>2 + 3</td><td>5</td></tr>
-    <tr><td>-</td><td>Subtraction</td><td>5 - 2</td><td>3</td></tr>
-    <tr><td>*</td><td>Multiplication</td><td>4 * 3</td><td>12</td></tr>
-    <tr><td>/</td><td>Division</td><td>10 / 2</td><td>5.0</td></tr>
-    <tr><td>//</td><td>Floor Division</td><td>7 // 2</td><td>3</td></tr>
-    <tr><td>%</td><td>Modulus (remainder)</td><td>7 % 3</td><td>1</td></tr>
-    <tr><td>**</td><td>Exponent (power)</td><td>2 ** 3</td><td>8</td></tr>
-  </tbody>
-</table>
+/* ── Operator symbol cell ─── */
+.op-sym-cell {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #00d4aa;
+  white-space: nowrap;
+  text-align: center;
+  background: #0d1117;
+  border-radius: 6px;
+  padding: 3px 10px;
+  display: inline-block;
+}
 
-<h4>💡 Real Example: Chocolate Buyer Bot</h4>
-<pre><code>money = 30
-price = 7
-chocolates = money // price
-change = money % price
-print("Chocolates:", chocolates)
-print("Change left: ₹", change)</code></pre>
+/* ── Completion banner ─── */
+.completion-banner {
+  text-align: center;
+  margin-top: 2.5em;
+  padding: 1.8em;
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+  border: 1px solid #30363d;
+  border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl, 18px);
+  color: #e6edf3;
+}
 
-<h4>🧪 B. Comparison Operators</h4>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>==</td><td>Equal to</td><td>5 == 5</td><td>True</td></tr>
-    <tr><td>!=</td><td>Not equal to</td><td>5 != 3</td><td>True</td></tr>
-    <tr><td>&gt;</td><td>Greater than</td><td>7 &gt; 2</td><td>True</td></tr>
-    <tr><td>&lt;</td><td>Less than</td><td>2 &lt; 5</td><td>True</td></tr>
-    <tr><td>&gt;=</td><td>Greater or equal</td><td>5 &gt;= 5</td><td>True</td></tr>
-    <tr><td>&lt;=</td><td>Less or equal</td><td>4 &lt;= 6</td><td>True</td></tr>
-  </tbody>
-</table>
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono, monospace); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
 
-<h4>🔗 C. Logical Operators</h4>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>and</td><td>Both True</td><td>True and True → True</td></tr>
-    <tr><td>or</td><td>At least one True</td><td>True or False → True</td></tr>
-    <tr><td>not</td><td>Reverse condition</td><td>not True → False</td></tr>
-  </tbody>
-</table>
+.next-badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.85em;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
 
-<h4>🧪 D. Assignment Operators</h4>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Operator</th><th>Example</th><th>Meaning</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>=</td><td>x = 5</td><td>Assign value</td></tr>
-    <tr><td>+=</td><td>x += 2</td><td>x = x + 2</td></tr>
-    <tr><td>-=</td><td>x -= 3</td><td>x = x - 3</td></tr>
-    <tr><td>*=</td><td>x *= 2</td><td>x = x * 2</td></tr>
-    <tr><td>/=</td><td>x /= 2</td><td>x = x / 2</td></tr>
-  </tbody>
-</table>
+/* ── Answers hidden ─── */
+.answer { display: none; }
+.answer .callout { margin-top: 0.8em; }
+.practice-gap { margin-top: 1.2em; }
 
-<h4>🧑‍💻 E. Bitwise Operators</h4>
-<p>Bitwise operators work at the binary level (0s and 1s). They're useful for low-level programming, but also fun to play with!</p>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Operator</th><th>Name</th><th>Example</th><th>Result</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>&amp;</td><td>Bitwise AND</td><td>5 &amp; 3</td><td>1</td></tr>
-    <tr><td>|</td><td>Bitwise OR</td><td>5 | 3</td><td>7</td></tr>
-    <tr><td>^</td><td>Bitwise XOR</td><td>5 ^ 3</td><td>6</td></tr>
-    <tr><td>~</td><td>Bitwise NOT</td><td>~5</td><td>-6</td></tr>
-    <tr><td>&lt;&lt;</td><td>Left Shift</td><td>5 &lt;&lt; 1</td><td>10</td></tr>
-    <tr><td>&gt;&gt;</td><td>Right Shift</td><td>5 &gt;&gt; 1</td><td>2</td></tr>
-  </tbody>
-</table>
+@media (max-width: 600px) {
+  .dtype-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
 
-<h4>🧪 Bitwise Example</h4>
-<pre><code>a = 5      # 0b0101
-b = 3      # 0b0011
-print(a & b)   # 1 (0b0001)
-print(a | b)   # 7 (0b0111)
-print(a ^ b)   # 6 (0b0110)
-print(~a)      # -6 (inverts all bits)
-print(a << 1)  # 10 (0b1010)
-print(a >> 1)  # 2 (0b0010)</code></pre>
-
-<div class="quiz-question">
-  <p>5. What is the result of <code>6 &amp; 2</code>?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) 0</li>
-    <li onclick="checkAnswer(this, 'correct')">b) 2</li>
-    <li onclick="checkAnswer(this, 'wrong')">c) 4</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) 8</li>
-  </ul>
+<!-- ── Chapter header ─── -->
+<div class="chapter-header">
+  <span class="chapter-badge">&#129504; Chapter 02</span>
+  <h1>Variables, Data Types &amp; Operators</h1>
+  <p>Because "x = 5" is more powerful than Goku at full power. Probably.</p>
 </div>
 
-<h3>😄 Funny Joke</h3>
-<blockquote>
-  Why did the Python variable get dumped?<br>
-  Because it kept changing its type!
-</blockquote>
-
-<h3>📚 Practice Time!</h3>
-<pre><code>name = "Aman"
-age = 22
-height = 5.9
-is_coder = True
-print("Name:", name)
-print("Age:", age)
-print("Height:", height)
-print("Is a coder?", is_coder)</code></pre>
-<div class="quiz">
-<h3>🎮 Mini Quiz Time!</h3>
-
-<div class="quiz-question">
-  <p>1. What is the correct way to create a variable in Python?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) int x = 5</li>
-    <li onclick="checkAnswer(this, 'wrong')">b) x := 5</li>
-    <li onclick="checkAnswer(this, 'correct')">c) x = 5</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) let x = 5</li>
-  </ul>
+<!-- ── Hero ─── -->
+<div class="hero-section">
+  <div style="font-size: 3em; margin-bottom: 12px;">&#129519;</div>
+  <h1>&#128230; Variables — Python's Memory Box</h1>
+  <p>Store anything. Change it anytime. Python won't judge you. <em>(Unlike Java.)</em></p>
 </div>
 
-<div class="quiz-question">
-  <p>2. What is the data type of 3.14?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) int</li>
-    <li onclick="checkAnswer(this, 'correct')">b) float</li>
-    <li onclick="checkAnswer(this, 'wrong')">c) str</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) bool</li>
-  </ul>
-</div>
+<!-- ── Section 1: Variables ─── -->
+<div class="card-section">
+  <h2>&#128230; 1. What is a Variable?</h2>
+  <p>Variable = labelled box. You put stuff inside. Python remembers it — unlike your ex.</p>
 
-<div class="quiz-question">
-  <p>3. Which operator is used for exponentiation?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) ^</li>
-    <li onclick="checkAnswer(this, 'correct')">b) **</li>
-    <li onclick="checkAnswer(this, 'wrong')">c) //</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) %</li>
-  </ul>
-</div>
+  <div class="analogy-box">
+    <h3>&#129302; Analogy: Naruto's Jutsu Memory</h3>
+    <p>Naruto needs to remember his moves. So his brain stores:</p>
+    <ul>
+      <li><code>favourite_jutsu = "Rasengan"</code></li>
+      <li><code>chakra_level = 9999</code></li>
+      <li><code>is_hokage = True</code></li>
+    </ul>
+    <p>Change <code>chakra_level = 0</code> → Naruto is now just a loud kid from Konoha with no plan.</p>
+  </div>
 
-<div class="quiz-question">
-  <p>4. What will 7 % 3 return?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'correct')">a) 1</li>
-    <li onclick="checkAnswer(this, 'wrong')">b) 2</li>
-    <li onclick="checkAnswer(this, 'wrong')">c) 3</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) 4</li>
-  </ul>
-</div>
-</div>
+  <pre><code>hero = "Naruto"
+chakra = 9999
+is_hokage = True
 
-<h3>🧪 Challenge For You</h3>
-<p><strong>Write a program to:</strong></p>
-<ol>
-  <li>Store your name, age, and marks in 3 subjects.</li>
-  <li>Calculate total marks and average.</li>
-  <li>Print a sentence:<br><code>My name is Aman. I scored 250 out of 300. Average: 83.3</code></li>
-</ol>
+print(hero, "has", chakra, "chakra units")
+print("Is Hokage?", is_hokage)</code></pre>
 
-<h3>✍️ Summary</h3>
-<ul>
-  <li>Variables are containers for storing data.</li>
-  <li>Python has different data types: int, float, str, bool, etc.</li>
-  <li>Operators help in performing calculations and comparisons.</li>
-  <li>Python makes it easy to manipulate and play with data.</li>
-</ul>
+  <div class="output-block">Naruto has 9999 chakra units
+Is Hokage? True</div>
 
-<div class="fun-fact">
-  <h4>🤔 Bitwise Analogy</h4>
-  <blockquote style="margin: 0; font-style: italic; font-size: 1.1em;">
-    Imagine bitwise operators as switches on a control panel. <br>
-    <b>AND</b> only turns on a light if both switches are ON. <br>
-    <b>OR</b> turns on the light if at least one switch is ON. <br>
-    <b>XOR</b> is like a secret code: the light is ON only if the switches are different!
-  </blockquote>
-</div>
-
-<div class="challenge-box">
-  <h3>🧪 Bitwise Coding Challenge</h3>
-  <p><strong>🚀 Try this:</strong><br>
-  Write a Python program to check if a number is even or odd using a bitwise operator.</p>
-  <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-  <div class="answer" style="display: none;">
-    <div class="code-block">
-      <pre><code>num = 7
-if num & 1:
-    print("Odd")
-else:
-    print("Even")</code></pre>
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <div>
+      <strong>Syntax:</strong> <code>variable_name = value</code><br>
+      No <code>int</code>, no <code>var</code>, no <code>let</code>. Python just… vibes.
     </div>
   </div>
-  <p><em>💡 Tip: <b>num & 1</b> checks the last bit. If it's 1, the number is odd!</em></p>
+
+  <h3>&#128721; Variable Naming Rules</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Valid &#9989;</th><th>Invalid &#10060;</th></tr></thead>
+    <tbody>
+      <tr><td>Start with letter or <code>_</code></td><td><code>name</code>, <code>_power</code></td><td><code>1name</code>, <code>9lives</code></td></tr>
+      <tr><td>Letters, numbers, underscores only</td><td><code>hero_1</code></td><td><code>hero-1</code>, <code>hero 1</code></td></tr>
+      <tr><td>Case sensitive</td><td><code>Goku</code> ≠ <code>goku</code></td><td>Mixing them up = bug</td></tr>
+      <tr><td>No Python keywords</td><td><code>power_level</code></td><td><code>for</code>, <code>class</code>, <code>if</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <span>&#128073;</span>
+    <span>Python is case-sensitive. <code>SpongeBob</code> ≠ <code>spongebob</code> ≠ <code>SPONGEBOB</code>. Three different variables. Three different mental breakdowns.</span>
+  </div>
 </div>
 
-<div class="fun-fact">
-  <p><strong>Tip:</strong> <b>AND</b> is strict (both must be 1), <b>OR</b> is friendly (either can be 1)!</p>
-</div>
+<!-- ── Section 2: Data Types ─── -->
+<div class="card-section">
+  <h2>&#127912; 2. Python Data Types</h2>
+  <p>Python needs to know <em>what kind</em> of data it's storing. Not all heroes wear capes. Not all variables hold numbers.</p>
 
-        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #007acc; color: white; border-radius: 12px; transition: transform 0.3s ease;">
-            <h3>🎉 Congratulations!</h3>
-            <p>You've completed Chapter 2! You now understand variables, data types, and operators in Python.</p>
-            <p><strong>Next up:</strong> Control Flow and Loops 🚀</p>
-        </div>
+  <div class="dtype-grid">
+    <div class="dtype-card">
+      <span class="dtype-tag">int</span>
+      <div class="dtype-desc">Whole numbers. No drama, no decimals.</div>
+      <div class="dtype-ex">power_level = 9001</div>
     </div>
+    <div class="dtype-card" style="border-top-color: #7c3aed;">
+      <span class="dtype-tag" style="color:#a78bfa;">float</span>
+      <div class="dtype-desc">Decimal numbers. Fancy integers.</div>
+      <div class="dtype-ex">accuracy = 97.3</div>
+    </div>
+    <div class="dtype-card" style="border-top-color: #f59e0b;">
+      <span class="dtype-tag" style="color:#f59e0b;">str</span>
+      <div class="dtype-desc">Text. Wrapped in quotes like a burrito.</div>
+      <div class="dtype-ex">hero = "Iron Man"</div>
+    </div>
+    <div class="dtype-card" style="border-top-color: #ef4444;">
+      <span class="dtype-tag" style="color:#ef4444;">bool</span>
+      <div class="dtype-desc">True or False. No maybe. Python doesn't do "maybe".</div>
+      <div class="dtype-ex">is_alive = True</div>
+    </div>
+    <div class="dtype-card" style="border-top-color: #3b82f6;">
+      <span class="dtype-tag" style="color:#3b82f6;">list</span>
+      <div class="dtype-desc">Ordered, changeable collection. Like the Avengers roster.</div>
+      <div class="dtype-ex">avengers = ["Tony", "Steve"]</div>
+    </div>
+    <div class="dtype-card" style="border-top-color: #10b981;">
+      <span class="dtype-tag" style="color:#10b981;">tuple</span>
+      <div class="dtype-desc">List but frozen. Immutable. Like Thanos's decision.</div>
+      <div class="dtype-ex">infinity_stones = (6,)</div>
+    </div>
+    <div class="dtype-card" style="border-top-color: #ec4899;">
+      <span class="dtype-tag" style="color:#ec4899;">dict</span>
+      <div class="dtype-desc">Key-value pairs. Pokemon stats sheet.</div>
+      <div class="dtype-ex">pikachu = {"hp": 35}</div>
+    </div>
+    <div class="dtype-card" style="border-top-color: #f97316;">
+      <span class="dtype-tag" style="color:#f97316;">set</span>
+      <div class="dtype-desc">Unique values only. No duplicates. Like DNA.</div>
+      <div class="dtype-ex">unique_moves = {1, 2, 3}</div>
+    </div>
+  </div>
 
-    <script>
-        function checkAnswer(element, result) {
-            // Remove previous styling
-            const parent = element.parentElement;
-            const allOptions = parent.querySelectorAll('li');
-            allOptions.forEach(option => {
-                option.style.background = '';
-                option.style.color = '';
-            });
-            
-            // Style the clicked option
-            if (result === 'correct') {
-                element.style.background = '#4caf50';
-                element.style.color = 'white';
-            } else {
-                element.style.background = '#f44336';
-                element.style.color = 'white';
-            }
-        }
-        
-        function toggleAnswer(button) {
-            const answer = button.nextElementSibling;
-            if (answer.style.display === 'none' || answer.style.display === '') {
-                answer.style.display = 'block';
-                button.textContent = 'Hide Answer';
-            } else {
-                answer.style.display = 'none';
-                button.textContent = 'Show Answer';
-            }
-        }
-    </script>
-</body>
-</html>
+  <h3>&#128202; Avengers Data Sheet (real example)</h3>
+  <pre><code>hero = "Tony Stark"          # str   — billionaire, genius, showoff
+suits_count = 85             # int   — yes, 85 suits. Overachiever.
+battery_pct = 99.7           # float — Arc Reactor never fully charges. Classic.
+is_alive = False             # bool  — thanks, Thanos (spoilers, sorry)
+team = ["Thor", "Hulk", "Cap", "Natasha"]  # list
+stats = {"iq": 270, "ego": float('inf')}   # dict</code></pre>
+
+  <h3>&#129489;&#8205;&#128187; Check the Type — Python's `type()`</h3>
+  <pre><code>print(type(hero))         # &lt;class 'str'&gt;
+print(type(suits_count))  # &lt;class 'int'&gt;
+print(type(is_alive))     # &lt;class 'bool'&gt;
+print(type(stats))        # &lt;class 'dict'&gt;</code></pre>
+
+  <div class="output-block">&lt;class 'str'&gt;
+&lt;class 'int'&gt;
+&lt;class 'bool'&gt;
+&lt;class 'dict'&gt;</div>
+
+  <h3>&#128260; Type Conversion (Casting)</h3>
+  <p>Need to convert? Python handles it. Like Pikachu evolving into Raichu — same soul, different form.</p>
+
+  <pre><code>level = "99"           # str — useless for math
+level_int = int(level) # int — now we're talking
+print(level_int + 1)   # 100 — max level unlocked
+
+power = 9001
+power_str = str(power)
+print("Power level: " + power_str)  # string join now works</code></pre>
+
+  <div class="output-block">100
+Power level: 9001</div>
+
+  <div class="callout info">
+    <span>&#9888;&#65039;</span>
+    <span><code>int("nine thousand")</code> crashes. Python can't magic-guess. Only numbers-in-strings work. <code>int("9000")</code> ✅ — <code>int("nine thousand")</code> ❌</span>
+  </div>
+</div>
+
+<!-- ── Section 3: Operators ─── -->
+<div class="card-section">
+  <h2>&#9881;&#65039; 3. Operators</h2>
+  <p>Operators are symbols that do things. Math, comparisons, logic. Python's multi-tool.</p>
+
+  <h3>&#129518; A. Arithmetic Operators</h3>
+  <table>
+    <thead>
+      <tr><th>Operator</th><th>Description</th><th>Example</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="op-sym-cell">+</span></td><td>Addition</td><td><code>3 + 2</code></td><td><code>5</code></td></tr>
+      <tr><td><span class="op-sym-cell">-</span></td><td>Subtraction</td><td><code>5 - 2</code></td><td><code>3</code></td></tr>
+      <tr><td><span class="op-sym-cell">*</span></td><td>Multiplication</td><td><code>4 * 3</code></td><td><code>12</code></td></tr>
+      <tr><td><span class="op-sym-cell">/</span></td><td>Division — always returns float</td><td><code>10 / 2</code></td><td><code>5.0</code></td></tr>
+      <tr><td><span class="op-sym-cell">//</span></td><td>Floor Division — rounds down</td><td><code>7 // 2</code></td><td><code>3</code></td></tr>
+      <tr><td><span class="op-sym-cell">%</span></td><td>Modulus — remainder only</td><td><code>7 % 3</code></td><td><code>1</code></td></tr>
+      <tr><td><span class="op-sym-cell">**</span></td><td>Exponent — raise to power</td><td><code>2 ** 10</code></td><td><code>1024</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>&#127828; Thanos Snap Calculator</h3>
+  <div class="callout tip">
+    <span>&#129333;</span>
+    <span>Scenario: Thanos snaps half the universe. Let's do the math with Python — because even genocide should be PEP8 compliant.</span>
+  </div>
+  <pre><code>universe_population = 8_000_000_000   # 8 billion humans
+snapped = universe_population // 2
+survivors = universe_population - snapped
+snap_percent = (snapped / universe_population) * 100
+
+print(f"Snapped: {snapped:,}")        # 4,000,000,000
+print(f"Survivors: {survivors:,}")    # 4,000,000,000
+print(f"Gone: {snap_percent:.0f}%")   # 50%
+print("Balanced, as all things should be.")</code></pre>
+
+  <div class="output-block">Snapped: 4,000,000,000
+Survivors: 4,000,000,000
+Gone: 50%
+Balanced, as all things should be.</div>
+
+  <h3>&#128269; B. Comparison Operators</h3>
+  <p>Returns <code>True</code> or <code>False</code>. Python judging things since 1991.</p>
+
+  <table>
+    <thead>
+      <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="op-sym-cell">==</span></td><td>Equal to</td><td><code>5 == 5</code></td><td><code>True</code></td></tr>
+      <tr><td><span class="op-sym-cell">!=</span></td><td>Not equal</td><td><code>5 != 3</code></td><td><code>True</code></td></tr>
+      <tr><td><span class="op-sym-cell">&gt;</span></td><td>Greater than</td><td><code>9001 &gt; 9000</code></td><td><code>True</code></td></tr>
+      <tr><td><span class="op-sym-cell">&lt;</span></td><td>Less than</td><td><code>Yamcha &lt; Krillin</code></td><td><code>True</code> 💀</td></tr>
+      <tr><td><span class="op-sym-cell">&gt;=</span></td><td>Greater or equal</td><td><code>goku &gt;= vegeta</code></td><td><code>True</code></td></tr>
+      <tr><td><span class="op-sym-cell">&lt;=</span></td><td>Less or equal</td><td><code>2 &lt;= 5</code></td><td><code>True</code></td></tr>
+    </tbody>
+  </table>
+
+  <pre><code># Goku vs Vegeta — the eternal debate
+goku_power = 9000
+vegeta_power = 8500
+
+print(goku_power > vegeta_power)   # True  — sorry Vegeta
+print(goku_power == vegeta_power)  # False — not even close
+print(vegeta_power != 0)           # True  — he tries though</code></pre>
+
+  <div class="output-block">True
+False
+True</div>
+
+  <h3>&#129504; C. Logical Operators</h3>
+  <table>
+    <thead><tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><code>and</code></td><td>Both must be True</td><td><code>True and True</code></td><td>True</td></tr>
+      <tr><td><code>or</code></td><td>At least one True</td><td><code>True or False</code></td><td>True</td></tr>
+      <tr><td><code>not</code></td><td>Flip it</td><td><code>not True</code></td><td>False</td></tr>
+    </tbody>
+  </table>
+
+  <pre><code># SpongeBob entry check
+has_id = True
+is_over_18 = True   # debatable, honestly
+
+can_enter = has_id and is_over_18
+print("SpongeBob can enter:", can_enter)
+
+is_gary = False
+print("Is Gary allowed too?", is_gary or has_id)
+print("SpongeBob NOT allowed?", not can_enter)</code></pre>
+
+  <div class="output-block">SpongeBob can enter: True
+Is Gary allowed too? True
+SpongeBob NOT allowed? False</div>
+
+  <h3>&#128295; D. Assignment Operators</h3>
+  <table>
+    <thead><tr><th>Operator</th><th>Example</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>=</code></td><td><code>x = 5</code></td><td>Assign value</td></tr>
+      <tr><td><code>+=</code></td><td><code>x += 2</code></td><td>x = x + 2</td></tr>
+      <tr><td><code>-=</code></td><td><code>x -= 3</code></td><td>x = x - 3</td></tr>
+      <tr><td><code>*=</code></td><td><code>x *= 2</code></td><td>x = x * 2</td></tr>
+      <tr><td><code>/=</code></td><td><code>x /= 2</code></td><td>x = x / 2</td></tr>
+      <tr><td><code>**=</code></td><td><code>x **= 2</code></td><td>x = x squared</td></tr>
+      <tr><td><code>%=</code></td><td><code>x %= 3</code></td><td>x = remainder of x/3</td></tr>
+    </tbody>
+  </table>
+
+  <pre><code># Luffy eating food — assignment operators in action
+luffy_meat = 10
+print("Meat:", luffy_meat)   # 10
+
+luffy_meat += 5   # Robin gave him more
+print("Meat:", luffy_meat)   # 15
+
+luffy_meat *= 2   # Sanji cooked double
+print("Meat:", luffy_meat)   # 30
+
+luffy_meat -= 30  # Luffy ate EVERYTHING
+print("Meat left:", luffy_meat)  # 0 — predictable</code></pre>
+
+  <div class="output-block">Meat: 10
+Meat: 15
+Meat: 30
+Meat left: 0</div>
+
+  <h3>&#128187; E. Bitwise Operators</h3>
+  <p>Binary-level operations. Used in encryption, hardware, and interviews to make you sweat.</p>
+
+  <table>
+    <thead><tr><th>Operator</th><th>Name</th><th>Example</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><code>&amp;</code></td><td>AND</td><td>5 &amp; 3</td><td>1</td></tr>
+      <tr><td><code>|</code></td><td>OR</td><td>5 | 3</td><td>7</td></tr>
+      <tr><td><code>^</code></td><td>XOR</td><td>5 ^ 3</td><td>6</td></tr>
+      <tr><td><code>~</code></td><td>NOT</td><td>~5</td><td>-6</td></tr>
+      <tr><td><code>&lt;&lt;</code></td><td>Left Shift</td><td>5 &lt;&lt; 1</td><td>10</td></tr>
+      <tr><td><code>&gt;&gt;</code></td><td>Right Shift</td><td>5 &gt;&gt; 1</td><td>2</td></tr>
+    </tbody>
+  </table>
+
+  <pre><code>a = 5      # binary: 0101
+b = 3      # binary: 0011
+print(a & b)   # 1  — only bits BOTH have
+print(a | b)   # 7  — bits EITHER has
+print(a ^ b)   # 6  — bits only ONE has (exclusive)
+print(~a)      # -6 — flip all bits, cry a little
+print(a << 1)  # 10 — shift left = multiply by 2
+print(a >> 1)  # 2  — shift right = divide by 2</code></pre>
+
+  <div class="output-block">1
+7
+6
+-6
+10
+2</div>
+
+  <div class="fun-fact">
+    <strong>&#128336; Interview Trick:</strong> Check even/odd with bitwise — <code>num &amp; 1</code> returns <code>1</code> if odd, <code>0</code> if even. Faster than <code>%</code>. Sounds smarter in interviews. Use it.
+  </div>
+</div>
+
+<!-- ── Quiz ─── -->
+<div class="card-section">
+  <h2>&#127918; Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What is the correct Python syntax to create a variable?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>int x = 5</code></li>
+      <li onclick="checkAnswer(this,'wrong')">b) <code>x := 5</code></li>
+      <li onclick="checkAnswer(this,'correct')">c) <code>x = 5</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>var x = 5</code></li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What is the data type of <code>3.14</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) int</li>
+      <li onclick="checkAnswer(this,'correct')">b) float</li>
+      <li onclick="checkAnswer(this,'wrong')">c) str</li>
+      <li onclick="checkAnswer(this,'wrong')">d) double (wrong language, buddy)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Python's exponentiation operator is?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>^</code> (that's XOR, not power)</li>
+      <li onclick="checkAnswer(this,'correct')">b) <code>**</code></li>
+      <li onclick="checkAnswer(this,'wrong')">c) <code>//</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>pow</code> (function, not operator)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>4. <code>7 % 3</code> returns?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'correct')">a) 1 — remainder when 7 ÷ 3</li>
+      <li onclick="checkAnswer(this,'wrong')">b) 2</li>
+      <li onclick="checkAnswer(this,'wrong')">c) 3</li>
+      <li onclick="checkAnswer(this,'wrong')">d) 2.33 — that's division, not modulus</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>5. What does <code>6 &amp; 2</code> return (bitwise AND)?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) 0</li>
+      <li onclick="checkAnswer(this,'correct')">b) 2 — binary 110 &amp; 010 = 010</li>
+      <li onclick="checkAnswer(this,'wrong')">c) 4</li>
+      <li onclick="checkAnswer(this,'wrong')">d) 8</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── Challenges ─── -->
+<div class="card-section">
+  <h2>&#129514; Coding Challenges</h2>
+
+  <div class="practice-zone">
+    <strong>&#128640; Challenge 1: Dragon Ball Power Check</strong><br>
+    Store Goku's power level as <code>9001</code>. Print: <em>"IT'S OVER 9000!"</em> using string + variable.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>power_level = 9001
+print("It's OVER " + str(power_level - 1) + "!")</code></pre>
+    <div class="callout tip">
+      <span>&#128161;</span>
+      <span>Must convert <code>int</code> → <code>str</code> before joining with <code>+</code>. Or use f-string: <code>f"It's OVER {power_level - 1}!"</code></span>
+    </div>
+  </div>
+
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 2: Tony Stark's Suit Report</strong><br>
+    Variables: <code>suit_count = 85</code>, <code>broken = 12</code>. Calculate working suits. Print: <em>"Working suits: X. That's still overkill."</em>
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>suit_count = 85
+broken = 12
+working = suit_count - broken
+print(f"Working suits: {working}. That's still overkill.")</code></pre>
+  </div>
+
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 3: Even or Odd (Bitwise)</strong><br>
+    Use <code>&amp; 1</code> to check if a number is even or odd. No <code>%</code> allowed.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>num = 42
+if num & 1:
+    print(f"{num} is Odd")
+else:
+    print(f"{num} is Even")  # correct — 42 is famously even AND the answer to everything</code></pre>
+    <div class="callout tip">
+      <span>&#128161;</span>
+      <span><code>num &amp; 1</code> checks last binary bit. <code>1</code> = odd, <code>0</code> = even.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Summary ─── -->
+<div class="summary-box">
+  <h3>&#9997;&#65039; Chapter Summary</h3>
+  <ul>
+    <li>Variable = named container. <code>x = 5</code> — no type declaration needed.</li>
+    <li>8 main data types: <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>list</code>, <code>tuple</code>, <code>dict</code>, <code>set</code>.</li>
+    <li><code>type()</code> tells you what something is. Like a label on Naruto's chakra jar.</li>
+    <li>Arithmetic: <code>+ - * / // % **</code> — do math.</li>
+    <li>Comparison: <code>== != &gt; &lt; &gt;= &lt;=</code> — returns True/False.</li>
+    <li>Logical: <code>and or not</code> — combine conditions.</li>
+    <li>Assignment shortcuts: <code>+= -= *= /=</code> etc.</li>
+    <li>Bitwise: <code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code> — binary-level ops. Interview gold.</li>
+  </ul>
+</div>
+
+<!-- ── Completion ─── -->
+<div class="completion-banner">
+  <h3>&#127881; Chapter 2 Complete!</h3>
+  <p>You now store data like Naruto stores chakra. Responsibly. Mostly.</p>
+  <span class="next-badge">&#9654; Next: Control Flow &amp; Loops</span>
+</div>
