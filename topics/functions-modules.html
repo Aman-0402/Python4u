@@ -1,66 +1,529 @@
-<h2>✅ 1. Introduction to Functions</h2>
-
-<h3>🔹 What is a Function?</h3>
-<p>A function is a reusable block of code that performs a specific task.</p>
-
-<h3>🔹 Why Use Functions?</h3>
-<ul>
-  <li>To organize code.</li>
-  <li>To avoid repetition.</li>
-  <li>To break problems into smaller pieces.</li>
-</ul>
-
-<h3>🧠 Syntax of a Function in Python:</h3>
-<pre><code>def function_name(parameters):
+<style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #222;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        body.dark .container {
+            background: #1e1e1e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section {
+            text-align: center;
+            background: linear-gradient(135deg, #007acc 0%, #005b99 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        .python-logo {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 5%;
+            transition: transform 0.3s ease;
+        }
+        
+        .python-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        h2 {
+            color: #007acc;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 8px;
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+        
+        body.dark h2 {
+            color: #89d3ff;
+            border-bottom-color: #89d3ff;
+        }
+        
+        h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-top: 25px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #007acc;
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark h3 {
+            color: #e0e0e0;
+            background: #2a2a2a;
+            border-left-color: #89d3ff;
+        }
+        
+        h4 {
+            color: #007acc;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        body.dark h4 {
+            color: #89d3ff;
+        }
+        
+        .fun-fact {
+            background: #fff8dc;
+            border-left: 4px solid #f4a261;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+        
+        .fun-fact:hover {
+            transform: translateX(5px);
+        }
+        
+        body.dark .fun-fact {
+            background: #2e2e2e;
+            border-left-color: #f4a261;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            color: #111;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark .code-block {
+            background: #1e1e1e;
+            color: #e8e8e8;
+            border-color: #333;
+        }
+        
+        .code-block:hover {
+            background: #eaeaea;
+        }
+        
+        body.dark .code-block:hover {
+            background: #2a2a2a;
+        }
+        
+        pre {
+            margin: 0;
+            font-family: 'Fira Code', 'Courier New', monospace;
+        }
+        
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            background: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        body.dark code {
+            background: #333;
+            color: #e8e8e8;
+        }
+        
+        .output-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark .output-block {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        
+        .analogy-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .analogy-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        body.dark .analogy-box {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        table:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        body.dark table {
+            background: #1e1e1e;
+        }
+        
+        th {
+            background: #007acc;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        body.dark th {
+            background: #333;
+        }
+        
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e9ecef;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark td {
+            border-bottom-color: #444;
+        }
+        
+        tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        body.dark tr:hover td {
+            background: #2a2a2a;
+        }
+        
+        .quiz {
+            background: #fff8dc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 6px solid #f4a261;
+        }
+        
+        body.dark .quiz {
+            background: #2e2e2e;
+            border-left-color: #f4a261;
+        }
+        
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .quiz-question:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .quiz-question {
+            background: #1e1e1e;
+        }
+        
+        .quiz-question ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quiz-question li {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: #e0f7fa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .quiz-question li:hover {
+            background: #b2ebf2;
+            transform: translateX(5px);
+        }
+        
+        body.dark .quiz-question li {
+            background: #333;
+        }
+        
+        body.dark .quiz-question li:hover {
+            background: #444;
+        }
+        
+        .challenge-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .challenge-box:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .challenge-box {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .summary-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .summary-box:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .summary-box {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .summary-box li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            transition: transform 0.2s ease;
+        }
+        
+        .summary-box li:hover {
+            transform: translateX(5px);
+        }
+        
+        .summary-box li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .emoji {
+            font-size: 1.1em;
+            margin-right: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+        
+        body.dark .highlight {
+            background: linear-gradient(120deg, #1a237e 0%, #283593 100%);
+            color: #90caf9;
+        }
+        
+        blockquote {
+            background: #f8f9fa;
+            border-left: 4px solid #007acc;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        
+        body.dark blockquote {
+            background: #2a2a2a;
+            border-left-color: #89d3ff;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .show-answer {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .show-answer:hover {
+            background: #005b99;
+        }
+        
+        .answer {
+            margin-top: 15px;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+<div class="container">
+  <div class="hero-section">
+    <h1>🧠 Chapter 4: Functions & Modules in Python</h1>
+    <p>Unlock the power of reusable code! In this chapter, you'll learn how to write, use, and organize functions and modules in Python. Mastering these concepts will make your code cleaner, smarter, and more efficient. 🚀</p>
+  </div>
+<!-- Enhanced and structured content for Functions & Modules in Python -->
+<div class="section">
+  <h2>✅ 1. Introduction to Functions</h2>
+  <h3>🔹 What is a Function?</h3>
+  <p>A function is a reusable block of code that performs a specific task.</p>
+  <div class="tip"><strong>💡 Analogy:</strong> Think of a function as a coffee machine: you give it ingredients (inputs), press a button (call the function), and get coffee (output)!</div>
+  <h3>🔹 Why Use Functions?</h3>
+  <ul>
+    <li>To organize code.</li>
+    <li>To avoid repetition.</li>
+    <li>To break problems into smaller pieces.</li>
+  </ul>
+  <h3>🧠 Syntax of a Function in Python:</h3>
+  <pre><code>def function_name(parameters):
     # block of code
     return result</code></pre>
+</div>
 
-<h3>✅ Example 1:</h3>
-<pre><code>def copy():
+<div class="section">
+  <h3>✅ Example 1:</h3>
+  <pre><code>def copy():
     print("Don't Copy Me Idiot Try ur own example")
 
 copy()  # Calling the function</code></pre>
-
-<h3>✅ Example 2: Function with Parameters</h3>
-<pre><code>def add(a, b):
+  <h3>✅ Example 2: Function with Parameters</h3>
+  <pre><code>def add(a, b):
     return a + b
 
 result = add(5, 3)
 print("Sum is:", result)</code></pre>
+</div>
 
-<h2>❓ Questions for Practice:</h2>
-
-<div class="quiz-question">
-  <p>1. What is the output of this code?</p>
-  <pre><code>def say_hello():
+<div class="quiz-section">
+  <h2>❓ Questions for Practice:</h2>
+  <div class="quiz-question">
+    <p>1. What is the output of this code?</p>
+    <pre><code>def say_hello():
     return "Hi!"
 
 print(say_hello())</code></pre>
-<button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
     <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> Hi!</p>
+      <p><strong>✅ Answer:</strong> Hi!</p>
     </div>
-</div>
-
-<div class="quiz-question">
-  <p>2. Fill in the blank:</p>
-  <pre><code>def _____():
+  </div>
+  <div class="quiz-question">
+    <p>2. Fill in the blank:</p>
+    <pre><code>def _____():
     print("Python is fun!")</code></pre>
     <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
     <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> <code>my_function</code> (Any valid function name is acceptable.)</p>
+      <p><strong>✅ Answer:</strong> <code>my_function</code> (Any valid function name is acceptable.)</p>
     </div>
+  </div>
+  <div class="quiz-question">
+    <p>3. What is the purpose of <code>return</code> in a function?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) Print the result</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) Stop execution</li>
+      <li onclick="checkAnswer(this, 'correct')">C) Send back a value</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) Create a loop</li>
+    </ul>
+  </div>
 </div>
 
-<div class="quiz-question">
-  <p>3. What is the purpose of <code>return</code> in a function?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Print the result</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) Stop execution</li>
-    <li onclick="checkAnswer(this, 'correct')">C) Send back a value</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Create a loop</li>
-  </ul>
-</div>
 <h2>✅ 2. Function Parameters and Arguments</h2>
 
 <h3>🔹 What are Parameters?</h3>
@@ -107,13 +570,13 @@ student_info(age=20, name="Aman")</code></pre>
 
 <div class="quiz-question">
   <p>1. What will this print?</p>
-  <pre><code>def show_info(name, country="India"):
-    print(name, "is from", country)
+  <pre><code>def show_info(name, city="vadodara"):
+    print(name, "don't like PARUL which is in ", city)
 
-show_info("Aman")</code></pre>
+show_info("Aman Sir")</code></pre>
 <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
     <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> Aman is from India</p>
+  <p><strong>✅ Answer:</strong> Aman Sir don't like PARUL which is in vadodara</p>
     </div>
 </div>
 
@@ -179,10 +642,10 @@ print("y:", y)  # Output: y: Hello</code></pre>
   <pre><code>def multiply(a, b):
     return a * b
 
-print(multiply(3, 4))</code></pre>
+print(multiply(29, 46))</code></pre>
 <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
     <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> 12</p>
+  <p><strong>✅ Answer:</strong> 1421 </p>
     </div>
 </div>
 
@@ -214,8 +677,8 @@ print(multiply(3, 4))</code></pre>
 <p>These are pre-defined in Python and ready to use.</p>
 
 <h4>🧪 Examples:</h4>
-<pre><code>print(len("Python"))      # Output: 6
-print(max(3, 10, 5))       # Output: 10
+<pre><code>print(len("Pythonnnnnnn"))      # Output: 12
+print(max(39, 1003, 579))       # Output: 1003
 print(round(4.56))         # Output: 5</code></pre>
 
 <p>🛠️ <strong>Other built-in functions:</strong>,sum(),type(),input(),range(),sorted(),abs() etc.</p>
@@ -315,11 +778,11 @@ print(even)  # Output: [8, 12]</code></pre>
 
 <div class="quiz-question">
   <p>1. What will this print?</p>
-  <pre><code>x = lambda a: a * 10
-print(x(3))</code></pre>
+  <pre><code>x = lambda a: a * 1123
+print(x(35))</code></pre>
 <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
     <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> 30</p>
+  <p><strong>✅ Answer:</strong> 39305</p>
     </div>
 </div>
 
@@ -449,7 +912,7 @@ print(math.pi)               # 3.141592...</code></pre>
 print(random.randint(1, 10))         # Random integer between 1 and 10
 print(random.choice(['apple', 'banana', 'cherry']))  # Random choice
 print(random.random())               # Random float between 0 and 1
-random.shuffle([1, 2, 3, 4, 5])      # Shuffles list in-place</code></pre>
+</code></pre>
 
 <h3>💻 3. <strong>os</strong> Module</h3>
 <p>Provides functions to interact with the Operating System.</p>
@@ -704,3 +1167,7 @@ print(calculator(10, 5, 'add'))  # Output: 15
     <tr><td><strong>Import</strong></td><td>Bring in external code using <code>import</code></td></tr>
   </tbody>
 </table>
+
+<div class="tip"><strong>😆 Joke Time!</strong> Why did the Python function go to therapy? Because it had too many unresolved arguments! 🐍</div>
+
+<div class="tip"><strong>🤔 Did You Know?</strong> You can assign a function to a variable in Python and call it using that variable name!</div>

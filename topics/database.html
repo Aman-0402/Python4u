@@ -6,7 +6,10 @@
 </head>
 <body>
 
-  <h1>🗃️ Chapter 12: Introduction to Database Connectivity in Python</h1>
+  <div class="hero-section">
+    <h1>🗃️ Chapter 12: Introduction to Database Connectivity in Python</h1>
+    <p>Learn how to connect your Python applications to real-world databases! In this chapter, you'll explore how to use libraries like <code>sqlite3</code> to create, read, update, and delete data from databases. Understand how SQL and Python work together to build dynamic, data-driven programs. 🛢️🔗</p>
+  </div>
 
   <h2>🤔 Why Learn Database?</h2>
   <p><em>“A program without a database is like a library without books.”</em></p>
@@ -59,29 +62,50 @@
       <code>import sqlite3</code>
     </li>
     <li><strong>Connect to a database (or create it)</strong><br>
-      <code>conn = sqlite3.connect('students.db')</code>
+      <code>conn = sqlite3.connect('school.db')</code>
     </li>
     <li><strong>Create a cursor object</strong><br>
       <code>cur = conn.cursor()</code>
     </li>
     <li><strong>Create a table</strong>
       <pre><code>cur.execute('''
-CREATE TABLE IF NOT EXISTS students (
-    id INTEGER PRIMARY KEY,
-    name TEXT,
-    marks INTEGER
+CREATE TABLE IF NOT EXISTS student (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    grade INTEGER NOT NULL
 )
 ''')</code></pre>
     </li>
     <li><strong>Insert data</strong><br>
-      <code>cur.execute("INSERT INTO students (name, marks) VALUES (?, ?)", ("Aman", 95))<br>
-conn.commit()</code>
+      <pre><code>cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", ("Aman", 95))
+cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", ("Preet", 88))
+conn.commit()</code></pre>
     </li>
     <li><strong>Read data</strong><br>
-      <pre><code>cur.execute("SELECT * FROM students")
+      <pre><code>cur.execute("SELECT * FROM student")
 rows = cur.fetchall()
 for row in rows:
     print(row)</code></pre>
+    </li>
+    <li><strong>Update data</strong><br>
+      <pre><code>cur.execute("UPDATE student SET grade = 92 WHERE name = 'Preet'")
+conn.commit()</code></pre>
+    </li>
+    <li><strong>Delete data</strong><br>
+      <pre><code>cur.execute("DELETE FROM student WHERE name = 'Aman'")
+conn.commit()</code></pre>
+    </li>
+    <li><strong>Filter data (WHERE clause)</strong><br>
+      <pre><code>cur.execute("SELECT * FROM student WHERE grade > 90")
+print(cur.fetchall())</code></pre>
+    </li>
+    <li><strong>Sort data (ORDER BY)</strong><br>
+      <pre><code>cur.execute("SELECT * FROM student ORDER BY grade DESC")
+print(cur.fetchall())</code></pre>
+    </li>
+    <li><strong>Count total rows</strong><br>
+      <pre><code>cur.execute("SELECT COUNT(*) FROM student")
+print("Total students:", cur.fetchone()[0])</code></pre>
     </li>
     <li><strong>Close the connection</strong><br>
       <code>conn.close()</code>
@@ -92,11 +116,46 @@ for row in rows:
   <pre><code>import sqlite3
 conn = sqlite3.connect('school.db')
 cur = conn.cursor()
-cur.execute('CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY, name TEXT, grade INTEGER)')
-cur.execute('INSERT INTO student (name, grade) VALUES (?, ?)', ('Riya', 88))
+
+# Create table
+cur.execute('''
+CREATE TABLE IF NOT EXISTS student (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    grade INTEGER NOT NULL
+)
+''')
+
+# Insert
+cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", ("Preet", 88))
+cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", ("Aman", 95))
 conn.commit()
-cur.execute('SELECT * FROM student')
-print(cur.fetchall())
+
+# Update
+cur.execute("UPDATE student SET grade = 92 WHERE name = 'Preet'")
+conn.commit()
+
+# Delete
+cur.execute("DELETE FROM student WHERE name = 'Aman'")
+conn.commit()
+
+# Read
+cur.execute("SELECT * FROM student")
+print("All Students:", cur.fetchall())
+
+# Filter
+cur.execute("SELECT * FROM student WHERE grade > 90")
+print("High scorers:", cur.fetchall())
+
+# Sort
+cur.execute("SELECT * FROM student ORDER BY grade DESC")
+print("Sorted:", cur.fetchall())
+
+# Count
+cur.execute("SELECT COUNT(*) FROM student")
+print("Total students:", cur.fetchone()[0])
+
+# Close
 conn.close()</code></pre>
 
   <h2>🤪 Funny Analogy</h2>
@@ -104,34 +163,79 @@ conn.close()</code></pre>
   It writes and reads whatever you tell it — quietly and efficiently.</p>
 
   <div class="quiz">
-  <h2>🧠 Quiz Time!</h2>
-  <div class="quiz-question">
-    <p>1. Which module is used in Python for SQLite?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) pymysql</li>
-      <li onclick="checkAnswer(this, 'correct')">b) sqlite3</li>
-      <li onclick="checkAnswer(this, 'wrong')">c) pandaSQL</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>2. What does conn.commit() do?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) Starts a loop</li>
-      <li onclick="checkAnswer(this, 'wrong')">b) Cancels connection</li>
-      <li onclick="checkAnswer(this, 'correct')">c) Saves changes to database</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>3. What function is used to read all rows from a query?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) .read()</li>
-      <li onclick="checkAnswer(this, 'correct')">b) .fetchall()</li>
-      <li onclick="checkAnswer(this, 'wrong')">c) .select()</li>
-    </ul>
-  </div>
+    <h2>🧠 Quiz Time!</h2>
+    <div class="quiz-question">
+      <p>1. Which module is used in Python for SQLite?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'wrong')">a) pymysql</li>
+        <li onclick="checkAnswer(this, 'correct')">b) sqlite3</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) pandaSQL</li>
+      </ul>
     </div>
+    
+    <div class="quiz-question">
+      <p>2. What does conn.commit() do?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'wrong')">a) Starts a loop</li>
+        <li onclick="checkAnswer(this, 'wrong')">b) Cancels connection</li>
+        <li onclick="checkAnswer(this, 'correct')">c) Saves changes to database</li>
+      </ul>
+    </div>
+    
+    <div class="quiz-question">
+      <p>3. What function is used to read all rows from a query?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'wrong')">a) .read()</li>
+        <li onclick="checkAnswer(this, 'correct')">b) .fetchall()</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) .select()</li>
+      </ul>
+    </div>
+    <div class="quiz-question">
+      <p>4. What does the <code>fetchone()</code> function return?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'wrong')">a) All rows as a list</li>
+        <li onclick="checkAnswer(this, 'correct')">b) The first row from the result</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) A list of columns</li>
+      </ul>
+    </div>
+    
+    <div class="quiz-question">
+      <p>5. Which SQL command is used to remove data from a table?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'wrong')">a) REMOVE</li>
+        <li onclick="checkAnswer(this, 'correct')">b) DELETE</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) ERASE</li>
+      </ul>
+    </div>
+    
+    <div class="quiz-question">
+      <p>6. What will happen if you forget to use <code>conn.commit()</code> after <code>INSERT</code>?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'correct')">a) The data won’t be saved permanently</li>
+        <li onclick="checkAnswer(this, 'wrong')">b) The program will crash</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) It will insert duplicate data</li>
+      </ul>
+    </div>
+    
+    <div class="quiz-question">
+      <p>7. Which SQL keyword is used to sort the results?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'wrong')">a) GROUP BY</li>
+        <li onclick="checkAnswer(this, 'correct')">b) ORDER BY</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) ARRANGE BY</li>
+      </ul>
+    </div>
+    
+    <div class="quiz-question">
+      <p>8. What is the purpose of the <code>WHERE</code> clause in SQL?</p>
+      <ul>
+        <li onclick="checkAnswer(this, 'correct')">a) To filter specific rows</li>
+        <li onclick="checkAnswer(this, 'wrong')">b) To change table name</li>
+        <li onclick="checkAnswer(this, 'wrong')">c) To join two tables</li>
+      </ul>
+    </div>
+    
+  </div>
 
   <h2>🎯 Challenge Task</h2>
   <ol>

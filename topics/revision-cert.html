@@ -1,2 +1,4642 @@
-<h1> You know everything. Try your Best</h1>
-<h1> All the Best</h1>
+<h1>Chapter 1: Introduction to Python</h1>
+<div class="quiz-question">
+    <p><strong>Question 1</strong></p>
+    <p>Select the incorrect statement.</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) You can pass keyword arguments in any order.</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) You can call a function with positional and keyword arguments.</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Positional arguments must be before keyword arguments in a function call.</li>
+        <li onclick="checkAnswer(this, 'correct')">D) You can pass positional arguments in any order.</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: You can pass positional arguments in any order. ❌</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>Let's look at each option:</p>
+        
+        <p><strong>❌ You can pass positional arguments in any order.</strong><br>
+        ➤ Incorrect. The order of positional arguments matters because the function assigns them based on their position.<br>
+        <strong>Example:</strong></p>
+        
+        <pre><code>def greet(name, age):
+    print(f"{name} is {age} years old.")
+
+greet("Alice", 25)     # ✅ Correct
+greet(25, "Alice")     # ❌ Incorrect meaning, wrong assignment</code></pre>
+        
+        <p><strong>✅ You can pass keyword arguments in any order.</strong><br>
+        ➤ This is true because keyword arguments are explicitly named, so order doesn't matter.</p>
+        
+        <p><strong>✅ You can call a function with positional and keyword arguments.</strong><br>
+        ➤ Yes, a mix is allowed, but positional must come first.</p>
+        
+        <p><strong>✅ Positional arguments must be before keyword arguments in a function call.</strong><br>
+        ➤ This is correct and mandatory in Python syntax.</p>
+        
+        <p><strong>✅ Final Answer:</strong> You can pass positional arguments in any order.</p>
+    </div>
+</div>
+
+<div class="quiz-question">
+    <p><strong>Question 2</strong></p>
+    <p>Select the correct statement about function arguments in Python:</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) You can pass keyword arguments before positional arguments.</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) All arguments must be keyword arguments.</li>
+        <li onclick="checkAnswer(this, 'correct')">C) You can use both positional and keyword arguments in a single function call.</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) You cannot use positional arguments in Python functions.</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C<br>You can use both positional and keyword arguments in a single function call.</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python:</p>
+        <ul>
+            <li>You can mix positional and keyword arguments in a function call.</li>
+            <li>But positional arguments must come first, followed by keyword arguments.</li>
+            <li>So, <code>func(10, b=20)</code> is valid, but <code>func(a=10, 20)</code> is invalid.</li>
+        </ul>
+        
+        <h4>Why other options are wrong:</h4>
+        <ul>
+            <li><strong>A)</strong> Keyword arguments cannot come before positional arguments</li>
+            <li><strong>B)</strong> Functions can accept positional arguments, keyword arguments, or both</li>
+            <li><strong>D)</strong> Python absolutely supports positional arguments</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 3</strong></p>
+    <p>Which of the following is not a keyword?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) eval</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) assert</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) nonlocal</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) pass</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: eval</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>Let's analyze each option:</p>
+        
+        <p><strong>eval – ❌ Not a keyword</strong><br>
+        ➤ It is a built-in function, not a keyword.<br>
+        <strong>Example:</strong></p>
+        
+        <pre><code>eval("2 + 3")  # Returns 5</code></pre>
+        
+        <p><strong>assert – ✅ Keyword</strong><br>
+        ➤ Used for debugging to test if a condition is True.</p>
+        
+        <p><strong>nonlocal – ✅ Keyword</strong><br>
+        ➤ Used inside nested functions to refer to variables in the outer (non-global) scope.</p>
+        
+        <p><strong>pass – ✅ Keyword</strong><br>
+        ➤ Used as a placeholder when no action is required.</p>
+        
+        <p><strong>✅ Final Answer:</strong> eval</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 4</strong></p>
+    <p>Which of the following is a keyword in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) lambda</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) append</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) index</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) eval</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A. lambda</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <ul>
+            <li><strong>lambda</strong> is a Python keyword used to define anonymous functions.</li>
+            <li><strong>append</strong> and <strong>index</strong> are methods used on lists, not keywords.</li>
+            <li><strong>eval</strong> is a built-in function, not a keyword.</li>
+            <li>Only reserved words defined by Python syntax (like <code>if</code>, <code>else</code>, <code>lambda</code>, <code>def</code>) are considered keywords.</li>
+        </ul>
+        
+        <h4>Example of lambda usage:</h4>
+        <pre><code>square = lambda x: x**2
+print(square(5))  # Outputs 25</code></pre>
+        
+        <h4>Why other options are wrong:</h4>
+        <ul>
+            <li><strong>B) append</strong> - List method (e.g., <code>my_list.append(1)</code>)</li>
+            <li><strong>C) index</strong> - List method (e.g., <code>my_list.index('a')</code>)</li>
+            <li><strong>D) eval</strong> - Built-in function (e.g., <code>eval('2+2')</code>)</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 5</strong></p>
+    <p>Which of the following is an invalid statement?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) abc = 1,000,000</li>
+        <li onclick="checkAnswer(this, 'correct')">B) a b c = 1000 2000 3000</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) a,b,c = 1000, 2000, 3000</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) a_b_c = 1,000,000</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: a b c = 1000 2000 3000</h4>
+        
+        <h4>🧠 Explanation of Each Option:</h4>
+        
+        <p><strong>abc = 1,000,000</strong><br>
+        ✅ Valid – This assigns a tuple (1, 0, 0) to abc, due to the commas being interpreted as tuple separators.</p>
+        
+        <p><strong>a b c = 1000 2000 3000</strong><br>
+        ❌ Invalid – Variable names cannot contain spaces. Python will raise a SyntaxError. 
+        Multiple assignment requires commas between variables.</p>
+        
+        <p><strong>a,b,c = 1000, 2000, 3000</strong><br>
+        ✅ Valid – This is tuple unpacking, assigning:<br>
+        a = 1000<br>
+        b = 2000<br>
+        c = 3000</p>
+        
+        <p><strong>a_b_c = 1,000,000</strong><br>
+        ✅ Valid – This assigns the tuple (1, 0, 0) to the variable a_b_c. 
+        Underscores are valid in variable names.</p>
+        
+        <h4>Key Takeaways:</h4>
+        <ul>
+            <li>Variable names cannot contain spaces</li>
+            <li>Commas in numbers don't work as thousand separators in Python</li>
+            <li>Multiple assignment requires commas between variables</li>
+            <li>Underscores are valid in variable names</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 6</strong></p>
+    <p>Which of the following is an invalid Python statement?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) x_y_z = 500_000</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) a, b, c = 1, 2, 3</li>
+        <li onclick="checkAnswer(this, 'correct')">C) x y z = 5 10 15</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) x = 1_000_000</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C. x y z = 5 10 15</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p><strong>C is invalid</strong> because variable names cannot contain spaces like <code>x y z</code>.</p>
+        <p>Python throws a <code>SyntaxError</code> when trying to assign values to variables written this way.</p>
+        
+        <h4>Valid Statements:</h4>
+        <ul>
+            <li><strong>A) x_y_z = 500_000</strong> → Underscores allowed in variable names and numbers (PEP 515)</li>
+            <li><strong>B) a, b, c = 1, 2, 3</strong> → Valid tuple unpacking</li>
+            <li><strong>D) x = 1_000_000</strong> → Underscores can be used for readability in large numbers</li>
+        </ul>
+        
+        <h4>Key Python Rules:</h4>
+        <ol>
+            <li>Variable names can't contain spaces</li>
+            <li>Underscores are valid in variable names</li>
+            <li>Underscores in numbers are ignored (for readability)</li>
+            <li>Multiple assignment requires commas between variables</li>
+        </ol>
+        
+        <h4>Error Example:</h4>
+        <pre><code>>>> x y z = 5 10 15
+  File "<stdin>", line 1
+    x y z = 5 10 15
+      ^
+SyntaxError: invalid syntax</code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 7</strong></p>
+    <p>What is the order of precedence in Python?</p>
+    <ol type="i">
+        <li>Parentheses</li>
+        <li>Exponential</li>
+        <li>Multiplication</li>
+        <li>Division</li>
+        <li>Addition</li>
+        <li>Subtraction</li>
+    </ol>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) i, ii, iii, iv, v, vi</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) ii, i, iii, iv, v, vi</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) ii, i, iv, iii, v, vi</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) i, ii, iii, iv, vi, v</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: i, ii, iii, iv, v, vi</h4>
+        
+        <h4>🧠 Explanation: Order of Precedence in Python (from highest to lowest):</h4>
+        <ol type="i">
+            <li><strong>Parentheses → ()</strong><br>
+            ➤ Used to override default precedence</li>
+            <li><strong>Exponential → **</strong></li>
+            <li><strong>Multiplication → *</strong></li>
+            <li><strong>Division → /, //, %</strong></li>
+            <li><strong>Addition → +</strong></li>
+            <li><strong>Subtraction → -</strong></li>
+        </ol>
+        
+        <h4>Example:</h4>
+        <pre><code>result = (3 + 2) ** 2 * 4 / 2 - 1
+# Steps:
+1. (3+2) = 5    (Parentheses first)
+2. 5**2 = 25    (Exponentiation)
+3. 25*4 = 100   (Multiplication)
+4. 100/2 = 50   (Division)
+5. 50-1 = 49    (Subtraction last)</code></pre>
+        
+        <h4>Key Points:</h4>
+        <ul>
+            <li>Multiplication and Division have same precedence (left to right)</li>
+            <li>Addition and Subtraction have same precedence (left to right)</li>
+            <li>Use parentheses to explicitly define evaluation order</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 8</strong></p>
+    <p>What is the correct order of precedence in Python?</p>
+    <ol type="i">
+        <li>Parentheses</li>
+        <li>Exponentiation (**)</li>
+        <li>Multiplication / Division</li>
+        <li>Addition / Subtraction</li>
+    </ol>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) i, ii, iii, iv</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) ii, i, iii, iv</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) i, iii, ii, iv</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) i, ii, iv, iii</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A. i, ii, iii, iv</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>Python follows this order of precedence for arithmetic operators:</p>
+        <ol>
+            <li><strong>Parentheses ()</strong> – evaluated first</li>
+            <li><strong>Exponentiation **</strong></li>
+            <li><strong>Multiplication * / Division / / Floor division // / Modulus %</strong></li>
+            <li><strong>Addition + / Subtraction -</strong></li>
+        </ol>
+        
+        <p>So: <strong>i → ii → iii → iv</strong> is the correct sequence.</p>
+        
+        <h4>Practical Example:</h4>
+        <pre><code>result = (5 + 3) ** 2 * 4 / 2 - 1
+# Evaluation steps:
+1. (5 + 3) = 8       (Parentheses first)
+2. 8 ** 2 = 64       (Exponentiation)
+3. 64 * 4 = 256      (Multiplication)
+4. 256 / 2 = 128     (Division)
+5. 128 - 1 = 127     (Subtraction last)</code></pre>
+        
+        <h4>Key Notes:</h4>
+        <ul>
+            <li>Operators with same precedence (like * and /) evaluate left-to-right</li>
+            <li>Parentheses always have highest precedence</li>
+            <li>Exponentiation comes before other arithmetic operations</li>
+            <li>Use parentheses to make complex expressions clearer</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 9</strong></p>
+    <p>What will be the output of the following Python code?</p>
+    <pre><code>str1 = "helloworld"
+str1[::-1]</code></pre>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) dlrowolleh</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) hello</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) world</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) helloworld</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: dlrowolleh</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The code uses Python's string slicing with <code>[::-1]</code> which means:</p>
+        <ul>
+            <li>Start from the end of the string</li>
+            <li>Move backwards with step -1</li>
+            <li>This effectively reverses the string</li>
+        </ul>
+        
+        <h4>Breakdown of the slicing syntax:</h4>
+        <pre><code>[start:stop:step]
+# When step is negative, it goes backwards
+# Empty start/stop means "whole string"</code></pre>
+        
+        <h4>Example Output:</h4>
+        <pre><code>>>> str1 = "helloworld"
+>>> str1[::-1]
+'dlrowolleh'</code></pre>
+        
+        <h4>Other Common String Operations:</h4>
+        <table>
+            <tr>
+                <th>Operation</th>
+                <th>Example</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td>Get first 5 chars</td>
+                <td><code>str1[:5]</code></td>
+                <td>'hello'</td>
+            </tr>
+            <tr>
+                <td>Get last 5 chars</td>
+                <td><code>str1[-5:]</code></td>
+                <td>'world'</td>
+            </tr>
+            <tr>
+                <td>Every 2nd character</td>
+                <td><code>str1[::2]</code></td>
+                <td>'hlool'</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 10</strong></p>
+    <p>What will be the output of the following Python code?</p>
+    <pre><code>text = "PythonRocks"
+print(text[::2])</code></pre>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) PtoRc</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) yhnok</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Python</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) ytoRc</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A. PtoRc</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p><code>text[::2]</code> means: start from index 0, go till the end, and take every 2nd character.</p>
+        
+        <h4>Step-by-Step Breakdown:</h4>
+        <p>From "PythonRocks":</p>
+        <table>
+            <tr>
+                <th>Index</th>
+                <th>Character</th>
+                <th>Selected</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>P</td>
+                <td>✅ (P)</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>y</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>t</td>
+                <td>✅ (t)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>h</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>o</td>
+                <td>✅ (o)</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>n</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>R</td>
+                <td>✅ (R)</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>o</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>c</td>
+                <td>✅ (c)</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>k</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>s</td>
+                <td>❌</td>
+            </tr>
+        </table>
+        
+        <p>Result: <strong>'PtoRc'</strong></p>
+        
+        <h4>Comparison with Previous Example:</h4>
+        <p>Unlike <code>str1[::-1]</code> which reverses the string, <code>[::2]</code> takes every other character.</p>
+        
+        <h4>Other Common Slicing Patterns:</h4>
+        <pre><code>text[1::2]    # 'yhnok' (starts at index 1, then every 2nd)
+text[::-1]    # 'skcoRnohtyP' (reverse)
+text[3:8:2]   # 'hoR' (from index 3-7, every 2nd)</code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 11</strong></p>
+    <p>What is the output of the following code:</p>
+    <pre><code>print(9//2)</code></pre>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 4.5</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 4.0</li>
+        <li onclick="checkAnswer(this, 'correct')">C) 4</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C. 4</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p><code>//</code> is the <strong>floor division</strong> operator in Python.</p>
+        <p>It performs division and returns the largest whole number (integer) less than or equal to the result.</p>
+        
+        <h4>Calculation:</h4>
+        <pre><code>9 ÷ 2 = 4.5
+Floor of 4.5 = 4</code></pre>
+        
+        <h4>Key Points:</h4>
+        <ul>
+            <li>Floor division always returns an integer, even with floating-point inputs</li>
+            <li>Regular division (<code>/</code>) would return 4.5</li>
+            <li>Different from modulo (<code>%</code>) which gives the remainder</li>
+        </ul>
+        
+        <h4>More Examples:</h4>
+        <table>
+            <tr>
+                <th>Operation</th>
+                <th>Result</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td><code>11 // 3</code></td>
+                <td>3</td>
+                <td>11 ÷ 3 = 3.666 → floor is 3</td>
+            </tr>
+            <tr>
+                <td><code>-5 // 2</code></td>
+                <td>-3</td>
+                <td>-5 ÷ 2 = -2.5 → floor is -3</td>
+            </tr>
+            <tr>
+                <td><code>7.5 // 2</code></td>
+                <td>3.0</td>
+                <td>Result is float when inputs include floats</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 12</strong></p>
+    <p>What is the output of the following code:</p>
+    <pre><code>print(10 // 3)</code></pre>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 3.33</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 3.0</li>
+        <li onclick="checkAnswer(this, 'correct')">C) 3</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C. 3</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p><code>//</code> is the <strong>floor division</strong> operator in Python.</p>
+        <p>It returns the largest integer less than or equal to the division result.</p>
+        
+        <h4>Calculation:</h4>
+        <pre><code>10 ÷ 3 = 3.333...
+Floor of 3.333... = 3</code></pre>
+        
+        <h4>Key Characteristics:</h4>
+        <ul>
+            <li>Returns an <strong>integer</strong> when both operands are integers</li>
+            <li>Different from regular division (<code>/</code>) which returns a float</li>
+            <li>Rounds <em>down</em> to the nearest whole number</li>
+            <li>Works with negative numbers (rounds toward negative infinity)</li>
+        </ul>
+        
+        <h4>Comparison with Other Operators:</h4>
+        <table>
+            <tr>
+                <th>Operation</th>
+                <th>Example</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td>Regular Division</td>
+                <td><code>10 / 3</code></td>
+                <td>3.333...</td>
+            </tr>
+            <tr>
+                <td>Floor Division</td>
+                <td><code>10 // 3</code></td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Modulo</td>
+                <td><code>10 % 3</code></td>
+                <td>1 (remainder)</td>
+            </tr>
+        </table>
+        
+        <h4>Practical Applications:</h4>
+        <ul>
+            <li>When you need whole units (e.g., dividing people into groups)</li>
+            <li>Calculating page counts where fractions don't make sense</li>
+            <li>Any integer division scenario where remainders aren't needed</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 13</strong></p>
+    <p>Which function overloads the >> operator?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) more()</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) gt()</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) ge()</li>
+        <li onclick="checkAnswer(this, 'correct')">D) None of the above</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D. None of the above</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, operator overloading is done by defining special methods (also known as magic methods or dunder methods).</p>
+        
+        <p>The <code>>></code> (right shift) operator is overloaded using:</p>
+        <pre><code>__rshift__(self, other)</code></pre>
+        
+        <h4>Analysis of Options:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Evaluation</th>
+                <th>Correct Method</th>
+            </tr>
+            <tr>
+                <td>A) more()</td>
+                <td>❌ Not a special method</td>
+                <td>Doesn't exist</td>
+            </tr>
+            <tr>
+                <td>B) gt()</td>
+                <td>❌ Incorrect name</td>
+                <td><code>__gt__()</code> (for > operator)</td>
+            </tr>
+            <tr>
+                <td>C) ge()</td>
+                <td>❌ Incorrect name</td>
+                <td><code>__ge__()</code> (for >= operator)</td>
+            </tr>
+            <tr>
+                <td>D) None</td>
+                <td>✅ Correct</td>
+                <td>The right method is <code>__rshift__()</code></td>
+            </tr>
+        </table>
+        
+        <h4>Common Operator Overloading Methods:</h4>
+        <ul>
+            <li><code>__add__()</code> for + operator</li>
+            <li><code>__sub__()</code> for - operator</li>
+            <li><code>__mul__()</code> for * operator</li>
+            <li><code>__rshift__()</code> for >> operator</li>
+            <li><code>__lshift__()</code> for << operator</li>
+        </ul>
+        
+        <h4>Example Implementation:</h4>
+        <pre><code>class Data:
+    def __rshift__(self, other):
+        print(f"Right shift with {other}")
+
+d = Data()
+d >> 5  # Output: Right shift with 5</code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 14</strong></p>
+    <p>Which special method is used to overload the + operator in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) __add__()</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) __plus__()</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) __sum__()</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) __concat__()</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A. __add__()</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>Python supports operator overloading using special methods (also called dunder methods).</p>
+        
+        <p>For the <code>+</code> operator, the method is:</p>
+        <pre><code>__add__(self, other)</code></pre>
+        
+        <h4>Comparison with Original Question:</h4>
+        <p>For the <code>>></code> operator (from previous question), the method is <code>__rshift__()</code>, making "None of the above" the correct answer there.</p>
+        
+        <h4>Common Operator Overloading Methods:</h4>
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Method</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>+</td>
+                <td>__add__()</td>
+                <td>a + b</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>__sub__()</td>
+                <td>a - b</td>
+            </tr>
+            <tr>
+                <td>*</td>
+                <td>__mul__()</td>
+                <td>a * b</td>
+            </tr>
+            <tr>
+                <td>>></td>
+                <td>__rshift__()</td>
+                <td>a >> b</td>
+            </tr>
+        </table>
+        
+        <h4>Example Implementation:</h4>
+        <pre><code>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+v1 = Vector(1, 2)
+v2 = Vector(3, 4)
+v3 = v1 + v2  # Uses __add__ method</code></pre>
+        
+        <h4>Key Points:</h4>
+        <ul>
+            <li>Special methods always have double underscores (dunder)</li>
+            <li>__add__() is called when + operator is used</li>
+            <li>Can return any type (not limited to same class)</li>
+            <li>Should implement __radd__() for reverse operations</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 15</strong></p>
+    <p>Which operator is overloaded by the <code>__or__()</code> function?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) ||</li>
+        <li onclick="checkAnswer(this, 'correct')">B) |</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) //</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) /</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) |</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, the <code>__or__()</code> special method overloads the bitwise OR operator <code>|</code>.</p>
+        
+        <h4>Key Points:</h4>
+        <ul>
+            <li><code>__or__()</code> is called when the <code>|</code> operator is used</li>
+            <li>Not to be confused with logical OR (which uses <code>or</code> keyword)</li>
+            <li>Python doesn't have <code>||</code> operator like some other languages</li>
+        </ul>
+        
+        <h4>Comparison of Operators:</h4>
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Method</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><code>|</code></td>
+                <td>__or__()</td>
+                <td>Bitwise OR</td>
+            </tr>
+            <tr>
+                <td><code>or</code></td>
+                <td>Cannot be overloaded</td>
+                <td>Logical OR</td>
+            </tr>
+            <tr>
+                <td><code>//</code></td>
+                <td>__floordiv__()</td>
+                <td>Floor division</td>
+            </tr>
+            <tr>
+                <td><code>/</code></td>
+                <td>__truediv__()</td>
+                <td>True division</td>
+            </tr>
+        </table>
+        
+        <h4>Example Implementation:</h4>
+        <pre><code>class Flags:
+    def __init__(self, value):
+        self.value = value
+        
+    def __or__(self, other):
+        return Flags(self.value | other.value)
+
+f1 = Flags(0b01)
+f2 = Flags(0b10)
+result = f1 | f2  # Uses __or__ method
+print(bin(result.value))  # Output: 0b11</code></pre>
+        
+        <h4>Common Uses:</h4>
+        <ul>
+            <li>Bitwise operations</li>
+            <li>Combining sets or flags</li>
+            <li>Custom OR-like behavior for objects</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 16</strong></p>
+    <p>Which operator is overloaded by the <code>__and__()</code> function in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) &&</li>
+        <li onclick="checkAnswer(this, 'correct')">B) &</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) and</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) |</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) &</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, the <code>__and__()</code> special method overloads the bitwise AND operator <code>&</code>.</p>
+        
+        <h4>Key Points:</h4>
+        <ul>
+            <li><code>__and__()</code> is called when the <code>&</code> operator is used</li>
+            <li>Not to be confused with logical AND (which uses <code>and</code> keyword)</li>
+            <li>Python doesn't have <code>&&</code> operator like some other languages</li>
+            <li>The <code>and</code> keyword cannot be overloaded</li>
+        </ul>
+        
+        <h4>Comparison of Operators:</h4>
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Method</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><code>&</code></td>
+                <td>__and__()</td>
+                <td>Bitwise AND</td>
+            </tr>
+            <tr>
+                <td><code>and</code></td>
+                <td>Cannot be overloaded</td>
+                <td>Logical AND</td>
+            </tr>
+            <tr>
+                <td><code>|</code></td>
+                <td>__or__()</td>
+                <td>Bitwise OR</td>
+            </tr>
+        </table>
+        
+        <h4>Example Implementation:</h4>
+        <pre><code>class Bitmask:
+    def __init__(self, value):
+        self.value = value
+        
+    def __and__(self, other):
+        return Bitmask(self.value & other.value)
+
+b1 = Bitmask(0b1010)
+b2 = Bitmask(0b1100)
+result = b1 & b2  # Uses __and__ method
+print(bin(result.value))  # Output: 0b1000</code></pre>
+        
+        <h4>Common Uses:</h4>
+        <ul>
+            <li>Bitwise operations and masking</li>
+            <li>Custom AND-like behavior for objects</li>
+            <li>Implementing set intersections</li>
+        </ul>
+        
+        <h4>Note About Original Question:</h4>
+        <p>For the <code>or</code> case mentioned earlier, <code>__or__()</code> overloads the <code>|</code> operator, not any <code>or()</code> function.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 17</strong></p>
+    <p>Which of these is not a core data type in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) Lists</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) Dictionary</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Tuples</li>
+        <li onclick="checkAnswer(this, 'correct')">D) Class</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D) Class</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>Python's core (built-in) data types include:</p>
+        <ul>
+            <li>Numbers: <code>int</code>, <code>float</code>, <code>complex</code></li>
+            <li><code>str</code> → String</li>
+            <li><code>list</code> → Ordered, mutable collection</li>
+            <li><code>tuple</code> → Ordered, immutable collection</li>
+            <li><code>dict</code> → Key-value mapping</li>
+            <li><code>set</code> → Unordered collection of unique elements</li>
+            <li><code>bool</code> → Boolean values (<code>True</code>/<code>False</code>)</li>
+        </ul>
+        
+        <h4>Analysis of Options:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>A) Lists</td>
+                <td>✅ Core</td>
+                <td>Mutable sequence: <code>[1, 2, 3]</code></td>
+            </tr>
+            <tr>
+                <td>B) Dictionary</td>
+                <td>✅ Core</td>
+                <td>Key-value pairs: <code>{'a': 1, 'b': 2}</code></td>
+            </tr>
+            <tr>
+                <td>C) Tuples</td>
+                <td>✅ Core</td>
+                <td>Immutable sequence: <code>(1, 2, 3)</code></td>
+            </tr>
+            <tr>
+                <td>D) Class</td>
+                <td>❌ Not core</td>
+                <td>User-defined blueprint for objects</td>
+            </tr>
+        </table>
+        
+        <h4>Key Differences:</h4>
+        <ul>
+            <li><strong>Core types</strong> are built into Python and always available</li>
+            <li><strong>Classes</strong> are user-defined and used in object-oriented programming</li>
+            <li>Core types are implemented as classes in Python, but they're special built-in ones</li>
+        </ul>
+        
+        <h4>Example of Class Definition:</h4>
+        <pre><code>class Person:  # This is a class, not a core data type
+    def __init__(self, name):
+        self.name = name
+
+p = Person("Alice")  # Creating an object</code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 18</strong></p>
+    <p>Which of the following is a core data type in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) Object</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) Class</li>
+        <li onclick="checkAnswer(this, 'correct')">C) Set</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Module</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) Set</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>Python's core (built-in) data types include:</p>
+        <ul>
+            <li>Numeric types: <code>int</code>, <code>float</code>, <code>complex</code></li>
+            <li>Text type: <code>str</code></li>
+            <li>Sequence types: <code>list</code>, <code>tuple</code>, <code>range</code></li>
+            <li>Mapping type: <code>dict</code></li>
+            <li>Set types: <code>set</code>, <code>frozenset</code></li>
+            <li>Boolean type: <code>bool</code></li>
+        </ul>
+        
+        <h4>Analysis of Options:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>A) Object</td>
+                <td>❌ OOP Concept</td>
+                <td>Instance of a class, not a core data type</td>
+            </tr>
+            <tr>
+                <td>B) Class</td>
+                <td>❌ OOP Concept</td>
+                <td>Blueprint for creating objects</td>
+            </tr>
+            <tr>
+                <td>C) Set</td>
+                <td>✅ Core</td>
+                <td>Unordered collection: <code>{1, 2, 3}</code></td>
+            </tr>
+            <tr>
+                <td>D) Module</td>
+                <td>❌ Import System</td>
+                <td>File containing Python code, not a data type</td>
+            </tr>
+        </table>
+        
+        <h4>Key Differences:</h4>
+        <ul>
+            <li><strong>Core types</strong> are fundamental building blocks of Python</li>
+            <li><strong>Set</strong> is an unordered collection of unique elements</li>
+            <li>Classes and objects are part of OOP, not basic data types</li>
+            <li>Modules are organizational units, not data types</li>
+        </ul>
+        
+        <h4>Set Example:</h4>
+        <pre><code>fruits = {"apple", "banana", "cherry"}  # Core set type
+print(type(fruits))  # Output: &lt;class 'set'&gt;</code></pre>
+        
+        <h4>Note About Previous Question:</h4>
+        <p>In the original question, <code>Class</code> was correctly identified as <em>not</em> being a core data type.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 19</strong></p>
+    <p>What data type is the object below?<br><code>L = [1, 23, 'hello', 1]</code></p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) List</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) Tuple</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Dictionary</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Array</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) List</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The object <code>L = [1, 23, 'hello', 1]</code> is enclosed in square brackets <code>[]</code>, which is the syntax for a <strong>list</strong> in Python.</p>
+        
+        <h4>Key Characteristics of Lists:</h4>
+        <ul>
+            <li>Enclosed in square brackets <code>[]</code></li>
+            <li>Can contain elements of different data types</li>
+            <li>Allows duplicate values</li>
+            <li>Mutable (can be changed after creation)</li>
+            <li>Ordered (maintains insertion order)</li>
+        </ul>
+        
+        <h4>Comparison with Other Options:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Syntax</th>
+                <th>Key Difference</th>
+            </tr>
+            <tr>
+                <td>B) Tuple</td>
+                <td><code>(1, 23, 'hello', 1)</code></td>
+                <td>Uses parentheses, immutable</td>
+            </tr>
+            <tr>
+                <td>C) Dictionary</td>
+                <td><code>{'key1': 1, 'key2': 23}</code></td>
+                <td>Requires key-value pairs</td>
+            </tr>
+            <tr>
+                <td>D) Array</td>
+                <td><code>array('i', [1, 23])</code></td>
+                <td>Requires importing array module, homogeneous types</td>
+            </tr>
+        </table>
+        
+        <h4>List Operations Example:</h4>
+        <pre><code>L = [1, 23, 'hello', 1]
+print(type(L))  # Output: &lt;class 'list'&gt;
+L.append('world')  # Lists are mutable
+print(L)  # Output: [1, 23, 'hello', 1, 'world']</code></pre>
+        
+        <h4>Why Not Array?</h4>
+        <ul>
+            <li>Python lists can hold mixed types, arrays cannot</li>
+            <li>Arrays require importing a module (<code>import array</code>)</li>
+            <li>Lists are more flexible for general use</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 20</strong></p>
+    <p>What data type is the object below?<br><code>T = (10, 20, 'world', 10)</code></p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) List</li>
+        <li onclick="checkAnswer(this, 'correct')">B) Tuple</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Dictionary</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Set</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) Tuple</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The object <code>T = (10, 20, 'world', 10)</code> is enclosed in parentheses <code>()</code>, which is the syntax for a <strong>tuple</strong> in Python.</p>
+        
+        <h4>Key Characteristics of Tuples:</h4>
+        <ul>
+            <li>Enclosed in parentheses <code>()</code></li>
+            <li>Can contain elements of different data types</li>
+            <li>Allows duplicate values</li>
+            <li>Immutable (cannot be changed after creation)</li>
+            <li>Ordered (maintains insertion order)</li>
+            <li>Generally faster than lists</li>
+        </ul>
+        
+        <h4>Comparison with Other Options:</h4>
+        <table>
+            <tr>
+                <th>Data Type</th>
+                <th>Syntax</th>
+                <th>Key Difference</th>
+            </tr>
+            <tr>
+                <td>List</td>
+                <td><code>[10, 20, 'world', 10]</code></td>
+                <td>Uses square brackets, mutable</td>
+            </tr>
+            <tr>
+                <td>Dictionary</td>
+                <td><code>{'a': 10, 'b': 20}</code></td>
+                <td>Uses curly braces with key-value pairs</td>
+            </tr>
+            <tr>
+                <td>Set</td>
+                <td><code>{10, 20, 'world'}</code></td>
+                <td>Uses curly braces, only unique elements</td>
+            </tr>
+        </table>
+        
+        <h4>Tuple Operations Example:</h4>
+        <pre><code>T = (10, 20, 'world', 10)
+print(type(T))  # Output: &lt;class 'tuple'&gt;
+print(T[1])     # Output: 20 (indexing works)
+# T[1] = 30    # Would raise error - tuples are immutable</code></pre>
+        
+        <h4>When to Use Tuples vs Lists:</h4>
+        <ul>
+            <li>Use tuples for fixed collections that shouldn't change</li>
+            <li>Use lists for collections that need modification</li>
+            <li>Tuples are preferred for dictionary keys (as they're immutable)</li>
+        </ul>
+        
+        <h4>Note About Original Question:</h4>
+        <p>In the previous question, <code>L = [1, 23, 'hello', 1]</code> was a list because it used square brackets <code>[]</code>.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question 21</strong></p>
+    <p>Which of the following functions converts a string to a float in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) int(x[,base])</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) long(x[,base])</li>
+        <li onclick="checkAnswer(this, 'correct')">C) float(x)</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) str(x)</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) float(x)</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>To convert a string to a floating-point number in Python, you use the built-in <code>float()</code> function.</p>
+        
+        <h4>Example Usage:</h4>
+        <pre><code>num = float("3.14")  # Converts string to float 3.14
+pi = float("3.14159")
+print(type(num))  # Output: &lt;class 'float'&gt;</code></pre>
+        
+        <h4>Analysis of Options:</h4>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Purpose</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>int(x)</code></td>
+                <td>Converts to integer</td>
+                <td><code>int("3") → 3</code></td>
+            </tr>
+            <tr>
+                <td><code>long(x)</code></td>
+                <td>Python 2 only (removed in Python 3)</td>
+                <td>N/A in modern Python</td>
+            </tr>
+            <tr>
+                <td><code>float(x)</code></td>
+                <td>Converts to floating-point</td>
+                <td><code>float("3.14") → 3.14</code></td>
+            </tr>
+            <tr>
+                <td><code>str(x)</code></td>
+                <td>Converts to string</td>
+                <td><code>str(3.14) → "3.14"</code></td>
+            </tr>
+        </table>
+        
+        <h4>Important Notes:</h4>
+        <ul>
+            <li><code>float()</code> can also convert integers to floats</li>
+            <li>Will raise <code>ValueError</code> if string isn't a valid number</li>
+            <li>Scientific notation works: <code>float("1e-3") → 0.001</code></li>
+            <li>For currency or precise decimal math, consider <code>decimal</code> module</li>
+        </ul>
+        
+        <h4>Error Handling Example:</h4>
+        <pre><code>try:
+    price = float("$3.50")  # Will raise ValueError
+except ValueError:
+    print("Invalid number format")</code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which of the following functions converts a number to a string in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) float(x)</li>
+        <li onclick="checkAnswer(this, 'correct')">B) str(x)</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) int(x)</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) bool(x)</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) str(x)</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>str()</code> function converts any object (including numbers) into its string representation.</p>
+        
+        <h4>Example Usage:</h4>
+        <pre><code>num = 42
+text = str(num)  # Converts to string "42"
+print(type(text))  # Output: &lt;class 'str'&gt;</code></pre>
+        
+        <h4>Analysis of Options:</h4>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Purpose</th>
+                <th>Example</th>
+                <th>Result Type</th>
+            </tr>
+            <tr>
+                <td><code>float(x)</code></td>
+                <td>Converts to floating-point</td>
+                <td><code>float(3) → 3.0</code></td>
+                <td>float</td>
+            </tr>
+            <tr>
+                <td><code>str(x)</code></td>
+                <td>Converts to string</td>
+                <td><code>str(3.14) → "3.14"</code></td>
+                <td>str</td>
+            </tr>
+            <tr>
+                <td><code>int(x)</code></td>
+                <td>Converts to integer</td>
+                <td><code>int(3.9) → 3</code></td>
+                <td>int</td>
+            </tr>
+            <tr>
+                <td><code>bool(x)</code></td>
+                <td>Converts to boolean</td>
+                <td><code>bool(1) → True</code></td>
+                <td>bool</td>
+            </tr>
+        </table>
+        
+        <h4>Key Features of str():</h4>
+        <ul>
+            <li>Works with all Python data types (numbers, lists, dictionaries, etc.)</li>
+            <li>Essential for string concatenation: <code>"Value: " + str(42)</code></li>
+            <li>Used implicitly in <code>print()</code> function</li>
+            <li>Can specify encoding for bytes conversion</li>
+        </ul>
+        
+        <h4>Comparison with Original Question:</h4>
+        <p>Previously, <code>float(x)</code> was the correct answer for converting strings to numbers - the inverse of this operation.</p>
+        
+        <h4>Practical Example:</h4>
+        <pre><code># Converting different types to strings
+print(str(10))       # "10"
+print(str(3.14))     # "3.14"
+print(str(True))     # "True"
+print(str([1,2]))    # "[1, 2]"</code></pre>
+    </div>
+</div>
+<br>
+<br>
+<h1>Chapter 2: Deep Dive into Python</h1>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which of the following statements is used to create an empty set in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) { }</li>
+        <li onclick="checkAnswer(this, 'correct')">B) set()</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) [ ]</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) ( )</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) set()</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, you must use the <code>set()</code> constructor to create an empty set.</p>
+        
+        <h4>Why Other Options Are Incorrect:</h4>
+        <table>
+            <tr>
+                <th>Syntax</th>
+                <th>Creates</th>
+                <th>Reason</th>
+            </tr>
+            <tr>
+                <td><code>{ }</code></td>
+                <td>Empty dictionary</td>
+                <td>Curly braces without contents default to dict</td>
+            </tr>
+            <tr>
+                <td><code>[ ]</code></td>
+                <td>Empty list</td>
+                <td>Square brackets always create lists</td>
+            </tr>
+            <tr>
+                <td><code>( )</code></td>
+                <td>Empty tuple</td>
+                <td>Parentheses create tuples</td>
+            </tr>
+        </table>
+        
+        <h4>Example:</h4>
+        <pre><code>empty_set = set()
+print(type(empty_set))  # Output: &lt;class 'set'&gt;
+print(empty_set)        # Output: set()</code></pre>
+        
+        <h4>Creating Non-Empty Sets:</h4>
+        <pre><code># For non-empty sets, use curly braces with elements
+numbers = {1, 2, 3}
+print(type(numbers))  # Output: &lt;class 'set'&gt;</code></pre>
+        
+        <h4>Key Characteristics of Sets:</h4>
+        <ul>
+            <li>Unordered collection</li>
+            <li>Contains only unique elements</li>
+            <li>Mutable (can add/remove items)</li>
+            <li>Can perform set operations (union, intersection, etc.)</li>
+        </ul>
+        
+        <h4>Common Pitfall:</h4>
+        <p>Many beginners try <code>{}</code> to create an empty set, but this actually creates a dictionary. Always use <code>set()</code> for empty sets.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which of the following is used to create an empty dictionary in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) {}</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) set()</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) []</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) ()</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) {}</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, curly braces <code>{}</code> by default create an empty dictionary.</p>
+        
+        <h4>Comparison with Other Options:</h4>
+        <table>
+            <tr>
+                <th>Syntax</th>
+                <th>Creates</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>{}</code></td>
+                <td>Empty dictionary</td>
+                <td>Default behavior of empty curly braces</td>
+            </tr>
+            <tr>
+                <td><code>set()</code></td>
+                <td>Empty set</td>
+                <td>Correct way to make empty sets (from original question)</td>
+            </tr>
+            <tr>
+                <td><code>[]</code></td>
+                <td>Empty list</td>
+                <td>Square brackets always create lists</td>
+            </tr>
+            <tr>
+                <td><code>()</code></td>
+                <td>Empty tuple</td>
+                <td>Parentheses create tuples</td>
+            </tr>
+        </table>
+        
+        <h4>Example:</h4>
+        <pre><code>empty_dict = {}
+print(type(empty_dict))  # Output: &lt;class 'dict'&gt;
+print(empty_dict)        # Output: {}</code></pre>
+        
+        <h4>Creating Non-Empty Dictionaries:</h4>
+        <pre><code># For non-empty dictionaries, use key-value pairs
+student = {"name": "Alice", "age": 20}
+print(type(student))  # Output: &lt;class 'dict'&gt;</code></pre>
+        
+        <h4>Key Dictionary Characteristics:</h4>
+        <ul>
+            <li>Unordered collection (Python 3.7+ maintains insertion order)</li>
+            <li>Key-value pairs</li>
+            <li>Keys must be immutable (strings, numbers, tuples)</li>
+            <li>Mutable (can add/remove items)</li>
+        </ul>
+        
+        <h4>Important Distinction:</h4>
+        <p>While <code>{1, 2, 3}</code> creates a set, <code>{}</code> alone creates a dictionary. This is why <code>set()</code> is needed for empty sets.</p>
+        
+        <h4>Connection to Original Question:</h4>
+        <p>In your previous question, <code>set()</code> was the correct way to create an empty set, while here <code>{}</code> is correct for dictionaries.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which of the following is used to create an empty dictionary in Python?</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) {}</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) set()</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) []</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) ()</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) {}</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, curly braces <code>{}</code> by default create an empty dictionary.</p>
+        
+        <h4>Comparison with Other Options:</h4>
+        <table>
+            <tr>
+                <th>Syntax</th>
+                <th>Creates</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>{}</code></td>
+                <td>Empty dictionary</td>
+                <td>Default behavior of empty curly braces</td>
+            </tr>
+            <tr>
+                <td><code>set()</code></td>
+                <td>Empty set</td>
+                <td>Correct way to make empty sets (from original question)</td>
+            </tr>
+            <tr>
+                <td><code>[]</code></td>
+                <td>Empty list</td>
+                <td>Square brackets always create lists</td>
+            </tr>
+            <tr>
+                <td><code>()</code></td>
+                <td>Empty tuple</td>
+                <td>Parentheses create tuples</td>
+            </tr>
+        </table>
+        
+        <h4>Example:</h4>
+        <pre><code>empty_dict = {}
+print(type(empty_dict))  # Output: &lt;class 'dict'&gt;
+print(empty_dict)        # Output: {}</code></pre>
+        
+        <h4>Creating Non-Empty Dictionaries:</h4>
+        <pre><code># For non-empty dictionaries, use key-value pairs
+student = {"name": "Alice", "age": 20}
+print(type(student))  # Output: &lt;class 'dict'&gt;</code></pre>
+        
+        <h4>Key Dictionary Characteristics:</h4>
+        <ul>
+            <li>Unordered collection (Python 3.7+ maintains insertion order)</li>
+            <li>Key-value pairs</li>
+            <li>Keys must be immutable (strings, numbers, tuples)</li>
+            <li>Mutable (can add/remove items)</li>
+        </ul>
+        
+        <h4>Important Distinction:</h4>
+        <p>While <code>{1, 2, 3}</code> creates a set, <code>{}</code> alone creates a dictionary. This is why <code>set()</code> is needed for empty sets.</p>
+        
+        <h4>Connection to Original Question:</h4>
+        <p>In your previous question, <code>set()</code> was the correct way to create an empty set, while here <code>{}</code> is correct for dictionaries.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+    
+    <pre><code>
+a = {4, 5, 6}
+b = {4, 5, 6}
+print(a.issubset(b))
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) True</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) False</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Error</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) No output</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) True</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>issubset()</code> method checks whether all elements of set <code>a</code> are present in set <code>b</code>.</p>
+        <p>Since both <code>a</code> and <code>b</code> have the same elements <code>{4, 5, 6}</code>, <code>a</code> is considered a subset of <code>b</code>. Hence, the method returns <code>True</code>.</p>
+        
+        <h4>Comparison with Related Concept:</h4>
+        <table>
+            <tr>
+                <th>Expression</th>
+                <th>Result</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>{1, 2}.issubset({1, 2, 3})</code></td>
+                <td>True</td>
+                <td>All elements in first set exist in the second</td>
+            </tr>
+            <tr>
+                <td><code>{1, 4}.issubset({1, 2, 3})</code></td>
+                <td>False</td>
+                <td>Element 4 is missing in the second set</td>
+            </tr>
+            <tr>
+                <td><code>s.issubset(s)</code></td>
+                <td>True</td>
+                <td>Any set is always a subset of itself</td>
+            </tr>
+        </table>
+
+        <h4>Example:</h4>
+        <pre><code>
+s1 = {1, 2, 3}
+print(s1.issubset(s1))  # Output: True
+        </code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>issubset()</code> returns a boolean value</li>
+            <li>Set A is a subset of B if all elements in A exist in B</li>
+            <li>Every set is a subset of itself</li>
+        </ul>
+
+        <h4>Important Distinction:</h4>
+        <p><code>a.issubset(b)</code> checks for inclusion, not identity. Even if two sets are identical, the method returns <code>True</code> because all elements of <code>a</code> are in <code>b</code>.</p>
+
+        <h4>Connection to Related Questions:</h4>
+        <p>Earlier, you asked about <code>{}</code> creating a dictionary and <code>set()</code> creating a set. This is another example of set operations in Python.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output of the following Python code?</p>
+    
+    <pre><code>
+for i in range(float('inf')):
+    print(i)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 0.0 0.1 0.2 0.3...</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 0 1 2 3...</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) 0.0 1.0 2.0 3.0...</li>
+        <li onclick="checkAnswer(this, 'correct')">D) none of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D) none of the mentioned</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>range()</code> function in Python requires integer arguments. However, <code>float('inf')</code> returns a float that represents positive infinity, which is not an integer.</p>
+        <p>So when you try to execute:</p>
+
+        <pre><code>
+for i in range(float('inf')):
+    print(i)
+        </code></pre>
+
+        <p>You will get the following error:</p>
+        <pre><code>TypeError: 'float' object cannot be interpreted as an integer</code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>range()</code> only accepts integer values (int, not float).</li>
+            <li><code>float('inf')</code> is a float representing mathematical infinity.</li>
+            <li>Passing a float to <code>range()</code> always raises a <code>TypeError</code>.</li>
+        </ul>
+
+        <h4>Example Fix:</h4>
+        <pre><code>
+# Incorrect
+range(float('inf'))  # ❌ Error
+
+# Correct: Use a very large integer if you want an infinite-like loop
+import itertools
+for i in itertools.count():
+    print(i)  # ✅ Will print indefinitely starting from 0
+        </code></pre>
+
+        <h4>Important Distinction:</h4>
+        <p>Using <code>float('inf')</code> in loops or index-based operations that expect integers is a common beginner mistake. Always validate types when using built-in functions like <code>range()</code>.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output of the following Python code?</p>
+    
+    <pre><code>
+for i in range('10'):
+    print(i)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 0 1 2 3 4 5 6 7 8 9</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 10</li>
+        <li onclick="checkAnswer(this, 'correct')">C) Error</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) None of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) Error</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>range()</code> function in Python requires an integer as its argument. However, in this code, a string <code>'10'</code> is passed instead of an integer.</p>
+        <p>This results in a <code>TypeError</code> because Python cannot interpret a string as an integer in the context of <code>range()</code>.</p>
+
+        <h4>Actual Error:</h4>
+        <pre><code>TypeError: 'str' object cannot be interpreted as an integer</code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>range()</code> requires integer input</li>
+            <li>Passing a string (even if it looks like a number) will raise a TypeError</li>
+            <li>Always convert string inputs to integers using <code>int()</code> before passing to <code>range()</code></li>
+        </ul>
+
+        <h4>Corrected Example:</h4>
+        <pre><code>
+for i in range(int('10')):
+    print(i)  # Output: 0 1 2 3 4 5 6 7 8 9
+        </code></pre>
+
+        <h4>Connection to Previous Question:</h4>
+        <p>Just like <code>float('inf')</code> caused a <code>TypeError</code> because it’s a float, <code>'10'</code> here causes a <code>TypeError</code> because it's a string — both are invalid for <code>range()</code>.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+    
+    <pre><code>
+True = False
+while True:
+    print(True)
+    break
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) True</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) False</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) None</li>
+        <li onclick="checkAnswer(this, 'correct')">D) none of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D) none of the mentioned</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In this code, you are trying to assign <code>False</code> to the literal keyword <code>True</code> using the line:</p>
+        <pre><code>True = False</code></pre>
+        <p>However, <code>True</code> and <code>False</code> are Python built-in constants (keywords), and **you cannot assign a value to them**. Doing so will raise a <code>SyntaxError</code>.</p>
+
+        <h4>Actual Error:</h4>
+        <pre><code>SyntaxError: cannot assign to True</code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>True</code> and <code>False</code> are immutable boolean constants in Python</li>
+            <li>Assignment to these literals is not allowed</li>
+            <li>Doing so results in a compile-time <code>SyntaxError</code>, not a runtime error</li>
+        </ul>
+
+        <h4>What If It Were Valid?</h4>
+        <p>If Python allowed this (it doesn’t), it would cause logical confusion. For example:</p>
+        <pre><code>
+True = False
+while True:  # This would become while False
+    print(True)  # Would print False
+    break
+        </code></pre>
+        <p>But again, Python prevents this kind of behavior to maintain the integrity of the language.</p>
+
+        <h4>Connection to Previous Questions:</h4>
+        <p>This is similar in nature to passing <code>float('inf')</code> or <code>'10'</code> to <code>range()</code> — all are examples of **type violations** or **invalid syntax usage**.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+    
+    <pre><code>
+False = True
+if False:
+    print("Hello")
+else:
+    print("World")
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) Hello</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) World</li>
+        <li onclick="checkAnswer(this, 'correct')">C) Error</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) None of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) Error</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>In Python 3.x, <code>True</code> and <code>False</code> are reserved keywords representing boolean values.</p>
+        <p>Attempting to assign a new value to them — like <code>False = True</code> — is **not allowed** and results in a <code>SyntaxError</code>.</p>
+
+        <h4>Actual Error:</h4>
+        <pre><code>SyntaxError: cannot assign to False</code></pre>
+
+        <h4>Why This Happens:</h4>
+        <ul>
+            <li><code>True</code> and <code>False</code> are not just variables — they are built-in constants</li>
+            <li>You cannot reassign them to other values</li>
+            <li>This prevents bugs and logical confusion in your code</li>
+        </ul>
+
+        <h4>Incorrect Assumption:</h4>
+        <pre><code>
+# If it were allowed (it's not):
+False = True  # ❌ Invalid
+if False:     # Actually means 'if True' (if it worked)
+    print("Hello")
+else:
+    print("World")
+        </code></pre>
+        <p>But this code will never run because the assignment is illegal.</p>
+
+        <h4>Connection to Previous Questions:</h4>
+        <p>Similar to your earlier question using <code>True = False</code> in a <code>while</code> loop — Python will throw a <code>SyntaxError</code> as soon as it encounters the invalid assignment.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>To open a file <code>c:\file.txt</code> for appending data, we use ____________</p>
+    
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) outfile = open("c:\\file.txt", "a")</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) outfile = open("c:\\file.txt", "rw")</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) outfile = open(file = "c:\file.txt", "w")</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) outfile = open(file = "c:\\file.txt", "w")</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) outfile = open("c:\\file.txt", "a")</h4>
+        
+        <h4>🧠 Explanation:</h4>
+        <p>To open a file for **appending** in Python, you use the <code>"a"</code> mode:</p>
+        <pre><code>
+open("filename", "a")
+        </code></pre>
+        <ul>
+            <li><code>"a"</code> stands for "append" mode.</li>
+            <li>Appends data to the end of the file without removing existing content.</li>
+            <li>The double backslash <code>\\</code> is required to escape the backslash in Windows file paths.</li>
+        </ul>
+
+        <h4>Breakdown of Options:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Explanation</th>
+                <th>Valid?</th>
+            </tr>
+            <tr>
+                <td><code>open("c:\\file.txt", "a")</code></td>
+                <td>Appends data to file – ✅ Correct</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>open("c:\\file.txt", "rw")</code></td>
+                <td><code>"rw"</code> is not a valid mode in Python</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><code>open(file = "c:\file.txt", "w")</code></td>
+                <td>Invalid path string due to unescaped <code>\f</code></td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><code>open(file = "c:\\file.txt", "w")</code></td>
+                <td>Valid path but opens in write mode (overwrites)</td>
+                <td>❌</td>
+            </tr>
+        </table>
+
+        <h4>Reminder:</h4>
+        <ul>
+            <li><code>"w"</code> – Write mode (overwrites)</li>
+            <li><code>"r"</code> – Read mode</li>
+            <li><code>"a"</code> – Append mode ✅</li>
+            <li><code>"r+"</code> – Read and write</li>
+        </ul>
+
+        <h4>Correct Usage Example:</h4>
+        <pre><code>
+outfile = open("c:\\file.txt", "a")
+outfile.write("This will be added to the end of the file.")
+outfile.close()
+        </code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>To open a file <code>d:\data.txt</code> for reading, we use ____________</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) file = open("d:\\data.txt", "r")</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) file = open("d:\\data.txt", "w")</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) file = open("d:\\data.txt", "a")</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) file = open("d:\\data.txt", "rw")</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) file = open("d:\\data.txt", "r")</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>To open a file for reading in Python, you use the <code>"r"</code> mode, which is the **default mode** for the <code>open()</code> function.</p>
+        
+        <h4>Breakdown of Options:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Mode</th>
+                <th>Effect</th>
+                <th>Valid?</th>
+            </tr>
+            <tr>
+                <td><code>open("d:\\data.txt", "r")</code></td>
+                <td>Read</td>
+                <td>Opens file for reading</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>open("d:\\data.txt", "w")</code></td>
+                <td>Write</td>
+                <td>Opens file for writing (overwrites if exists)</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>open("d:\\data.txt", "a")</code></td>
+                <td>Append</td>
+                <td>Opens file for appending at end</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>open("d:\\data.txt", "rw")</code></td>
+                <td>Invalid</td>
+                <td><code>"rw"</code> is not a valid Python mode</td>
+                <td>❌</td>
+            </tr>
+        </table>
+
+        <h4>Note:</h4>
+        <ul>
+            <li>Always escape backslashes in Windows file paths using <code>\\</code></li>
+            <li><code>"r"</code> mode throws an error if the file doesn't exist</li>
+        </ul>
+
+        <h4>Correct Usage Example:</h4>
+        <pre><code>
+file = open("d:\\data.txt", "r")
+content = file.read()
+print(content)
+file.close()
+        </code></pre>
+
+        <h4>Connection to Previous Question:</h4>
+        <p>Just like <code>"a"</code> mode is used for appending, <code>"r"</code> is used for reading. Always choose the mode based on what operation you want to perform on the file.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code snippet?</p>
+
+    <pre><code>
+string = "my name is x"
+
+for i in ' '.join(string.split()):
+    print(i, end=", ")
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) m, y, , n, a, m, e, , i, s, , x,</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) m, y, , n, a, m, e, , i, s, , x</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) my, name, is, x,</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) error</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) m, y, , n, a, m, e, , i, s, , x,</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>Let’s break it down step-by-step:</p>
+
+        <ol>
+            <li><code>string.split()</code> → <code>['my', 'name', 'is', 'x']</code></li>
+            <li><code>' '.join(...)</code> → <code>'my name is x'</code></li>
+            <li>The <code>for</code> loop iterates over each character in the string <code>'my name is x'</code></li>
+            <li><code>print(i, end=", ")</code> → prints each character followed by a comma and space</li>
+        </ol>
+
+        <h4>So it prints:</h4>
+        <pre><code>m, y,  , n, a, m, e,  , i, s,  , x, </code></pre>
+
+        <p>Final output (with commas):</p>
+        <pre><code>m, y, , n, a, m, e, , i, s, , x,</code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>split()</code> splits by spaces</li>
+            <li><code>' '.join()</code> puts the list back into a single string with single spaces</li>
+            <li>The loop prints each character individually</li>
+        </ul>
+
+        <h4>Bonus Tip:</h4>
+        <p>If you had written <code>print(i)</code> instead of <code>print(i, end=", ")</code>, it would have printed one character per line.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+    <pre><code>
+text = "hello world"
+for i in '-'.join(text.split()):
+    print(i, end="*")
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) h*e*l*l*o*-*w*o*r*l*d*</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) helloworld</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) hello world</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) error</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) h*e*l*l*o*-*w*o*r*l*d*</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>Let's analyze the code step-by-step:</p>
+
+        <pre><code>
+text = "hello world"
+text.split()            ➝ ['hello', 'world']
+'-'.join(...)           ➝ "hello-world"
+</code></pre>
+
+        <p>Then, the <code>for</code> loop iterates over each character of the string <code>"hello-world"</code> and prints each followed by <code>*</code>.</p>
+
+        <h4>So the output is:</h4>
+        <pre><code>h*e*l*l*o*-*w*o*r*l*d*</code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>split()</code> turns the string into a list of words</li>
+            <li><code>'-'.join()</code> joins the list back with hyphens</li>
+            <li>The <code>for</code> loop prints each character with an asterisk after it</li>
+        </ul>
+
+        <h4>Visual Breakdown:</h4>
+        <table>
+            <tr><th>Operation</th><th>Result</th></tr>
+            <tr><td><code>text.split()</code></td><td><code>['hello', 'world']</code></td></tr>
+            <tr><td><code>'-'.join(...)</code></td><td><code>"hello-world"</code></td></tr>
+            <tr><td>Character iteration</td><td><code>h*e*l*l*o*-*w*o*r*l*d*</code></td></tr>
+        </table>
+
+        <h4>Connection to Related Question:</h4>
+        <p>Similar to the <code>' '.join(string.split())</code> example with <code>end=", "</code>, this question demonstrates character-wise output formatting using a separator (in this case, <code>*</code>).</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+    <pre><code>
+a = ["Apple", "Ball", "Cobra"]
+a.sort(key=len)
+print(a)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) ['Apple', 'Ball', 'Cobra']</li>
+        <li onclick="checkAnswer(this, 'correct')">B) ['Ball', 'Apple', 'Cobra']</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) ['Cobra', 'Apple', 'Ball']</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Invalid syntax for sort()</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) ['Ball', 'Apple', 'Cobra']</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>sort()</code> function sorts the list in-place.</p>
+        <p>Using <code>key=len</code> tells Python to sort based on the **length** of each string:</p>
+
+        <ul>
+            <li>"Apple" → length 5</li>
+            <li>"Ball" → length 4</li>
+            <li>"Cobra" → length 5</li>
+        </ul>
+
+        <p>Sorted by length (ascending):</p>
+        <pre><code>['Ball', 'Apple', 'Cobra']</code></pre>
+
+        <p>Note that "Apple" and "Cobra" are both of length 5, so their **relative order is preserved** (Python uses a stable sort).</p>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>sort(key=len)</code> – sorts based on the return value of <code>len()</code></li>
+            <li>Stable sort – maintains relative order of equal elements</li>
+        </ul>
+
+        <h4>Common Mistake:</h4>
+        <p>Thinking <code>sort()</code> sorts alphabetically by default (which it does), but <code>key=len</code> changes that behavior to sort by length.</p>
+
+        <h4>Output:</h4>
+        <pre><code>['Ball', 'Apple', 'Cobra']</code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+    <pre><code>
+fruits = ["Kiwi", "Banana", "Fig"]
+fruits.sort(key=len)
+print(fruits)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) ['Kiwi', 'Banana', 'Fig']</li>
+        <li onclick="checkAnswer(this, 'correct')">B) ['Fig', 'Kiwi', 'Banana']</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) ['Banana', 'Kiwi', 'Fig']</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Invalid syntax for sort()</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) ['Fig', 'Kiwi', 'Banana']</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>sort()</code> method with <code>key=len</code> sorts the list based on the **length** of each string (from shortest to longest).</p>
+
+        <h4>String Lengths:</h4>
+        <ul>
+            <li>"Fig" → 3</li>
+            <li>"Kiwi" → 4</li>
+            <li>"Banana" → 6</li>
+        </ul>
+
+        <h4>Sorted List by Length:</h4>
+        <pre><code>['Fig', 'Kiwi', 'Banana']</code></pre>
+
+        <h4>Key Concepts:</h4>
+        <ul>
+            <li><code>key=len</code> tells Python to sort by the number of characters in each item</li>
+            <li>This is a stable sort — if two items had the same length, their original order would be preserved</li>
+        </ul>
+
+        <h4>Connection to Related Question:</h4>
+        <p>Previously, <code>a = ["Apple", "Ball", "Cobra"]</code> sorted by length gave <code>['Ball', 'Apple', 'Cobra']</code> because "Ball" had the shortest length.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+    <pre><code>
+a = [1, 5, 7, 9, 9, 1]
+b = a[0]
+x = 0
+for x in range(1, len(a)):
+    if a[x] > b:
+        b = a[x]
+        b = x
+print(b)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 5</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 3</li>
+        <li onclick="checkAnswer(this, 'correct')">C) 4</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) 0</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) 4</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>Let’s walk through the code step by step:</p>
+
+        <pre><code>
+Initial list: a = [1, 5, 7, 9, 9, 1]
+Start with:
+    b = a[0] = 1
+</code></pre>
+
+        <p>Now we loop through the list from index 1 to 5:</p>
+
+        <table>
+            <tr>
+                <th>x</th>
+                <th>a[x]</th>
+                <th>b (before)</th>
+                <th>a[x] > b?</th>
+                <th>b (after b = a[x])</th>
+                <th>b (after b = x)</th>
+            </tr>
+            <tr><td>1</td><td>5</td><td>1</td><td>✅</td><td>5</td><td>1</td></tr>
+            <tr><td>2</td><td>7</td><td>1</td><td>✅</td><td>7</td><td>2</td></tr>
+            <tr><td>3</td><td>9</td><td>2</td><td>✅</td><td>9</td><td>3</td></tr>
+            <tr><td>4</td><td>9</td><td>3</td><td>✅</td><td>9</td><td>4</td></tr>
+            <tr><td>5</td><td>1</td><td>4</td><td>❌</td><td>–</td><td>4</td></tr>
+        </table>
+
+        <h4>Key Detail:</h4>
+        <p>The line <code>b = a[x]</code> is immediately overwritten by <code>b = x</code>, so you're not storing the **value**, you're keeping the **index** of the max value seen so far.</p>
+
+        <h4>Final Output:</h4>
+        <pre><code>4</code></pre>
+
+        <h4>Important Concept:</h4>
+        <p>This code finds the index of the last occurrence of the maximum value in the list.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+    <pre><code>
+nums = [3, 8, 2, 8, 10]
+max_val = nums[0]
+for i in range(1, len(nums)):
+    if nums[i] > max_val:
+        max_val = i
+print(max_val)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 10</li>
+        <li onclick="checkAnswer(this, 'correct')">B) 4</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) 8</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) 3</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) 4</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The programmer intended to track the maximum <strong>value</strong> but accidentally stores the <strong>index</strong> instead.</p>
+
+        <h4>Let's Trace the Code:</h4>
+        <ul>
+            <li>Initial list: <code>[3, 8, 2, 8, 10]</code></li>
+            <li><code>max_val = nums[0]</code> → <code>3</code></li>
+        </ul>
+
+        <h4>Iteration Trace:</h4>
+        <table>
+            <tr><th>i</th><th>nums[i]</th><th>Condition</th><th>max_val</th></tr>
+            <tr><td>1</td><td>8</td><td>8 > 3 → ✅</td><td>max_val = 1</td></tr>
+            <tr><td>2</td><td>2</td><td>2 > 1 → ❌</td><td>unchanged</td></tr>
+            <tr><td>3</td><td>8</td><td>8 > 1 → ✅</td><td>max_val = 3</td></tr>
+            <tr><td>4</td><td>10</td><td>10 > 3 → ✅</td><td>max_val = 4</td></tr>
+        </table>
+
+        <p><strong>Important:</strong> The condition compares the value <code>nums[i]</code> to <code>max_val</code>, but <code>max_val</code was updated with index values like 1, 3, etc., not actual list elements.</p>
+
+        <p>Thus, <strong>final value printed is the index of the max value</strong> → <code>4</code></p>
+
+        <h4>Correct Way (if we wanted actual max value):</h4>
+        <pre><code>
+max_val = nums[0]
+for i in range(1, len(nums)):
+    if nums[i] > max_val:
+        max_val = nums[i]
+print(max_val)  # Output: 10
+        </code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>What will be the output of the following Python code snippet?</p>
+    <pre>print('+99'.zfill(5))</pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. 00+99</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. 00099</li>
+      <li onclick="checkAnswer(this, 'correct')">C. +0099</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. +++99</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C. +0099</h4>
+      <h4>🧠 Explanation:</h4>
+      <p>
+        The <code>zfill(width)</code> method pads the string on the left with zeros until it reaches the specified width.
+        If the string starts with a '+' or '-', the zeros are inserted after the sign.
+        Here, '+99' is of length 3, so two zeros are added after the '+' to make the length 5 → <code>+0099</code>.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <pre>
+  a = {'B': 5, 'A': 9, 'C': 7}
+  sorted(a)
+    </pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. ['A', 'B', 'C']</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. ['B', 'C', 'A']</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. [5, 7, 9]</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. [9, 5, 7]</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. ['A', 'B', 'C']</h4>
+      <h4>🧠 Explanation:</h4>
+      <p>
+        The <code>sorted()</code> function, when applied to a dictionary, sorts its keys by default.
+        So, <code>sorted(a)</code> returns the sorted list of keys: <code>['A', 'B', 'C']</code>.
+        The values are not considered unless explicitly accessed.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <pre>
+  a = {}
+  a[2] = 1
+  a[1] = [2, 3, 4]
+  print(a[1][1])
+    </pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. [2, 3, 4]</li>
+      <li onclick="checkAnswer(this, 'correct')">B. 3</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. 2</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. An exception is thrown</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. 3</h4>
+      <h4>🧠 Explanation:</h4>
+      <p>
+        The dictionary <code>a</code> has two keys: <code>2</code> mapped to <code>1</code>, and
+        <code>1</code> mapped to the list <code>[2, 3, 4]</code>.
+        Accessing <code>a[1]</code> returns the list <code>[2, 3, 4]</code>, and
+        <code>a[1][1]</code> accesses the element at index 1 of that list,
+        which is <code>3</code>.
+      </p>
+    </div>
+  </div>
+<br>
+<br>      
+<h1>Chapter 3: Python Libraries</h1>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the correct way to install the <code>pandas</code> library?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) install pandas</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) pandas install python</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) python install pandas</li>
+      <li onclick="checkAnswer(this, 'correct')">D) pip install pandas</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D) pip install pandas</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The correct command to install the <code>pandas</code> library using Python's package manager is:</p>
+      <pre><code>pip install pandas</code></pre>
+      <p>This downloads and installs pandas and its dependencies from the Python Package Index (PyPI).</p>
+  
+      <h4>❌ Incorrect Options:</h4>
+      <ul>
+        <li><code>install pandas</code> – Not a valid command</li>
+        <li><code>pandas install python</code> – Reversed and invalid syntax</li>
+        <li><code>python install pandas</code> – Incorrect use of the <code>python</code> command</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>DataFrame in pandas is ...</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) 1 dimensional array</li>
+      <li onclick="checkAnswer(this, 'correct')">B) 2 dimensional array</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) 3 dimensional array</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) None of the above</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B) 2 dimensional array</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>A <code>DataFrame</code> in pandas is a two-dimensional, size-mutable, and heterogeneous data structure — similar to a table in a database, an Excel spreadsheet, or a SQL table.</p>
+      <ul>
+        <li>Rows and columns are labeled (indexed)</li>
+        <li>Each column can hold data of a different type (int, float, string, etc.)</li>
+      </ul>
+  
+      <h4>Example:</h4>
+      <pre><code>
+  import pandas as pd
+  df = pd.DataFrame({
+      "Name": ["Alice", "Bob"],
+      "Age": [25, 30]
+  })
+  print(df)
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Suppose <code>list1 = [1, 3, 2]</code>. What is <code>list1 * 2</code>?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) [2, 6, 4]</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) [1, 3, 2, 1, 3]</li>
+      <li onclick="checkAnswer(this, 'correct')">C) [1, 3, 2, 1, 3, 2]</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) [1, 3, 2, 3, 2, 1]</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C) [1, 3, 2, 1, 3, 2]</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>In Python, multiplying a list by an integer using <code>*</code> repeats the list that many times.</p>
+      <pre><code>
+  list1 = [1, 3, 2]
+  print(list1 * 2)  # Output: [1, 3, 2, 1, 3, 2]
+      </code></pre>
+      <p>This does <strong>not</strong> multiply individual elements — it duplicates the entire list.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output when the following code is executed?</p>
+    <pre><code>"Welcome to Python".split()</code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A) [“Welcome”, “to”, “Python”]</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) (“Welcome”, “to”, “Python”)</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) {“Welcome”, “to”, “Python”}</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) “Welcome”, “to”, “Python”</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A) [“Welcome”, “to”, “Python”]</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>split()</code> method, when called without any arguments, splits a string at each space and returns a list of words.</p>
+      
+      <pre><code>
+  text = "Welcome to Python"
+  print(text.split())  # Output: ['Welcome', 'to', 'Python']
+      </code></pre>
+  
+      <p>So the output is a <strong>list</strong> containing the words as elements.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which function from the options given below can read the dataset from a large text file?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) read_json</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) read_pickle</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) read_hdf</li>
+      <li onclick="checkAnswer(this, 'correct')">D) read_csv</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D) read_csv</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>read_csv()</code> function in pandas is specifically designed to read data from large text files that are comma-separated (CSV format).</p>
+      
+      <p>Other options:</p>
+      <ul>
+        <li><code>read_json</code>: reads JSON-formatted data</li>
+        <li><code>read_pickle</code>: reads pickled pandas objects</li>
+        <li><code>read_hdf</code>: reads HDF5 files, not plain text</li>
+      </ul>
+  
+      <p><strong>Therefore, for plain text datasets, especially CSV files, <code>read_csv()</code> is the most appropriate.</strong></p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>This function in the library of Pandas allows you to manipulate data and create new variables:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) read_csv function</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) pivot_table function</li>
+      <li onclick="checkAnswer(this, 'correct')">C) apply function</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) merge function</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C) apply function</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>apply()</code> function in pandas is used to apply a function along the axis of a DataFrame or Series. This allows you to perform custom operations, transform data, and create new variables.</p>
+  
+      <h4>Example:</h4>
+      <pre><code>
+  import pandas as pd
+  
+  df = pd.DataFrame({'x': [1, 2, 3]})
+  df['squared'] = df['x'].apply(lambda x: x**2)
+  print(df)
+      </code></pre>
+  
+      <h4>Why not the others?</h4>
+      <ul>
+        <li><code>read_csv()</code>: only reads data from a file</li>
+        <li><code>pivot_table()</code>: used for summarizing data</li>
+        <li><code>merge()</code>: used to combine two datasets</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which of these is an invalid writer function in Pandas?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) to_clipboard</li>
+      <li onclick="checkAnswer(this, 'correct')">B) to_text</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) to_stata</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) to_msgpack</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B) to_text</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>Pandas provides several writer functions to export data to different formats. Here's a breakdown:</p>
+  
+      <ul>
+        <li><code>to_clipboard()</code> — ✅ Valid, writes data to your system clipboard</li>
+        <li><code>to_stata()</code> — ✅ Valid, writes to Stata file format</li>
+        <li><code>to_msgpack()</code> — ✅ (Deprecated) used to write data in MessagePack format</li>
+        <li><code>to_text()</code> — ❌ <strong>Invalid</strong>, there is no such function called <code>to_text</code> in pandas</li>
+      </ul>
+  
+      <p><strong>Note:</strong> While <code>to_msgpack</code> is deprecated in modern versions of pandas, it was once valid — unlike <code>to_text</code>, which never existed.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which among the following options can be used to create a DataFrame in Pandas?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) A scalar value</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) An ndarray</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) A python dict</li>
+      <li onclick="checkAnswer(this, 'correct')">D) All of the above</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D) All of the above</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>Pandas provides flexibility in creating DataFrames using various input types:</p>
+  
+      <table>
+        <tr>
+          <th>Input Type</th>
+          <th>Valid?</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><code>scalar</code></td>
+          <td>✅</td>
+          <td>Creates a DataFrame where the scalar is broadcasted across specified index/columns.</td>
+        </tr>
+        <tr>
+          <td><code>ndarray</code></td>
+          <td>✅</td>
+          <td>You can pass a 2D NumPy array as data.</td>
+        </tr>
+        <tr>
+          <td><code>dict</code></td>
+          <td>✅</td>
+          <td>The most common and flexible way; keys become column names.</td>
+        </tr>
+      </table>
+  
+      <h4>✅ Example:</h4>
+      <pre><code>
+  import pandas as pd
+  import numpy as np
+  
+  # From scalar
+  df1 = pd.DataFrame(7, index=[0, 1], columns=['A'])
+  
+  # From ndarray
+  df2 = pd.DataFrame(np.array([[1, 2], [3, 4]]), columns=['X', 'Y'])
+  
+  # From dict
+  df3 = pd.DataFrame({'Name': ['Alice', 'Bob'], 'Age': [25, 30]})
+      </code></pre>
+  
+      <p>So, all of the listed options can be used to create a DataFrame in Pandas.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Identify the correct statement:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) The standard marker for missing data in Pandas is NaN</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) Series act in a way similar to that of an array</li>
+      <li onclick="checkAnswer(this, 'correct')">C) Both of the above</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) None of the above</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C) Both of the above</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <ul>
+        <li><strong>NaN (Not a Number)</strong> is indeed the standard placeholder for missing values in Pandas.</li>
+        <li><strong>Series</strong> in Pandas are 1-dimensional labeled arrays and behave very similarly to NumPy arrays, supporting element-wise operations and broadcasting.</li>
+      </ul>
+  
+      <h4>✅ Example:</h4>
+      <pre><code>
+  import pandas as pd
+  import numpy as np
+  
+  # NaN example
+  data = pd.Series([10, np.nan, 30])
+  print(data)
+  
+  # Series like array
+  arr = pd.Series([1, 2, 3])
+  print(arr + 10)  # [11, 12, 13]
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What happens to the indexes when any operations are done to unaligned series?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) Total</li>
+      <li onclick="checkAnswer(this, 'correct')">B) Union</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) Intersection</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) All of the above</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B) Union</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>When performing operations on two unaligned pandas Series (i.e., Series with different indexes), pandas automatically aligns them by the index and performs the <strong>union</strong> of the two index sets. If an index is missing in either series, the result will have a <code>NaN</code> at that position.</p>
+  
+      <h4>✅ Example:</h4>
+      <pre><code>
+  import pandas as pd
+  
+  s1 = pd.Series([1, 2], index=['a', 'b'])
+  s2 = pd.Series([3, 4], index=['b', 'c'])
+  
+  print(s1 + s2)
+  # Output:
+  # a    NaN
+  # b    5.0
+  # c    NaN
+      </code></pre>
+  
+      <p>As shown, the resulting index is the <strong>union</strong> of s1 and s2's indexes: ['a', 'b', 'c'].</p>
+    </div>
+  </div>
+  <br>
+  <br>
+<h1>Chapter 4: Error Handling</h1>  
+<div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Is the following Python code valid?</p>
+  
+    <pre><code>try:
+      # Do something
+  except:
+      # Do something
+  finally:
+      # Do something</code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) no, there is no such thing as finally</li>
+      <li onclick="checkAnswer(this, 'correct')">B) no, finally cannot be used with except</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) no, finally must come before except</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) yes</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B) no, finally cannot be used with except</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>try-except-finally</code> structure is completely valid in Python. Here's how it works:</p>
+      <ul>
+        <li><strong>try:</strong> block contains code that might raise an exception.</li>
+        <li><strong>except:</strong> block handles exceptions if they occur.</li>
+        <li><strong>finally:</strong> block contains code that will always run after try and except, regardless of whether an exception occurred.</li>
+      </ul>
+  
+      <h4>✅ Example:</h4>
+      <pre><code>try:
+      print("Trying...")
+      x = 1 / 0  # Raises ZeroDivisionError
+  except:
+      print("Exception caught!")
+  finally:
+      print("This runs no matter what.")</code></pre>
+  
+      <p>Output:</p>
+      <pre><code>Trying...
+  Exception caught!
+  This runs no matter what.</code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>How many <code>except</code> statements can a <code>try-except</code> block have?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) zero</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) one</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) more than one</li>
+      <li onclick="checkAnswer(this, 'correct')">D) more than zero</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C) more than one</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>A <code>try</code> block in Python can be followed by:</p>
+      <ul>
+        <li>Multiple <code>except</code> blocks to handle different types of exceptions</li>
+        <li>Only one block will run — the first matching <code>except</code></li>
+      </ul>
+  
+      <h4>✅ Example:</h4>
+      <pre><code>try:
+      x = int("abc")
+  except ValueError:
+      print("ValueError caught")
+  except TypeError:
+      print("TypeError caught")</code></pre>
+  
+      <p>This handles both <code>ValueError</code> and <code>TypeError</code> appropriately, using multiple <code>except</code> blocks.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>When will the <code>else</code> part of <code>try-except-else</code> be executed?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) always</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) when an exception occurs</li>
+      <li onclick="checkAnswer(this, 'correct')">C) when no exception occurs</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) when an exception occurs in the except block</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C) when no exception occurs</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>else</code> block in a <code>try-except-else</code> structure is executed <strong>only if no exceptions occur</strong> in the <code>try</code> block.</p>
+  
+      <p><strong>Flow:</strong></p>
+      <ol>
+        <li><code>try</code> → Run this code.</li>
+        <li>If exception occurs → control moves to <code>except</code>.</li>
+        <li>If no exception → <code>else</code> block is executed.</li>
+      </ol>
+  
+      <h4>✅ Example:</h4>
+      <pre><code>try:
+      num = int("10")
+  except ValueError:
+      print("Invalid number!")
+  else:
+      print("Conversion successful!")</code></pre>
+  
+      <p>Output:</p>
+      <code>Conversion successful!</code>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p>Is the following Python code valid?</p>
+  
+    <pre><code>try:
+      # do something
+  except:
+      # do something
+  else
+      # do something</code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. no, there is no such thing as else</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. no, else cannot be used with except</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. no, else must come before except</li>
+      <li onclick="checkAnswer(this, 'correct')">D. Yes</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C. no, else must come before except</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The syntax of the provided Python code is incorrect because the <code>else</code> block must be placed <strong>after</strong> the <code>except</code> block, <strong>but must be followed by a colon <code>:</code></strong>.</p>
+  
+      <p>Also, the correct structure is:</p>
+      <pre><code>try:
+      # do something
+  except:
+      # handle error
+  else:
+      # executes if no error occurred in try block</code></pre>
+  
+      <p>In the given code, <code>else</code> is missing a colon <code>:</code> — making the code invalid.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong><br>Can one block of except statements handle multiple exceptions?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. yes, like except typeerror, syntaxerror [,…]</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. yes, like except (TypeError, SyntaxError)</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. no</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. none of the mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. yes, like <code>except (TypeError, SyntaxError)</code></h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>In Python, you can handle multiple exceptions in a single <code>except</code> block by grouping them in a tuple. The correct syntax is:</p>
+      <pre><code>try:
+      # some code
+  except (TypeError, SyntaxError):
+      # handle either TypeError or SyntaxError
+  </code></pre>
+      <p>Options A and D are invalid syntax. Option C is incorrect because Python <em>does</em> allow multiple exceptions in a single except block.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>When is the <code>finally</code> block executed?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. when there is no exception</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. when there is an exception</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. only if some condition that has been specified is satisfied</li>
+      <li onclick="checkAnswer(this, 'correct')">D. always</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D. always</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        The <code>finally</code> block in Python is <strong>always executed</strong> after the <code>try</code> and <code>except</code> blocks, regardless of whether an exception occurred or not. It is used to define clean-up actions that must be executed under all circumstances (like closing files or releasing resources).
+      </p>
+  
+      <h4>🔁 Example:</h4>
+      <pre><code>try:
+      print("Trying...")
+      1 / 0
+  except ZeroDivisionError:
+      print("Exception occurred")
+  finally:
+      print("Finally block executed")</code></pre>
+  
+      <p><strong>Output:</strong></p>
+      <pre><code>Trying...
+  Exception occurred
+  Finally block executed</code></pre>
+    </div>
+  </div>
+  <br>
+  <br>
+  <h1>Chapter 5: Other Topics</h1>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>What will be the output of the following Python code?</p>
+  
+    <pre><code>import re
+  sentence = 'I am groot'
+  matched = re.match(r'(.*) (.*?) (.*)', sentence)
+  print(matched.group(2))</code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. am</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. I</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. groot</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. I am groot</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. am</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        The regular expression <code>r'(.*) (.*?) (.*)'</code> is broken down as follows:
+      </p>
+      <ul>
+        <li><code>(.*)</code>: Greedy match for any characters up to the first space → matches <strong>"I am"</strong></li>
+        <li><code>(.*?)</code>: Lazy match for the shortest string until the next space → matches <strong>"I"</strong></li>
+        <li><code>(.*)</code>: Matches the rest → matches <strong>"groot"</strong></li>
+      </ul>
+      <p>
+        However, in reality, Python’s <code>re.match()</code> starts at the beginning and finds:
+      </p>
+      <ul>
+        <li><code>group(1)</code>: <code>'I'</code></li>
+        <li><code>group(2)</code>: <code>'am'</code></li>
+        <li><code>group(3)</code>: <code>'groot'</code></li>
+      </ul>
+      <p>
+        So <code>matched.group(2)</code> returns <code>'am'</code>
+      </p>
+  
+      <p><strong>🛑 Correction:</strong> The actual match is:</p>
+      <pre>
+  Group 1 → 'I'
+  Group 2 → 'am'
+  Group 3 → 'groot'
+      </pre>
+  
+      <p>✅ Final Answer: <strong>A. am</strong></p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>________ matches the start of the string.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. ‘^’</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. ‘$’</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. ‘$’</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. ‘?’</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. ‘^’</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In regular expressions (regex), the <code>^</code> symbol is used to match the **start** of a string.
+        <br>For example:
+      </p>
+      <pre><code>
+  import re
+  pattern = r'^Hello'
+  re.match(pattern, 'Hello World')  # ✅ Matches
+  re.match(pattern, 'World Hello')  # ❌ Does not match
+      </code></pre>
+      <p><strong>Breakdown of other options:</strong></p>
+      <ul>
+        <li><strong>'$'</strong> – Matches the <em>end</em> of a string.</li>
+        <li><strong>'?'</strong> – Matches zero or one occurrence of the previous character or group.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>The character Dot (that is, ‘.’) in the default mode, matches any character other than _____________</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. caret</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. ampersand</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. percentage symbol</li>
+      <li onclick="checkAnswer(this, 'correct')">D. newline</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D. newline</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In Python's regular expressions, the dot <code>.</code> is a special character that matches **any single character except the newline character (<code>\n</code>)** by default.
+      </p>
+      <p>
+        If you want the dot to match newline characters as well, you can use the <code>re.DOTALL</code> or <code>re.S</code> flag when compiling the regex.
+      </p>
+  
+      <pre><code>
+  import re
+  
+  text = "Hello\nWorld"
+  
+  # Without DOTALL
+  re.search(r'.+', text)     # Matches only "Hello"
+  
+  # With DOTALL
+  re.search(r'.+', text, re.DOTALL)  # Matches "Hello\nWorld"
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>The expression <code>a{5}</code> will match _____________ characters with the previous regular expression.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. 5 or less</li>
+      <li onclick="checkAnswer(this, 'correct')">B. exactly 5</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. 5 or more</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. exactly 4</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. exactly 5</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In regular expressions, the curly braces <code>{n}</code> are used to specify that the preceding character or group should appear **exactly <code>n</code> times**.
+      </p>
+      <p>
+        So, <code>a{5}</code> means the character <code>'a'</code> must occur **exactly 5 times** in a row to produce a match.
+      </p>
+  
+      <pre><code>
+  import re
+  
+  # Matches exactly 5 a's
+  print(re.fullmatch(r'a{5}', 'aaaaa'))  # ✅ Match
+  print(re.fullmatch(r'a{5}', 'aaaa'))   # ❌ No match
+  print(re.fullmatch(r'a{5}', 'aaaaaa')) # ❌ No match
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>________ matches the start of the string. ________ matches the end of the string.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. ‘^’, ‘$’</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. ‘$’, ‘^’</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. ‘$’, ‘?’</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. ‘?’, ‘^’</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. ‘^’, ‘$’</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In regular expressions:
+        <ul>
+          <li><code>^</code> is used to match the **start** of a string.</li>
+          <li><code>$</code> is used to match the **end** of a string.</li>
+        </ul>
+      </p>
+      <p>These anchors are helpful when you want to validate whether a string starts or ends with a specific pattern.</p>
+  
+      <pre><code>
+  import re
+  
+  # Match if string starts with 'Hello'
+  print(re.match(r'^Hello', 'Hello World'))  # ✅ Match
+  
+  # Match if string ends with 'World'
+  print(re.search(r'World$', 'Hello World')) # ✅ Match
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following will result in an error?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. <code>>>> p = re.compile("d") >>> p.search("door")</code></li>
+      <li onclick="checkAnswer(this, 'wrong')">B. <code>>>> p = re.escape('hello')</code></li>
+      <li onclick="checkAnswer(this, 'correct')">C. <code>>>> p = re.subn()</code></li>
+      <li onclick="checkAnswer(this, 'wrong')">D. <code>>>> p = re.purge()</code></li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C. <code>>>> p = re.subn()</code></h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <ul>
+        <li><strong>A:</strong> ✅ Valid. <code>re.compile()</code> compiles a regex, and <code>search()</code> searches the string. No error.</li>
+        <li><strong>B:</strong> ✅ Valid. <code>re.escape()</code> returns a string with all non-alphanumeric characters backslashed. No error.</li>
+        <li><strong>C:</strong> ❌ <strong>Invalid.</strong> <code>re.subn()</code> requires at least 3 arguments: pattern, replacement, and string. Calling it with no arguments causes a <code>TypeError</code>.</li>
+        <li><strong>D:</strong> ✅ Valid. <code>re.purge()</code> clears the regex cache. No arguments needed, no error.</li>
+      </ul>
+  
+      <p><strong>Therefore, only Option C results in an error.</strong></p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p>What will be the output of the following Python code?</p>
+  
+    <pre><code>import re
+  re.findall('hello world','hello',1)</code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. ["hello"]</li>
+      <li onclick="checkAnswer(this, 'correct')">B. [ ]</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. hello</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. hello world</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. [ ]</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>re.findall()</code> function expects the first argument to be a pattern and the second to be the string to search in.</p>
+      <p>Here, the code is incorrectly ordered:</p>
+      <pre><code>re.findall('hello world', 'hello', 1)</code></pre>
+      <p>This tries to find matches of the string <code>'hello world'</code> within <code>'hello'</code>, which obviously doesn't match.</p>
+      <p>So, it returns an empty list: <code>[]</code>.</p>
+  
+      <p><strong>Note:</strong> Even though this code uses the optional flags parameter (3rd argument = 1), it doesn’t affect the result here.</p>
+    </div>
+  </div>
+  <br>
+  <br>
+  <h1>Chapter 6: Regression (Use Case Study)</h1>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>A process by which we estimate the value of dependent variable on the basis of one or more independent variables is called:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Correlation</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Regression</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Residual</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Slope</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Regression</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Regression</strong> is a statistical method used for estimating the relationships among variables.</p>
+      <p>It allows us to predict the value of a <strong>dependent variable</strong> based on the value(s) of one or more <strong>independent variables</strong>.</p>
+      <p>For example, predicting a student's marks based on hours studied is a case of simple linear regression.</p>
+  
+      <ul>
+        <li><strong>Correlation</strong> measures the strength and direction of a relationship but does not imply prediction.</li>
+        <li><strong>Residual</strong> is the difference between the actual and predicted value.</li>
+        <li><strong>Slope</strong> is a component of the regression line equation, not the process itself.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>The method of least squares dictates that we choose a regression line where the sum of the square of deviations of the points from the line is:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Maximum</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Minimum</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Zero</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Positive</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Minimum</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <strong>method of least squares</strong> is a standard approach in regression analysis that minimizes the sum of the squares of the vertical deviations (errors) between the observed values and the values predicted by the linear model.</p>
+      <p>Mathematically, it finds the line of best fit by minimizing:</p>
+      <pre>∑(Actual Value - Predicted Value)²</pre>
+      <p>This ensures the line is as close as possible to all data points, making it the most accurate linear prediction.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>All data points falling along a straight line is called:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. Linear relationship</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Non linear relationship</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Residual</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Scatter diagram</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. Linear relationship</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>A <strong>linear relationship</strong> means that the data points lie along a straight line. In such a relationship, the change in the dependent variable is directly proportional to the change in the independent variable.</p>
+      <p>Mathematically, it's represented as: <code>y = mx + c</code>, where <code>m</code> is the slope and <code>c</code> is the intercept.</p>
+      <p>✅ When all data points fall perfectly on this line, the relationship is considered perfectly linear.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>If the value of any regression coefficient is zero, then two variables are:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Qualitative</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Correlation</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Dependent</li>
+      <li onclick="checkAnswer(this, 'correct')">D. Independent</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D. Independent</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>In a regression equation, the regression coefficient represents the strength and type of relationship between the independent and dependent variables.</p>
+      <p>If the coefficient is zero, it means that the independent variable has no effect on the dependent variable — there is no linear relationship between them.</p>
+      <p>➡️ Thus, the variables are considered <strong>independent</strong>.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which module in Python supports regular expressions?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. re</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. regex</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. pyregex</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. None of the mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. re</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>Python's standard library includes the <code>re</code> module for working with regular expressions.</p>
+      <p>It provides functions like <code>match()</code>, <code>search()</code>, <code>findall()</code>, and more.</p>
+      <p>Other names like <strong>regex</strong> or <strong>pyregex</strong> are not standard modules in Python.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following creates a pattern object?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. re.create(str)</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. re.regex(str)</li>
+      <li onclick="checkAnswer(this, 'correct')">C. re.compile(str)</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. re.assemble(str)</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C. re.compile(str)</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>re.compile()</code> function in Python’s <code>re</code> module compiles a regular expression pattern into a pattern object.</p>
+      <p>This pattern object can be reused for matching, searching, and other operations.</p>
+      <p>None of the other functions listed (<code>re.create</code>, <code>re.regex</code>, <code>re.assemble</code>) exist in the <code>re</code> module.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>What does the function <code>re.match</code> do?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. matches a pattern at the start of the string</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. matches a pattern at any position in the string</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. such a function does not exist</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. none of the mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. matches a pattern at the start of the string</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>re.match()</code> function attempts to match a pattern **only at the beginning** of the string.</p>
+      <p>If the pattern is found at the start, it returns a match object; otherwise, it returns <code>None</code>.</p>
+      <p>To match a pattern anywhere in the string, <code>re.search()</code> should be used instead.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>What does the function <code>re.search</code> do?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. matches a pattern at the start of the string</li>
+      <li onclick="checkAnswer(this, 'correct')">B. matches a pattern at any position in the string</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. such a function does not exist</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. none of the mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. matches a pattern at any position in the string</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>re.search()</code> function scans through the entire string looking for a match to the pattern.</p>
+      <p>It returns the first match found **anywhere** in the string (not just at the beginning).</p>
+      <p>Use <code>re.match()</code> if you want to restrict the search to the start of the string.</p>
+    </div>
+  </div>                
+  <br>
+  <br> 
+  <h1>Chapter 7: Other Regression Related Topics</h1>    
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>What is exploratory data analysis (EDA)?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. An initial way by which we can get a feel for data</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. A rigid framework by which we analyze data</li>
+      <li onclick="checkAnswer(this, 'correct')">C. A type of purely quantitative method of data analysis</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. A set of scientific principles for analyzing data in a categorical manner</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. An initial way by which we can get a feel for data</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>Exploratory Data Analysis (EDA) is the **first step** in data analysis where we visually and statistically explore data to understand its structure, patterns, anomalies, or relationships.</p>
+      <p>It is <strong>not rigid</strong> or purely quantitative—it includes both visual tools (like plots) and summary statistics to get an initial "feel" of the dataset.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following groups find the correlation matrix?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. factor.model</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. col.max(x)</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. stem</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. which.max(x)</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D. which.max(x)</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><code>which.max(x)</code> is an R function that returns the index of the maximum value in a vector. While it doesn't directly compute the correlation matrix, it is more aligned with data analysis operations than the other distractors here. However, the **function used to find the correlation matrix in R is actually <code>cor()</code>**.</p>
+      <p>So technically, none of the options are perfect. But if you're selecting from these, <code>which.max(x)</code> is the most reasonable data analysis tool listed, and is often involved in interpreting matrix results.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Andrews Curves allow one to plot multivariate data.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. True</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. False</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. True</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Andrews Curves</strong> are a visualization tool used in Exploratory Data Analysis (EDA) for plotting multivariate data.</p>
+      <p>They transform each data point into a curve using a Fourier series, making it easier to detect patterns, clusters, and outliers in high-dimensional datasets.</p>
+      <p>This method is particularly useful when you want to analyze multiple features at once.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following plots are often used for checking randomness in time series?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Autocausation</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Autorank</li>
+      <li onclick="checkAnswer(this, 'correct')">C. Autocorrelation</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. None of the mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C. Autocorrelation</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Autocorrelation plots</strong> (also called correlograms) are commonly used in time series analysis to determine whether the observations in the series are correlated with past values.</p>
+      <p>If the values are highly autocorrelated, it suggests a pattern or trend, meaning the data is not completely random. If not, the series may be considered random (or stationary).</p>
+      <p>This is a critical step in model selection for time series forecasting (e.g., ARIMA models).</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>The <code>plot()</code> method on Series and DataFrame is just a simple wrapper around ____________.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Gplt.Plot()</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Plt.Plot()</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Plt.Plotgraph()</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. None Of The Mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Plt.Plot()</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>Pandas' <code>plot()</code> method is a simple wrapper around <code>matplotlib.pyplot.plot()</code>, typically imported as <code>plt</code>.</p>
+      <p>It allows quick and easy plotting of Series and DataFrame data using the powerful <code>matplotlib</code> library under the hood.</p>
+      <p>Example:</p>
+      <pre><code>
+  import pandas as pd
+  import matplotlib.pyplot as plt
+  
+  s = pd.Series([1, 3, 2, 4])
+  s.plot()
+  plt.show()
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Point out the correct combination with regards to <code>kind</code> keyword for graph plotting in Pandas:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. ‘Hist’ For Histogram</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. ‘Box’ For Boxplot</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. ‘Area’ For Area Plots</li>
+      <li onclick="checkAnswer(this, 'correct')">D. All Of The Mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D. All Of The Mentioned</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>In Pandas, the <code>plot()</code> function has a <code>kind</code> parameter that determines the type of plot. Valid values include:</p>
+      <ul>
+        <li><code>'hist'</code> → Histogram</li>
+        <li><code>'box'</code> → Boxplot</li>
+        <li><code>'area'</code> → Area plot</li>
+        <li>Other types include: <code>'line'</code>, <code>'bar'</code>, <code>'barh'</code>, <code>'pie'</code>, etc.</li>
+      </ul>
+      <p>So all the options listed are valid and correct combinations.</p>
+  
+      <p><strong>Example:</strong></p>
+      <pre><code>
+  import pandas as pd
+  
+  df = pd.DataFrame({
+      'A': [1, 2, 3, 4],
+      'B': [3, 4, 2, 1]
+  })
+  
+  df.plot(kind='hist')  # Histogram
+  df.plot(kind='box')   # Boxplot
+  df.plot(kind='area')  # Area plot
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following value is provided by the <code>kind</code> keyword for a bar plot in Pandas?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. Bar</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Kde</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Hexbin</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. None Of The Mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. Bar</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>kind</code> keyword in the Pandas <code>plot()</code> method specifies the type of plot to generate.</p>
+      <ul>
+        <li><code>'bar'</code> – Bar plot (used for categorical data or comparisons).</li>
+        <li><code>'kde'</code> – Kernel Density Estimate plot (used for distributions).</li>
+        <li><code>'hexbin'</code> – Hexagonal bin plot (for 2D histogram-type visualization).</li>
+      </ul>
+      <p>Therefore, to generate a bar plot, you should use <code>kind='bar'</code>.</p>
+  
+      <p><strong>Example:</strong></p>
+      <pre><code>
+  import pandas as pd
+  df = pd.DataFrame({'Category': ['A', 'B', 'C'], 'Values': [4, 7, 2]})
+  df.plot(kind='bar', x='Category', y='Values')
+      </code></pre>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>You can create a Scatter Plot Matrix using the __________ method in <code>pandas.tools.plotting</code>.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Sca_Matrix</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Scatter_Matrix</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Dataframe.Plot</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. All Of The Mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Scatter_Matrix</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>scatter_matrix</code> function in <code>pandas.plotting</code> (formerly <code>pandas.tools.plotting</code>) is used to generate a matrix of scatter plots for each pair of numerical columns in a DataFrame.</p>
+  
+      <p><strong>Correct Syntax Example:</strong></p>
+      <pre><code>
+  from pandas.plotting import scatter_matrix
+  import pandas as pd
+  import matplotlib.pyplot as plt
+  
+  df = pd.DataFrame({
+      'A': [1, 2, 3],
+      'B': [4, 5, 6],
+      'C': [7, 8, 9]
+  })
+  
+  scatter_matrix(df, alpha=0.8, figsize=(6, 6), diagonal='hist')
+  plt.show()
+      </code></pre>
+  
+      <p>This helps visualize relationships and distributions across multiple variables.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Point out the <strong>wrong combination</strong> with regards to <code>kind</code> keyword for graph plotting.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. ‘Scatter’ For Scatter Plots</li>
+      <li onclick="checkAnswer(this, 'correct')">B. ‘Kde’ For Hexagonal Bin Plots</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. ‘Pie’ For Pie Plots</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. None Of The Mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. ‘Kde’ For Hexagonal Bin Plots</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The <code>kind</code> keyword in Pandas specifies the type of plot to create. Here are the valid uses:</p>
+      <ul>
+        <li><code>'scatter'</code> → Used for scatter plots</li>
+        <li><code>'kde'</code> → Used for Kernel Density Estimation plots (not hexbin)</li>
+        <li><code>'pie'</code> → Used for pie charts</li>
+        <li><code>'hexbin'</code> → Used for hexagonal bin plots</li>
+      </ul>
+      <p>Therefore, saying <strong>'kde'</strong> is for hexagonal bin plots is incorrect.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following plots are used to check if a data set or time series is random?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. Lag</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Random</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Lead</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. None Of The Mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. Lag</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Lag plots</strong> are commonly used in time series analysis to check for randomness. If the points in the lag plot form a structure (e.g., a line or curve), the data may not be random. If they appear scattered randomly, the data likely is.</p>
+      <p>This helps determine whether values are correlated with past values — a key assumption in many time series models.</p>
+    </div>
+  </div>
+<br>
+<br>
+<h1>Chapter 8: Advance</h1>        
+<div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following is a widely used and effective machine learning algorithm based on the idea of bagging?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">Decision Tree</li>
+      <li onclick="checkAnswer(this, 'wrong')">Regression</li>
+      <li onclick="checkAnswer(this, 'wrong')">Classification</li>
+      <li onclick="checkAnswer(this, 'correct')">Random Forest</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: Random Forest</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Random Forest</strong> is an ensemble learning algorithm that builds multiple decision trees during training and merges their results to improve accuracy and control overfitting. It is based on the concept of <strong>bagging (Bootstrap Aggregating)</strong>, where multiple models (decision trees) are trained on random subsets of the data and then aggregated.</p>
+      <p>This method improves performance and robustness compared to a single decision tree.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>What is Machine learning?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">The autonomous acquisition of knowledge through the use of computer programs</li>
+      <li onclick="checkAnswer(this, 'wrong')">The autonomous acquisition of knowledge through the use of manual programs</li>
+      <li onclick="checkAnswer(this, 'wrong')">The selective acquisition of knowledge through the use of computer programs</li>
+      <li onclick="checkAnswer(this, 'wrong')">The selective acquisition of knowledge through the use of manual programs</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: The autonomous acquisition of knowledge through the use of computer programs</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Machine Learning</strong> is a subfield of Artificial Intelligence (AI) that enables systems to learn and improve from experience without being explicitly programmed. It involves the <strong>autonomous acquisition</strong> of patterns or knowledge from data using algorithms and statistical models.</p>
+      <p>The goal is for computers to automatically improve their performance on tasks through exposure to data.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following is correct with respect to random forest?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">Random forest are difficult to interpret but often very accurate</li>
+      <li onclick="checkAnswer(this, 'wrong')">Random forest are easy to interpret but often very accurate</li>
+      <li onclick="checkAnswer(this, 'wrong')">Random forest are difficult to interpret but very less accurate</li>
+      <li onclick="checkAnswer(this, 'wrong')">None of the mentioned</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: Random forest are difficult to interpret but often very accurate</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p><strong>Random Forest</strong> is an ensemble learning method that builds multiple decision trees and merges their results to improve accuracy and reduce overfitting.</p>
+      <p>While it is <strong>highly accurate</strong> due to averaging results over many trees, it is also considered a "black box" model because it is <strong>difficult to interpret</strong> how the individual decisions contribute to the final output.</p>
+      <p>This trade-off between accuracy and interpretability is common in ensemble models like Random Forest.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Which of the following is a disadvantage of decision trees?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">Factor analysis</li>
+      <li onclick="checkAnswer(this, 'wrong')">Decision trees are robust to outliers</li>
+      <li onclick="checkAnswer(this, 'correct')">Decision trees are prone to be overfit</li>
+      <li onclick="checkAnswer(this, 'wrong')">None of the above</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: Decision trees are prone to be overfit</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>One of the key disadvantages of decision trees is that they are <strong>prone to overfitting</strong>, especially when the tree is very deep and complex. This means they may perform well on training data but poorly on unseen data.</p>
+      <p>While they are <strong>robust to outliers</strong> and do not require feature scaling, the model's flexibility can lead it to learn noise in the data unless pruning or ensemble methods like Random Forest are used.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Different learning methods does not include:</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Memorization</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Analogy</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Deduction</li>
+      <li onclick="checkAnswer(this, 'correct')">D. Introduction</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D. Introduction</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>In the context of artificial intelligence and machine learning, common learning methods include:</p>
+      <ul>
+        <li><strong>Memorization</strong>: Learning by storing previously encountered examples.</li>
+        <li><strong>Analogy</strong>: Learning by comparing new situations to known ones.</li>
+        <li><strong>Deduction</strong>: Learning by logical reasoning from general rules to specific instances.</li>
+      </ul>
+      <p><strong>Introduction</strong> is not considered a formal method of learning in AI/ML frameworks. Therefore, it's not part of the recognized learning methods.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>A _________ is a decision support tool that uses a tree-like graph or model of decisions and their possible consequences, including chance event outcomes, resource costs, and utility.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. Decision tree</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Graphs</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Trees</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Neural Networks</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. Decision tree</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        A <strong>decision tree</strong> is a widely used decision support tool that presents decisions and their possible consequences, outcomes, costs, and benefits in a tree-like structure. 
+        It is particularly helpful in classification and regression problems in machine learning and is also useful in operational and strategic decision-making processes.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Decision Tree is a display of an algorithm.</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. True</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. False</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. True</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        A <strong>decision tree</strong> visually represents the flow of an algorithm that makes decisions based on conditions at each node, leading to different outcomes or classifications.
+        Thus, it is a graphical display of the decision-making process and underlying algorithm.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Decision Nodes are represented by ____________</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Disks</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Squares</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Circles</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Triangles</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Squares</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In decision trees, <strong>decision nodes</strong> are typically represented by <strong>squares</strong>, indicating points where a decision or test is made.
+        Other nodes like chance nodes may be shown as circles.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>Automated vehicle is an example of ______</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'correct')">A. Supervised learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">B. Unsupervised learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Active learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Reinforcement learning</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: A. Supervised learning</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        Automated vehicles often rely on <strong>Supervised Learning</strong>, where models are trained on labeled data
+        to recognize patterns and make decisions based on prior examples. This allows the vehicle to predict and react to various driving scenarios.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>In which of the following learning the teacher returns reward and punishment to learner?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Active learning</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Reinforcement learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Supervised learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Unsupervised learning</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Reinforcement learning</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In <strong>Reinforcement Learning</strong>, the learner (agent) learns by interacting with the environment and receives rewards or punishments as feedback from the teacher (environment). This feedback guides the agent to improve its actions over time.
+      </p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question:</strong></p>
+    <p>In which of the following learning the teacher returns reward and punishment to learner?</p>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A. Active learning</li>
+      <li onclick="checkAnswer(this, 'correct')">B. Reinforcement learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">C. Supervised learning</li>
+      <li onclick="checkAnswer(this, 'wrong')">D. Unsupervised learning</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B. Reinforcement learning</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>
+        In <strong>Reinforcement Learning</strong>, the learner (agent) learns by interacting with the environment and receives rewards or punishments as feedback from the teacher (environment). This feedback guides the agent to improve its actions over time.
+      </p>
+    </div>
+  </div>
+      
+                  
+<br>
+<br>
+<h1>Final Question</h1>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Which of the following is <strong>incorrect</strong> in Python?</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) float('inf')</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) float('nan')</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) float('56' + '78')</li>
+        <li onclick="checkAnswer(this, 'correct')">D) float('12+34')</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D) float('12+34')</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Description</th>
+                <th>Valid?</th>
+            </tr>
+            <tr>
+                <td><code>float('inf')</code></td>
+                <td>Valid – Converts to positive infinity</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>float('nan')</code></td>
+                <td>Valid – Converts to NaN (Not a Number)</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>float('56' + '78')</code></td>
+                <td>'56' + '78' = '5678' → float('5678') = 5678.0</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td><code>float('12+34')</code></td>
+                <td>Invalid – Contains non-numeric characters ('+')</td>
+                <td>❌ Raises <code>ValueError</code></td>
+            </tr>
+        </table>
+
+        <h4>📌 Important Note:</h4>
+        <p>The <code>float()</code> function only accepts strings that are valid numeric representations like <code>"3.14"</code>, <code>"inf"</code>, <code>"nan"</code>, etc.</p>
+
+        <h4>Output of Invalid Code:</h4>
+        <pre><code>
+>>> float("12+34")
+ValueError: could not convert string to float: '12+34'
+        </code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code snippet?</p>
+
+    <pre><code>
+['hello', 'morning'][bool('')]
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) error</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) no output</li>
+        <li onclick="checkAnswer(this, 'correct')">C) hello</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) morning</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) hello</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>Let's break it down:</p>
+
+        <ol>
+            <li><code>bool('')</code> → This is <code>False</code> because an empty string is considered <strong>falsey</strong> in Python.</li>
+            <li>So the expression becomes <code>['hello', 'morning'][False]</code></li>
+            <li>In Python, <code>False</code> is equivalent to integer <code>0</code>, and <code>True</code> is <code>1</code></li>
+            <li>Therefore, <code>['hello', 'morning'][0]</code> returns <strong>'hello'</strong></li>
+        </ol>
+
+        <h4>✅ Output:</h4>
+        <pre><code>'hello'</code></pre>
+
+        <h4>💡 Quick Tip:</h4>
+        <p>This is a common Pythonic trick used for conditional selection inside lists.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Suppose <code>t = (1, 2, 4, 3)</code>, which of the following is <strong>incorrect</strong>?</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) print(t[3])</li>
+        <li onclick="checkAnswer(this, 'correct')">B) t[3] = 45</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) print(max(t))</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) print(len(t))</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) t[3] = 45</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The variable <code>t</code> is a tuple, and tuples in Python are <strong>immutable</strong>. That means once defined, you cannot change their elements.</p>
+
+        <h4>Let’s evaluate each option:</h4>
+        <ul>
+            <li><code>print(t[3])</code> → Valid, outputs <code>3</code></li>
+            <li><code>t[3] = 45</code> → ❌ Invalid. Trying to assign a value in a tuple raises a <code>TypeError</code></li>
+            <li><code>print(max(t))</code> → Valid, prints the maximum value in the tuple: <code>4</code></li>
+            <li><code>print(len(t))</code> → Valid, prints the length of the tuple: <code>4</code></li>
+        </ul>
+
+        <h4>🚫 Error Output:</h4>
+        <pre><code>
+TypeError: 'tuple' object does not support item assignment
+        </code></pre>
+
+        <h4>📌 Tuple Facts:</h4>
+        <ul>
+            <li>Tuples are ordered and immutable</li>
+            <li>They can contain heterogeneous data</li>
+            <li>They support indexing, slicing, and built-in functions like <code>max()</code> and <code>len()</code></li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output of the following Python code?</p>
+
+    <pre><code>
+d = {0: 'a', 1: 'b', 2: 'c'}
+for x in d.keys():
+    print(d[x])
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 0 1 2</li>
+        <li onclick="checkAnswer(this, 'correct')">B) a b c</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) 0 a 1 b 2 c</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) none of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) a b c</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The dictionary <code>d</code> is defined as:</p>
+        <pre><code>{0: 'a', 1: 'b', 2: 'c'}</code></pre>
+
+        <p>The loop <code>for x in d.keys()</code> iterates over the keys: <code>0, 1, 2</code></p>
+        <p>Each key is used to access and print its corresponding value from the dictionary:</p>
+
+        <pre><code>
+d[0] → 'a'
+d[1] → 'b'
+d[2] → 'c'
+        </code></pre>
+
+        <p>So, the output printed is:</p>
+        <pre><code>a
+b
+c
+        </code></pre>
+
+        <h4>📌 Important Concepts:</h4>
+        <ul>
+            <li><code>d.keys()</code> returns all the dictionary keys</li>
+            <li><code>d[x]</code> accesses the value associated with key <code>x</code></li>
+        </ul>
+
+        <h4>👀 Note:</h4>
+        <p>If this were printed on the same line (e.g., using <code>end=" "</code>), the output would be <code>a b c</code>.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output of the following Python code?</p>
+
+    <pre><code>
+x = 'abcd'
+for i in x:
+    print(i.upper())
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) a b c d</li>
+        <li onclick="checkAnswer(this, 'correct')">B) A B C D</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) a B C D</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) error</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) A B C D</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The code iterates through the string <code>'abcd'</code>, converting each character to uppercase using <code>i.upper()</code>:</p>
+
+        <ul>
+            <li>'a'.upper() → 'A'</li>
+            <li>'b'.upper() → 'B'</li>
+            <li>'c'.upper() → 'C'</li>
+            <li>'d'.upper() → 'D'</li>
+        </ul>
+
+        <p>The loop prints each uppercase letter on a separate line:</p>
+        <pre><code>
+A
+B
+C
+D
+        </code></pre>
+
+        <h4>✅ Therefore, the output is: A B C D</h4>
+        <p>(if shown side by side — otherwise, each letter appears on a new line)</p>
+
+        <h4>📌 Key Concept:</h4>
+        <p><code>str.upper()</code> is a built-in method that converts any lowercase character to uppercase.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+    <pre><code>
+for i in range(int(2.0)):
+    print(i)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 0.0 1.0</li>
+        <li onclick="checkAnswer(this, 'correct')">B) 0 1</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) error</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) none of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) 0 1</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <ul>
+            <li><code>int(2.0)</code> converts the float <code>2.0</code> to the integer <code>2</code></li>
+            <li><code>range(2)</code> generates numbers starting from <code>0</code> up to <code>1</code> (not including 2)</li>
+            <li>The loop prints each number in that range:</li>
+        </ul>
+
+        <pre><code>
+0
+1
+        </code></pre>
+
+        <h4>📌 Reminder:</h4>
+        <ul>
+            <li><code>int()</code> can safely convert float values to integers (if they’re whole numbers)</li>
+            <li><code>range()</code> must always receive integer arguments</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the use of the <code>seek()</code> method in files?</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) sets the file’s current position at the offset</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) sets the file’s previous position at the offset</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) sets the file’s current position within the file</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) none of the mentioned</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) sets the file’s current position at the offset</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>The <code>seek()</code> method is used to move the file pointer to a specific location in the file. This allows you to re-read or overwrite parts of the file from that position.</p>
+
+        <pre><code>
+f = open("example.txt", "r")
+f.seek(5)  # Moves the file pointer to byte 5
+data = f.read()  # Starts reading from byte 5
+        </code></pre>
+
+        <h4>🔁 Common Use Cases:</h4>
+        <ul>
+            <li>Rewinding a file (e.g., <code>seek(0)</code> to go to the beginning)</li>
+            <li>Jumping to specific byte positions for reading/writing</li>
+        </ul>
+
+        <h4>📌 Note:</h4>
+        <p><code>seek()</code> is especially useful when working with binary files or resetting the file pointer.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the <strong>best way</strong> to import the pandas module in your program?</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) import pandas</li>
+        <li onclick="checkAnswer(this, 'correct')">B) import pandas as p</li>
+        <li onclick="checkAnswer(this, 'correct')">C) from pandas import *</li>
+        <li onclick="checkAnswer(this, 'correct')">D) All of the above</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D) All of the above</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <table>
+            <tr>
+                <th>Import Style</th>
+                <th>Valid?</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><code>import pandas</code></td>
+                <td>✅</td>
+                <td>Standard import. Use full name like <code>pandas.DataFrame()</code></td>
+            </tr>
+            <tr>
+                <td><code>import pandas as p</code></td>
+                <td>✅</td>
+                <td>Valid alias. Conventionally, <code>pd</code> is used instead of <code>p</code></td>
+            </tr>
+            <tr>
+                <td><code>from pandas import *</code></td>
+                <td>✅</td>
+                <td>Valid, but not recommended — pollutes global namespace</td>
+            </tr>
+        </table>
+
+        <h4>🔍 Recommendation:</h4>
+        <p>The most recommended and widely used approach is:</p>
+        <pre><code>import pandas as pd</code></pre>
+
+        <p>This makes your code concise and conventional for readability.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>We can analyze the data in pandas with:</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) Series</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) DataFrame</li>
+        <li onclick="checkAnswer(this, 'correct')">C) Both of the above</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) None of the above</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) Both of the above</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>Pandas provides two primary data structures for data manipulation and analysis:</p>
+
+        <ul>
+            <li><strong>Series</strong>: A one-dimensional labeled array capable of holding any data type (integers, strings, floats, etc.).</li>
+            <li><strong>DataFrame</strong>: A two-dimensional labeled data structure with columns that can hold different data types (like a spreadsheet or SQL table).</li>
+        </ul>
+
+        <h4>✅ Therefore:</h4>
+        <p>You can analyze data using both <code>Series</code> and <code>DataFrame</code>, depending on your use case.</p>
+
+        <h4>💡 Example:</h4>
+        <pre><code>
+import pandas as pd
+
+# Series
+s = pd.Series([10, 20, 30])
+
+# DataFrame
+df = pd.DataFrame({
+    'Name': ['Alice', 'Bob'],
+    'Age': [25, 30]
+})
+        </code></pre>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Most often, EDA relies on _____.</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) visual techniques</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) assumptions</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) fixed models</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) testing for statistical significance</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) visual techniques</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p><strong>Exploratory Data Analysis (EDA)</strong> is the initial step in data analysis that uses visual methods to:</p>
+        <ul>
+            <li>Understand the distribution of data</li>
+            <li>Identify patterns, trends, and outliers</li>
+            <li>Check assumptions and relationships between variables</li>
+        </ul>
+
+        <h4>📊 Common Visualization Tools in EDA:</h4>
+        <ul>
+            <li>Histograms</li>
+            <li>Box plots</li>
+            <li>Scatter plots</li>
+            <li>Correlation heatmaps</li>
+        </ul>
+
+        <h4>🚫 Why Not Others?</h4>
+        <ul>
+            <li><strong>Assumptions</strong> are validated after EDA, not relied upon initially</li>
+            <li><strong>Fixed models</strong> are applied after exploring the data</li>
+            <li><strong>Statistical significance</strong> testing is part of inferential statistics, not EDA</li>
+        </ul>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output of the following Python code?</p>
+
+    <pre><code>
+a, b = 1, 0
+a = a ^ b
+b = a ^ b
+a = a ^ b
+print(a)
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) 0</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 1</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) 2</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) This code will raise a runtime error</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) 0</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>This code performs a variable swap using the XOR bitwise operator <code>^</code>. Here's what happens step-by-step:</p>
+
+        <ul>
+            <li><code>a = 1, b = 0</code></li>
+            <li><code>a = a ^ b → 1 ^ 0 = 1</code></li>
+            <li><code>b = a ^ b → 1 ^ 0 = 1</code></li>
+            <li><code>a = a ^ b → 1 ^ 1 = 0</code></li>
+        </ul>
+
+        <p>So after the swap, the values are:</p>
+        <ul>
+            <li><code>a = 0</code></li>
+            <li><code>b = 1</code></li>
+        </ul>
+
+        <p>Finally, <code>print(a)</code> outputs <strong>0</strong>.</p>
+
+        <h4>📌 Note:</h4>
+        <p>This is a common technique used in low-level programming to swap variables without a temporary variable.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the value of the following expression?</p>
+
+    <pre><code>
+2 ** 2 ** 3 ** 1
+    </code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) 12</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 64</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) 128</li>
+        <li onclick="checkAnswer(this, 'correct')">D) 256</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: D) 256</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>In Python, the exponentiation operator <code>**</code> is <strong>right-associative</strong>, which means it evaluates from right to left.</p>
+
+        <p>So the expression:</p>
+        <pre><code>2 ** 2 ** 3 ** 1</code></pre>
+        <p>Evaluates as:</p>
+        <pre><code>2 ** (2 ** (3 ** 1))</code></pre>
+
+        <ul>
+            <li><code>3 ** 1</code> = 3</li>
+            <li><code>2 ** 3</code> = 8</li>
+            <li><code>2 ** 8</code> = 256</li>
+        </ul>
+
+        <h4>📌 Key Concept:</h4>
+        <p><code>**</code> chains from the right, unlike many other binary operators in Python.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Select the <strong>incorrect</strong> statement:</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) You can pass positional arguments in any order.</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) You can pass keyword arguments in any order.</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) You can call a function with positional and keyword arguments.</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) Positional arguments must be before keyword arguments in a function call.</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) You can pass positional arguments in any order.</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <ul>
+            <li><strong>A) ❌ Incorrect:</strong> Positional arguments must be passed in the order defined in the function. You cannot change their order.</li>
+            <li><strong>B) ✅ Correct:</strong> Keyword arguments can be passed in any order, as long as the correct parameter names are used.</li>
+            <li><strong>C) ✅ Correct:</strong> You can use a combination of positional and keyword arguments when calling a function.</li>
+            <li><strong>D) ✅ Correct:</strong> Positional arguments must come before any keyword arguments in a function call.</li>
+        </ul>
+
+        <h4>📌 Summary:</h4>
+        <p>Python enforces order for <strong>positional</strong> arguments, but allows flexibility with <strong>keyword</strong> arguments.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Suppose you have two sets <code>s1 = {1, 2, 3}</code> and <code>s2 = {3, 4, 5}</code>. Which of the following statements <strong>does NOT</strong> give us their union?</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) s1.union({3, 4, 5})</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) s1 | {3, 4, 5}</li>
+        <li onclick="checkAnswer(this, 'correct')">C) s1 | [3, 4, 5]</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) s1.union(set([3, 4, 5]))</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: C) s1 | [3, 4, 5]</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p>We are finding the union of sets <code>s1 = {1, 2, 3}</code> and <code>{3, 4, 5}</code>. The correct union is <code>{1, 2, 3, 4, 5}</code>.</p>
+
+        <ul>
+            <li><strong>A) ✅ Valid:</strong> <code>s1.union({3, 4, 5})</code> is correct and returns the union.</li>
+            <li><strong>B) ✅ Valid:</strong> <code>s1 | {3, 4, 5}</code> uses the union operator for sets and works properly.</li>
+            <li><strong>C) ❌ Invalid:</strong> <code>s1 | [3, 4, 5]</code> raises a <code>TypeError</code> because <code>|</code> only works with set operands — not with lists.</li>
+            <li><strong>D) ✅ Valid:</strong> <code>s1.union(set([3, 4, 5]))</code> first converts the list to a set and performs a valid union.</li>
+        </ul>
+
+        <h4>📌 Note:</h4>
+        <p>The <code>|</code> operator is only valid between set types. Mixing it with a list causes an error.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Polymorphism is when a subclass can modify the behavior of its superclass.</p>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) False</li>
+        <li onclick="checkAnswer(this, 'correct')">B) True</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Depends on the contents of the class</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) This is an invalid question</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) True</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <p><strong>Polymorphism</strong> is a core concept of Object-Oriented Programming (OOP) which means “many forms.” It allows objects of different classes to respond to the same method call in a way specific to their class.</p>
+
+        <p>When a subclass modifies (or overrides) the behavior of its superclass by redefining a method, it's called <strong>method overriding</strong>, which is a type of polymorphism.</p>
+
+        <h4>📌 Example:</h4>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal speaks")
+
+class Dog(Animal):
+    def speak(self):
+        print("Dog barks")
+
+a = Animal()
+d = Dog()
+a.speak()  # Output: Animal speaks
+d.speak()  # Output: Dog barks</code></pre>
+
+        <p>This is an example of polymorphism — different behaviors for the same method <code>speak()</code>.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will be the output of the following Python code?</p>
+
+<pre><code>
+scores = {'Ayushi': 97, 'Megha': 98}
+if scores['Ayushi'] > 97:
+    print("Scholar")
+elif scores['Megha'] > 97:
+    print("Topper")
+elif scores['Melanie'] > 97:
+    print("Teacher")
+else:
+    print("Nobody topped")
+</code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) Scholar</li>
+        <li onclick="checkAnswer(this, 'correct')">B) Topper</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) Teacher</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) This code raises a KeyError</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: B) Topper</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <ul>
+            <li><strong>scores['Ayushi']</strong> = 97 → not greater than 97 → ❌</li>
+            <li><strong>scores['Megha']</strong> = 98 → greater than 97 → ✅ <code>print("Topper")</code></li>
+        </ul>
+
+        <p>The <code>elif scores['Melanie']</code> line is never reached, so no KeyError occurs, even though 'Melanie' isn't in the dictionary.</p>
+
+        <p>If we had reached <code>scores['Melanie']</code>, it would raise a <code>KeyError</code>, but here it’s bypassed due to the earlier true condition.</p>
+
+        <h4>🛠 Correction Note:</h4>
+        <p>The original code had a small syntax issue with <code>)</code> instead of <code>}</code> when defining the dictionary. Assuming it’s fixed, the logic runs fine.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What is the output of the following Python code?</p>
+
+<pre><code>
+val = 154
+while(not(val)):
+    val **= 2
+else:
+    val //= 2
+
+print(val)
+</code></pre>
+
+    <ul>
+        <li onclick="checkAnswer(this, 'correct')">A) 77</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) 154</li>
+        <li onclick="checkAnswer(this, 'wrong')">C) 11858</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) 23716</li>
+    </ul>
+
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+        <h4>✅ Correct Answer: A) 77</h4>
+
+        <h4>🧠 Explanation:</h4>
+        <ul>
+            <li><code>val = 154</code></li>
+            <li><code>not(val)</code> → <code>not(154)</code> → <code>False</code></li>
+            <li>Since the condition is False, the <code>while</code> block is skipped</li>
+            <li>The <code>else</code> block runs: <code>val //= 2</code> → <code>154 // 2 = 77</code></li>
+            <li><code>print(val)</code> → <code>77</code></li>
+        </ul>
+
+        <p><strong>Note:</strong> In Python, <code>while-else</code> means the <code>else</code> runs only when the loop isn't broken by <code>break</code> — or is skipped entirely.</p>
+    </div>
+</div>
+<div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What will the following Python code print?</p>
+  
+  <pre><code>
+  from random import randint
+  for i in range(5):
+      print(random(1, 5))
+  </code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) Five random numbers in the range 1 to 5</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) Five random integers in the range 1 to 4</li>
+      <li onclick="checkAnswer(this, 'wrong')">C) Five random integers in the range 1 to 5</li>
+      <li onclick="checkAnswer(this, 'correct')">D) This code raises an exception</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D) This code raises an exception</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>The code imports only <code>randint</code> from the <code>random</code> module:</p>
+      <pre><code>from random import randint</code></pre>
+  
+      <p>But the function <code>random(1, 5)</code> is called inside the loop — which doesn't exist unless <code>random</code> itself was imported.</p>
+  
+      <p><strong>Error:</strong> <code>NameError: name 'random' is not defined</code></p>
+  
+      <h4>✅ Correct version of the code:</h4>
+      <pre><code>from random import randint
+  for i in range(5):
+      print(randint(1, 5))</code></pre>
+  
+      <p>This would print five random integers between 1 and 5, inclusive.</p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>How many levels deep are sublists in the following Python list?</p>
+  
+  <pre><code>
+  l = list()
+  l.append([1, 2, [3, 4]])
+  l.extend([5, 6, 7])
+  print(1)
+  </code></pre>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) 1</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) 2</li>
+      <li onclick="checkAnswer(this, 'correct')">C) 3</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) 4</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: C) 3</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <ul>
+        <li><code>l.append([1, 2, [3, 4]])</code> adds a single element: a list → <code>[[1, 2, [3, 4]]]</code></li>
+        <li><code>l.extend([5, 6, 7])</code> adds elements 5, 6, 7 to the outer list</li>
+        <li>Final structure:
+          <pre><code>[
+    [1, 2, [3, 4]],  # Level 2
+    5,
+    6,
+    7
+  ]</code></pre></li>
+      </ul>
+  
+      <p><strong>Nested levels:</strong></p>
+      <ul>
+        <li>Level 1: Outer list <code>l</code></li>
+        <li>Level 2: First element is a list → <code>[1, 2, [3, 4]]</code></li>
+        <li>Level 3: Inside it → <code>[3, 4]</code> is another list</li>
+      </ul>
+  
+      <p>✅ Maximum depth = <strong>3</strong></p>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>Select the <strong>incorrect statements</strong> from the following:</p>
+  
+    <ol type="I">
+      <li>Constructors cannot return values</li>
+      <li>The <code>__bases__</code> attribute will give you the names of the direct parent classes</li>
+      <li><code>issubclass(A, B)</code> returns True if A is an object derived from class B</li>
+      <li>Function overloading is an effective way to implement polymorphism in Python</li>
+    </ol>
+  
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">A) I and III</li>
+      <li onclick="checkAnswer(this, 'wrong')">B) II and III</li>
+      <li onclick="checkAnswer(this, 'correct')">C) III and IV</li>
+      <li onclick="checkAnswer(this, 'wrong')">D) I, II and IV</li>
+    </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: B) II and III</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <ul>
+        <li><strong>I. Constructors cannot return values</strong> ✅ Correct statement.<br>
+          Python constructors (i.e., <code>__init__</code>) must not return values except <code>None</code>.
+        </li>
+        <li><strong>II. The <code>__bases__</code> attribute will give you the names of the direct parent classes</strong> ❌ Incorrect.<br>
+          <code>__bases__</code> gives **classes**, not their names.
+        </li>
+        <li><strong>III. <code>issubclass(A, B)</code> returns True if A is an object derived from class B</strong> ❌ Incorrect.<br>
+          <code>issubclass()</code> works with **classes**, not objects.
+        </li>
+        <li><strong>IV. Function overloading is an effective way to implement polymorphism in Python</strong> ✅ Mostly acceptable.<br>
+          Python doesn’t support traditional function overloading but polymorphism is supported via method overriding or *args/**kwargs.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="quiz-question">
+    <p><strong>Question</strong></p>
+    <p>What can be passed as data while creating a <code>DataFrame</code> in Pandas?</p>
+  
+    <ul>
+        <li onclick="checkAnswer(this, 'wrong')">A) Integer</li>
+        <li onclick="checkAnswer(this, 'wrong')">B) String</li>
+        <li onclick="checkAnswer(this, 'correct')">C) Pandas Series</li>
+        <li onclick="checkAnswer(this, 'wrong')">D) All of the above</li>
+      </ul>
+  
+    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer" style="display: none;">
+      <h4>✅ Correct Answer: D) All of the above</h4>
+  
+      <h4>🧠 Explanation:</h4>
+      <p>You can pass different types of data structures to <code>pandas.DataFrame()</code>, such as:</p>
+      <ul>
+        <li><strong>Integer</strong> → as part of a list or array</li>
+        <li><strong>String</strong> → as part of a column, list, or dictionary</li>
+        <li><strong>Pandas Series</strong> → as individual columns</li>
+      </ul>
+      <p>You can also use:</p>
+      <ul>
+        <li>Dictionaries</li>
+        <li>Lists of lists</li>
+        <li>NumPy arrays</li>
+      </ul>
+      <p>This flexibility makes DataFrame a powerful structure for data analysis in Pandas.</p>
+    </div>
+  </div>
+  
+      

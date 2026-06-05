@@ -4,86 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chapter 6: Strings & File I/O in Python</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <h1>🧠 Chapter 6: String Handling & File I/O in Python</h1>
-
-  <div class="section">
-    <h2>📘 Part 1: String Handling</h2>
-    <p>Everything in the digital world involves text — from chatting on WhatsApp to writing passwords.</p>
-
-    <h3>🔤 What is a String?</h3>
-    <p>A string is a sequence of characters:</p>
-    <pre><code>name = "Aman"
+  <div class="hero-section">
+    <h1>🧠 Chapter 6: String Handling & File I/O in Python</h1>
+    <p>Text is everywhere — from WhatsApp chats to passwords! In this chapter, you'll master Python's string magic and learn to read/write files like a pro. ✨📂</p>
+  </div>
+  <div class="chapter">
+    <div class="card-section">
+      <h2>🔤 What is a String?</h2>
+      <p>A <span class="highlight">string</span> is a sequence of characters. In Python, strings are <b>immutable</b> (cannot be changed after creation).</p>
+      <div class="analogy-box">
+        <b>Analogy:</b> Think of a string as a row of lockers — you can read what's inside, but you can't swap the doors!
+      </div>
+      <pre class="code-block"><code>name = "Aman"
 quote = "Python is fun!"</code></pre>
-    <p>Strings are <strong>immutable</strong>.</p>
-
-    <h3>🧪 String Indexing & Slicing</h3>
-    <pre><code>text = "Python"
+    </div>
+    <div class="card-section">
+      <h2>🧪 String Indexing & Slicing</h2>
+      <p>Access parts of a string using <span class="highlight">indexing</span> and <span class="highlight">slicing</span>:</p>
+      <pre class="code-block"><code>text = "Python"
 print(text[0])      # P   (first character)
 print(text[-1])     # n  (last character)
 print(text[1:4])    # yth (2nd to 4th character)
 print(text[::-1])   # nohtyP (reversed)</code></pre>
-
-<h3>💡 Indexing Recap</h3>
-<div class="index-recap">
-  <table>
-    <tr>
-      <th>Index</th>
-      <td>P</td>
-      <td>y</td>
-      <td>t</td>
-      <td>h</td>
-      <td>o</td>
-      <td>n</td>
-    </tr>
-    <tr>
-      <th>Positive</th>
-      <td>0</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>Negative</th>
-      <td>-6</td>
-      <td>-5</td>
-      <td>-4</td>
-      <td>-3</td>
-      <td>-2</td>
-      <td>-1</td>
-    </tr>
-  </table>
-</div>
-
-<h3>🔧 String Slicing Syntax</h3>
-<pre><code>string[start:end:step]</code></pre>
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>start</td>
-    <td>index to begin from (inclusive)</td>
-  </tr>
-  <tr>
-    <td>end</td>
-    <td>index to stop before (exclusive)</td>
-  </tr>
-  <tr>
-    <td>step</td>
-    <td>how many steps to skip (default 1)</td>
-  </tr>
-</table>
-
-<div class="quiz">
-  <h3>❓ Quiz Time</h3>
-  <div class="quiz-question">
-    <p>Q. What will be the output of this code?</p>
-    <pre><code>word = "Programming"
+      <div class="fun-fact">💡 <b>Indexing Recap:</b> <br>Positive: 0, 1, 2... | Negative: -1, -2, ...</div>
+      <table>
+        <tr><th>Char</th><td>P</td><td>y</td><td>t</td><td>h</td><td>o</td><td>n</td></tr>
+        <tr><th>Pos</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><th>Neg</th><td>-6</td><td>-5</td><td>-4</td><td>-3</td><td>-2</td><td>-1</td></tr>
+      </table>
+      <div class="callout info">
+        <span class="emoji">🔧</span> <b>Slicing Syntax:</b> <code>string[start:end:step]</code>
+      </div>
+      <table class="quickref-table">
+        <tr><th>Parameter</th><th>Description</th></tr>
+        <tr><td>start</td><td>index to begin from (inclusive)</td></tr>
+        <tr><td>end</td><td>index to stop before (exclusive)</td></tr>
+        <tr><td>step</td><td>how many steps to skip (default 1)</td></tr>
+      </table>
+    </div>
+    <div class="quiz-question">
+      <p>Q. What will be the output of this code?</p>
+      <pre class="code-block"><code>word = "Programming"
 print(word[3:8])</code></pre>
     <ul>
       <li onclick="checkAnswer(this, 'wrong')">a) gram</li>
@@ -164,9 +128,10 @@ print(word[3:8])</code></pre>
     <pre><code>user_input = "  python is awesome "
 cleaned = user_input.strip().title()
 print(cleaned)  # Python Is Awesome</code></pre>
-
-    <h3>🔐 Real-Life Use Case</h3>
-    <pre><code>password = input("Enter password: ")
+      <div class="callout tip">
+        <span class="emoji">🔐</span> <b>Real-Life Use:</b> <br>Validate passwords, clean up user input, format names, and more!
+      </div>
+      <pre class="code-block"><code>password = input("Enter password: ")
 if password.strip() == "OpenSesame":
     print("Access Granted ✅")
 else:
@@ -342,198 +307,126 @@ else:
         <p><code>"r"</code> means "read mode".</p>
       </div>
     </div>
-  </div>
-
-  <div class="section">
-    <h3>🔓 2. File Modes</h3>
-    <table class="file-modes">
-      <thead>
-        <tr>
-          <th>Mode</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>r</code></td>
-          <td>Read (default)</td>
-        </tr>
-        <tr>
-          <td><code>w</code></td>
-          <td>Write (overwrites existing file)</td>
-        </tr>
-        <tr>
-          <td><code>a</code></td>
-          <td>Append (adds to file)</td>
-        </tr>
-        <tr>
-          <td><code>r+</code></td>
-          <td>Read and write</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="section">
-    <h3>🖊️ 3. Writing to a File</h3>
-    <pre><code>file = open("notes.txt", "w")  # Open in write mode
-  file.write("Learning Python is fun!\n")
-  file.close()</code></pre>
-    <p>This creates a new file or overwrites it if it already exists.</p>
-  </div>
-
-  <div class="section">
-    <h3>➕ Appending to a File</h3>
-    <pre><code>file = open("notes.txt", "a")  # Open in append mode
-  file.write("Let's master file handling.\n")
-  file.close()</code></pre>
-    <p>Appends content to the end of the file without deleting existing data.</p>
-  </div>
-  
-  <div class="section">
-    <h3>📖 4. Reading Line-by-Line</h3>
-    <pre><code>file = open("notes.txt", "r")
-  for line in file:
-      print(line.strip())
-  file.close()</code></pre>
-    <p><code>.strip()</code> removes <code>\n</code> from each line when printed.</p>
-  </div>
-  
-  <div class="section">
-    <h3>✅ 5. Using with (Best Practice)</h3>
-    <pre><code>with open("notes.txt", "r") as f:
-      content = f.read()
-      print(content)</code></pre>
-    <p>Automatically closes the file.</p>
-    <p>Preferred for safety and cleaner syntax.</p>
-  </div>
-  
-  <div class="section">
-    <h3>📂 6. Student Data Example</h3>
-    <pre><code>with open("student.txt", "w") as f:
-      f.write("Name: Aman\n")
-      f.write("Course: Python\n")
-      f.write("Marks: 88\n")</code></pre>
-    <p>To read it:</p>
-    <pre><code>with open("student.txt", "r") as f:
-      print(f.read())</code></pre>
-  </div>
-  
-  <div class="section">
-    <h3>🔄 7. User Input to File</h3>
-    <pre><code>data = input("Enter something to save: ")
-  with open("mydata.txt", "w") as file:
-      file.write(data)</code></pre>
-    <p>This program lets the user type text, and saves it to a file.</p>
-  </div>
-
-  <div class="quiz-section">
-    <h2>🧠 Quiz Time: File I/O</h2>
-  
-    <div class="quiz-question">
-      <p>Q1. What does the mode "w" do when opening a file?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Reads a file</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) Appends to a file</li>
-        <li onclick="checkAnswer(this, 'correct')">c) Writes to a file (and overwrites)</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) Opens file in binary</li>
-      </ul>
-
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q2. Which method reads the entire content of a file?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) file.readall()</li>
-        <li onclick="checkAnswer(this, 'correct')">b) file.read()</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) file.line()</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) file.scan()</li>
-      </ul>
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q3. What is the advantage of using with open(...) over open(...).close()?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) It types faster</li>
-        <li onclick="checkAnswer(this, 'correct')">b) It automatically closes the file</li>
-        <li onclick="checkAnswer(this, 'wrong')">c) It opens multiple files at once</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) No difference</li>
-      </ul>
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q4. What will this code do?</p>
-      <pre><code>with open("data.txt", "a") as f:
-      f.write("Hello\n")</code></pre>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) Delete old data and write "Hello"</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) Raise an error</li>
-        <li onclick="checkAnswer(this, 'correct')">c) Add "Hello" at the end of file</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) Create a new file only if it doesn't exist</li>
-      </ul>
-
-    </div>
-  
-    <div class="quiz-question">
-      <p>Q5. What happens if you try to read a non-existent file using "r" mode?</p>
-      <ul>
-        <li onclick="checkAnswer(this, 'wrong')">a) It creates the file</li>
-        <li onclick="checkAnswer(this, 'wrong')">b) It prints nothing</li>
-        <li onclick="checkAnswer(this, 'correct')">c) It throws a FileNotFoundError</li>
-        <li onclick="checkAnswer(this, 'wrong')">d) It skips the file</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="quiz">
-    <h3>🧠 Quiz Time</h3>
-    <div class="quiz-question">
-        <p>1. What method reads a whole file at once?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) .open()</li>
-          <li onclick="checkAnswer(this, 'correct')">b) .read()</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) .scan()</li>
-        </ul>
+    <div class="card-section">
+      <h2>🖊️ Writing & Appending to a File</h2>
+      <pre class="code-block"><code>file = open("notes.txt", "w")  # Open in write mode
+file.write("Learning Python is fun!\n")
+file.close()</code></pre>
+      <div class="callout tip">
+        <span class="emoji">➕</span> <b>Append mode</b> adds to the end of the file without deleting existing data.
       </div>
-      
+      <pre class="code-block"><code>file = open("notes.txt", "a")  # Open in append mode
+file.write("Let's master file handling.\n")
+file.close()</code></pre>
+    </div>
+    <div class="card-section">
+      <h2>📖 Reading Line-by-Line</h2>
+      <pre class="code-block"><code>file = open("notes.txt", "r")
+for line in file:
+    print(line.strip())
+file.close()</code></pre>
+      <div class="callout info">
+        <span class="emoji">📚</span> <b>Tip:</b> <code>.strip()</code> removes <code>\n</code> from each line when printed.
+      </div>
+    </div>
+    <div class="card-section">
+      <h2>✅ Using <code>with</code> (Best Practice)</h2>
+      <pre class="code-block"><code>with open("notes.txt", "r") as f:
+    content = f.read()
+    print(content)</code></pre>
+      <div class="callout tip">
+        <span class="emoji">👍</span> <b>Why?</b> <code>with</code> auto-closes the file, even if errors occur!
+      </div>
+    </div>
+    <div class="card-section">
+      <h2>📂 Student Data Example</h2>
+      <pre class="code-block"><code>with open("student.txt", "w") as f:
+    f.write("Name: Aman\n")
+    f.write("Course: Python\n")
+    f.write("Marks: 88\n")</code></pre>
+      <div class="callout info">
+        <span class="emoji">📖</span> <b>To read it:</b>
+        <pre class="code-block"><code>with open("student.txt", "r") as f:
+    print(f.read())</code></pre>
+      </div>
+    </div>
+    <div class="card-section">
+      <h2>🔄 User Input to File</h2>
+      <pre class="code-block"><code>data = input("Enter something to save: ")
+with open("mydata.txt", "w") as file:
+    file.write(data)</code></pre>
+      <div class="callout tip">
+        <span class="emoji">💡</span> <b>Practice:</b> Try saving your name and favorite quote to a file!
+      </div>
+    </div>
+    <div class="quiz-section">
+      <h2>🧠 Quiz Time: File I/O</h2>
       <div class="quiz-question">
-        <p>2. What is the output of "Python".upper()?</p>
+        <p>Q1. What does the mode "w" do when opening a file?</p>
         <ul>
-          <li onclick="checkAnswer(this, 'correct')">a) PYTHON</li>
-          <li onclick="checkAnswer(this, 'wrong')">b) python</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) Python</li>
+          <li onclick="checkAnswer(this, 'wrong')">a) Reads a file</li>
+          <li onclick="checkAnswer(this, 'wrong')">b) Appends to a file</li>
+          <li onclick="checkAnswer(this, 'correct')">c) Writes to a file (and overwrites)</li>
+          <li onclick="checkAnswer(this, 'wrong')">d) Opens file in binary</li>
         </ul>
       </div>
-      
       <div class="quiz-question">
-        <p>3. What does file.close() do?</p>
+        <p>Q2. Which method reads the entire content of a file?</p>
         <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) Deletes file</li>
-          <li onclick="checkAnswer(this, 'correct')">b) Closes it</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) Locks the file</li>
+          <li onclick="checkAnswer(this, 'wrong')">a) file.readall()</li>
+          <li onclick="checkAnswer(this, 'correct')">b) file.read()</li>
+          <li onclick="checkAnswer(this, 'wrong')">c) file.line()</li>
+          <li onclick="checkAnswer(this, 'wrong')">d) file.scan()</li>
         </ul>
       </div>
+      <div class="quiz-question">
+        <p>Q3. What is the advantage of using with open(...) over open(...).close()?</p>
+        <ul>
+          <li onclick="checkAnswer(this, 'wrong')">a) It types faster</li>
+          <li onclick="checkAnswer(this, 'correct')">b) It automatically closes the file</li>
+          <li onclick="checkAnswer(this, 'wrong')">c) It opens multiple files at once</li>
+          <li onclick="checkAnswer(this, 'wrong')">d) No difference</li>
+        </ul>
+      </div>
+      <div class="quiz-question">
+        <p>Q4. What will this code do?</p>
+        <pre class="code-block"><code>with open("data.txt", "a") as f:
+    f.write("Hello\n")</code></pre>
+        <ul>
+          <li onclick="checkAnswer(this, 'wrong')">a) Delete old data and write "Hello"</li>
+          <li onclick="checkAnswer(this, 'wrong')">b) Raise an error</li>
+          <li onclick="checkAnswer(this, 'correct')">c) Add "Hello" at the end of file</li>
+          <li onclick="checkAnswer(this, 'wrong')">d) Create a new file only if it doesn't exist</li>
+        </ul>
+      </div>
+      <div class="quiz-question">
+        <p>Q5. What happens if you try to read a non-existent file using "r" mode?</p>
+        <ul>
+          <li onclick="checkAnswer(this, 'wrong')">a) It creates the file</li>
+          <li onclick="checkAnswer(this, 'wrong')">b) It prints nothing</li>
+          <li onclick="checkAnswer(this, 'correct')">c) It throws a FileNotFoundError</li>
+          <li onclick="checkAnswer(this, 'wrong')">d) It skips the file</li>
+        </ul>
+      </div>
+    </div>
+    <div class="challenge-box">
+      <h3>🎯 Challenge Task</h3>
+      <ol>
+        <li>Ask the user for name, course, and marks.</li>
+        <li>Save the data in a file <code>record.txt</code>.</li>
+        <li>Read and print the data from the file.</li>
+      </ol>
+    </div>
+    <div class="summary-box">
+      <h2>🧾 Summary</h2>
+      <ul>
+        <li><b>String Handling:</b> Manage and format text</li>
+        <li><b>Indexing/Slicing:</b> Access parts of strings</li>
+        <li><b>File Read/Write:</b> Store & retrieve data from files</li>
+        <li><b>Modes (r, w):</b> Control how files are opened</li>
+        <li><b>with open():</b> Automatically manage file resources</li>
+      </ul>
+    </div>
   </div>
-
-  <div class="challenge">
-    <h3>🎯 Challenge Task</h3>
-    <ol>
-      <li>Ask the user for name, course, and marks.</li>
-      <li>Save the data in a file <code>record.txt</code>.</li>
-      <li>Read and print the data from the file.</li>
-    </ol>
-  </div>
-
-  <div class="section">
-    <h2>🧾 Summary</h2>
-    <table>
-      <tr><th>Feature</th><th>Purpose</th></tr>
-      <tr><td>String Handling</td><td>Manage and format text</td></tr>
-      <tr><td>Indexing/Slicing</td><td>Access parts of strings</td></tr>
-      <tr><td>File Read/Write</td><td>Store & retrieve data from files</td></tr>
-      <tr><td>Modes (r, w)</td><td>Control how files are opened</td></tr>
-      <tr><td>with open()</td><td>Automatically manage file resources</td></tr>
-    </table>
-  </div>
-
 </body>
 </html>

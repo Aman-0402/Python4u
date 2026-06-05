@@ -8,6 +8,11 @@
 </head>
 <body>
 
+  <div class="hero-section">
+    <h1>🧠 Chapter 5: Data Structures in Python</h1>
+    <p>Master the art of organizing and managing information! In this chapter, you'll explore Python's most powerful built-in data structures—lists, tuples, sets, and dictionaries. Learn how to store, access, and manipulate data like a pro. 🗂️🔑</p>
+  </div>
+
   <div class="chapter">
     <h1>🧠 Chapter 5: Data Structures in Python – List, Tuple, Set, Dictionary</h1>
 
@@ -21,7 +26,7 @@
     <table>
       <thead>
         <tr>
-          <th>Type</th><th>Ordered</th><th>Mutable</th><th>Duplicate Items</th><th>Syntax Example</th>
+          <th>Type</th><th>Ordered</th><th>Mutable</th><th>Duplicate Items</th><th>SyntaxExample</th>
         </tr>
       </thead>
       <tbody>
@@ -127,7 +132,10 @@ print(shopping)  # Output: ['butter', 'eggs', 'milk']
   <pre><code>items = ["pen", "book", "eraser"]
 print(items[2])</code></pre>
   <ul>
-    <li onclick="checkAnswer(this, 'correct')">✅ Answer: eraser</li>
+    <li onclick="checkAnswer(this, 'wrong')">A) book</li>
+    <li onclick="checkAnswer(this, 'correct')">B) eraser</li>
+    <li onclick="checkAnswer(this, 'wrong')">C) mouse</li>
+    <li onclick="checkAnswer(this, 'wrong')">D) shoes</li>
   </ul>
 </div>
 
@@ -147,9 +155,13 @@ print(items[2])</code></pre>
 x.pop(2)
 print(x)</code></pre>
   <ul>
-    <li onclick="checkAnswer(this, 'correct')">✅ Answer: [10, 20, 40]</li>
+    <li onclick="checkAnswer(this, 'wrong')">A) [90, 30, 40]</li>
+    <li onclick="checkAnswer(this, 'correct')">B) [10, 20, 40]</li>
+    <li onclick="checkAnswer(this, 'wrong')">C) [20, 80, 40]</li>
+    <li onclick="checkAnswer(this, 'wrong')">D) (10, 20, 40)</li>
   </ul>
 </div>
+
 
 <div class="quiz-question">
   <p>5. What is the output of:</p>
@@ -157,7 +169,19 @@ print(x)</code></pre>
 x.insert(1, "z")
 print(x)</code></pre>
   <ul>
-    <li onclick="checkAnswer(this, 'correct')">✅ Answer: ['a', 'z', 'b', 'c']</li>
+    <li onclick="checkAnswer(this, 'wrong')">A) ['z', 'a', 'b', 'c']</li>
+    <li onclick="checkAnswer(this, 'correct')">B) ['a', 'z', 'b', 'c']</li>
+    <li onclick="checkAnswer(this, 'wrong')">C) ['a', 'b', 'z', 'c']</li>
+    <li onclick="checkAnswer(this, 'wrong')">D) ['a', 'b', 'c', 'z']</li>
+  </ul>
+</div>
+
+
+<div class="practice-zone">
+  <h4>Practice Zone</h4>
+  <ul>
+    <li>Create a list of your 3 favorite foods and print the second one.</li>
+    <li>Add a new food to the list and print the updated list.</li>
   </ul>
 </div>
 
@@ -277,8 +301,14 @@ print(languages.index("Java"))     # 1
   <p>1. What will this print?</p>
   <pre><code>nums = (1, 2, 3, 4)
 print(nums[2])</code></pre>
-  <ul><li>✅ Answer: 3</li></ul>
+  <ul>
+    <li onclick="checkAnswer(this, 'wrong')">A) 2</li>
+    <li onclick="checkAnswer(this, 'correct')">B) 3</li>
+    <li onclick="checkAnswer(this, 'wrong')">C) 4</li>
+    <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
+  </ul>
 </div>
+
 
 <div class="quiz-question">
   <p>2. What’s the correct way to create a 1-element tuple?</p>
@@ -304,7 +334,21 @@ print(nums[2])</code></pre>
   <p>4. Fill in the blank:</p>
   <pre><code>colors = ("red", "green", "blue")
 print(____(colors))  # To get total items</code></pre>
-  <ul><li>✅ Answer: len</li></ul>
+  <ul>
+    <li onclick="checkAnswer(this, 'correct')">A) len</li>
+    <li onclick="checkAnswer(this, 'wrong')">B) count</li>
+    <li onclick="checkAnswer(this, 'wrong')">C) size</li>
+    <li onclick="checkAnswer(this, 'wrong')">D) total</li>
+  </ul>
+</div>
+
+
+<div class="practice-zone">
+  <h4>Practice Zone</h4>
+  <ul>
+    <li>Create a list of your 3 favorite foods and print the second one.</li>
+    <li>Add a new food to the list and print the updated list.</li>
+  </ul>
 </div>
 
 
@@ -448,6 +492,13 @@ colors._____("green")</code></pre>
 
 </div>
 
+<div class="practice-zone">
+  <h4>Practice Zone</h4>
+  <ul>
+    <li>Create a list of your 3 favorite foods and print the second one.</li>
+    <li>Add a new food to the list and print the updated list.</li>
+  </ul>
+</div>
 
 
 <h2>🤖 4. Dictionary – Your Phone Contacts 📱</h2>

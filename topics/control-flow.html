@@ -1,43 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chapter 3: Control Flow Statements</title>
-  <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Chapter 3: Control Flow Statements in Python</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #222;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        body.dark .container {
+            background: #1e1e1e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        .python-logo {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 5%;
+            transition: transform 0.3s ease;
+        }
+        
+        .python-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+        
+        body.dark h2 {
+            color: #a8b4ff;
+            border-bottom-color: #a8b4ff;
+        }
+        
+        h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-top: 25px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark h3 {
+            color: #e0e0e0;
+            background: #2a2a2a;
+            border-left-color: #a8b4ff;
+        }
+        
+        h4 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        body.dark h4 {
+            color: #a8b4ff;
+        }
+        
+        .fun-fact {
+            background: #fff8dc;
+            border-left: 4px solid #f4a261;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+        
+        .fun-fact:hover {
+            transform: translateX(5px);
+        }
+        
+        body.dark .fun-fact {
+            background: #2e2e2e;
+            border-left-color: #f4a261;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            color: #111;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark .code-block {
+            background: #1e1e1e;
+            color: #e8e8e8;
+            border-color: #333;
+        }
+        
+        .code-block:hover {
+            background: #eaeaea;
+        }
+        
+        body.dark .code-block:hover {
+            background: #2a2a2a;
+        }
+        
+        pre {
+            margin: 0;
+            font-family: 'Fira Code', 'Courier New', monospace;
+        }
+        
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            background: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        body.dark code {
+            background: #333;
+            color: #e8e8e8;
+        }
+        
+        .output-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark .output-block {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        
+        .analogy-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .analogy-box:hover {
+            transform: translateX(5px);
+        }
+        
+        body.dark .analogy-box {
+            background: #2a2a2a;
+            border-left-color: #28a745;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .warning-box:hover {
+            transform: translateX(5px);
+        }
+        
+        body.dark .warning-box {
+            background: #2e2e2e;
+            border-color: #fdcb6e;
+        }
+        
+        .quiz {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark .quiz {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .quiz:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .quiz h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .quiz ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quiz li {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+        }
+        
+        .quiz li:hover {
+            background: #e3f2fd;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        body.dark .quiz li {
+            background: #1e1e1e;
+            border-color: #444;
+        }
+        
+        body.dark .quiz li:hover {
+            background: #2a2a2a;
+            border-color: #a8b4ff;
+        }
+        
+        .quiz li.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .quiz li.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        body.dark .quiz li.correct {
+            background: #1e3a1e;
+            border-color: #28a745;
+            color: #a8e6a8;
+        }
+        
+        body.dark .quiz li.wrong {
+            background: #3a1e1e;
+            border-color: #dc3545;
+            color: #e6a8a8;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        body.dark table {
+            background: #1e1e1e;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        body.dark th, body.dark td {
+            border-bottom-color: #444;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        body.dark th {
+            background: #4a5568;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        body.dark tr:hover {
+            background: #2a2a2a;
+        }
+        
+        .practice-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .practice-section h3 {
+            background: none;
+            border: none;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .practice-section .code-block {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .toggle-theme {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toggle-theme:hover {
+            background: #5a67d8;
+            transform: scale(1.05);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark .section {
+            background: #2a2a2a;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .interactive-demo {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark .interactive-demo {
+            background: #1a1a2e;
+            border-color: #2196f3;
+        }
+        
+        .interactive-demo:hover {
+            transform: scale(1.02);
+        }
+        
+        .demo-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .demo-output {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body.dark .demo-output {
+            background: #1e1e1e;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2em;
+            }
+            
+            .code-block {
+                font-size: 14px;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
+    
+    <div class="container">
+        <div class="hero-section">
+            <h1>🧠 Chapter 3: Control Flow Statements</h1>
+            <p>Master the art of decision-making and repetition in Python! 🚀</p>
+            <p>Learn how to make your programs think and act intelligently</p>
+        </div>
 
-  <div class="chapter">
-    <h1>🧠 Chapter 3: Control Flow Statements in Python</h1>
-    <p>Python is like a smart robot 🦾 — but to make decisions, it needs your instructions.<br/>
-    That’s where <strong>Control Flow Statements</strong> come in — they let you tell Python what to do, when to do it, and how many times.</p>
+        <div class="section">
+            <h2>🎯 What are Control Flow Statements?</h2>
+            <p>Control flow statements are like traffic signals for your code 🚦. They determine which path your program takes and how many times it repeats certain actions.</p>
+            
+            <div class="fun-fact">
+                <strong>💡 Fun Fact:</strong> The term "control flow" was first introduced by computer scientist Maurice Wilkes in 1949!
+            </div>
+            
+            <h3>Types of Control Flow:</h3>
+            <ul>
+                <li><strong>Conditional Statements:</strong> Make decisions (<code>if</code>, <code>else</code>, <code>elif</code>)</li>
+                <li><strong>Loops:</strong> Repeat actions (<code>while</code>, <code>for</code>)</li>
+                <li><strong>Control Statements:</strong> Jump over code (<code>break</code>, <code>continue</code>, <code>pass</code>)</li>
+            </ul>
+        </div>
 
-    <h2>🎯 What are Control Flow Statements?</h2>
-    <ul>
-      <li>Make decisions (<code>if</code>, <code>else</code>, <code>elif</code>)</li>
-      <li>Repeat actions (<code>while</code>, <code>for</code>)</li>
-      <li>Jump over code (<code>break</code>, <code>continue</code>, <code>pass</code>)</li>
-    </ul>
-
-    <h2>🤖 1. Conditional Statements – Making Decisions</h2>
-    <p><strong>📌 Syntax:</strong></p>
-    <pre><code>if condition:
+        <div class="section">
+            <h2>🤖 1. Conditional Statements – Making Decisions</h2>
+            <p>Conditional statements let your program make decisions based on certain conditions, just like you decide what to wear based on the weather! 🌤️</p>
+            
+            <h3>Basic Syntax:</h3>
+            <div class="code-block">
+<pre>if condition:
     # run this block
 elif another_condition:
     # run this if above fails
 else:
-    # fallback code</code></pre>
-
-    <p><strong>🎮 Real-Life Example:</strong></p>
-    <pre><code>age = 18
+    # fallback code</pre>
+            </div>
+            
+            <div class="analogy-box">
+                <strong>🧠 Real-Life Analogy:</strong><br/>
+                Think of conditional statements like a smart thermostat:<br/>
+                • If temperature > 25°C → Turn on AC<br/>
+                • Else if temperature < 18°C → Turn on heater<br/>
+                • Else → Keep current setting
+            </div>
+            
+            <h3>🎮 Practical Examples:</h3>
+            
+            <h4>Example 1: Age Verification</h4>
+            <div class="code-block">
+<pre>age = 18
 if age >= 18:
     print("You can vote! 🗳️")
 else:
-    print("Sorry, you are too young 😢")</code></pre>
-
-    <p><strong>🧪 Another Example:</strong></p>
-    <pre><code>marks = 85
+    print("Sorry, you are too young 😢")</pre>
+            </div>
+            
+            <div class="output-block">
+<strong>Output:</strong><br/>
+You can vote! 🗳️
+            </div>
+            
+            <h4>Example 2: Grade System</h4>
+            <div class="code-block">
+<pre>marks = 85
 if marks >= 90:
     print("Grade: A+ 🏆")
 elif marks >= 75:
@@ -45,167 +563,412 @@ elif marks >= 75:
 elif marks >= 60:
     print("Grade: B 🙂")
 else:
-    print("Grade: Needs Improvement 😐")</code></pre>
+    print("Grade: Needs Improvement 😐")</pre>
+            </div>
+            
+            <div class="output-block">
+<strong>Output:</strong><br/>
+Grade: A 🎉
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> Python uses indentation (spaces/tabs) to define code blocks. Always use consistent indentation!
+            </div>
+        </div>
 
-    <blockquote>😂 <strong>Funny Analogy:</strong><br/>
-    If your mom is home, you eat good food.<br/>
-    Else if your dad is home, you order pizza.<br/>
-    Else, you starve and eat Maggi. 🍜</blockquote>
-
-    <h2>🔁 2. Loops – Doing Things Repeatedly</h2>
-
-    <h3>🌀 A. while Loop</h3>
-    <p>Repeats a block as long as a condition is true.</p>
-    <pre><code>count = 1
+        <div class="section">
+            <h2>🔁 2. Loops – Doing Things Repeatedly</h2>
+            <p>Loops are like a broken record that keeps playing until you tell it to stop! 🎵</p>
+            
+            <h3>🌀 A. while Loop</h3>
+            <p>The <code>while</code> loop repeats a block as long as a condition remains true.</p>
+            
+            <div class="code-block">
+<pre>count = 1
 while count <= 5:
     print("Count:", count)
-    count += 1</code></pre>
-
-    <p><strong>Output:</strong><br/>
-    Count: 1<br/>Count: 2<br/>Count: 3<br/>Count: 4<br/>Count: 5</p>
-
-    <blockquote><strong>🧠 Real-Life Analogy:</strong><br/>
-    Imagine eating Laddus until the box is empty.<br/>
-    As long as the box has Laddus, you keep eating! 😋</blockquote>
-
-    <h3>🔂 B. for Loop</h3>
-    <p>Used to iterate over a sequence (like a list, string, range).</p>
-    <pre><code>for i in range(1, 6):
-    print("This is line", i)</code></pre>
-
-    <p><strong>Output:</strong><br/>
-    This is line 1<br/>This is line 2<br/>This is line 3<br/>This is line 4<br/>This is line 5</p>
-
-    <p><strong>📚 Looping Through a List:</strong></p>
-    <pre><code>fruits = ["apple", "banana", "mango"]
+    count += 1</pre>
+            </div>
+            
+            <div class="output-block">
+<strong>Output:</strong><br/>
+Count: 1<br/>
+Count: 2<br/>
+Count: 3<br/>
+Count: 4<br/>
+Count: 5
+            </div>
+            
+            <div class="analogy-box">
+                <strong>🧠 Real-Life Analogy:</strong><br/>
+                Imagine eating Laddus until the box is empty:<br/>
+                • While box has Laddus → Keep eating<br/>
+                • When box is empty → Stop eating<br/>
+                Just like: while laddus_in_box: eat_laddu() 😋
+            </div>
+            
+            <h3>🔂 B. for Loop</h3>
+            <p>The <code>for</code> loop is used to iterate over sequences (lists, strings, ranges).</p>
+            
+            <h4>Basic Range Loop:</h4>
+            <div class="code-block">
+<pre>for i in range(1, 6):
+    print("This is line", i)</pre>
+            </div>
+            
+            <div class="output-block">
+<strong>Output:</strong><br/>
+This is line 1<br/>
+This is line 2<br/>
+This is line 3<br/>
+This is line 4<br/>
+This is line 5
+            </div>
+            
+            <h4>Looping Through Lists:</h4>
+            <div class="code-block">
+<pre>fruits = ["apple", "banana", "mango"]
 for fruit in fruits:
-    print("I like", fruit)</code></pre>
+    print("I like", fruit)</pre>
+            </div>
+            
+            <div class="output-block">
+<strong>Output:</strong><br/>
+I like apple<br/>
+I like banana<br/>
+I like mango
+            </div>
+            
+            <div class="fun-fact">
+                <strong>💡 Pro Tip:</strong> <code>range(3)</code> gives you [0, 1, 2], not [1, 2, 3]! Python starts counting from 0.
+            </div>
+        </div>
 
-    <h2>🛑 3. Loop Control Statements</h2>
-
-    <h3>⛔ break – Exit the loop immediately</h3>
-    <pre><code>for i in range(1, 10):
+        <div class="section">
+            <h2>🛑 3. Loop Control Statements</h2>
+            <p>These are like emergency buttons for your loops! 🚨</p>
+            
+            <h3>⛔ break – Exit the loop immediately</h3>
+            <p>Like hitting the emergency stop button!</p>
+            <div class="code-block">
+<pre>for i in range(1, 10):
     if i == 5:
         break
-    print(i)</code></pre>
-    <p><strong>Output:</strong> 1 2 3 4</p>
-
-    <h3>⏩ continue – Skip to next iteration</h3>
-    <pre><code>for i in range(1, 6):
+    print(i)</pre>
+            </div>
+            <div class="output-block">
+<strong>Output:</strong> 1 2 3 4
+            </div>
+            
+            <h3>⏩ continue – Skip to next iteration</h3>
+            <p>Like skipping a song you don't like!</p>
+            <div class="code-block">
+<pre>for i in range(1, 6):
     if i == 3:
         continue
-    print(i)</code></pre>
-    <p><strong>Output:</strong> 1 2 4 5</p>
+    print(i)</pre>
+            </div>
+            <div class="output-block">
+<strong>Output:</strong> 1 2 4 5
+            </div>
+            
+            <h3>😶 pass – Do nothing (a placeholder)</h3>
+            <p>Like saying "I'll do this later"</p>
+            <div class="code-block">
+<pre>for i in range(3):
+    pass  # do nothing for now</pre>
+            </div>
+            
+            <div class="analogy-box">
+                <strong>🧠 Memory Trick:</strong><br/>
+                • <strong>break</strong> = "Break out of here!"<br/>
+                • <strong>continue</strong> = "Continue to the next one"<br/>
+                • <strong>pass</strong> = "Pass this for now"
+            </div>
+        </div>
 
-    <h3>😶 pass – Do nothing (a placeholder)</h3>
-    <pre><code>for i in range(3):
-    pass  # do nothing for now</code></pre>
+        <div class="practice-section">
+            <h3>🧪 Interactive Practice: Guess the Number Game 🎲</h3>
+            <p>Let's create a simple number guessing game using control flow!</p>
+            
+            <div class="code-block">
+<pre>import random
 
-    <p>Used when you write code but want to fill it later.</p>
+secret = random.randint(1, 10)
+attempts = 0
+max_attempts = 3
 
-    <h2>🧪 Practice Example: Guess the Number 🎲</h2>
-    <pre><code>secret = 7
-guess = int(input("Guess a number between 1 and 10: "))
-if guess == secret:
-    print("🎉 You guessed it right!")
-elif guess < secret:
-    print("Too low! Try again.")
-else:
-    print("Too high! Try again.")</code></pre>
+print("🎮 Welcome to Guess the Number!")
+print("I'm thinking of a number between 1 and 10.")
 
-    <div class="quiz">
-    <h2>🧠 Quick Quiz:</h2>
+while attempts < max_attempts:
+    guess = int(input("Enter your guess: "))
+    attempts += 1
     
-<div class="quiz-question">
-    <p>1. Which loop is better when the number of iterations is unknown?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) for loop</li>
-      <li onclick="checkAnswer(this, 'correct')">b) while loop</li>
-      <li onclick="checkAnswer(this, 'wrong')">c) loop</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>2. What will range(3) return?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) [0, 1, 2, 3]</li>
-      <li onclick="checkAnswer(this, 'wrong')">b) [1, 2, 3]</li>
-      <li onclick="checkAnswer(this, 'correct')">c) [0, 1, 2]</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>3. Which keyword exits a loop early?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) exit</li>
-      <li onclick="checkAnswer(this, 'correct')">b) break</li>
-      <li onclick="checkAnswer(this, 'wrong')">c) stop</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>4. What does pass do in Python?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) Skips the loop</li>
-      <li onclick="checkAnswer(this, 'correct')">b) Does nothing</li>
-      <li onclick="checkAnswer(this, 'wrong')">c) Ends the loop</li>
-    </ul>
-  </div>
-  </div>
+    if guess == secret:
+        print("🎉 You guessed it right!")
+        break
+    elif guess < secret:
+        print("Too low! Try again.")
+    else:
+        print("Too high! Try again.")
 
-    <h2>🎯 Challenge Task</h2>
-    <p>🔥 Create a mini login system:</p>
-    <ol>
-      <li>Set a predefined password.</li>
-      <li>Let user enter password 3 times.</li>
-      <li>If correct → print “Welcome!”</li>
-      <li>Else → print “Access Denied”</li>
-    </ol>
-    <p><strong>Hint:</strong> Use <code>while</code> and <code>break</code></p>
+if attempts == max_attempts and guess != secret:
+    print(f"Game Over! The number was {secret}")</pre>
+            </div>
+            
+            <div class="interactive-demo">
+                <h4>Try it yourself!</h4>
+                <button class="demo-button" onclick="runDemo()">Run Demo</button>
+                <div id="demo-output" class="demo-output"></div>
+            </div>
+        </div>
 
-      <h2>🔐 Mini Login System using Python</h2>
-
-  <pre><code>
-# Predefined password
+        <div class="section">
+            <h2>🔐 Advanced Example: Mini Login System</h2>
+            <p>Let's build a simple login system using control flow concepts!</p>
+            
+            <div class="code-block">
+<pre># Predefined password
 correct_password = "python123"
 
 # Attempt counter
 attempts = 0
 max_attempts = 3
 
-while attempts &lt; max_attempts:
+print("🔐 Welcome to the Login System")
+
+while attempts < max_attempts:
     entered_password = input("Enter your password: ")
     
     if entered_password == correct_password:
-        print("Welcome!")
+        print("✅ Welcome! Access granted.")
         break  # Exit loop if password is correct
     else:
         attempts += 1
-        print("Incorrect password. Try again.")
+        remaining = max_attempts - attempts
+        print(f"❌ Incorrect password. {remaining} attempts remaining.")
 
 if attempts == max_attempts:
-    print("Access Denied")
-  </code></pre>
+    print("🚫 Access Denied. Too many failed attempts.")</pre>
+            </div>
+            
+            <div class="output-block">
+<strong>Sample Output:</strong><br/>
+🔐 Welcome to the Login System<br/>
+Enter your password: wrong123<br/>
+❌ Incorrect password. 2 attempts remaining.<br/>
+Enter your password: python123<br/>
+✅ Welcome! Access granted.
+            </div>
+        </div>
 
-    <blockquote>😄 <strong>Bonus Joke:</strong><br/>
-    Why did the Python loop apply for a job?<br/>
-    Because it wanted a break! 😆</blockquote>
+        <div class="quiz">
+            <h3>🧠 Test Your Knowledge!</h3>
+            
+            <div class="quiz-question">
+                <p><strong>1.</strong> Which loop is better when the number of iterations is unknown?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) for loop</li>
+                    <li onclick="checkAnswer(this, 'correct')">b) while loop</li>
+                    <li onclick="checkAnswer(this, 'wrong')">c) loop</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-question">
+                <p><strong>2.</strong> What will <code>range(3)</code> return?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) [0, 1, 2, 3]</li>
+                    <li onclick="checkAnswer(this, 'wrong')">b) [1, 2, 3]</li>
+                    <li onclick="checkAnswer(this, 'correct')">c) [0, 1, 2]</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-question">
+                <p><strong>3.</strong> Which keyword exits a loop early?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) exit</li>
+                    <li onclick="checkAnswer(this, 'correct')">b) break</li>
+                    <li onclick="checkAnswer(this, 'wrong')">c) stop</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-question">
+                <p><strong>4.</strong> What does <code>pass</code> do in Python?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) Skips the loop</li>
+                    <li onclick="checkAnswer(this, 'correct')">b) Does nothing</li>
+                    <li onclick="checkAnswer(this, 'wrong')">c) Ends the loop</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-question">
+                <p><strong>5.</strong> What's the output of this code?</p>
+                <div class="code-block">
+<pre>for i in range(3):
+    if i == 1:
+        continue
+    print(i)</pre>
+                </div>
+                <ul>
+                    <li onclick="checkAnswer(this, 'correct')">a) 0 2</li>
+                    <li onclick="checkAnswer(this, 'wrong')">b) 0 1 2</li>
+                    <li onclick="checkAnswer(this, 'wrong')">c) 1 2</li>
+                </ul>
+            </div>
+        </div>
 
-    <h2>🧾 Summary:</h2>
-    <table>
-      <thead>
-        <tr><th>Control Flow</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>if / elif / else</code></td><td>Makes decisions</td></tr>
-        <tr><td><code>while</code></td><td>Loops while condition is true</td></tr>
-        <tr><td><code>for</code></td><td>Loops over sequences</td></tr>
-        <tr><td><code>break</code></td><td>Exits loop early</td></tr>
-        <tr><td><code>continue</code></td><td>Skips to next iteration</td></tr>
-        <tr><td><code>pass</code></td><td>Does nothing, used as placeholder</td></tr>
-      </tbody>
-    </table>
-  </div>
+        <div class="section">
+            <h2>🎯 Challenge Tasks</h2>
+            <p>Ready to test your skills? Try these challenges!</p>
+            
+            <h3>Challenge 1: Number Pattern Printer</h3>
+            <p>Create a program that prints this pattern using loops:</p>
+            <div class="code-block">
+<pre>1
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5</pre>
+            </div>
+            
+            <h3>Challenge 2: Password Strength Checker</h3>
+            <p>Create a program that checks password strength:</p>
+            <ul>
+                <li>At least 8 characters long</li>
+                <li>Contains at least one uppercase letter</li>
+                <li>Contains at least one number</li>
+                <li>Contains at least one special character</li>
+            </ul>
+            
+            <h3>Challenge 3: Simple Calculator</h3>
+            <p>Build a calculator that:</p>
+            <ul>
+                <li>Asks for two numbers</li>
+                <li>Asks for operation (+, -, *, /)</li>
+                <li>Performs the calculation</li>
+                <li>Handles division by zero</li>
+            </ul>
+        </div>
 
+        <div class="section">
+            <h2>🧾 Summary Table</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Control Flow</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>if / elif / else</code></td>
+                            <td>Makes decisions based on conditions</td>
+                            <td><code>if age >= 18: print("Adult")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>while</code></td>
+                            <td>Loops while condition is true</td>
+                            <td><code>while count < 5: count += 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>for</code></td>
+                            <td>Loops over sequences</td>
+                            <td><code>for i in range(5): print(i)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>break</code></td>
+                            <td>Exits loop early</td>
+                            <td><code>if condition: break</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>continue</code></td>
+                            <td>Skips to next iteration</td>
+                            <td><code>if condition: continue</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>pass</code></td>
+                            <td>Does nothing, placeholder</td>
+                            <td><code>if condition: pass</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎉 Congratulations!</h2>
+            <p>You've successfully learned about Control Flow Statements in Python! 🚀</p>
+            
+            <div class="fun-fact">
+                <strong>😄 Bonus Joke:</strong><br/>
+                Why did the Python loop apply for a job?<br/>
+                Because it wanted a break! 😆
+            </div>
+            
+            <p><strong>Next Steps:</strong></p>
+            <ul>
+                <li>Practice with the interactive examples above</li>
+                <li>Try the challenge tasks</li>
+                <li>Move on to Chapter 4: Functions and Modules</li>
+                <li>Build your own projects using control flow!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const button = document.querySelector('.toggle-theme');
+            if (document.body.classList.contains('dark')) {
+                button.textContent = '☀️';
+            } else {
+                button.textContent = '🌙';
+            }
+        }
+
+        function checkAnswer(element, result) {
+            // Remove previous selections
+            const parent = element.parentElement;
+            parent.querySelectorAll('li').forEach(li => {
+                li.classList.remove('correct', 'wrong');
+            });
+            
+            // Add result class
+            element.classList.add(result);
+            
+            // Show feedback
+            if (result === 'correct') {
+                element.style.animation = 'fadeIn 0.5s ease-in-out';
+            }
+        }
+
+        function runDemo() {
+            const output = document.getElementById('demo-output');
+            const secret = Math.floor(Math.random() * 10) + 1;
+            
+            output.innerHTML = `
+                🎮 Welcome to Guess the Number!<br/>
+                I'm thinking of a number between 1 and 10.<br/>
+                <br/>
+                <strong>Demo with secret number: ${secret}</strong><br/>
+                <br/>
+                Guess: 5<br/>
+                ${5 < secret ? 'Too low! Try again.' : 5 > secret ? 'Too high! Try again.' : '🎉 You guessed it right!'}<br/>
+                <br/>
+                ${5 !== secret ? `Guess: ${secret}<br/>🎉 You guessed it right!` : ''}
+            `;
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
 </body>
 </html>

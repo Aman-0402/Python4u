@@ -3,9 +3,287 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Python eBook</title>
+  <title>🐍 Python eBook - Your Journey to Mastery</title>
   <link rel="icon" type="image/png" href="faviconnn.png">
   <link rel="stylesheet" href="style.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Hero Section Styles */
+    .hero-container {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: 3.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: bounceIn 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 30px 0;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      display: block;
+      color: #ffd700;
+    }
+
+    .stat-label {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    /* Interactive Cards */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .feature-card:hover::before {
+      left: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    body.dark .feature-card {
+      background: #1e1e1e;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #667eea;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .feature-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    body.dark .feature-title {
+      color: #e0e0e0;
+    }
+
+    .feature-description {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    body.dark .feature-description {
+      color: #ccc;
+    }
+
+    /* Progress Section */
+    .progress-section {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .progress-title {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      width: 0%;
+      transition: width 2s ease;
+      border-radius: 10px;
+    }
+
+    /* Floating Python */
+    .floating-python {
+      position: absolute;
+      font-size: 2em;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    .python-1 { top: 20%; left: 10%; animation-delay: 0s; }
+    .python-2 { top: 60%; right: 15%; animation-delay: 2s; }
+    .python-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+    /* Animations */
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Quick Start Section */
+    .quick-start {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .quick-start-btn {
+      display: inline-block;
+      background: white;
+      color: #4facfe;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin: 20px 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .quick-start-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    /* Fun Quote */
+    .fun-quote {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 40px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark .fun-quote {
+      background: linear-gradient(135deg, #2e2e2e 0%, #4a4a4a 100%);
+    }
+
+    .quote-text {
+      font-size: 1.5em;
+      font-style: italic;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    body.dark .quote-text {
+      color: #e0e0e0;
+    }
+
+    .quote-author {
+      font-weight: bold;
+      color: #666;
+    }
+
+    body.dark .quote-author {
+      color: #ccc;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5em; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .floating-python { display: none; }
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -18,40 +296,176 @@
   <!-- Sidebar / Table of Contents -->
   <nav class="sidebar closed" id="sidebar">
     <ul>
-      <li><a href="#" class="topic-link" data-file="compiler.html">Compiler Here</a></li>
-      <li><a href="#" class="topic-link" data-file="introduction.html">Introduction to Python</a></li>
-      <li><a href="#" class="topic-link" data-file="variables.html">Variables, Data Types and Operators</a></li>
-      <li><a href="#" class="topic-link" data-file="control-flow.html">Control Flow Statements</a></li>
-      <li><a href="#" class="topic-link" data-file="functions-modules.html">Functions and Modules</a></li>
-      <li><a href="#" class="topic-link" data-file="data-structures.html">Data Structures - List, Tuple, Set, Dictionary</a></li>
-      <li><a href="#" class="topic-link" data-file="strings-files.html">String Handling and File I/O</a></li>
-      <li><a href="#" class="topic-link" data-file="exceptions.html">Exception Handling and Debugging</a></li>
-      <li><a href="#" class="topic-link" data-file="oop.html">Object-Oriented Programming in Python</a></li>
-      <li><a href="#" class="topic-link" data-file="libraries.html">Working with Libraries (NumPy, pandas)</a></li>
-      <li><a href="#" class="topic-link" data-file="visualization.html">Data Visualization with matplotlib</a></li>
-      <li><a href="#" class="topic-link" data-file="apis-json.html">Introduction to Web APIs and JSON</a></li>
-      <li><a href="#" class="topic-link" data-file="database.html">Introduction to Database Connectivity</a></li>
-      <li><a href="#" class="topic-link" data-file="quiz.html">Quiz</a></li>
-      <li><a href="#" class="topic-link" data-file="mock.html">Mock Exam Question Type</a></li>
-      <li><a href="#" class="topic-link" data-file="project.html">Capstone Mini Project</a></li> 
-      <li><a href="#" class="topic-link" data-file="fullstackproject.html">Full Stack Project</a></li> 
-      <li><a href="#" class="topic-link" data-file="revision-cert.html">Revision & IBM Certification Practice Tests</a></li>
+      <li><a href="#" class="topic-link" data-file="compiler.html">🚀 Compiler Here</a></li>
+      <li><a href="#" class="topic-link" data-file="introduction.html">📚 Introduction to Python</a></li>
+      <li><a href="#" class="topic-link" data-file="variables.html">🔢 Variables, Data Types and Operators</a></li>
+      <li><a href="#" class="topic-link" data-file="control-flow.html">🔄 Control Flow Statements</a></li>
+      <li><a href="#" class="topic-link" data-file="functions-modules.html">⚙️ Functions and Modules</a></li>
+      <li><a href="#" class="topic-link" data-file="data-structures.html">📊 Data Structures - List, Tuple, Set, Dictionary</a></li>
+      <li><a href="#" class="topic-link" data-file="strings-files.html">📝 String Handling and File I/O</a></li>
+      <li><a href="#" class="topic-link" data-file="exceptions.html">⚠️ Exception Handling and Debugging</a></li>
+      <li><a href="#" class="topic-link" data-file="oop.html">🏗️ Object-Oriented Programming in Python</a></li>
+      <li><a href="#" class="topic-link" data-file="libraries.html">📦 Working with Libraries (NumPy, pandas)</a></li>
+      <li><a href="#" class="topic-link" data-file="visualization.html">📈 Data Visualization with matplotlib</a></li>
+      <li><a href="#" class="topic-link" data-file="apis-json.html">🌐 Introduction to Web APIs and JSON</a></li>
+      <li><a href="#" class="topic-link" data-file="database.html">🗄️ Introduction to Database Connectivity</a></li>
+      <li><a href="#" class="topic-link" data-file="quiz.html">🎯 Quiz</a></li>
+      <li><a href="#" class="topic-link" data-file="mock.html">📋 Mock Exam Question Type</a></li>
+      <li><a href="#" class="topic-link" data-file="project.html">🎓 Capstone Mini Project</a></li> 
+      <li><a href="#" class="topic-link" data-file="fullstackproject.html">🌍 Full Stack Project</a></li> 
+      <li><a href="#" class="topic-link" data-file="revision-cert.html">🏆 Revision & IBM Certification Practice Tests</a></li>
+      <li><a href="#" class="topic-link" data-file="follow.html">Contributors</a></li>
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main class="content" id="content">
-  
-    <div style="margin-top: 5px; text-align: center;">
-      <img src="python.png" alt="Funny Python" style="width: 80%; max-height: 600px; object-fit: cover; border-radius: 5px;">
-      <p style="margin-top: 10px; font-weight: bold; font-size: 2em; color: #4CAF50;">
-        🐍 "I'm not just a snake... I'm an interpreter of dreams and bugs!" 🐛
-      </p>
+     <!-- Fun Quote -->
+     <div class="fun-quote">
+      <p class="quote-text">"I'm not just a snake... I'm an interpreter of dreams and bugs!" 🐛</p>
+      <p class="quote-author">- Python Your Best Friends</p>
     </div>
+
+    <!-- Main Image -->
+    <div style="margin-top: 40px; text-align: center;">
+      <img src="python.png" alt="Funny Python" style="width: 80%; max-height: 600px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: transform 0.3s ease;" id="mainImage">
+    </div>
+    <!-- Hero Section -->
+    <div class="hero-container">
+      <h1 class="hero-title">Welcome to Python Mastery! 🚀</h1>
+      <p class="hero-subtitle">Your complete journey from beginner to Python expert</p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="features-grid">
+      <div class="feature-card" onclick="loadTopic('compiler.html')">
+        <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">Live Python Compiler</h3>
+        <p class="feature-description">Write and run Python code directly in your browser. No setup required!</p>
+      </div>
+
+      <div class="feature-card" onclick="loadTopic('introduction.html')">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title">Comprehensive Learning</h3>
+        <p class="feature-description">From basics to advanced concepts, everything you need to master Python.</p>
+      </div>
+
+      <div class="feature-card" onclick="loadTopic('quiz.html')">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Interactive Quizzes</h3>
+        <p class="feature-description">Test your knowledge with fun, interactive quizzes and challenges.</p>
+      </div>
+
+      <div class="feature-card" onclick="loadTopic('project.html')">
+        <div class="feature-icon">🎓</div>
+        <h3 class="feature-title">Real Projects</h3>
+        <p class="feature-description">Build real-world projects to apply what you've learned.</p>
+      </div>
+
+      <div class="feature-card" onclick="loadTopic('mock.html')">
+        <div class="feature-icon">📋</div>
+        <h3 class="feature-title">Mock Exams</h3>
+        <p class="feature-description">Prepare for certifications with realistic mock exams.</p>
+      </div>
+
+      <div class="feature-card" onclick="loadTopic('revision-cert.html')">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">IBM Certification</h3>
+        <p class="feature-description">Practice tests specifically designed for IBM Python certification.</p>
+      </div>
+    </div>
+    <div class="feature-card" onclick="window.open('https://drive.google.com/file/d/1KrN8O4jeWsqP4DD__KxqpexL3eRlHFnz/preview', '_blank')">
+  <div class="feature-icon">📋</div>
+  <h3 class="feature-title">Mock Exams</h3>
+  <p class="feature-description">Prepare for certifications with realistic mock exams.</p>
+</div>
+
+
+
+    <!-- Quick Start Section -->
+    <div class="quick-start">
+      <h2>Ready to Start Your Python Journey?</h2>
+      <p>Choose your path and begin learning today!</p>
+      <a href="#" class="quick-start-btn" onclick="loadTopic('introduction.html')">
+        <i class="fas fa-play"></i> Start Learning
+      </a>
+      <a href="#" class="quick-start-btn" onclick="loadTopic('compiler.html')">
+        <i class="fas fa-code"></i> Try Compiler
+      </a>
+    </div>
+
   </main>
 
   <script src="script.js"></script>
+  <script src="enhanced-script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    // Enhanced functionality for the main page
+    function loadTopic(topicFile) {
+      const link = document.querySelector(`[data-file="${topicFile}"]`);
+      if (link) {
+        link.click();
+      }
+    }
 
+    // Progress tracking
+    function updateProgress() {
+      const completed = localStorage.getItem('completedTopics') || 0;
+      const total = 18;
+      const percent = Math.round((completed / total) * 100);
+      
+      document.getElementById('completedTopics').textContent = completed;
+      document.getElementById('progressPercent').textContent = percent + '%';
+      document.getElementById('progressBar').style.width = percent + '%';
+    }
+
+    // Animate progress bar on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        updateProgress();
+      }, 500);
+    });
+
+    // Add click effects to feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+      });
+    });
+
+    // Add hover effect to main image
+    document.getElementById('mainImage').addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.02)';
+    });
+
+    document.getElementById('mainImage').addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+
+    // Welcome message
+    window.addEventListener('load', () => {
+      if (!localStorage.getItem('hasVisited')) {
+        setTimeout(() => {
+          Swal.fire({
+            title: 'Welcome to Python eBook! 🐍',
+            text: 'Ready to start your Python journey?',
+            icon: 'success',
+            confirmButtonText: 'Let\'s Go!',
+            background: '#f0f8ff',
+            backdrop: `
+              rgba(0,0,123,0.4)
+              url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='50' font-size='5' text-anchor='middle'%3E🐍%3C/text%3E%3C/svg%3E")
+              left top
+              no-repeat
+            `
+          });
+        }, 1000);
+        localStorage.setItem('hasVisited', 'true');
+      }
+    });
+  </script>
 </body>
 </html>

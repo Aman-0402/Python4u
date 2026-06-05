@@ -1,149 +1,704 @@
-<h2>🐍 Chapter 1: Introduction to Python</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Chapter 1: Introduction to Python</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #222;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        body.dark .container {
+            background: #1e1e1e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section {
+            text-align: center;
+            background: linear-gradient(135deg, #007acc 0%, #005b99 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        .python-logo {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 5%;
+            transition: transform 0.3s ease;
+        }
+        
+        .python-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        h2 {
+            color: #007acc;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 8px;
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+        
+        body.dark h2 {
+            color: #89d3ff;
+            border-bottom-color: #89d3ff;
+        }
+        
+        h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-top: 25px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #007acc;
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark h3 {
+            color: #e0e0e0;
+            background: #2a2a2a;
+            border-left-color: #89d3ff;
+        }
+        
+        .fun-fact {
+            background: #fff8dc;
+            border-left: 4px solid #f4a261;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+        
+        .fun-fact:hover {
+            transform: translateX(5px);
+        }
+        
+        body.dark .fun-fact {
+            background: #2e2e2e;
+            border-left-color: #f4a261;
+        }
+        
+        .code-block {
+            background: #f4f4f4;
+            color: #111;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark .code-block {
+            background: #1e1e1e;
+            color: #e8e8e8;
+            border-color: #333;
+        }
+        
+        .code-block:hover {
+            background: #eaeaea;
+        }
+        
+        body.dark .code-block:hover {
+            background: #2a2a2a;
+        }
+        
+        .output-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark .output-block {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        
+        .analogy-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .analogy-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        body.dark .analogy-box {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .creator-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .creator-info:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .creator-info {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .creator-photo {
+            width: 200px;
+            height:300px;
+            border-radius: 10%;
+            object-fit: cover;
+            border: 3px solid #007acc;
+            transition: transform 0.3s ease;
+        }
+        
+        .creator-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-color: #007acc;
+        }
+        
+        body.dark .benefit-card {
+            background: #1e1e1e;
+            border-color: #444;
+        }
+        
+        body.dark .benefit-card:hover {
+            border-color: #89d3ff;
+        }
+        
+        .benefit-card h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: #007acc;
+        }
+        
+        body.dark .benefit-card h4 {
+            color: #89d3ff;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        table:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        body.dark table {
+            background: #1e1e1e;
+        }
+        
+        th {
+            background: #007acc;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        body.dark th {
+            background: #333;
+        }
+        
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #e9ecef;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark td {
+            border-bottom-color: #444;
+        }
+        
+        tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        body.dark tr:hover td {
+            background: #2a2a2a;
+        }
+        
+        .quiz {
+            background: #fff8dc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 6px solid #f4a261;
+        }
+        
+        body.dark .quiz {
+            background: #2e2e2e;
+            border-left-color: #f4a261;
+        }
+        
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .quiz-question:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .quiz-question {
+            background: #1e1e1e;
+        }
+        
+        .quiz-question ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quiz-question li {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: #e0f7fa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .quiz-question li:hover {
+            background: #b2ebf2;
+            transform: translateX(5px);
+        }
+        
+        body.dark .quiz-question li {
+            background: #333;
+        }
+        
+        body.dark .quiz-question li:hover {
+            background: #444;
+        }
+        
+        .challenge-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .challenge-box:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .challenge-box {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .summary-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .summary-box:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.dark .summary-box {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .summary-box li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            transition: transform 0.2s ease;
+        }
+        
+        .summary-box li:hover {
+            transform: translateX(5px);
+        }
+        
+        .summary-box li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .emoji {
+            font-size: 1.1em;
+            margin-right: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+        
+        body.dark .highlight {
+            background: linear-gradient(120deg, #1a237e 0%, #283593 100%);
+            color: #90caf9;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python Logo" class="python-logo">
 
-<h3>🎯 What is Python?</h3>
-<p>Python is a high-level, interpreted, and general-purpose programming language known for its simplicity, readability, and power. Think of it like a universal Swiss Army knife — from websites and automation to AI and games, Python can do it all.</p>
+            <h1>🐍 Chapter 1: Introduction to Python</h1>
+            <p>Your Journey to Becoming a Python Master Begins Here!</p>
+        </div>
 
-<h3>🤔 A Funny Starter Question</h3>
-<blockquote>
-  Q: Why did the Python programmer go hungry?<br>
-  A: Because he couldn’t find a byte to eat!
-</blockquote>
+        <h3>🎯 What is Python?</h3>
+        <p>Python is a <span class="highlight">high-level, interpreted, and general-purpose programming language</span> known for its simplicity, readability, and power. Think of it like a universal Swiss Army knife — from websites and automation to AI and games, Python can do it all.</p>
 
-<h3>🧠 Real-Life Analogy</h3>
-<p>
-  Imagine this:<br>
-  You want to send 50 emails to your friends inviting them to your birthday party.<br>
-  Python is like having a robot assistant that does it for you with one line of code.<br>
-  No more Ctrl+C, Ctrl+V. Work smart, not hard.
-</p>
+        <div class="fun-fact">
+            <h4>🤔 A Funny Starter Question</h4>
+            <blockquote style="margin: 0; font-style: italic; font-size: 1.1em;">
+                Q: Why did the Python programmer go hungry?<br>
+                A: Because he couldn't find a byte to eat!
+            </blockquote>
+        </div>
 
-<h3>🔎 Who Created Python?</h3>
-<ul>
-  <li>👨‍💻 <strong>Creator:</strong> Guido van Rossum</li>
-  <li>📅 <strong>Created in:</strong> Late 1980s, released in 1991</li>
-  <li>🧠 <strong>Why?:</strong>
-    <ul>
-      <li>Easy to learn</li>
-      <li>Fun to use</li>
-      <li>As readable as plain English</li>
-      <li>Free and open-source</li>
-    </ul>
-  </li>
-</ul>
-<p><strong>Fun fact:</strong> He named it “Python” not after the snake 🐍, but after his favorite British comedy show “Monty Python’s Flying Circus” 🎭.</p>
+        <div class="analogy-box">
+            <h3>🧠 Real-Life Analogy</h3>
+            <p>
+                <strong>Imagine this scenario:</strong><br><br>
+                You want to send 50 emails to your friends inviting them to your birthday party.<br>
+                <span class="highlight">Python is like having a robot assistant</span> that does it for you with one line of code.<br>
+                No more Ctrl+C, Ctrl+V. Work smart, not hard! 🚀
+            </p>
+        </div>
 
-<h3>💡 Why Learn Python?</h3>
-<ul>
-  <li>✅ Beginner-Friendly: Great for students and non-programmers.</li>
-  <li>🚀 Career Opportunities: Python is used at Google, Netflix, NASA, and Instagram.</li>
-  <li>🤖 AI & Data Science King: 90% of AI & ML tools use Python.</li>
-  <li>🌐 Web Development: Build websites using Django, Flask.</li>
-  <li>🛠️ Automation: Save hours of repetitive work.</li>
-  <li>🎮 Game Development: Yes, you can make games!</li>
-  <li>🧪 Scientific Research: Python powers data analysis & simulations.</li>
-</ul>
-<p><strong>In short:</strong> Python is like English for computers — easy, powerful, and universal.</p>
+        <h3>🔎 Who Created Python?</h3>
+        <div class="creator-info">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Guido_van_Rossum_OSCON_2006.jpg" alt="Guido van Rossum" class="creator-photo">
+            <div>
+                <ul style="list-style: none; padding: 0;">
+                    <li>👨‍💻 <strong>Creator:</strong> Guido van Rossum</li>
+                    <li>📅 <strong>Created in:</strong> Late 1980s, released in 1991</li>
+                    <li>🧠 <strong>Why?:</strong>
+                        <ul>
+                            <li>Easy to learn</li>
+                            <li>Fun to use</li>
+                            <li>As readable as plain English</li>
+                            <li>Free and open-source</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="fun-fact">
+          <p><strong>Fun fact:</strong> He named it "Python" not after the snake 🐍, but after his favorite British comedy show "Monty Python's Flying Circus" 🎭.</p>
+          <img src="monty.jpg"
+               alt="Monty Python's Flying Circus" 
+               style="max-width: 80%; height: auto; margin-top: 10px; border-radius: 8px;">
+        </div>
+        <h3>💡 Why Learn Python?</h3>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h4>🎓 Beginner-Friendly</h4>
+                <p>Great for students and non-programmers. Perfect first language!</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🚀 Career Opportunities</h4>
+                <p>Used at Google, Netflix, NASA, and Instagram. High demand!</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🤖 AI & Data Science King</h4>
+                <p>90% of AI & ML tools use Python. Future-proof skill!</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🌐 Web Development</h4>
+                <p>Build websites using Django, Flask. Full-stack ready!</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🛠️ Automation</h4>
+                <p>Save hours of repetitive work. Be more productive!</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🎮 Game Development</h4>
+                <p>Yes, you can make games! Pygame makes it fun!</p>
+            </div>
+        </div>
+        
+        <p><strong>In short:</strong> Python is like English for computers — easy, powerful, and universal.</p>
 
-<h3>🔥 First Python Code</h3>
-<pre><code>print("Hello, Python World!")</code></pre>
-<p>✅ Output:</p>
-<pre><code>Hello, Python World!</code></pre>
-<p>This is your digital "Namaste 🙏" to the coding world.</p>
+        <h3>🔥 Your First Python Code</h3>
+        <div class="code-block">
+print("My life! , My Rule! My Code!")
+        </div>
+        <p>✅ Output:</p>
+        <div class="output-block">
+          My life! , My Rule! My Code!
+        </div>
+        <p>This is your digital "Namaste 🙏" to the coding world.</p>
 
-<h3>🦸‍♂️ Funny Example</h3>
-<p><strong>Scenario:</strong> You're too lazy to reply “Good Morning” to your friends every day.<br>
-Let Python handle it!</p>
-<pre><code>for friend in range(5):
+        <h3>🦸‍♂️ Funny Example: Lazy Greetings</h3>
+        <p><strong>Scenario:</strong> You're too lazy to reply "Good Morning" to your friends every day.<br>
+        Let Python handle it!</p>
+        <div class="code-block">
+            <pre><code>for friend in range(5):
     print("Good morning, friend!")</code></pre>
-<p>✅ Output:</p>
-<pre><code>Good morning, friend!
+
+        </div>
+        <p>✅ Output:</p>
+        <div class="output-block">
+          <pre><code>Good morning, friend!
 Good morning, friend!
 Good morning, friend!
 Good morning, friend!
 Good morning, friend!</code></pre>
-<p>Now you can sip chai while Python handles greetings ☕🤖.</p>
 
-<h3>🦸‍♂️ What if we have to Friends name</h3>
-<pre><code>friends = ["Alice", "Bob", "Charlie", "Diana"]
-  for name in friends:
-  print(f"Good morning, {name}! ☀️")</code></pre>
-<p>✅ Output:</p>
-<pre><code>Good morning, Alice! ☀️
-  Good morning, Bob! ☀️
-  Good morning, Charlie! ☀️
-  Good morning, Diana! ☀️</code></pre>
+        </div>
+        <p>Now you can sip chai while Python handles greetings ☕🤖.</p>
 
-<h3>🧠 Quick Concepts Recap</h3>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Concept</th><th>Meaning</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>print()</td><td>Outputs text to the screen</td></tr>
-    <tr><td>Variable</td><td>Container to store data</td></tr>
-    <tr><td>Indentation</td><td>Python uses spaces (very picky about it!)</td></tr>
-    <tr><td>Comments</td><td>Notes in code that are ignored by Python</td></tr>
-  </tbody>
-</table>
+        <h3>🦸‍♂️ Personalized Greetings with Names</h3>
+        <div class="code-block">
+            <pre><code>friends = ["Superman", "Batman", "Goku", "Vegeta","Saitama","Eren Yeager","Luffy"]
+for name in friends:
+    print(f"Good morning, {name}!")</code></pre>
+        </div>
+        <p>✅ Output:</p>
+        <div class="output-block">
+          <pre><code>Good morning, Superman!
+Good morning, Batman!
+Good morning, Goku!
+Good morning, Vegeta!
+Good morning, Saitama!
+Good morning, Eren Yeager!
+Good morning, Luffy!</code></pre>
+        </div>
 
-<h3>🎯 Why Python is Important?</h3>
-<table border="1" cellpadding="8">
-  <thead>
-    <tr><th>Area</th><th>Use of Python</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>AI & Machine Learning</td><td>Used in tools like TensorFlow, PyTorch</td></tr>
-    <tr><td>Web Development</td><td>Django, Flask frameworks</td></tr>
-    <tr><td>Data Analysis</td><td>Pandas, NumPy, Matplotlib</td></tr>
-    <tr><td>Education</td><td>First language in schools/colleges</td></tr>
-    <tr><td>Automation</td><td>Bots, task schedulers, scripts</td></tr>
-    <tr><td>Gaming</td><td>Pygame library</td></tr>
-  </tbody>
-</table>
-<p><strong>Python is EVERYWHERE</strong> — phones, websites, robots, even space missions! 🚀</p>
-<div class="quiz">
-<h3>🎮 Mini Quiz Time!</h3>
-<div class="quiz-question">
-    <p>1. Who created Python?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) Dennis Ritchie</li>
-      <li onclick="checkAnswer(this, 'wrong')">b) James Gosling</li>
-      <li onclick="checkAnswer(this, 'correct')">c) Guido van Rossum</li>
-      <li onclick="checkAnswer(this, 'wrong')">d) Elon Musk</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>2. What is the output of print("Namaste")?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) print("Namaste")</li>
-      <li onclick="checkAnswer(this, 'wrong')">b) "Namaste"</li>
-      <li onclick="checkAnswer(this, 'correct')">c) Namaste</li>
-      <li onclick="checkAnswer(this, 'wrong')">d) Error</li>
-    </ul>
-  </div>
-  
-  <div class="quiz-question">
-    <p>3. Why is Python popular?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">a) It's complex</li>
-      <li onclick="checkAnswer(this, 'wrong')">b) It's free</li>
-      <li onclick="checkAnswer(this, 'wrong')">c) It's readable and powerful</li>
-      <li onclick="checkAnswer(this, 'correct')">d) Both b and c</li>
-    </ul>
-  </div>
-</div>
+        <h3>🧠 Quick Concepts Recap</h3>
+        <table>
+            <thead>
+                <tr><th>Concept</th><th>Meaning</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>print()</td><td>Outputs text to the screen</td><td>print("Hello")</td></tr>
+                <tr><td>Variable</td><td>Container to store data</td><td>name = "Python"</td></tr>
+                <tr><td>Indentation</td><td>Python uses spaces (very picky!)</td><td>4 spaces for blocks</td></tr>
+                <tr><td>Comments</td><td>Notes ignored by Python</td><td># This is a comment</td></tr>
+            </tbody>
+        </table>
 
-<h3>🧪 Coding Challenge</h3>
-<p><strong>🚀 Try this:</strong><br>
-Write a Python program to display your name 10 times.</p>
-<pre><code>for i in range(10):
+        <h3>🎯 Why Python is Important?</h3>
+        <table>
+            <thead>
+                <tr><th>Area</th><th>Use of Python</th><th>Popular Tools</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>🤖 AI & Machine Learning</td><td>Used in advanced AI tools</td><td>TensorFlow, PyTorch</td></tr>
+                <tr><td>🌐 Web Development</td><td>Build websites and APIs</td><td>Django, Flask</td></tr>
+                <tr><td>📊 Data Analysis</td><td>Process and visualize data</td><td>Pandas, NumPy, Matplotlib</td></tr>
+                <tr><td>🎓 Education</td><td>First language in schools</td><td>Scratch, Turtle Graphics</td></tr>
+                <tr><td>⚡ Automation</td><td>Bots, task schedulers</td><td>Selenium, BeautifulSoup</td></tr>
+                <tr><td>🎮 Gaming</td><td>Create games and graphics</td><td>Pygame library</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Python is EVERYWHERE</strong> — phones, websites, robots, even space missions! 🚀</p>
+
+        <div class="quiz">
+            <h3>🎮 Mini Quiz Time!</h3>
+            <div class="quiz-question">
+                <p>1. Who created Python?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) Dennis Ritchie</li>
+                    <li onclick="checkAnswer(this, 'wrong')">b) James Gosling</li>
+                    <li onclick="checkAnswer(this, 'correct')">c) Guido van Rossum</li>
+                    <li onclick="checkAnswer(this, 'wrong')">d) Elon Musk</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-question">
+                <p>2. What is the output of print("Namaste")?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) print("Namaste")</li>
+                    <li onclick="checkAnswer(this, 'wrong')">b) "Namaste"</li>
+                    <li onclick="checkAnswer(this, 'correct')">c) Namaste</li>
+                    <li onclick="checkAnswer(this, 'wrong')">d) Error</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-question">
+                <p>3. Why is Python popular?</p>
+                <ul>
+                    <li onclick="checkAnswer(this, 'wrong')">a) It's complex</li>
+                    <li onclick="checkAnswer(this, 'wrong')">b) It's free</li>
+                    <li onclick="checkAnswer(this, 'wrong')">c) It's readable and powerful</li>
+                    <li onclick="checkAnswer(this, 'correct')">d) Both b and c</li>
+                </ul>
+            </div>
+        </div>
+
+            <h3>🧪 Coding Challenge</h3>
+            <p><strong>🚀 Try this:</strong><br>
+            Write a Python program to display your name 1000 times.</p>
+            <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+            <div class="answer" style="display: none;">
+            <div class="code-block">
+              <pre><code>for i in range(1000):
     print("YourNameHere")</code></pre>
+                  </div>
+            </div>
+            <p><em>💡 Tip: Replace "YourNameHere" with your actual name!</em></p>
+        
+        <h3>🧪 Coding Challenge</h3>
+        <p><strong>🚀 Try this:</strong><br>
+        Write a Python program that asks for your name and prints a welcome message.</p>
+        <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer" style="display: none;">
+          <div class="code-block">
+            <pre><code>name = input("Enter your name: ")
+        print("Welcome, " + name + "!")</code></pre>
+          </div>
+        </div>
+        <p><em>💡 Tip: Use <strong>input()</strong> to take user input and <strong>+</strong> to join strings.</em></p>
+        </div>
+        
+        <div class="summary-box">
+            <h3>✍️ Summary</h3>
+            <ul>
+                <li>Python is a powerful, friendly, and flexible language.</li>
+                <li>Created by Guido van Rossum to make coding fun and easy.</li>
+                <li>It's used everywhere from YouTube to NASA.</li>
+                <li>One of the best languages to start your programming journey!</li>
+                <li>Perfect for beginners and professionals alike.</li>
+            </ul>
+        </div>
 
-<h3>✍️ Summary</h3>
-<ul>
-  <li>Python is a powerful, friendly, and flexible language.</li>
-  <li>Created by Guido van Rossum to make coding fun and easy.</li>
-  <li>It’s used everywhere from YouTube to NASA.</li>
-  <li>One of the best languages to start your programming journey!</li>
-</ul>
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #007acc; color: white; border-radius: 12px; transition: transform 0.3s ease;">
+            <h3>🎉 Congratulations!</h3>
+            <p>You've completed Chapter 1! You're now ready to dive deeper into the Python world.</p>
+            <p><strong>Next up:</strong> Variables and Data Types 🚀</p>
+        </div>
+    </div>
+</body>
+</html>
