@@ -1,3 +1,15 @@
+// ── Back-to-top visibility ───────────────────────────
+window.addEventListener('scroll', function () {
+  var btn = document.getElementById('toTopBtn');
+  if (btn) {
+    if (window.scrollY > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+}, { passive: true });
+
 // ── Sidebar toggle ──────────────────────────────────
 const menuBtn     = document.getElementById('menuBtn');
 const sidebar     = document.getElementById('sidebar');

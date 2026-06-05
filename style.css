@@ -1080,3 +1080,102 @@ body.dark * { scrollbar-color: #30363d transparent; }
 .card-section  { animation: fadeInUp 0.5s ease-out both; }
 .callout       { animation: slideIn  0.4s ease-out both; }
 .practice-zone { animation: fadeInUp 0.5s ease-out both; }
+
+/* ── Back-to-top button ──────────────────────────────── */
+#toTopBtn {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 1200;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  font-size: 1.4em;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 212, 170, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(14px) scale(0.85);
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: none;
+}
+
+#toTopBtn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+#toTopBtn:hover {
+  background: #00f5c4;
+  box-shadow: 0 6px 24px rgba(0, 212, 170, 0.6);
+  transform: translateY(-2px) scale(1.05);
+}
+
+#toTopBtn:active {
+  transform: scale(0.94);
+}
+
+/* ── Light-theme: code wrapper border visibility ─────── */
+body:not(.dark) .code-wrapper {
+  border-color: #d0d7de;
+}
+
+body:not(.dark) .code-header {
+  border-bottom-color: #d0d7de;
+}
+
+body:not(.dark) .output-wrapper {
+  border-color: #d0d7de;
+}
+
+/* ── Mobile: code & output blocks ───────────────────── */
+@media (max-width: 600px) {
+  pre {
+    font-size: 0.82em;
+    padding: 0.9em 0.9em;
+  }
+
+  .code-header {
+    padding: 6px 10px;
+    gap: 7px;
+  }
+
+  .code-fname {
+    font-size: 0.7em;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .copy-btn {
+    padding: 2px 8px;
+    font-size: 0.7em;
+  }
+
+  .output-block {
+    font-size: 0.82em;
+    padding: 0.8em 0.9em;
+  }
+
+  .output-header {
+    padding: 4px 10px;
+    font-size: 0.7em;
+  }
+
+  #toTopBtn {
+    bottom: 18px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.15em;
+  }
+}
