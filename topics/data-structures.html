@@ -1,1234 +1,576 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chapter 5: Data Structures in Python</title>
-  <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-
-  <div class="hero-section">
-    <h1>🧠 Chapter 5: Data Structures in Python</h1>
-    <p>Master the art of organizing and managing information! In this chapter, you'll explore Python's most powerful built-in data structures—lists, tuples, sets, and dictionaries. Learn how to store, access, and manipulate data like a pro. 🗂️🔑</p>
-  </div>
-
-  <div class="chapter">
-    <h1>🧠 Chapter 5: Data Structures in Python – List, Tuple, Set, Dictionary</h1>
-
-    <p>Imagine your brain having separate compartments for different types of memory — like playlists, favorite emojis, fridge items, and contacts.<br/>
-    That’s what data structures in Python help you do — store and organize data efficiently! 📦📚</p>
-
-    <h2>📦 What are Data Structures?</h2>
-    <p>They’re ways of storing and organizing data so you can access, modify, and manage it easily.</p>
-
-    <h3>Four Main Built-in Data Structures:</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th><th>Ordered</th><th>Mutable</th><th>Duplicate Items</th><th>SyntaxExample</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>List</td><td>✅ Yes</td><td>✅ Yes</td><td>✅ Yes</td><td>[1, 2, 3]</td></tr>
-        <tr><td>Tuple</td><td>✅ Yes</td><td>❌ No</td><td>✅ Yes</td><td>(1, 2, 3)</td></tr>
-        <tr><td>Set</td><td>❌ No</td><td>✅ Yes</td><td>❌ No</td><td>{1, 2, 3}</td></tr>
-        <tr><td>Dictionary</td><td>❌ No</td><td>✅ Yes</td><td>❌ Keys Unique</td><td>{"name": "Aman"}</td></tr>
-      </tbody>
-    </table>
-
-    <h2>🧃 1. Python List – A Basket of Items 🧺</h2>
-
-<h3>🔍 What is a List?</h3>
-<p>
-  A list in Python is an ordered, mutable (changeable) collection of items, enclosed in square brackets <strong>[]</strong>.
-</p>
-<p><strong>✅ A list can hold:</strong></p>
-<ul>
-  <li>Strings: <code>["apple", "banana"]</code></li>
-  <li>Numbers: <code>[1, 2, 3]</code></li>
-  <li>Mixed types: <code>["Aman", 25, True]</code></li>
-  <li>Even other lists: <code>[[1, 2], ["x", "y"]]</code></li>
-</ul>
-
-<h3>🛍️ Funny Analogy</h3>
-<p>A list is like a shopping basket – you can:</p>
-<ul>
-  <li>Add items 🍎</li>
-  <li>Remove items 🥭</li>
-  <li>Sort them 📦</li>
-  <li>Count how many are inside 🧮</li>
-</ul>
-
-<pre><code>fruits = ["apple", "banana", "mango"]
-print(fruits[1])  # Output: banana (Lists are 0-indexed!)
-</code></pre>
-
-<h3>⚙️ Useful List Methods</h3>
-<table>
-  <thead>
-    <tr><th>Method</th><th>What it does</th><th>Example</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>append(item)</td><td>Adds item to end</td><td>fruits.append("orange")</td></tr>
-    <tr><td>insert(index, item)</td><td>Inserts at position</td><td>fruits.insert(1, "grape")</td></tr>
-    <tr><td>remove(item)</td><td>Removes first match</td><td>fruits.remove("apple")</td></tr>
-    <tr><td>pop(index)</td><td>Removes & returns item</td><td>fruits.pop(2)</td></tr>
-    <tr><td>sort()</td><td>Sorts list ascending</td><td>fruits.sort()</td></tr>
-    <tr><td>reverse()</td><td>Reverses the list</td><td>fruits.reverse()</td></tr>
-    <tr><td>len(list)</td><td>Counts items</td><td>len(fruits)</td></tr>
-    <tr><td>index(item)</td><td>Returns index of item</td><td>fruits.index("banana")</td></tr>
-    <tr><td>count(item)</td><td>Counts item occurrences</td><td>fruits.count("apple")</td></tr>
-    <tr><td>clear()</td><td>Removes all items</td><td>fruits.clear()</td></tr>
-  </tbody>
-</table>
-
-<h3>🧠 Accessing List Items</h3>
-<pre><code>fruits = ["apple", "banana", "cherry"]
-print(fruits[0])    # apple
-print(fruits[-1])   # cherry
-</code></pre>
-
-<h3>🔄 Slicing a List</h3>
-<pre><code>fruits = ["apple", "banana", "mango", "grape", "orange"]
-print(fruits[1:4])    # ['banana', 'mango', 'grape']
-print(fruits[:3])     # ['apple', 'banana', 'mango']
-print(fruits[-3:])    # ['mango', 'grape', 'orange']
-</code></pre>
-
-<h3>💣 Common Mistakes</h3>
-<table>
-  <thead>
-    <tr><th>Mistake</th><th>What happens?</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><code>fruits[5]</code> (if only 3 items)</td><td>❌ IndexError: list index out of range</td></tr>
-    <tr><td><code>fruits.remove("papaya")</code></td><td>❌ ValueError: item not in list</td></tr>
-    <tr><td><code>fruits.sort()</code> with mixed types</td><td>❌ TypeError: can’t compare types</td></tr>
-  </tbody>
-</table>
-
-<h3>🧪 Example Code</h3>
-<pre><code>shopping = ["milk", "bread", "eggs"]
-shopping.append("butter")
-shopping.remove("bread")
-shopping.sort()
-print(shopping)  # Output: ['butter', 'eggs', 'milk']
-</code></pre>
-
-<h2>🎯 Quiz Time</h2>
-
-<div class="quiz-question">
-  <p>1. What does <code>fruits.append("grape")</code> do?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Deletes "grape"</li>
-    <li onclick="checkAnswer(this, 'correct')">B) Adds grape at the end</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) Inserts at the beginning</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>2. What will this print?</p>
-  <pre><code>items = ["pen", "book", "eraser"]
-print(items[2])</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) book</li>
-    <li onclick="checkAnswer(this, 'correct')">B) eraser</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) mouse</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) shoes</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>3. Which method removes everything from a list?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) pop()</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) remove()</li>
-    <li onclick="checkAnswer(this, 'correct')">C) clear()</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) del</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>4. What is the output?</p>
-  <pre><code>x = [10, 20, 30, 40]
-x.pop(2)
-print(x)</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) [90, 30, 40]</li>
-    <li onclick="checkAnswer(this, 'correct')">B) [10, 20, 40]</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) [20, 80, 40]</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) (10, 20, 40)</li>
-  </ul>
-</div>
-
-
-<div class="quiz-question">
-  <p>5. What is the output of:</p>
-  <pre><code>x = ["a", "b", "c"]
-x.insert(1, "z")
-print(x)</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) ['z', 'a', 'b', 'c']</li>
-    <li onclick="checkAnswer(this, 'correct')">B) ['a', 'z', 'b', 'c']</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) ['a', 'b', 'z', 'c']</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) ['a', 'b', 'c', 'z']</li>
-  </ul>
-</div>
-
-
-<div class="practice-zone">
-  <h4>Practice Zone</h4>
-  <ul>
-    <li>Create a list of your 3 favorite foods and print the second one.</li>
-    <li>Add a new food to the list and print the updated list.</li>
-  </ul>
-</div>
-
-
-<h2>🪑 2. Tuple – The Unchangeable Chair Set</h2>
-
-<h3>🔍 What is a Tuple?</h3>
-<p>
-  A tuple is an <strong>ordered</strong>, <strong>immutable</strong> (unchangeable) collection of items, enclosed in parentheses <strong>()</strong>.
-</p>
-
-<h3>🧠 Funny Analogy</h3>
-<p>
-  A tuple is like your school timetable 📅 or a chair set 🪑:
-  <br>Once made, you can’t change or remove any item.
-  You can sit on it, count it, and admire it — but you can't modify it!
-</p>
-
-<pre><code>colors = ("red", "green", "blue")
-print(colors[0])  # Output: red
-</code></pre>
-
-<h3>✅ Why Use Tuples?</h3>
-<table>
-  <thead>
-    <tr><th>Reason</th><th>Explanation</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>✅ Faster than lists</td><td>Tuples take less memory and are faster</td></tr>
-    <tr><td>✅ Immutable</td><td>Protect data from being changed</td></tr>
-    <tr><td>✅ Used as dictionary keys</td><td>Only immutable types can be keys</td></tr>
-    <tr><td>✅ Safer data representation</td><td>Good for read-only or fixed data</td></tr>
-  </tbody>
-</table>
-
-<h3>🎯 Tuple Syntax:</h3>
-<pre><code># Normal tuple
-days = ("Mon", "Tue", "Wed")
-
-# Single-element tuple (must include comma!)
-one = ("hello",)
-print(type(one))  # Output: &lt;class 'tuple'&gt;
-</code></pre>
-
-<h3>⚠️ Can't Do With Tuples (Unlike Lists)</h3>
-<table>
-  <thead>
-    <tr><th>Operation</th><th>List ✅</th><th>Tuple ❌</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>append()</td><td>✅</td><td>❌</td></tr>
-    <tr><td>remove()</td><td>✅</td><td>❌</td></tr>
-    <tr><td>pop()</td><td>✅</td><td>❌</td></tr>
-    <tr><td>sort()</td><td>✅</td><td>❌</td></tr>
-    <tr><td>insert()</td><td>✅</td><td>❌</td></tr>
-  </tbody>
-</table>
-
-<p>Tuples are read-only – just like sealed boxes 📦.</p>
-
-<h3>✅ What You Can Do With Tuples</h3>
-<table>
-  <thead>
-    <tr><th>Operation</th><th>Example</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Indexing</td><td>colors[1] → "green"</td></tr>
-    <tr><td>Slicing</td><td>colors[:2] → ("red", "green")</td></tr>
-    <tr><td>len()</td><td>len(colors) → 3</td></tr>
-    <tr><td>count()</td><td>colors.count("red") → 1</td></tr>
-    <tr><td>index()</td><td>colors.index("blue") → 2</td></tr>
-    <tr><td>Looping</td><td>for c in colors:</td></tr>
-  </tbody>
-</table>
-
-<h3>🧪 Code Example</h3>
-<pre><code>languages = ("Python", "Java", "C++", "Python")
-print(len(languages))              # 4
-print(languages.count("Python"))   # 2
-print(languages.index("Java"))     # 1
-</code></pre>
-
-<h3>⚖️ Tuple vs List</h3>
-<table>
-  <thead>
-    <tr><th>Feature</th><th>List ([])</th><th>Tuple (())</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Mutable</td><td>✅ Yes</td><td>❌ No</td></tr>
-    <tr><td>Faster</td><td>❌ Slightly slower</td><td>✅ Faster</td></tr>
-    <tr><td>Syntax</td><td>[] brackets</td><td>() parentheses</td></tr>
-    <tr><td>Methods</td><td>More methods</td><td>Fewer methods</td></tr>
-  </tbody>
-</table>
-
-<h3>⚠️ Common Mistakes</h3>
-<table>
-  <thead>
-    <tr><th>Mistake</th><th>Problem</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><code>t = ("hi")</code></td><td>It's a string, not a tuple! ❌</td></tr>
-    <tr><td><code>t = ("hi",)</code></td><td>Now it's a tuple ✔️</td></tr>
-    <tr><td><code>t.append("x")</code></td><td>❌ AttributeError: 'tuple' object has no attribute 'append'</td></tr>
-  </tbody>
-</table>
-
-<h3>🧠 Joke Reminder:</h3>
-<p>
-  A tuple is like your school timetable 📅
-  <br>If it's Tuesday and you have Math, you can’t swap it with Games 😭
-</p>
-
-<h2>🎯 Quiz Time</h2>
-
-<div class="quiz-question">
-  <p>1. What will this print?</p>
-  <pre><code>nums = (1, 2, 3, 4)
-print(nums[2])</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) 2</li>
-    <li onclick="checkAnswer(this, 'correct')">B) 3</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) 4</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
-  </ul>
-</div>
-
-
-<div class="quiz-question">
-  <p>2. What’s the correct way to create a 1-element tuple?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) t = ("apple")</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) t = ["apple"]</li>
-    <li onclick="checkAnswer(this, 'correct')">C) t = ("apple",)</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) t = tuple("apple")</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>3. Which method works on tuples?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) append()</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) insert()</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) remove()</li>
-    <li onclick="checkAnswer(this, 'correct')">D) count()</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>4. Fill in the blank:</p>
-  <pre><code>colors = ("red", "green", "blue")
-print(____(colors))  # To get total items</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'correct')">A) len</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) count</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) size</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) total</li>
-  </ul>
-</div>
-
-
-<div class="practice-zone">
-  <h4>Practice Zone</h4>
-  <ul>
-    <li>Create a list of your 3 favorite foods and print the second one.</li>
-    <li>Add a new food to the list and print the updated list.</li>
-  </ul>
-</div>
-
-
-<h2>🔁 3. Set – A Unique Collection 🌟</h2>
-
-<h3>🔍 What is a Set in Python?</h3>
-<p>A <strong>Set</strong> is an <strong>unordered</strong>, <strong>mutable</strong>, and <strong>unindexed</strong> collection that stores only <strong>unique</strong> elements.</p>
-<p>✅ Duplicate values are automatically removed.</p>
-
-<h3>🧠 Funny Analogy:</h3>
-<p>A set is like a VIP list at a party 🎉 — each guest (element) can appear only once. No duplicates allowed!</p>
-
-<h3>🧪 Example:</h3>
-<pre><code>numbers = {1, 2, 2, 3, 4}
-print(numbers)  # Output: {1, 2, 3, 4}
-</code></pre>
-
-<h3>📌 Key Characteristics of Sets</h3>
-<table>
-  <thead><tr><th>Property</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td>✅ No duplicates</td><td>All elements are unique</td></tr>
-    <tr><td>🔄 Unordered</td><td>No indexing or order guaranteed</td></tr>
-    <tr><td>🚀 Fast lookup</td><td>Faster than lists for checking existence</td></tr>
-    <tr><td>🛠️ Mutable</td><td>You can add/remove items</td></tr>
-  </tbody>
-</table>
-
-<h3>🧠 Real Example:</h3>
-<pre><code>emails = {"a@example.com", "b@example.com", "a@example.com"}
-print(emails)  # Output: {'a@example.com', 'b@example.com'}
-</code></pre>
-
-<h3>✅ Common Set Methods</h3>
-<table>
-  <thead><tr><th>Method</th><th>Description</th><th>Example</th></tr></thead>
-  <tbody>
-    <tr><td>add(x)</td><td>Adds item</td><td>s.add(5)</td></tr>
-    <tr><td>remove(x)</td><td>Removes item; error if not found</td><td>s.remove(3)</td></tr>
-    <tr><td>discard(x)</td><td>Removes item; no error if not found</td><td>s.discard(3)</td></tr>
-    <tr><td>clear()</td><td>Removes all items</td><td>s.clear()</td></tr>
-    <tr><td>pop()</td><td>Removes random item</td><td>s.pop()</td></tr>
-    <tr><td>union(set2)</td><td>Combines sets (no duplicates)</td><td>s1.union(s2)</td></tr>
-    <tr><td>intersection(set2)</td><td>Returns common elements</td><td>s1.intersection(s2)</td></tr>
-    <tr><td>difference(set2)</td><td>Items only in first set</td><td>s1.difference(s2)</td></tr>
-    <tr><td>issubset(set2)</td><td>Checks if set1 ⊆ set2</td><td>s1.issubset(s2)</td></tr>
-    <tr><td>issuperset(set2)</td><td>Checks if set1 ⊇ set2</td><td>s1.issuperset(s2)</td></tr>
-  </tbody>
-</table>
-
-<h3>🧪 Code Example</h3>
-<pre><code>set1 = {1, 2, 3}
-set2 = {3, 4, 5}
-
-print(set1.union(set2))         # {1, 2, 3, 4, 5}
-print(set1.intersection(set2))  # {3}
-print(set1.difference(set2))    # {1, 2}
-</code></pre>
-
-<h3>⚠️ Set vs List vs Tuple</h3>
-<table>
-  <thead>
-    <tr><th>Feature</th><th>List []</th><th>Tuple ()</th><th>Set {}</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Ordered</td><td>✅</td><td>✅</td><td>❌</td></tr>
-    <tr><td>Duplicates</td><td>✅</td><td>✅</td><td>❌ Only unique</td></tr>
-    <tr><td>Mutable</td><td>✅</td><td>❌</td><td>✅</td></tr>
-    <tr><td>Indexed</td><td>✅</td><td>✅</td><td>❌</td></tr>
-    <tr><td>Performance</td><td>🔁 Slower</td><td>🔁 Medium</td><td>🚀 Fast</td></tr>
-  </tbody>
-</table>
-
-<h3>⚠️ Common Mistakes</h3>
-<table>
-  <thead><tr><th>Mistake</th><th>Result/Error</th></tr></thead>
-  <tbody>
-    <tr><td><code>myset = {}</code></td><td>❌ Creates an empty dict, not a set! <br>✅ Correct: <code>myset = set()</code></td></tr>
-    <tr><td><code>myset[0]</code></td><td>❌ TypeError – no indexing in sets</td></tr>
-    <tr><td>Using duplicate values</td><td>✅ They get automatically removed</td></tr>
-  </tbody>
-</table>
-
-<div class="quiz">
-  <h2>🎯 Quiz Time</h2>
-
-  <div class="quiz-question">
-    <p>1. What does this print?</p>
-    <pre><code>nums = {10, 20, 20, 30}
-print(nums)</code></pre>
-    <ul>
-      <li onclick="checkAnswer(this, 'correct')">A) {10, 20, 30}</li>
-      <li onclick="checkAnswer(this, 'wrong')">B) {10, 20, 20, 30}</li>
-      <li onclick="checkAnswer(this, 'wrong')">C) [10, 20, 30]</li>
-      <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
-    </ul>
-  </div>
-
-  <div class="quiz-question">
-    <p>2. Which operation gives common elements?</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">A) union()</li>
-      <li onclick="checkAnswer(this, 'correct')">B) intersection()</li>
-      <li onclick="checkAnswer(this, 'wrong')">C) difference()</li>
-      <li onclick="checkAnswer(this, 'wrong')">D) combine()</li>
-    </ul>
-  </div>
-
-  <div class="quiz-question">
-    <p>3. What is the output?</p>
-    <pre><code>a = {1, 2, 3}
-b = {3, 4, 5}
-print(a.difference(b))</code></pre>
-    <ul>
-      <li onclick="checkAnswer(this, 'correct')">A) {1, 2}</li>
-      <li onclick="checkAnswer(this, 'wrong')">B) {3}</li>
-      <li onclick="checkAnswer(this, 'wrong')">C) {1, 2, 3, 4, 5}</li>
-      <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
-    </ul>
-  </div>
-
-  <div class="quiz-question">
-    <p>4. Fill in the blank:</p>
-    <pre><code>colors = {"red", "blue"}
-colors._____("green")</code></pre>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">A) insert</li>
-      <li onclick="checkAnswer(this, 'correct')">B) add</li>
-      <li onclick="checkAnswer(this, 'wrong')">C) append</li>
-      <li onclick="checkAnswer(this, 'wrong')">D) extend</li>
-    </ul>
-  </div>
-
-  <div class="quiz-question">
-    <p>5. True or False: A set can have duplicates.</p>
-    <ul>
-      <li onclick="checkAnswer(this, 'wrong')">A) ✅ True</li>
-      <li onclick="checkAnswer(this, 'correct')">B) ❌ False</li>
-    </ul>
-  </div>
-
-</div>
-
-<div class="practice-zone">
-  <h4>Practice Zone</h4>
-  <ul>
-    <li>Create a list of your 3 favorite foods and print the second one.</li>
-    <li>Add a new food to the list and print the updated list.</li>
-  </ul>
-</div>
-
-
-<h2>🤖 4. Dictionary – Your Phone Contacts 📱</h2>
-
-<p><strong>🔍 What is a Dictionary in Python?</strong><br>
-A dictionary is an unordered, mutable collection of key-value pairs, where each key is unique and used to access its corresponding value.</p>
-
-<p><strong>🧠 Funny Analogy:</strong><br>
-A dictionary is like your phonebook 📱: You search a name (key) and get the number or info (value). No duplicate names allowed!</p>
-
-<h3>✅ Example:</h3>
-<pre><code>student = {
-  "name": "Aman",
-  "age": 21,
-  "marks": 88
+<!-- ── Chapter 5: Data Structures ── -->
+<style>
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--accent, #00d4aa), #7c3aed);
+  color: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-print(student["name"])  # Output: Aman</code></pre>
+/* ── DS type badges ─── */
+.ds-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin: 2px 4px 2px 0;
+}
+.ds-list  { background: rgba(0,212,170,0.15); color: #00d4aa; border: 1px solid rgba(0,212,170,0.3); }
+.ds-tuple { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+.ds-set   { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.ds-dict  { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
 
-<h3>🧠 Real-World Example – Nested Dictionary</h3>
-<pre><code>students = {
-  "Aman": {"age": 21, "course": "Python"},
-  "Ayush": {"age": 20, "course": "Java"}
+/* ── DS icon grid (overview) ─── */
+.ds-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 1.2em 0;
 }
 
-print(students["Ayush"]["course"])  # Output: Java</code></pre>
-
-<h3>📌 Key Characteristics</h3>
-<ul>
-  <li><strong>🔑 Keys are unique</strong> – No duplicate keys allowed</li>
-  <li><strong>🔁 Mutable</strong> – You can change, add, delete items</li>
-  <li><strong>❌ No index</strong> – You access values using keys, not positions</li>
-  <li><strong>🧠 Powerful</strong> – Supports nested structures (dict in dict)</li>
-</ul>
-
-<h3>🎯 Useful Dictionary Methods</h3>
-<table>
-  <thead>
-    <tr><th>Method</th><th>Description</th><th>Example</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>dict[key]</td><td>Access value by key</td><td>student["name"]</td></tr>
-    <tr><td>dict[key] = value</td><td>Add or update value</td><td>student["course"] = "Python"</td></tr>
-    <tr><td>pop(key)</td><td>Remove key-value pair</td><td>student.pop("age")</td></tr>
-    <tr><td>keys()</td><td>Returns list of keys</td><td>student.keys()</td></tr>
-    <tr><td>values()</td><td>Returns list of values</td><td>student.values()</td></tr>
-    <tr><td>items()</td><td>Returns key-value pairs</td><td>student.items()</td></tr>
-    <tr><td>get(key, default)</td><td>Safer way to get value</td><td>student.get("marks", 0)</td></tr>
-    <tr><td>clear()</td><td>Remove everything</td><td>student.clear()</td></tr>
-    <tr><td>update(dict2)</td><td>Add items from another dictionary</td><td>student.update({"age": 22})</td></tr>
-  </tbody>
-</table>
-
-<h3>🧪 Example Code</h3>
-<pre><code>student = {
-  "name": "Aman",
-  "age": 21,
-  "course": "Python"
+.ds-card {
+  border-radius: var(--r-lg);
+  padding: 16px;
+  text-align: center;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-print(student["name"])               # Aman
-student["marks"] = 95                # Add new item
-student.pop("age")                   # Remove item
-print(student.keys())                # dict_keys(['name', 'course', 'marks'])
-print(student.values())              # dict_values(['Aman', 'Python', 95])</code></pre>
+.ds-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+body.dark .ds-card { background: rgba(33,38,45,0.8); }
 
-<h3>💡 Bonus Tip: Dictionary Comprehension</h3>
-<pre><code>squares = {x: x**2 for x in range(1, 4)}
-print(squares)  # {1: 1, 2: 4, 3: 9}</code></pre>
+.ds-card .ds-icon { font-size: 2em; display: block; margin-bottom: 8px; }
+.ds-card h4 { margin: 0 0 4px; font-family: var(--font-mono); }
+.ds-card p  { font-size: 0.78em; color: var(--text-muted); margin: 0; }
+.ds-card-list  { border-top: 3px solid #00d4aa; }
+.ds-card-list h4  { color: #00d4aa; }
+.ds-card-tuple { border-top: 3px solid #a78bfa; }
+.ds-card-tuple h4 { color: #a78bfa; }
+.ds-card-set   { border-top: 3px solid #f59e0b; }
+.ds-card-set h4   { color: #f59e0b; }
+.ds-card-dict  { border-top: 3px solid #f87171; }
+.ds-card-dict h4  { color: #f87171; }
 
-<h3>⚠️ Common Mistakes</h3>
-<ul>
-  <li><strong>Using unhashable types as keys:</strong> ❌ TypeError (e.g., lists as keys)</li>
-  <li><strong>Accessing a missing key without get():</strong> ❌ KeyError</li>
-  <li><strong>Forgetting quotes on string keys:</strong> ❌ NameError</li>
-</ul>
+/* ── Answers ─── */
+.answer { display: none; }
+.practice-gap { margin-top: 1.2em; }
 
-<p><strong>✅ Best Practice:</strong></p>
-<pre><code>print(student.get("grade", "Not Available"))</code></pre>
+/* ── Completion ─── */
+.completion-banner {
+  text-align: center;
+  margin-top: 2.5em;
+  padding: 1.8em;
+  background: linear-gradient(135deg, #0d1117, #161b22);
+  border: 1px solid #30363d;
+  border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl, 18px);
+  color: #e6edf3;
+}
 
-<h3>🎯 Quiz Time:</h3>
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85em;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
 
-<div class="quiz-question">
-  <p>1. What is the output?</p>
-  <pre><code>info = {"name": "Aman", "course": "Python"}
-print(info["course"])</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Aman</li>
-    <li onclick="checkAnswer(this, 'correct')">B) Python</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) Error</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) course</li>
-  </ul>
+@media (max-width: 600px) { .ds-overview-grid { grid-template-columns: 1fr 1fr; } }
+
+.ds-footnote { font-size: 0.82em; color: var(--text-muted); }
+</style>
+
+<!-- ── Chapter header ─── -->
+<div class="chapter-header">
+  <span class="chapter-badge">&#128230; Chapter 05</span>
+  <h1>Data Structures</h1>
+  <p>List, Tuple, Set, Dictionary — Python's four ways to organize chaos. Pick the right one or suffer the consequences.</p>
 </div>
 
-<div class="quiz-question">
-  <p>2. What does student.pop("age") do?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Adds age</li>
-    <li onclick="checkAnswer(this, 'correct')">B) Removes the 'age' key</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) Prints age</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Clears dictionary</li>
-  </ul>
+<!-- ── Hero ─── -->
+<div class="hero-section">
+  <div class="hero-icon-lg">&#127968;</div>
+  <h1>&#127968; Organising Data — Python Style</h1>
+  <p>Without data structures, every Python script would be like Tom trying to catch Jerry: frantic, unorganised, never actually works.</p>
 </div>
 
-<div class="quiz-question">
-  <p>3. Which method is safest for accessing a key?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) dict.key()</li>
-    <li onclick="checkAnswer(this, 'correct')">B) dict.get()</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) dict["key"]</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) dict.find()</li>
-  </ul>
-</div>
+<!-- ── Overview ─── -->
+<div class="card-section">
+  <h2>&#128230; Overview — Four Built-in Containers</h2>
 
-<div class="quiz-question">
-  <p>4. What is the output?</p>
-  <pre><code>d = {"a": 1, "b": 2}
-d.update({"c": 3})
-print(d)</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'correct')">A) {'a': 1, 'b': 2, 'c': 3}</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) {'a': 1, 'b': 2}</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) {'c': 3}</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Error</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>5. Fill in the blank:</p>
-  <pre><code>student = {"name": "Aman"}
-student["marks"] = 90
-print(student["____"])</code></pre>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) grade</li>
-    <li onclick="checkAnswer(this, 'correct')">B) marks</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) name</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) 90</li>
-  </ul>
-</div>
-<div class="quiz">
-    <h2>✅ Quiz Time!</h2>
-    <div class="quiz-question">
-        <p>1. Which data structure does not allow duplicates?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) List</li>
-          <li onclick="checkAnswer(this, 'wrong')">b) Tuple</li>
-          <li onclick="checkAnswer(this, 'correct')">c) Set</li>
-          <li onclick="checkAnswer(this, 'wrong')">d) Dictionary</li>
-        </ul>
-      </div>
-      
-      <div class="quiz-question">
-        <p>2. What is the output of len((1, 2, 3))?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) 2</li>
-          <li onclick="checkAnswer(this, 'correct')">b) 3</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) 1</li>
-        </ul>
-      </div>
-      
-      <div class="quiz-question">
-        <p>3. What will my_dict["name"] return?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'wrong')">a) KeyError</li>
-          <li onclick="checkAnswer(this, 'correct')">b) Value of "name"</li>
-          <li onclick="checkAnswer(this, 'wrong')">c) "name"</li>
-        </ul>
-      </div>
-      
-      <div class="quiz-question">
-        <p>4. Can we sort a set?</p>
-        <ul>
-          <li onclick="checkAnswer(this, 'correct')">a) Yes (using sorted(set))</li>
-          <li onclick="checkAnswer(this, 'wrong')">b) No</li>
-        </ul>
-      </div>
-</div>
-    <h2>🎯 Challenge Task:</h2>
-    <ul>
-      <li>Create a list of 5 numbers.</li>
-      <li>Convert it into a set to remove duplicates.</li>
-      <li>Store names & marks of 3 students using a dictionary.</li>
-      <li>Access one student’s mark and print it.</li>
-    </ul>
-
-    <div class="section">
-      <h2>🔥 Summary: List vs Tuple vs Set vs Dictionary</h2>
-    
-      <p>This chart will help you quickly revise and compare:</p>
-    
-      <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>List 🛍️</th>
-            <th>Tuple 🪑</th>
-            <th>Set 🔁</th>
-            <th>Dictionary 📱</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Syntax</strong></td>
-            <td>[1, 2, 3]</td>
-            <td>(1, 2, 3)</td>
-            <td>{1, 2, 3}</td>
-            <td>{"key": "value"}</td>
-          </tr>
-          <tr>
-            <td><strong>Ordered?</strong></td>
-            <td>✅ Yes</td>
-            <td>✅ Yes</td>
-            <td>❌ No</td>
-            <td>❌ No <small>(Python 3.6+ keeps order)</small></td>
-          </tr>
-          <tr>
-            <td><strong>Mutable?</strong></td>
-            <td>✅ Yes</td>
-            <td>❌ No</td>
-            <td>✅ Yes</td>
-            <td>✅ Yes</td>
-          </tr>
-          <tr>
-            <td><strong>Duplicates allowed?</strong></td>
-            <td>✅ Yes</td>
-            <td>✅ Yes</td>
-            <td>❌ No</td>
-            <td>❌ Keys no, values yes</td>
-          </tr>
-          <tr>
-            <td><strong>Indexing?</strong></td>
-            <td>✅ Yes</td>
-            <td>✅ Yes</td>
-            <td>❌ No</td>
-            <td>✅ With keys</td>
-          </tr>
-          <tr>
-            <td><strong>Usage</strong></td>
-            <td>Collections with order</td>
-            <td>Fixed data, fast lookup</td>
-            <td>Unique elements, math ops</td>
-            <td>Mapping keys to values</td>
-          </tr>
-          <tr>
-            <td><strong>Common Methods</strong></td>
-            <td>append(), remove()</td>
-            <td>count(), index()</td>
-            <td>add(), union()</td>
-            <td>get(), keys(), pop()</td>
-          </tr>
-          <tr>
-            <td><strong>When to Use?</strong></td>
-            <td>Dynamic, editable data</td>
-            <td>Constant values</td>
-            <td>Unique filters, fast lookups</td>
-            <td>Structured data with labels</td>
-          </tr>
-        </tbody>
-      </table>
-    
-      <h3>🧠 Visual Memory Tip:</h3>
-      <ul>
-        <li><strong>List →</strong> Shopping Bag 🛍️</li>
-        <li><strong>Tuple →</strong> School Time Table 🪑</li>
-        <li><strong>Set →</strong> Unique Guest List 🔁</li>
-        <li><strong>Dict →</strong> Phonebook / Contact List 📱</li>
-      </ul>
-    
-      <h3>✅ Real-World Use Cases:</h3>
-      <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Real-Life Scenario</th>
-            <th>Ideal Data Structure</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Student names with marks</td><td>Dictionary</td></tr>
-          <tr><td>Days of the week</td><td>Tuple</td></tr>
-          <tr><td>List of books to read</td><td>List</td></tr>
-          <tr><td>Unique cities visited</td><td>Set</td></tr>
-        </tbody>
-      </table>
-    
-      <h3>🧪 Final Challenge: Match the Structure!</h3>
-      <ol>
-        <li>("January", "February", "March")</li>
-        <li>{"apple", "banana", "apple"}</li>
-        <li>["Aman", "Riya", "Kabir"]</li>
-        <li>{"Aman": 95, "Riya": 88}</li>
-      </ol>
-    
-      <p><strong>🔸 Options:</strong></p>
-      <ul>
-        <li>A. Set</li>
-        <li>B. Dictionary</li>
-        <li>C. Tuple</li>
-        <li>D. List</li>
-      </ul>
-    
-      <div class="quiz-question">
-        <p><strong>Match Answers:</strong></p>
-        <ul>
-          <li>1 → <strong>C) Tuple</strong></li>
-          <li>2 → <strong>A) Set</strong></li>
-          <li>3 → <strong>D) List</strong></li>
-          <li>4 → <strong>B) Dictionary</strong></li>
-        </ul>
-      </div>
+  <div class="ds-overview-grid">
+    <div class="ds-card ds-card-list">
+      <span class="ds-icon">&#128094;</span>
+      <h4>List []</h4>
+      <p>Ordered, mutable, allows duplicates. The shopping bag — add/remove freely.</p>
     </div>
-    
-
-    <h3>🧠 Bonus Tip:</h3>
-    <p>Want to convert between structures?<br/>
-    ✅ Yes, you can!</p>
-    <pre><code>list1 = [1, 2, 2, 3]
-set1 = set(list1)          # Remove duplicates
-tuple1 = tuple(list1)      # Make immutable</code></pre>
+    <div class="ds-card ds-card-tuple">
+      <span class="ds-icon">&#128274;</span>
+      <h4>Tuple ()</h4>
+      <p>Ordered, immutable. Bedrock laws — carved in stone, can't change.</p>
+    </div>
+    <div class="ds-card ds-card-set">
+      <span class="ds-icon">&#127881;</span>
+      <h4>Set {}</h4>
+      <p>Unordered, unique elements only. VIP list — no duplicates at the door.</p>
+    </div>
+    <div class="ds-card ds-card-dict">
+      <span class="ds-icon">&#128222;</span>
+      <h4>Dict {key: val}</h4>
+      <p>Key-value pairs. Gadget lookup — every name maps to its power.</p>
+    </div>
   </div>
-    <h2>🎓 Mini Project: Student Management System</h2>
-  
-    <p><strong>✅ Objective:</strong> Create a program to manage students’ info using:</p>
+
+  <table>
+    <thead><tr><th>Type</th><th>Ordered</th><th>Mutable</th><th>Duplicates</th><th>Syntax</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ds-badge ds-list">list</span></td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td><code>[1, 2, 3]</code></td></tr>
+      <tr><td><span class="ds-badge ds-tuple">tuple</span></td><td>&#9989;</td><td>&#10060;</td><td>&#9989;</td><td><code>(1, 2, 3)</code></td></tr>
+      <tr><td><span class="ds-badge ds-set">set</span></td><td>&#10060;</td><td>&#9989;</td><td>&#10060;</td><td><code>{1, 2, 3}</code></td></tr>
+      <tr><td><span class="ds-badge ds-dict">dict</span></td><td>&#9989;*</td><td>&#9989;</td><td>&#10060; keys</td><td><code>{"k": "v"}</code></td></tr>
+    </tbody>
+  </table>
+  <p class="ds-footnote">* dict preserves insertion order from Python 3.7+</p>
+</div>
+
+<!-- ── Section 1: LIST ─── -->
+<div class="card-section">
+  <h2><span class="ds-badge ds-list">list</span> 1. List — Jerry's Cheese Heist</h2>
+  <p>Ordered, mutable, allows duplicates. Jerry updates his cheese stash all the time. That's a list.</p>
+
+  <div class="analogy-box">
+    <h3>&#128027; Jerry's Cheese Inventory</h3>
+    <p>Jerry keeps a list of stolen cheeses. Adds new ones, removes eaten ones, sorts by size, counts the total. Tom's list of failed traps is also a list — very, very long.</p>
+  </div>
+
+  <pre><code>jerry_cheeses = ["cheddar", "gouda", "brie", "swiss", "cheddar"]
+
+print(jerry_cheeses[0])      # cheddar  (0-indexed)
+print(jerry_cheeses[-1])     # cheddar  (last item)
+print(len(jerry_cheeses))    # 5</code></pre>
+
+  <div class="output-block">cheddar
+cheddar
+5</div>
+
+  <h3>&#128260; Slicing — Take a piece like Jerry</h3>
+  <pre><code>cheeses = ["cheddar", "gouda", "brie", "swiss", "parmesan"]
+print(cheeses[1:4])    # ['gouda', 'brie', 'swiss']
+print(cheeses[:3])     # ['cheddar', 'gouda', 'brie']
+print(cheeses[-2:])    # ['swiss', 'parmesan']
+print(cheeses[::2])    # ['cheddar', 'brie', 'parmesan']  (every 2nd)</code></pre>
+
+  <div class="output-block">['gouda', 'brie', 'swiss']
+['cheddar', 'gouda', 'brie']
+['swiss', 'parmesan']
+['cheddar', 'brie', 'parmesan']</div>
+
+  <h3>&#9881;&#65039; List Methods</h3>
+  <table>
+    <thead><tr><th>Method</th><th>What it does</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>append(x)</code></td><td>Add to end</td><td><code>lst.append("apple")</code></td></tr>
+      <tr><td><code>insert(i, x)</code></td><td>Insert at index</td><td><code>lst.insert(1, "kiwi")</code></td></tr>
+      <tr><td><code>remove(x)</code></td><td>Remove first match</td><td><code>lst.remove("apple")</code></td></tr>
+      <tr><td><code>pop(i)</code></td><td>Remove + return at index</td><td><code>lst.pop(0)</code></td></tr>
+      <tr><td><code>sort()</code></td><td>Sort in-place</td><td><code>lst.sort()</code></td></tr>
+      <tr><td><code>reverse()</code></td><td>Reverse in-place</td><td><code>lst.reverse()</code></td></tr>
+      <tr><td><code>index(x)</code></td><td>Find first index of x</td><td><code>lst.index("brie")</code></td></tr>
+      <tr><td><code>count(x)</code></td><td>Count occurrences</td><td><code>lst.count("cheddar")</code></td></tr>
+      <tr><td><code>clear()</code></td><td>Remove everything</td><td><code>lst.clear()</code></td></tr>
+      <tr><td><code>extend(lst2)</code></td><td>Merge another list in</td><td><code>lst.extend([1,2])</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>&#9889; Tom's Trap Log — Methods in action</h3>
+  <pre><code>traps = ["bucket drop", "rocket skates", "anvil ceiling"]
+
+traps.append("fake tunnel painted on wall")    # add
+traps.insert(0, "giant mousetrap")             # insert at front
+traps.remove("rocket skates")                  # remove by value
+popped = traps.pop()                           # remove last
+traps.sort()                                   # alphabetical
+
+print(traps)
+print(f"Popped trap: {popped}")
+print(f"Total remaining traps: {len(traps)}")</code></pre>
+
+  <div class="output-block">['anvil ceiling', 'bucket drop', 'giant mousetrap']
+Popped trap: fake tunnel painted on wall
+Total remaining traps: 3</div>
+
+  <h3>&#9889; List Comprehension — Power move</h3>
+  <pre><code># SpongeBob needs prices above 10
+menu_prices = [5, 12, 3, 8, 15, 20, 2]
+expensive = [p for p in menu_prices if p > 10]
+print(expensive)   # [12, 15, 20]
+
+# Square each price (Gary tax)
+taxed = [p * 2 for p in expensive]
+print(taxed)       # [24, 30, 40]</code></pre>
+
+  <div class="output-block">[12, 15, 20]
+[24, 30, 40]</div>
+</div>
+
+<!-- ── Section 2: TUPLE ─── -->
+<div class="card-section">
+  <h2><span class="ds-badge ds-tuple">tuple</span> 2. Tuple — Bedrock Laws</h2>
+  <p>Ordered, immutable. Can't add, remove, or change items. Like laws of Bedrock — written in stone. Fred Flintstone tried to update the mammoth migration schedule. TypeError.</p>
+
+  <pre><code>bedrock_laws = ("thou shalt not steal mammoth", "work 9 to 5", "YABBA DABBA DOO")
+
+print(bedrock_laws[2])          # YABBA DABBA DOO
+print(len(bedrock_laws))        # 3
+
+# bedrock_laws[0] = "something else"  ← TypeError: tuple is immutable</code></pre>
+
+  <div class="output-block">YABBA DABBA DOO
+3</div>
+
+  <h3>&#9888;&#65039; The Single-Item Trap</h3>
+  <pre><code>not_a_tuple = ("yabba")         # just a string in parentheses
+is_a_tuple  = ("yabba",)        # comma makes it a tuple!
+
+print(type(not_a_tuple))        # &lt;class 'str'&gt;
+print(type(is_a_tuple))         # &lt;class 'tuple'&gt;</code></pre>
+
+  <div class="output-block">&lt;class 'str'&gt;
+&lt;class 'tuple'&gt;</div>
+
+  <h3>&#128261; Tuple Unpacking — Looney Tunes roster</h3>
+  <pre><code>duo = ("Bugs Bunny", "Elmer Fudd")
+hunter, prey = duo
+print(f"Hunter: {hunter}")
+print(f"Prey: {prey}")
+
+# Swap values — tuple magic
+a, b = "Tom", "Jerry"
+a, b = b, a
+print(f"Chaser: {a}, Chasee: {b}")</code></pre>
+
+  <div class="output-block">Hunter: Bugs Bunny
+Prey: Elmer Fudd
+Chaser: Jerry, Chasee: Tom</div>
+
+  <table>
+    <thead><tr><th>Feature</th><th>List []</th><th>Tuple ()</th></tr></thead>
+    <tbody>
+      <tr><td>Mutable</td><td>&#9989; Yes</td><td>&#10060; No</td></tr>
+      <tr><td>Memory</td><td>More</td><td>Less (faster)</td></tr>
+      <tr><td>Can be dict key</td><td>&#10060; No</td><td>&#9989; Yes</td></tr>
+      <tr><td>Use when</td><td>Data changes</td><td>Data is fixed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Section 3: SET ─── -->
+<div class="card-section">
+  <h2><span class="ds-badge ds-set">set</span> 3. Set — The VIP Door Policy</h2>
+  <p>Unordered. Unique elements only. No duplicates, no indexing. Like the Looney Tunes VIP party — each character gets in once. Duplicate Daffy at the door? Kicked out.</p>
+
+  <pre><code>looney_vip = {"Bugs Bunny", "Daffy Duck", "Bugs Bunny", "Tweety", "Bugs Bunny"}
+print(looney_vip)      # Bugs admitted once, duplicates dropped</code></pre>
+
+  <div class="output-block">{'Bugs Bunny', 'Daffy Duck', 'Tweety'}</div>
+
+  <div class="callout warning">
+    <span>&#9888;&#65039;</span>
+    <span><code>{}</code> creates empty <strong>dict</strong>, not set! For empty set use <code>set()</code>.</span>
+  </div>
+
+  <h3>&#128200; Set Operations — Venn diagram in code</h3>
+  <pre><code>team_bugs = {"Bugs Bunny", "Tweety", "Road Runner", "Speedy Gonzales"}
+team_daffy = {"Daffy Duck", "Tweety", "Yosemite Sam", "Speedy Gonzales"}
+
+print("Union (all members):")
+print(team_bugs | team_daffy)             # all unique names
+
+print("\nIntersection (shared members):")
+print(team_bugs & team_daffy)             # in BOTH teams
+
+print("\nDifference (only in Bugs' team):")
+print(team_bugs - team_daffy)             # Bugs' exclusives
+
+print("\nSymmetric difference (not shared):")
+print(team_bugs ^ team_daffy)             # in one but NOT both</code></pre>
+
+  <div class="output-block">Union (all members):
+{'Bugs Bunny', 'Tweety', 'Road Runner', 'Speedy Gonzales', 'Daffy Duck', 'Yosemite Sam'}
+
+Intersection (shared members):
+{'Tweety', 'Speedy Gonzales'}
+
+Difference (only in Bugs' team):
+{'Bugs Bunny', 'Road Runner'}
+
+Symmetric difference (not shared):
+{'Bugs Bunny', 'Road Runner', 'Daffy Duck', 'Yosemite Sam'}</div>
+
+  <h3>&#9881;&#65039; Set Methods</h3>
+  <table>
+    <thead><tr><th>Method</th><th>Does what</th></tr></thead>
+    <tbody>
+      <tr><td><code>add(x)</code></td><td>Add one item</td></tr>
+      <tr><td><code>remove(x)</code></td><td>Remove; raises error if not found</td></tr>
+      <tr><td><code>discard(x)</code></td><td>Remove; NO error if not found</td></tr>
+      <tr><td><code>pop()</code></td><td>Remove random item</td></tr>
+      <tr><td><code>clear()</code></td><td>Empty the set</td></tr>
+      <tr><td><code>union(s2)</code></td><td>All unique from both</td></tr>
+      <tr><td><code>intersection(s2)</code></td><td>Common items</td></tr>
+      <tr><td><code>difference(s2)</code></td><td>In s1, not in s2</td></tr>
+      <tr><td><code>issubset(s2)</code></td><td>Is s1 ⊆ s2?</td></tr>
+    </tbody>
+  </table>
+
+  <h3>&#128161; Practical use: remove duplicates from list</h3>
+  <pre><code>tom_traps_attempted = ["bucket", "rocket", "bucket", "anvil", "rocket", "rocket"]
+unique_traps = list(set(tom_traps_attempted))
+print(f"Unique trap types: {len(unique_traps)}")
+print(unique_traps)</code></pre>
+
+  <div class="output-block">Unique trap types: 3
+['bucket', 'rocket', 'anvil']</div>
+</div>
+
+<!-- ── Section 4: DICT ─── -->
+<div class="card-section">
+  <h2><span class="ds-badge ds-dict">dict</span> 4. Dictionary — Inspector Gadget's Database</h2>
+  <p>Key-value pairs. Access value by key, not position. Like Inspector Gadget's gadget lookup — say the name, get the tool. "Go-Go Gadget Copter!" → key "copter" → value "hat helicopter".</p>
+
+  <pre><code>gadgets = {
+    "copter":    "hat helicopter",
+    "arm":       "extending mechanical arm",
+    "binoculars":"binocular eyes (slightly terrifying)",
+    "phone":     "shoe phone (classic)",
+}
+
+print(gadgets["copter"])
+print(gadgets.get("laser", "DR. CLAW STOLE IT"))    # safe access with default</code></pre>
+
+  <div class="output-block">hat helicopter
+DR. CLAW STOLE IT</div>
+
+  <h3>&#9881;&#65039; Dictionary Methods</h3>
+  <table>
+    <thead><tr><th>Method</th><th>Does what</th></tr></thead>
+    <tbody>
+      <tr><td><code>d[key]</code></td><td>Get value; KeyError if missing</td></tr>
+      <tr><td><code>d.get(key, default)</code></td><td>Safe get with fallback</td></tr>
+      <tr><td><code>d[key] = val</code></td><td>Add or update</td></tr>
+      <tr><td><code>d.pop(key)</code></td><td>Remove and return value</td></tr>
+      <tr><td><code>d.keys()</code></td><td>All keys</td></tr>
+      <tr><td><code>d.values()</code></td><td>All values</td></tr>
+      <tr><td><code>d.items()</code></td><td>Key-value pairs (for loops)</td></tr>
+      <tr><td><code>d.update(d2)</code></td><td>Merge another dict in</td></tr>
+      <tr><td><code>d.clear()</code></td><td>Delete everything</td></tr>
+    </tbody>
+  </table>
+
+  <h3>&#128270; Scooby-Doo Mystery Database</h3>
+  <pre><code>mysteries = {
+    "Haunted Mansion":    {"villain": "Old Jenkins", "solved": True},
+    "Ghost Ship":         {"villain": "Captain Reynolds", "solved": True},
+    "Funfair Phantom":    {"villain": "Still investigating", "solved": False},
+}
+
+# Loop over key-value pairs
+for location, info in mysteries.items():
+    status = "SOLVED" if info["solved"] else "ONGOING"
+    print(f"{location}: {status} — {info['villain']}")</code></pre>
+
+  <div class="output-block">Haunted Mansion: SOLVED — Old Jenkins
+Ghost Ship: SOLVED — Captain Reynolds
+Funfair Phantom: ONGOING — Still investigating</div>
+
+  <h3>&#9889; Dictionary Comprehension</h3>
+  <pre><code># Bugs Bunny's IQ scores: name → IQ squared (because why not)
+characters = ["Bugs", "Daffy", "Tweety", "Elmer"]
+iqs        = [200, 80, 140, 30]
+
+iq_map = {name: iq for name, iq in zip(characters, iqs)}
+print(iq_map)
+
+# Filter: only smart ones (IQ > 100)
+smart = {k: v for k, v in iq_map.items() if v > 100}
+print(smart)</code></pre>
+
+  <div class="output-block">{'Bugs': 200, 'Daffy': 80, 'Tweety': 140, 'Elmer': 30}
+{'Bugs': 200, 'Tweety': 140}</div>
+</div>
+
+<!-- ── Conversion between types ─── -->
+<div class="card-section">
+  <h2>&#128260; Converting Between Types</h2>
+  <pre><code>jerry_list = [1, 2, 2, 3, 3, 3]
+
+as_set   = set(jerry_list)       # {1, 2, 3}  — duplicates gone
+as_tuple = tuple(jerry_list)     # (1, 2, 2, 3, 3, 3)  — immutable
+
+print(as_set)
+print(as_tuple)
+print(list(as_set))              # back to list from set</code></pre>
+
+  <div class="output-block">{1, 2, 3}
+(1, 2, 2, 3, 3, 3)
+[1, 2, 3]</div>
+</div>
+
+<!-- ── Quiz ─── -->
+<div class="card-section">
+  <h2>&#127918; Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which data structure auto-removes duplicates?</p>
     <ul>
-      <li>🛍️ <strong>List</strong> to store multiple students</li>
-      <li>🪑 <strong>Tuple</strong> to store fixed data like available courses</li>
-      <li>🔁 <strong>Set</strong> to store unique clubs or hobbies</li>
-      <li>📱 <strong>Dictionary</strong> to store student details</li>
+      <li onclick="checkAnswer(this,'wrong')">a) list</li>
+      <li onclick="checkAnswer(this,'wrong')">b) tuple</li>
+      <li onclick="checkAnswer(this,'correct')">c) set</li>
+      <li onclick="checkAnswer(this,'wrong')">d) dict (keys are unique, values aren't)</li>
     </ul>
-  
-    <p><strong>✅ Project Features:</strong></p>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Tom runs <code>traps = ("bucket", "anvil"); traps.append("rocket")</code>. What happens?</p>
     <ul>
-      <li>Add new student</li>
-      <li>Show all students</li>
-      <li>Search student by name</li>
-      <li>List all enrolled courses</li>
-      <li>List all unique clubs</li>
+      <li onclick="checkAnswer(this,'wrong')">a) Works fine</li>
+      <li onclick="checkAnswer(this,'correct')">b) AttributeError — tuples are immutable</li>
+      <li onclick="checkAnswer(this,'wrong')">c) SyntaxError</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing, silently ignored</li>
     </ul>
-  
-    <h3>💻 Full Python Code:</h3>
-    <pre><code class="language-python">
-  # Fixed list of available courses (Tuple)
-  available_courses = ("Python", "Java", "C++", "HTML", "DSA")
-  
-  # Student records (List of dictionaries)
-  students = []
-  
-  # Set to store unique clubs
-  all_clubs = set()
-  
-  # Main loop
-  while True:
-      print("\n🎓 Student Management System")
-      print("1. Add Student")
-      print("2. Show All Students")
-      print("3. Search by Name")
-      print("4. Show All Courses")
-      print("5. Show All Unique Clubs")
-      print("6. Exit")
-  
-      choice = input("Enter your choice: ")
-  
-      if choice == '1':
-          name = input("Enter student name: ")
-          age = int(input("Enter age: "))
-          course = input(f"Enter course ({', '.join(available_courses)}): ")
-  
-          if course not in available_courses:
-              print("❌ Course not available.")
-              continue
-  
-          club = input("Enter club name: ")
-  
-          student = {
-              "name": name,
-              "age": age,
-              "course": course,
-              "club": club
-          }
-  
-          students.append(student)
-          all_clubs.add(club)
-          print("✅ Student added successfully!")
-  
-      elif choice == '2':
-          if not students:
-              print("No students added yet.")
-          else:
-              for s in students:
-                  print(f"👤 {s['name']}, Age: {s['age']}, Course: {s['course']}, Club: {s['club']}")
-  
-      elif choice == '3':
-          search = input("Enter name to search: ")
-          found = False
-          for s in students:
-              if s['name'].lower() == search.lower():
-                  print(f"✅ Found: {s}")
-                  found = True
-          if not found:
-              print("❌ Student not found.")
-  
-      elif choice == '4':
-          print("🎓 Courses Offered:")
-          for c in available_courses:
-              print(f"- {c}")
-  
-      elif choice == '5':
-          print("🏆 Unique Clubs:")
-          for club in all_clubs:
-              print(f"- {club}")
-  
-      elif choice == '6':
-          print("👋 Exiting program. Goodbye!")
-          break
-  
-      else:
-          print("❌ Invalid choice. Please try again.")
-    </code></pre>
-  
-    <h3>✅ Concepts Used:</h3>
-    <table border="1" cellpadding="8" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Concept</th>
-          <th>Where it's Used</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>List</td><td>To store multiple students (<strong>students</strong>)</td></tr>
-        <tr><td>Tuple</td><td>To store fixed list of courses (<strong>available_courses</strong>)</td></tr>
-        <tr><td>Set</td><td>To store unique clubs (<strong>all_clubs</strong>)</td></tr>
-        <tr><td>Dict</td><td>Each student's data is stored as a dictionary</td></tr>
-      </tbody>
-    </table>
-  
-    <h3>🧪 Sample Run:</h3>
-    <pre><code>
-  🎓 Student Management System
-  1. Add Student
-  2. Show All Students
-  ...
-  
-  Enter your choice: 1
-  Enter student name: Aman
-  Enter age: 21
-  Enter course: Python
-  Enter club name: Coding Club
-  ✅ Student added successfully!
-    </code></pre>
+  </div>
 
-    <br>
-    <br>
+  <div class="quiz-question">
+    <p>3. What does <code>gadgets.get("laser", "Not found")</code> return when "laser" key is missing?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) None</li>
+      <li onclick="checkAnswer(this,'wrong')">b) KeyError</li>
+      <li onclick="checkAnswer(this,'correct')">c) "Not found"</li>
+      <li onclick="checkAnswer(this,'wrong')">d) False</li>
+    </ul>
+  </div>
 
-      <h2>💾 Mini Project (with File Saving): Student Management System + File Storage</h2>
-    
-      <p><strong>✅ New Features:</strong></p>
-      <ul>
-        <li>Save students to a file (<code>students.json</code>)</li>
-        <li>Load data from the file when the program starts</li>
-        <li>Automatically update file when new student is added</li>
-      </ul>
-    
-      <p><strong>💡 Technologies Used:</strong></p>
-      <ul>
-        <li><code>json</code> module</li>
-        <li><code>with open(...) as file:</code> for safe file handling</li>
-        <li>Same usage of <strong>list, tuple, set, dict</strong></li>
-      </ul>
-    
-      <h3>💻 Full Python Code:</h3>
-      <pre><code class="language-python">
-    import json
-    import os
-    
-    # Fixed courses (Tuple)
-    available_courses = ("Python", "Java", "C++", "HTML", "DSA")
-    
-    # Load students from file
-    filename = "students.json"
-    students = []
-    all_clubs = set()
-    
-    # Load data if file exists
-    if os.path.exists(filename):
-        with open(filename, "r") as file:
-            students = json.load(file)
-            all_clubs = set([s["club"] for s in students])
-    
-    # Main loop
-    while True:
-        print("\n🎓 Student Management System")
-        print("1. Add Student")
-        print("2. Show All Students")
-        print("3. Search by Name")
-        print("4. Show All Courses")
-        print("5. Show All Unique Clubs")
-        print("6. Exit")
-    
-        choice = input("Enter your choice: ")
-    
-        if choice == '1':
-            name = input("Enter student name: ")
-            age = int(input("Enter age: "))
-            course = input(f"Enter course ({', '.join(available_courses)}): ")
-    
-            if course not in available_courses:
-                print("❌ Course not available.")
-                continue
-    
-            club = input("Enter club name: ")
-    
-            student = {
-                "name": name,
-                "age": age,
-                "course": course,
-                "club": club
-            }
-    
-            students.append(student)
-            all_clubs.add(club)
-    
-            # Save to file
-            with open(filename, "w") as file:
-                json.dump(students, file, indent=4)
-    
-            print("✅ Student added and saved!")
-    
-        elif choice == '2':
-            if not students:
-                print("No students yet.")
-            else:
-                for s in students:
-                    print(f"👤 {s['name']}, Age: {s['age']}, Course: {s['course']}, Club: {s['club']}")
-    
-        elif choice == '3':
-            search = input("Enter name to search: ")
-            found = False
-            for s in students:
-                if s['name'].lower() == search.lower():
-                    print(f"✅ Found: {s}")
-                    found = True
-            if not found:
-                print("❌ Student not found.")
-    
-        elif choice == '4':
-            print("📚 Available Courses:")
-            for c in available_courses:
-                print(f"- {c}")
-    
-        elif choice == '5':
-            print("🏆 Unique Clubs:")
-            for club in all_clubs:
-                print(f"- {club}")
-    
-        elif choice == '6':
-            print("👋 Exiting. Data saved.")
-            break
-    
-        else:
-            print("❌ Invalid choice.")
-      </code></pre>
-    
-      <h3>📝 Notes:</h3>
-      <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-          <tr><th>Feature</th><th>Details</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>File Name</td><td><code>students.json</code></td></tr>
-          <tr><td>Data Format</td><td>JSON (human-readable)</td></tr>
-          <tr><td>Persistent Storage</td><td>Data survives program restarts</td></tr>
-          <tr><td>Safety</td><td>Auto-creates file if it doesn’t exist</td></tr>
-        </tbody>
-      </table>
-    
-      <h3>✅ Example: students.json (after saving)</h3>
-      <pre><code class="language-json">
-    [
-      {
-        "name": "Aman",
-        "age": 21,
-        "course": "Python",
-        "club": "Coding Club"
-      }
-    ]
-      </code></pre>
-    
+  <div class="quiz-question">
+    <p>4. What does <code>{1,2,3} & {2,3,4}</code> return?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) {1, 2, 3, 4}</li>
+      <li onclick="checkAnswer(this,'correct')">b) {2, 3}</li>
+      <li onclick="checkAnswer(this,'wrong')">c) {1, 4}</li>
+      <li onclick="checkAnswer(this,'wrong')">d) TypeError</li>
+    </ul>
+  </div>
 
-        <h2>🛒 Mini Project: Shopping Cart System</h2>
-      
-        <p><strong>💡 Objective:</strong></p>
-        <ul>
-          <li>📦 Products are stored using a <strong>dictionary</strong></li>
-          <li>🛍️ Cart is a <strong>list</strong> of product entries</li>
-          <li>✅ Categories are fixed using a <strong>tuple</strong></li>
-          <li>🔁 <strong>Set</strong> is used to store unique brands added</li>
-          <li>💾 Cart data is saved to a file (<code>cart.json</code>)</li>
-        </ul>
-      
-        <p><strong>✅ Features:</strong></p>
-        <ul>
-          <li>View available products</li>
-          <li>Add to cart</li>
-          <li>View cart</li>
-          <li>Remove item</li>
-          <li>View unique brands</li>
-          <li>Save and exit</li>
-        </ul>
-      
-        <h3>🖥️ Full Python Code:</h3>
-        <pre><code class="language-python">
-      import json
-      import os
-      
-      # Fixed product categories (Tuple)
-      categories = ("Electronics", "Groceries", "Clothing")
-      
-      # Available products (Dict)
-      products = {
-          101: {"name": "Laptop", "price": 45000, "brand": "Dell", "category": "Electronics"},
-          102: {"name": "Rice", "price": 500, "brand": "India Gate", "category": "Groceries"},
-          103: {"name": "T-Shirt", "price": 799, "brand": "Puma", "category": "Clothing"},
-          104: {"name": "Headphones", "price": 1999, "brand": "Sony", "category": "Electronics"},
-      }
-      
-      # Cart (List of product IDs)
-      cart = []
-      
-      # Unique brands (Set)
-      brands = set()
-      
-      # Load cart if exists
-      filename = "cart.json"
-      if os.path.exists(filename):
-          with open(filename, "r") as file:
-              cart = json.load(file)
-              brands = {products[int(pid)]['brand'] for pid in cart}
-      
-      # Main loop
-      while True:
-          print("\n🛒 Shopping Cart Menu")
-          print("1. View Products")
-          print("2. Add to Cart")
-          print("3. View Cart")
-          print("4. Remove Item")
-          print("5. View Unique Brands in Cart")
-          print("6. Save and Exit")
-      
-          choice = input("Enter your choice: ")
-      
-          if choice == '1':
-              print("\n📦 Available Products:")
-              for pid, p in products.items():
-                  print(f"{pid} - {p['name']} | ₹{p['price']} | Brand: {p['brand']} | Category: {p['category']}")
-      
-          elif choice == '2':
-              pid = int(input("Enter Product ID to add: "))
-              if pid in products:
-                  cart.append(str(pid))
-                  brands.add(products[pid]["brand"])
-                  print(f"✅ {products[pid]['name']} added to cart.")
-              else:
-                  print("❌ Invalid Product ID.")
-      
-          elif choice == '3':
-              if not cart:
-                  print("🛒 Your cart is empty.")
-              else:
-                  print("\n🧾 Cart Items:")
-                  total = 0
-                  for pid in cart:
-                      p = products[int(pid)]
-                      print(f"- {p['name']} | ₹{p['price']} | Brand: {p['brand']}")
-                      total += p['price']
-                  print(f"💰 Total: ₹{total}")
-      
-          elif choice == '4':
-              pid = input("Enter Product ID to remove: ")
-              if pid in cart:
-                  cart.remove(pid)
-                  brands = {products[int(pid)]['brand'] for pid in cart}
-                  print("❎ Item removed from cart.")
-              else:
-                  print("❌ Item not in cart.")
-      
-          elif choice == '5':
-              print("\n🔁 Unique Brands in Cart:")
-              for brand in brands:
-                  print(f"- {brand}")
-      
-          elif choice == '6':
-              with open(filename, "w") as file:
-                  json.dump(cart, file)
-              print("💾 Cart saved. Exiting. Goodbye! 👋")
-              break
-      
-          else:
-              print("❌ Invalid choice.")
-        </code></pre>
-      
-        <h3>🧠 Concepts Covered:</h3>
-        <table border="1" cellpadding="8" cellspacing="0">
-          <thead>
-            <tr><th>Concept</th><th>Where It's Used</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Tuple</td><td>Fixed product categories</td></tr>
-            <tr><td>Dictionary</td><td>Product database</td></tr>
-            <tr><td>List</td><td>Cart that holds products</td></tr>
-            <tr><td>Set</td><td>Track unique brands</td></tr>
-            <tr><td>JSON/File</td><td>Save/load cart from file</td></tr>
-          </tbody>
-        </table>
-      
-        <h3>✅ Sample Run:</h3>
-        <pre><code>
-      🛒 Shopping Cart Menu
-      1. View Products
-      2. Add to Cart
-      3. View Cart
-      ...
-      
-      Enter choice: 1
-      
-      📦 Available Products:
-      101 - Laptop | ₹45000 | Brand: Dell | Category: Electronics
-      102 - Rice | ₹500 | Brand: India Gate | Category: Groceries
-      ...
-        </code></pre>
+  <div class="quiz-question">
+    <p>5. Which creates an <em>empty set</em>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>{}</code></li>
+      <li onclick="checkAnswer(this,'correct')">b) <code>set()</code></li>
+      <li onclick="checkAnswer(this,'wrong')">c) <code>empty_set = {None}</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>dict()</code></li>
+    </ul>
+  </div>
 
-      
-  
-</body>
-</html>
+  <div class="quiz-question">
+    <p>6. Output of <code>["a","b","c","d"][1:3]</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) ['a', 'b']</li>
+      <li onclick="checkAnswer(this,'correct')">b) ['b', 'c']</li>
+      <li onclick="checkAnswer(this,'wrong')">c) ['a', 'b', 'c']</li>
+      <li onclick="checkAnswer(this,'wrong')">d) ['b', 'c', 'd']</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── Challenges ─── -->
+<div class="card-section">
+  <h2>&#129514; Coding Challenges</h2>
+
+  <div class="practice-zone">
+    <strong>&#128640; Challenge 1: Tom's Unique Traps</strong><br>
+    Given list <code>["bucket","rocket","bucket","anvil","rocket","bucket","net"]</code>, use set to find unique trap count, then print sorted list of unique traps.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>traps = ["bucket", "rocket", "bucket", "anvil", "rocket", "bucket", "net"]
+
+unique = set(traps)
+print(f"Tom uses {len(unique)} unique trap types:")
+for t in sorted(unique):
+    print(f"  - {t}")</code></pre>
+  </div>
+
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 2: Looney Tunes Character Cards</strong><br>
+    Build dict of 4 characters: name → dict with keys <code>species</code> and <code>catchphrase</code>. Loop over <code>.items()</code> and print each one neatly.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>characters = {
+    "Bugs Bunny":  {"species": "rabbit",  "catchphrase": "What's up, Doc?"},
+    "Daffy Duck":  {"species": "duck",    "catchphrase": "You're despicable!"},
+    "Tweety Bird": {"species": "canary",  "catchphrase": "I tawt I taw a puddy tat!"},
+    "Road Runner": {"species": "bird",    "catchphrase": "Beep Beep!"},
+}
+
+for name, info in characters.items():
+    print(f"{name} ({info['species']}): \"{info['catchphrase']}\"")</code></pre>
+  </div>
+
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 3: The Great Gadget Inventory</strong><br>
+    Inspector Gadget list: <code>["copter","arm","copter","binoculars","phone","arm","arm"]</code>. Use <code>.count()</code> to find most-used gadget. Use comprehension to build dict of gadget → use count.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>gadget_log = ["copter", "arm", "copter", "binoculars", "phone", "arm", "arm"]
+
+usage = {g: gadget_log.count(g) for g in set(gadget_log)}
+print("Gadget usage:")
+for gadget, count in sorted(usage.items(), key=lambda x: -x[1]):
+    print(f"  {gadget}: {count}x")</code></pre>
+  </div>
+</div>
+
+<!-- ── Summary ─── -->
+<div class="summary-box">
+  <h3>&#9997;&#65039; Quick-Pick Guide</h3>
+  <table>
+    <thead><tr><th>Scenario</th><th>Use</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Ordered, editable collection</td><td><span class="ds-badge ds-list">list</span></td><td>Add/remove freely</td></tr>
+      <tr><td>Fixed data (coordinates, config)</td><td><span class="ds-badge ds-tuple">tuple</span></td><td>Immutable + faster</td></tr>
+      <tr><td>Unique items, fast lookup</td><td><span class="ds-badge ds-set">set</span></td><td>No duplicates, O(1) lookup</td></tr>
+      <tr><td>Named/labeled data</td><td><span class="ds-badge ds-dict">dict</span></td><td>Key-value structure</td></tr>
+      <tr><td>Remove duplicates from list</td><td><code>list(set(...))</code></td><td>Set drops dupes</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Completion ─── -->
+<div class="completion-banner">
+  <h3>&#127881; Chapter 5 Complete!</h3>
+  <p>You can now store data like Jerry stores cheese: organised, efficient, and always one step ahead of Tom.</p>
+  <span class="next-badge">&#9654; Next: Strings &amp; Files</span>
+</div>

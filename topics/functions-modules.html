@@ -1,1173 +1,621 @@
+<!-- ── Chapter 4: Functions & Modules ── -->
 <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #222;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        body.dark {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        
-        .container {
-            
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        body.dark .container {
-            background: #1e1e1e;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        
-        .hero-section {
-            text-align: center;
-            background: linear-gradient(135deg, #007acc 0%, #005b99 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-        }
-        
-        .hero-section:hover {
-            transform: translateY(-2px);
-        }
-        
-        .hero-section h1 {
-            font-size: 2.5em;
-            margin: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-        
-        .hero-section p {
-            font-size: 1.1em;
-            margin: 10px 0;
-            opacity: 0.9;
-        }
-        
-        .python-logo {
-            width: 80px;
-            height: 80px;
-            margin: 20px auto;
-            display: block;
-            border-radius: 5%;
-            transition: transform 0.3s ease;
-        }
-        
-        .python-logo:hover {
-            transform: scale(1.05);
-        }
-        
-        h2 {
-            color: #007acc;
-            border-bottom: 2px solid #007acc;
-            padding-bottom: 8px;
-            font-size: 1.8em;
-            margin-top: 30px;
-        }
-        
-        body.dark h2 {
-            color: #89d3ff;
-            border-bottom-color: #89d3ff;
-        }
-        
-        h3 {
-            color: #333;
-            font-size: 1.3em;
-            margin-top: 25px;
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border-left: 4px solid #007acc;
-            border-radius: 4px;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark h3 {
-            color: #e0e0e0;
-            background: #2a2a2a;
-            border-left-color: #89d3ff;
-        }
-        
-        h4 {
-            color: #007acc;
-            font-size: 1.1em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        body.dark h4 {
-            color: #89d3ff;
-        }
-        
-        .fun-fact {
-            background: #fff8dc;
-            border-left: 4px solid #f4a261;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 6px;
-            transition: transform 0.3s ease;
-        }
-        
-        .fun-fact:hover {
-            transform: translateX(5px);
-        }
-        
-        body.dark .fun-fact {
-            background: #2e2e2e;
-            border-left-color: #f4a261;
-        }
-        
-        .code-block {
-            background: #f4f4f4;
-            color: #111;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 15px;
-            font-weight: 600;
-            margin: 15px 0;
-            overflow-x: auto;
-            border: 1px solid #ddd;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        body.dark .code-block {
-            background: #1e1e1e;
-            color: #e8e8e8;
-            border-color: #333;
-        }
-        
-        .code-block:hover {
-            background: #eaeaea;
-        }
-        
-        body.dark .code-block:hover {
-            background: #2a2a2a;
-        }
-        
-        pre {
-            margin: 0;
-            font-family: 'Fira Code', 'Courier New', monospace;
-        }
-        
-        code {
-            font-family: 'Fira Code', 'Courier New', monospace;
-            background: #f1f1f1;
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-        
-        body.dark code {
-            background: #333;
-            color: #e8e8e8;
-        }
-        
-        .output-block {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 10px 0;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark .output-block {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-        
-        .analogy-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid #e9ecef;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .analogy-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        body.dark .analogy-box {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s ease;
-        }
-        
-        table:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        body.dark table {
-            background: #1e1e1e;
-        }
-        
-        th {
-            background: #007acc;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        body.dark th {
-            background: #333;
-        }
-        
-        td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #e9ecef;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.dark td {
-            border-bottom-color: #444;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        body.dark tr:hover td {
-            background: #2a2a2a;
-        }
-        
-        .quiz {
-            background: #fff8dc;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-left: 6px solid #f4a261;
-        }
-        
-        body.dark .quiz {
-            background: #2e2e2e;
-            border-left-color: #f4a261;
-        }
-        
-        .quiz-question {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .quiz-question:hover {
-            transform: translateY(-2px);
-        }
-        
-        body.dark .quiz-question {
-            background: #1e1e1e;
-        }
-        
-        .quiz-question ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .quiz-question li {
-            padding: 10px 15px;
-            margin: 5px 0;
-            background: #e0f7fa;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        
-        .quiz-question li:hover {
-            background: #b2ebf2;
-            transform: translateX(5px);
-        }
-        
-        body.dark .quiz-question li {
-            background: #333;
-        }
-        
-        body.dark .quiz-question li:hover {
-            background: #444;
-        }
-        
-        .challenge-box {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            border: 1px solid #e9ecef;
-            transition: transform 0.3s ease;
-        }
-        
-        .challenge-box:hover {
-            transform: translateY(-2px);
-        }
-        
-        body.dark .challenge-box {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        .summary-box {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 1px solid #e9ecef;
-            transition: transform 0.3s ease;
-        }
-        
-        .summary-box:hover {
-            transform: translateY(-2px);
-        }
-        
-        body.dark .summary-box {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        .summary-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .summary-box li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 25px;
-            transition: transform 0.2s ease;
-        }
-        
-        .summary-box li:hover {
-            transform: translateX(5px);
-        }
-        
-        .summary-box li:before {
-            content: "✅";
-            position: absolute;
-            left: 0;
-        }
-        
-        .emoji {
-            font-size: 1.1em;
-            margin-right: 5px;
-        }
-        
-        .highlight {
-            background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #1976d2;
-        }
-        
-        body.dark .highlight {
-            background: linear-gradient(120deg, #1a237e 0%, #283593 100%);
-            color: #90caf9;
-        }
-        
-        blockquote {
-            background: #f8f9fa;
-            border-left: 4px solid #007acc;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-            font-style: italic;
-        }
-        
-        body.dark blockquote {
-            background: #2a2a2a;
-            border-left-color: #89d3ff;
-        }
-        
-        ul, ol {
-            padding-left: 20px;
-        }
-        
-        li {
-            margin: 8px 0;
-        }
-        
-        .show-answer {
-            background: #007acc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .show-answer:hover {
-            background: #005b99;
-        }
-        
-        .answer {
-            margin-top: 15px;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-        
-        .section:hover {
-            transform: translateY(-2px);
-        }
-    </style>
-<div class="container">
-  <div class="hero-section">
-    <h1>🧠 Chapter 4: Functions & Modules in Python</h1>
-    <p>Unlock the power of reusable code! In this chapter, you'll learn how to write, use, and organize functions and modules in Python. Mastering these concepts will make your code cleaner, smarter, and more efficient. 🚀</p>
-  </div>
-<!-- Enhanced and structured content for Functions & Modules in Python -->
-<div class="section">
-  <h2>✅ 1. Introduction to Functions</h2>
-  <h3>🔹 What is a Function?</h3>
-  <p>A function is a reusable block of code that performs a specific task.</p>
-  <div class="tip"><strong>💡 Analogy:</strong> Think of a function as a coffee machine: you give it ingredients (inputs), press a button (call the function), and get coffee (output)!</div>
-  <h3>🔹 Why Use Functions?</h3>
-  <ul>
-    <li>To organize code.</li>
-    <li>To avoid repetition.</li>
-    <li>To break problems into smaller pieces.</li>
-  </ul>
-  <h3>🧠 Syntax of a Function in Python:</h3>
-  <pre><code>def function_name(parameters):
-    # block of code
-    return result</code></pre>
+.chapter-header { margin-bottom: 1.5em; }
+.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
+.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
+
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--accent, #00d4aa), #7c3aed);
+  color: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ── Function anatomy diagram ─── */
+.fn-anatomy {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: var(--r-lg);
+  padding: 1.4em 1.6em;
+  margin: 1.2em 0;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 2;
+}
+
+.fn-anatomy .fn-kw    { color: #569cd6; }
+.fn-anatomy .fn-name  { color: #dcdcaa; }
+.fn-anatomy .fn-param { color: #9cdcfe; }
+.fn-anatomy .fn-ret   { color: #ce9178; }
+.fn-anatomy .fn-arrow { color: #00d4aa; }
+.fn-anatomy .fn-note  {
+  color: #6a9955;
+  font-size: 0.82em;
+  font-style: italic;
+  margin-left: 8px;
+}
+
+/* ── Module type cards ─── */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 1.2em 0;
+}
+
+.module-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r-lg);
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.module-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+body.dark .module-card { background: rgba(33,38,45,0.8); border-color: var(--border); }
+
+.module-card .micon { font-size: 2em; display: block; margin-bottom: 8px; }
+.module-card h4 { margin: 0 0 6px; font-size: 0.95em; color: var(--accent); font-family: var(--font-mono); }
+.module-card p  { font-size: 0.82em; color: var(--text-muted); margin: 0; }
+.module-card-2  { border-top-color: #a78bfa; }
+.module-card-2 h4 { color: #a78bfa; }
+.module-card-3  { border-top-color: #f59e0b; }
+.module-card-3 h4 { color: #f59e0b; }
+
+/* ── Answers ─── */
+.answer { display: none; }
+.answer .callout { margin-top: 0.8em; }
+.practice-gap { margin-top: 1.2em; }
+
+/* ── Completion ─── */
+.completion-banner {
+  text-align: center;
+  margin-top: 2.5em;
+  padding: 1.8em;
+  background: linear-gradient(135deg, #0d1117, #161b22);
+  border: 1px solid #30363d;
+  border-bottom: 3px solid #2ea043;
+  border-radius: var(--r-xl, 18px);
+  color: #e6edf3;
+}
+
+.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
+.completion-banner p  { color: #8b949e; margin: 4px 0; }
+.next-badge {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--accent, #00d4aa);
+  color: #0d1117;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85em;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+@media (max-width: 600px) { .module-grid { grid-template-columns: 1fr 1fr; } }
+
+.hero-icon-lg { font-size: 3em; margin-bottom: 12px; }
+</style>
+
+<!-- ── Chapter header ─── -->
+<div class="chapter-header">
+  <span class="chapter-badge">&#9881;&#65039; Chapter 04</span>
+  <h1>Functions &amp; Modules</h1>
+  <p>Write code once. Use it everywhere. Even Tom could figure this out. Eventually.</p>
 </div>
 
-<div class="section">
-  <h3>✅ Example 1:</h3>
-  <pre><code>def copy():
-    print("Don't Copy Me Idiot Try ur own example")
-
-copy()  # Calling the function</code></pre>
-  <h3>✅ Example 2: Function with Parameters</h3>
-  <pre><code>def add(a, b):
-    return a + b
-
-result = add(5, 3)
-print("Sum is:", result)</code></pre>
+<!-- ── Hero ─── -->
+<div class="hero-section">
+  <div class="hero-icon-lg">&#9881;&#65039;</div>
+  <h1>&#9881;&#65039; Functions — Reusable Code Machines</h1>
+  <p>Without functions, every program looks like Tom's plans to catch Jerry. <em>Lots of effort. Zero reuse. Same result.</em></p>
 </div>
 
-<div class="quiz-section">
-  <h2>❓ Questions for Practice:</h2>
-  <div class="quiz-question">
-    <p>1. What is the output of this code?</p>
-    <pre><code>def say_hello():
-    return "Hi!"
+<!-- ── Section 1: What is a Function ─── -->
+<div class="card-section">
+  <h2>&#128230; 1. What is a Function?</h2>
+  <p>Function = named block of code you can <span class="highlight">call anytime, as many times as you want</span>. Write once, run forever. Like Jerry's escape routes — always available, always works.</p>
 
-print(say_hello())</code></pre>
-    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-      <p><strong>✅ Answer:</strong> Hi!</p>
-    </div>
-  </div>
-  <div class="quiz-question">
-    <p>2. Fill in the blank:</p>
-    <pre><code>def _____():
-    print("Python is fun!")</code></pre>
-    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-      <p><strong>✅ Answer:</strong> <code>my_function</code> (Any valid function name is acceptable.)</p>
-    </div>
-  </div>
-  <div class="quiz-question">
-    <p>3. What is the purpose of <code>return</code> in a function?</p>
+  <div class="analogy-box">
+    <h3>&#128049; Tom's Chase Strategy</h3>
+    <p>Tom runs the SAME chase sequence every single day:</p>
     <ul>
-      <li onclick="checkAnswer(this, 'wrong')">A) Print the result</li>
-      <li onclick="checkAnswer(this, 'wrong')">B) Stop execution</li>
-      <li onclick="checkAnswer(this, 'correct')">C) Send back a value</li>
-      <li onclick="checkAnswer(this, 'wrong')">D) Create a loop</li>
+      <li>Spot Jerry &#128027;</li>
+      <li>Run at full speed &#128007;</li>
+      <li>Crash into wall &#128165;</li>
+      <li>Lie flat on floor &#128128;</li>
+    </ul>
+    <p>That's a function. Same steps, called every episode. Tom just never checks the <code>return</code> value.</p>
+  </div>
+
+  <div class="fn-anatomy">
+    <span class="fn-kw">def</span> <span class="fn-name">chase_jerry</span>(<span class="fn-param">speed</span>, <span class="fn-param">direction</span>):
+    <span class="fn-note"># ← keyword + name + params</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn-kw">if</span> <span class="fn-param">speed</span> &gt; 100:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn-kw">return</span> <span class="fn-ret">"caught jerry"</span>
+    <span class="fn-note"># ← return sends value back</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn-kw">return</span> <span class="fn-ret">"wall crash 💥"</span><br>
+    <br>
+    result = <span class="fn-name">chase_jerry</span>(50, "left")
+    <span class="fn-note"># ← calling the function</span>
+  </div>
+
+  <pre><code>def chase_jerry(speed, direction):
+    if speed > 100:
+        return "Caught Jerry! ...wait, no."
+    return f"Crash into wall going {direction}. Again."
+
+print(chase_jerry(50, "left"))
+print(chase_jerry(200, "right"))</code></pre>
+
+  <div class="output-block">Crash into wall going left. Again.
+Caught Jerry! ...wait, no.</div>
+
+  <h3>&#128161; Why Use Functions?</h3>
+  <table>
+    <thead><tr><th>Without functions</th><th>With functions</th></tr></thead>
+    <tbody>
+      <tr><td>Copy-paste same code 10 times</td><td>Write once, call 10 times</td></tr>
+      <tr><td>Change in 10 places when bug found</td><td>Change in 1 place</td></tr>
+      <tr><td>500-line spaghetti mess</td><td>Clean, organized, readable</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Section 2: Parameters ─── -->
+<div class="card-section">
+  <h2>&#128270; 2. Parameters &amp; Arguments</h2>
+  <p><strong>Parameters</strong> = variables in function definition. <strong>Arguments</strong> = actual values you pass when calling. Like the difference between "a sandwich" (parameter) vs "a Krabby Patty" (argument).</p>
+
+  <table>
+    <thead><tr><th>Type</th><th>Example</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Positional</td><td><code>greet("Scooby", "Doo")</code></td><td>Order matters. Like episodes.</td></tr>
+      <tr><td>Keyword</td><td><code>greet(last="Doo", first="Scooby")</code></td><td>Order doesn't matter. Use names.</td></tr>
+      <tr><td>Default</td><td><code>def greet(name="Shaggy")</code></td><td>Fallback if nothing passed.</td></tr>
+      <tr><td>*args</td><td><code>def eat(*foods)</code></td><td>Any number of positional args.</td></tr>
+      <tr><td>**kwargs</td><td><code>def order(**items)</code></td><td>Any number of keyword args.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>&#128049; Scooby-Doo Mystery Solver — Default Args</h3>
+  <pre><code>def solve_mystery(location, villain="The Ghost of Mr. Jenkins"):
+    print(f"Gang investigates: {location}")
+    print(f"Villain unmasked: {villain}")
+    print("Scooby-Dooby-Doo! &#127829;")
+
+solve_mystery("Haunted Museum")          # uses default villain
+solve_mystery("Old Mill", "Farmer Brown")  # overrides default</code></pre>
+
+  <div class="output-block">Gang investigates: Haunted Museum
+Villain unmasked: The Ghost of Mr. Jenkins
+Scooby-Dooby-Doo! &#127829;
+Gang investigates: Old Mill
+Villain unmasked: Farmer Brown
+Scooby-Dooby-Doo! &#127829;</div>
+
+  <h3>&#129749; Homer's Donut Order — *args</h3>
+  <pre><code>def homer_orders(*donuts):
+    print(f"Homer wants {len(donuts)} donuts:")
+    for d in donuts:
+        print(f"  &#129361; {d}")
+    print("Mmmmm... donuts. &#128523;")
+
+homer_orders("glazed", "chocolate", "sprinkle", "pink frosted", "maple")</code></pre>
+
+  <div class="output-block">Homer wants 5 donuts:
+  &#129361; glazed
+  &#129361; chocolate
+  &#129361; sprinkle
+  &#129361; pink frosted
+  &#129361; maple
+Mmmmm... donuts. &#128523;</div>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span><strong>Order of params:</strong> positional → *args → defaults → **kwargs. Mix them up → <code>SyntaxError</code>. Python's grammar is stricter than English class.</span>
+  </div>
+</div>
+
+<!-- ── Section 3: return ─── -->
+<div class="card-section">
+  <h2>&#8617;&#65039; 3. The <code>return</code> Statement</h2>
+  <p><code>return</code> sends a value back and immediately exits the function. No <code>return</code> → function returns <code>None</code>. Like asking Mr. Bean a question — technically he answered, but you got nothing useful.</p>
+
+  <h3>&#127460; Mr. Bean's Disaster Calculator</h3>
+  <pre><code>def calculate_damage(chairs_knocked, vases_broken, people_embarrassed):
+    damage_score = chairs_knocked * 10 + vases_broken * 50 + people_embarrassed * 5
+    return damage_score  # sends the number back
+
+morning = calculate_damage(3, 2, 8)
+print(f"Morning damage score: {morning}")  # we can USE this value now
+
+total = calculate_damage(1, 0, 15) + calculate_damage(5, 3, 20)
+print(f"Full day damage: {total}")</code></pre>
+
+  <div class="output-block">Morning damage score: 170
+Full day damage: 280</div>
+
+  <h3>&#128161; return vs print — The Classic Trap</h3>
+  <pre><code>def say_hi():
+    print("Hi!")       # SHOWS on screen
+
+def give_hi():
+    return "Hi!"       # SENDS value back
+
+x = say_hi()           # prints "Hi!" but x = None
+y = give_hi()          # nothing prints but y = "Hi!"
+
+print("x is:", x)      # x is: None
+print("y is:", y)      # y is: Hi!</code></pre>
+
+  <div class="output-block">Hi!
+x is: None
+y is: Hi!</div>
+
+  <div class="callout warning">
+    <span>&#9888;&#65039;</span>
+    <span><code>print()</code> shows it on screen. <code>return</code> gives it back to the caller. They are NOT the same. Confusing them is the #1 beginner mistake.</span>
+  </div>
+
+  <h3>&#128214; Multiple Return Values</h3>
+  <pre><code>def bugs_bunny_stats():
+    name = "Bugs Bunny"
+    catchphrase = "What's up, Doc?"
+    escapes = 9999
+    return name, catchphrase, escapes  # Python packs as tuple
+
+who, quote, count = bugs_bunny_stats()  # unpack
+print(f"{who} says '{quote}' after {count} escapes.")</code></pre>
+
+  <div class="output-block">Bugs Bunny says 'What's up, Doc?' after 9999 escapes.</div>
+</div>
+
+<!-- ── Section 4: Lambda ─── -->
+<div class="card-section">
+  <h2>&#955; 4. Lambda Functions — One-Liners</h2>
+  <p>Lambda = anonymous function, one expression only. No <code>def</code>, no name, no ceremony. Like Bugs Bunny's escapes — simple, fast, no explanation needed.</p>
+
+  <pre><code>lambda arguments: expression</code></pre>
+
+  <table>
+    <thead><tr><th>Feature</th><th>def function</th><th>lambda</th></tr></thead>
+    <tbody>
+      <tr><td>Has name?</td><td>&#9989; Yes</td><td>&#10060; Anonymous</td></tr>
+      <tr><td>Lines of code</td><td>Multiple</td><td>Single expression</td></tr>
+      <tr><td>Use case</td><td>Complex logic</td><td>Short, throwaway logic</td></tr>
+    </tbody>
+  </table>
+
+  <h3>&#128007; Bugs Bunny's Escape Evaluator</h3>
+  <pre><code># Regular function — verbose
+def evaluate_escape(iq):
+    return "Easy" if iq > 50 else "Needs Plan B"
+
+# Lambda — same thing
+evaluate_escape_l = lambda iq: "Easy" if iq > 50 else "Needs Plan B"
+
+print(evaluate_escape(Elmer_iq := 30))    # Easy (Elmer is... not sharp)
+print(evaluate_escape_l(70))              # Easy</code></pre>
+
+  <h3>&#128260; Lambda with map() — Dora's Backpack Items</h3>
+  <pre><code>backpack = ["map", "backpack", "boots", "flashlight"]
+
+# Add "Explorer's " prefix to each item
+explorer_items = list(map(lambda item: f"Explorer's {item}", backpack))
+for item in explorer_items:
+    print(item)</code></pre>
+
+  <div class="output-block">Explorer's map
+Explorer's backpack
+Explorer's boots
+Explorer's flashlight</div>
+
+  <h3>&#128683; Lambda with filter() — Weed Out Weak Looney Tunes</h3>
+  <pre><code>characters = [
+    {"name": "Bugs Bunny",   "iq": 200},
+    {"name": "Daffy Duck",   "iq": 80},
+    {"name": "Elmer Fudd",   "iq": 30},
+    {"name": "Tweety Bird",  "iq": 140},
+    {"name": "Porky Pig",    "iq": 95},
+]
+
+smart_ones = list(filter(lambda c: c["iq"] > 100, characters))
+for c in smart_ones:
+    print(f"{c['name']} — IQ: {c['iq']}")</code></pre>
+
+  <div class="output-block">Bugs Bunny — IQ: 200
+Tweety Bird — IQ: 140</div>
+</div>
+
+<!-- ── Section 5: Modules ─── -->
+<div class="card-section">
+  <h2>&#128230; 5. Modules — Python's Toolboxes</h2>
+  <p>Module = a <code>.py</code> file full of functions and variables you can <code>import</code>. Like Buzz Lightyear's utility belt — you don't build the tools, you just bring the belt.</p>
+
+  <div class="module-grid">
+    <div class="module-card">
+      <span class="micon">&#128230;</span>
+      <h4>Built-in</h4>
+      <p>Ships with Python. <code>math</code>, <code>random</code>, <code>os</code>, <code>datetime</code></p>
+    </div>
+    <div class="module-card module-card-2">
+      <span class="micon">&#128736;&#65039;</span>
+      <h4>User-defined</h4>
+      <p>Your own <code>.py</code> files. Import between projects.</p>
+    </div>
+    <div class="module-card module-card-3">
+      <span class="micon">&#128250;</span>
+      <h4>Third-party</h4>
+      <p><code>numpy</code>, <code>pandas</code>, <code>flask</code>. Install via <code>pip</code>.</p>
+    </div>
+  </div>
+
+  <h3>&#128073; Import Syntax</h3>
+  <pre><code>import math                    # import whole module
+from math import sqrt, pi      # import specific items
+import numpy as np              # alias — shorter name</code></pre>
+
+  <h3>&#129749; math module — Homer's Donut Geometry</h3>
+  <pre><code>import math
+
+donut_radius = 5  # cm
+
+circumference = 2 * math.pi * donut_radius
+area = math.pi * math.pow(donut_radius, 2)
+
+print(f"Donut circumference: {circumference:.2f} cm")
+print(f"Donut area: {area:.2f} cm²")
+print(f"Square root of Homer's IQ: {math.sqrt(100):.1f}")  # &#129315;</code></pre>
+
+  <div class="output-block">Donut circumference: 31.42 cm
+Donut area: 78.54 cm²
+Square root of Homer's IQ: 10.0</div>
+
+  <h3>&#127922; random module — Scooby Snack Roulette</h3>
+  <pre><code>import random
+
+snacks = ["Scooby Snack", "Double Scooby Snack", "MEGA Scooby Snack", "Empty bag &#128530;"]
+
+print("Shaggy reaches in the bag...")
+chosen = random.choice(snacks)
+print(f"Got: {chosen}")
+
+print(f"\nRandom episode villain number: {random.randint(1, 100)}")
+print(f"Mystery probability: {random.random():.2f}")</code></pre>
+
+  <div class="output-block">Shaggy reaches in the bag...
+Got: Double Scooby Snack
+
+Random episode villain number: 47
+Mystery probability: 0.73</div>
+
+  <h3>&#8987;&#65039; datetime module — Back to the Future Calculator</h3>
+  <pre><code>from datetime import datetime, timedelta
+
+now = datetime.now()
+print(f"Current time: {now.strftime('%Y-%m-%d %H:%M')}")
+
+# Marty McFly needs to travel 30 years back
+years_back = timedelta(days=30*365)
+past_date = now - years_back
+print(f"30 years ago: {past_date.strftime('%Y-%m-%d')}")
+
+# When does Doc's Delorean need 1.21 gigawatts?
+event = datetime(1985, 10, 26, 1, 20)
+print(f"The lightning: {event.strftime('%B %d, %Y at %I:%M %p')}")</code></pre>
+
+  <div class="output-block">Current time: 2026-06-05 14:30
+30 years ago: 1996-06-05
+The lightning: October 26, 1985 at 01:20 AM</div>
+
+  <h3>&#128218; User-defined Module — Toy Story Utility Belt</h3>
+  <div class="analogy-box">
+    <strong>&#128578; Scenario:</strong> Andy's toys each have special powers. Let's put them in a module so every Python script can use them.
+  </div>
+
+  <pre><code># File: toy_story.py  (your custom module)
+
+def woody_says(message):
+    return f"[Woody] There's a snake in my boot! Also: {message}"
+
+def buzz_says(message):
+    return f"[Buzz] To infinity and beyond! Specifically: {message}"
+
+ANDY_NAME = "Andy"</code></pre>
+
+  <pre><code># File: main.py  (your main script)
+import toy_story
+
+print(toy_story.woody_says("Python is fun"))
+print(toy_story.buzz_says("modules save time"))
+print(f"Belongs to: {toy_story.ANDY_NAME}")</code></pre>
+
+  <div class="output-block">[Woody] There's a snake in my boot! Also: Python is fun
+[Buzz] To infinity and beyond! Specifically: modules save time
+Belongs to: Andy</div>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span>Filename = module name. <code>toy_story.py</code> → <code>import toy_story</code>. No spaces, no hyphens. Underscores only, like Python variable names.</span>
+  </div>
+</div>
+
+<!-- ── Built-in functions table ─── -->
+<div class="card-section">
+  <h2>&#128214; Built-in Functions You Need Daily</h2>
+  <table>
+    <thead><tr><th>Function</th><th>Does what</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>print()</code></td><td>Show output</td><td><code>print("meow")</code></td></tr>
+      <tr><td><code>input()</code></td><td>Get user input</td><td><code>name = input("Name?")</code></td></tr>
+      <tr><td><code>len()</code></td><td>Count items/chars</td><td><code>len("Scooby")</code> → 6</td></tr>
+      <tr><td><code>type()</code></td><td>What type is this</td><td><code>type(42)</code> → int</td></tr>
+      <tr><td><code>range()</code></td><td>Number sequence</td><td><code>range(1, 6)</code></td></tr>
+      <tr><td><code>int() str() float()</code></td><td>Type conversion</td><td><code>int("42")</code> → 42</td></tr>
+      <tr><td><code>max() min() sum()</code></td><td>Math on lists</td><td><code>max([3,1,4])</code> → 4</td></tr>
+      <tr><td><code>sorted()</code></td><td>Sort a list</td><td><code>sorted([3,1,2])</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Quiz ─── -->
+<div class="card-section">
+  <h2>&#127918; Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which keyword defines a function?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>function</code></li>
+      <li onclick="checkAnswer(this,'wrong')">b) <code>define</code></li>
+      <li onclick="checkAnswer(this,'correct')">c) <code>def</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>fn</code> (wrong language)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does a function without <code>return</code> return?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) 0</li>
+      <li onclick="checkAnswer(this,'wrong')">b) False</li>
+      <li onclick="checkAnswer(this,'correct')">c) <code>None</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) Error</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. <code>lambda x: x * 2</code> called with <code>5</code> returns?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>lambda</code></li>
+      <li onclick="checkAnswer(this,'correct')">b) <code>10</code></li>
+      <li onclick="checkAnswer(this,'wrong')">c) <code>5</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>x * 2</code></li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>4. Which is NOT a built-in Python module?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>math</code></li>
+      <li onclick="checkAnswer(this,'wrong')">b) <code>random</code></li>
+      <li onclick="checkAnswer(this,'correct')">c) <code>scooby</code> — sadly</li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>datetime</code></li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>5. What does <code>*args</code> allow?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Only keyword arguments</li>
+      <li onclick="checkAnswer(this,'wrong')">b) Exactly 2 arguments</li>
+      <li onclick="checkAnswer(this,'correct')">c) Any number of positional arguments</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Default values only</li>
     </ul>
   </div>
 </div>
 
-<h2>✅ 2. Function Parameters and Arguments</h2>
-
-<h3>🔹 What are Parameters?</h3>
-<p>
-  Parameters are the variables listed inside the parentheses in the function definition.<br/>
-  <strong>Arguments</strong> are the values you pass to the function when you call it.
-</p>
-
-<h3>📌 Types of Arguments in Python:</h3>
-<table>
-  <thead>
-    <tr><th>Type</th><th>Example Call</th><th>Description</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Positional</td><td><code>add(2, 3)</code></td><td>Values are assigned based on position.</td></tr>
-    <tr><td>Keyword</td><td><code>add(a=2, b=3)</code></td><td>Values assigned using parameter names.</td></tr>
-    <tr><td>Default</td><td><code>def greet(name="User")</code></td><td>Default used if no argument is passed.</td></tr>
-    <tr><td>Variable-length</td><td><code>*args, **kwargs</code></td><td>For dynamic number of arguments. (later)</td></tr>
-  </tbody>
-</table>
-
-<h3>✅ Example 1: Positional Arguments</h3>
-<pre><code>def add(a, b):
-    return a + b
-
-print(add(2, 3))  # Output: 5</code></pre>
-
-<h3>✅ Example 2: Default Arguments</h3>
-<pre><code>def AOT(name="Goku"):
-    print("Most Powerful character of Attack on Titan:", name)
-
-AOT()            # Output: Most Powerful character of Attack on Titan: Goku
-AOT("Eren")      # Output: Most Powerful character of Attack on Titan: Eren
-</code></pre>
-
-
-<h3>✅ Example 3: Keyword Arguments</h3>
-<pre><code>def student_info(name, age):
-    print(name, "is", age, "years old.")
-
-student_info(age=20, name="Aman")</code></pre>
-
-<h2>❓ Questions for Practice:</h2>
-
-<div class="quiz-question">
-  <p>1. What will this print?</p>
-  <pre><code>def show_info(name, city="vadodara"):
-    print(name, "don't like PARUL which is in ", city)
-
-show_info("Aman Sir")</code></pre>
-<button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> Aman Sir don't like PARUL which is in vadodara</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-  <p>2. Choose the correct option:<br/>
-  You can skip positional arguments and only use keyword arguments.</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'correct')">A) True</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) False</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>3. Which of the following allows default values for parameters?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Positional arguments</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) Keyword arguments</li>
-    <li onclick="checkAnswer(this, 'correct')">C) Default arguments</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) None</li>
-  </ul>
-</div>
-<h2>✅ 3. The return Statement in Python Functions</h2>
-
-<h3>🔹 What is return?</h3>
-<p>
-  The return statement is used to send a result back to the place where the function is called.<br/>
-  It ends the function execution immediately.
-</p>
-
-<h3>✅ Example 1: Simple Return</h3>
-<pre><code>def square(num):
-    return num * num
-
-result = square(4)
-print("Square is:", result)</code></pre>
-<p>🟩 <strong>Output:</strong> Square is: 16</p>
-
-<h3>✅ Example 2: Return Multiple Values</h3>
-<pre><code>def get_values():
-    return 10, 20, 30
-
-a, b, c = get_values()
-print(a, b, c)</code></pre>
-<p>🟩 <strong>Output:</strong> 10 20 30</p>
-
-<h3>✅ Example 3: Return vs Print</h3>
-<pre><code>def show():
-    print("Hello")
-
-def give():
-    return "Hello"
-
-x = show()     # prints Hello, but x is None
-y = give()     # does not print but y gets the value "Hello"
-
-print("x:", x)  # Output: x: None
-print("y:", y)  # Output: y: Hello</code></pre>
-
-<h2>❓ Questions for Practice:</h2>
-
-<div class="quiz-question">
-  <p>1. What will be the output?</p>
-  <pre><code>def multiply(a, b):
-    return a * b
-
-print(multiply(29, 46))</code></pre>
-<button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> 1421 </p>
-    </div>
-</div>
-
-<div class="quiz-question">
-  <p>2. Fill in the blank:</p>
-  <pre><code>def welcome():
-    _____ "Welcome Back!"</code></pre>
-    <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> <code>return</code></p>
-    </div>
-</div>
-
-<div class="quiz-question">
-  <p>3. What happens when a function doesn't have a <code>return</code> statement?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) It returns 0</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) It returns an error</li>
-    <li onclick="checkAnswer(this, 'correct')">C) It returns None</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) It returns True</li>
-  </ul>
-</div>
-
-<h2>✅ 4. Types of Functions in Python</h2>
-
-<p>Python has two main types of functions:</p>
-
-<h3>🔹 1. Built-in Functions</h3>
-<p>These are pre-defined in Python and ready to use.</p>
-
-<h4>🧪 Examples:</h4>
-<pre><code>print(len("Pythonnnnnnn"))      # Output: 12
-print(max(39, 1003, 579))       # Output: 1003
-print(round(4.56))         # Output: 5</code></pre>
-
-<p>🛠️ <strong>Other built-in functions:</strong>,sum(),type(),input(),range(),sorted(),abs() etc.</p>
-
-<h3>🔹 2. User-defined Functions</h3>
-<p>These are functions you create using def.</p>
-
-<h4>🧪 Example:</h4>
-<pre><code>def greet(name):
-    return "Hello " + name
-
-print(greet("Aman"))</code></pre>
-
-<h3>🔹 Built-in vs User-defined</h3>
-<table>
-  <thead>
-    <tr><th>Feature</th><th>Built-in</th><th>User-defined</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Who created?</td><td>Python developers</td><td>You / Programmer</td></tr>
-    <tr><td>Customizable?</td><td>❌ No</td><td>✅ Yes</td></tr>
-    <tr><td>Examples</td><td>len(), max()</td><td>greet(),calculate_area()</td></tr>
-  </tbody>
-</table>
-
-<h2>❓ Questions for Practice:</h2>
-
-<div class="quiz-question">
-  <p>1. Which one is <strong>not</strong> a built-in function in Python?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) input()</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) len()</li>
-    <li onclick="checkAnswer(this, 'correct')">C) add()</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) sum()</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>2. What is the use of <code>len()</code> function?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Adds numbers</li>
-    <li onclick="checkAnswer(this, 'correct')">B) Returns length</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) Converts case</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Takes input</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>3. Can we create our own functions in Python?</p>
-  <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> Yes, using def</p>
-    </div>
-</div>
-<h2>✅ 5. Lambda (Anonymous) Functions</h2>
-
-<h3>🔹 What is a Lambda Function?</h3>
-<p>
-  A <strong>lambda function</strong> is a small anonymous function — meaning it doesn’t have a name like regular functions created with def.
-</p>
-
-<h3>📌 Syntax:</h3>
-<pre><code>lambda arguments: expression</code></pre>
-<p>✅ It can take any number of arguments, but only one expression.</p>
-
-<h3>✅ Example 1: Simple Lambda Function</h3>
-<pre><code>square = lambda x: x * x
-print(square(5))  # Output: 25</code></pre>
-
-<h3>✅ Example 2: Lambda with Multiple Arguments</h3>
-<pre><code>add = lambda a, b: a + b
-print(add(3, 4))  # Output: 7</code></pre>
-
-<h3>✅ Example 3: Using Lambda with <code>map()</code></h3>
-<pre><code>nums = [1, 2, 3, 4]
-squared = list(map(lambda x: x ** 2, nums))
-print(squared)  # Output: [1, 4, 9, 16]</code></pre>
-
-<h3>✅ Example 4: Using Lambda with <code>filter()</code></h3>
-<pre><code>nums = [5, 8, 12, 3, 7]
-even = list(filter(lambda x: x % 2 == 0, nums))
-print(even)  # Output: [8, 12]</code></pre>
-
-<h3>✅ Lambda vs def</h3>
-<table>
-  <thead>
-    <tr><th>Feature</th><th>def function</th><th>lambda function</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Has a name?</td><td>✅ Yes</td><td>❌ Anonymous (usually)</td></tr>
-    <tr><td>Lines of code</td><td>Multiple lines</td><td>Single expression only</td></tr>
-    <tr><td>Use case</td><td>Complex logic</td><td>Simple, short expressions</td></tr>
-  </tbody>
-</table>
-
-<h2>❓ Questions for Practice:</h2>
-
-<div class="quiz-question">
-  <p>1. What will this print?</p>
-  <pre><code>x = lambda a: a * 1123
-print(x(35))</code></pre>
-<button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> 39305</p>
-    </div>
-</div>
-
-<div class="quiz-question">
-  <p>2. Which function is <strong>not</strong> related to lambda?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) map()</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) filter()</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) reduce()</li>
-    <li onclick="checkAnswer(this, 'correct')">D) len()</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>3. Fill in the blank:</p>
-  <pre><code>multiply = _____ a, b: a * b</code></pre>
-  <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> <code>lambda</code></p>
-    </div>
-</div>
-
-<h2>✅ 6. Modules in Python</h2>
-
-<h3>🔹 What is a Module?</h3>
-<p>
-  A <strong>module</strong> is a file containing Python code (functions, variables, classes) that you can import and reuse in other programs.
-</p>
-<p>📁 Think of a module as a toolbox — you import it when you need its tools (code).</p>
-
-<h3>🔹 Why Use Modules?</h3>
-<ul>
-  <li><strong>Reusability:</strong> Write once, use anywhere.</li>
-  <li><strong>Organization:</strong> Keep code clean and separate.</li>
-  <li><strong>Standard Library:</strong> Use built-in powerful features like <strong>math</strong>,<strong>random</strong>,<strong>datetime</strong>.</li>
-</ul>
-
-<h3>✅ Types of Modules</h3>
-<table>
-  <thead>
-    <tr><th>Type</th><th>Examples</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Built-in Modules</td><td><strong>math</strong>, <strong>random</strong>, <strong>os</strong>, <strong>datetime</strong></td></tr>
-    <tr><td>User-defined</td><td>Your own <strong>.py</strong> files</td></tr>
-    <tr><td>Third-party</td><td><strong>numpy</strong>, <strong>pandas</strong>, <strong>flask</strong>, etc. (via <strong>pip</strong>)</td></tr>
-  </tbody>
-</table>
-
-<h3>✅ Example 1: Import a Built-in Module</h3>
-<pre><code>import math
-
-print(math.sqrt(16))  # Output: 4.0</code></pre>
-
-<h3>✅ Example 2: Import Specific Function</h3>
-<pre><code>from math import pi, pow
-
-print(pi)        # Output: 3.14159...
-print(pow(2, 3)) # Output: 8.0</code></pre>
-
-<h3>✅ Example 3: Create and Use a User-defined Module</h3>
-<p>🔹 <strong>File 1 (<strong>mytools.py</strong>):</strong></p>
-<pre><code>def greet(name):
-    return "Hello " + name</code></pre>
-
-<p>🔹 <strong>File 2 (<strong>main.py</strong>):</strong></p>
-<pre><code>import mytools
-
-print(mytools.greet("Aman"))</code></pre>
-
-<h3>✅ Example 4: Third-party Module (Needs pip)</h3>
-<pre><code>pip install numpy</code></pre>
-<pre><code>import numpy as np
-arr = np.array([1, 2, 3])
-print(arr)</code></pre>
-
-<h2>❓ Questions for Practice:</h2>
-
-<div class="quiz-question">
-  <p>1. Which of the following is a built-in module?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) facebook</li>
-    <li onclick="checkAnswer(this, 'correct')">B) calendar</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) flask</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) browser</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>2. Fill in the blank:</p>
-  <pre><code>_____ math
-print(math.pi)</code></pre>
-<button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> <code>import</code></p>
-    </div>
-</div>
-
-<div class="quiz-question">
-  <p>3. What does pip do?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Prints</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) Plays music</li>
-    <li onclick="checkAnswer(this, 'correct')">C) Installs Python packages</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Formats code</li>
-  </ul>
-</div>
-<h2>✅ Built-in Modules in Python</h2>
-<p>
-  These modules come pre-installed with Python. You just <code>import</code> them and start using — no installation needed.
-</p>
-
-<h3>📦 1. <strong>math</strong> Module</h3>
-<p>Used for mathematical operations.</p>
-<pre><code>import math
-
-print(math.sqrt(25))         # Square root: 5.0
-print(math.ceil(4.2))        # Ceiling value: 5
-print(math.floor(4.9))       # Floor value: 4
-print(math.pow(2, 3))        # 2^3 = 8.0
-print(math.pi)               # 3.141592...</code></pre>
-
-<h3>🎲 2. <strong>random</strong> Module</h3>
-<p>Used to generate random numbers, choose random items, etc.</p>
-<pre><code>import random
-
-print(random.randint(1, 10))         # Random integer between 1 and 10
-print(random.choice(['apple', 'banana', 'cherry']))  # Random choice
-print(random.random())               # Random float between 0 and 1
-</code></pre>
-
-<h3>💻 3. <strong>os</strong> Module</h3>
-<p>Provides functions to interact with the Operating System.</p>
-<pre><code>import os
-
-print(os.getcwd())           # Current working directory
-print(os.name)               # OS name (e.g., 'nt' for Windows, 'posix' for Unix)
-os.mkdir("new_folder")       # Create new folder
-os.remove("file.txt")        # Delete a file</code></pre>
-
-<h3>⏰ 4. <strong>datetime</strong> Module</h3>
-<p>Used for working with dates and times.</p>
-<pre><code>import datetime
-
-now = datetime.datetime.now()
-print("Current Date and Time:", now)
-
-today = datetime.date.today()
-print("Today's Date:", today)
-
-delta = datetime.timedelta(days=5)
-future = today + delta
-print("5 days from today:", future)</code></pre>
-
-<h3>💡 Tip: Import Specific Functions</h3>
-<pre><code>from math import sqrt, pi
-
-print(sqrt(9))   # 3.0
-print(pi)        # 3.141592...</code></pre>
-
-<h2>❓ Quick Practice Questions:</h2>
-
-<div class="quiz-question">
-  <p>1. Which module helps generate random numbers?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) math</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) os</li>
-    <li onclick="checkAnswer(this, 'correct')">C) random</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) time</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>2. Fill in the blank:</p>
-  <pre><code>import _____
-print(math.sqrt(16))</code></pre>
-<button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> <code>math</code></p>
-    </div>
-</div>
-
-<div class="quiz-question">
-  <p>3. What does <code>os.mkdir("folder")</code> do?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Deletes folder</li>
-    <li onclick="checkAnswer(this, 'correct')">B) Creates a folder</li>
-    <li onclick="checkAnswer(this, 'wrong')">C) Prints folder</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) Renames folder</li>
-  </ul>
-</div>
-
-<h2>✅ User-Defined Modules in Python</h2>
-
-<h3>🔹 What is a User-Defined Module?</h3>
-<p>
-  A <strong>user-defined module</strong> is simply a Python file (<strong>.py</strong>) that contains functions, variables, or classes — created by you — and can be imported into other Python files.
-</p>
-<p>📦 Imagine making your own toolbox that you can reuse in other scripts.</p>
-
-<h3>✅ Step-by-Step Example:</h3>
-
-<h4>🔸 Step 1: Create the Module File</h4>
-<p>📝 <strong>mytools.py</strong></p>
-<pre><code># This is your user-defined module
-
-def greet(name):
-    return f"Hello, {name}!"
-
-def add(a, b):
-    return a + b
-
-pi = 3.14159</code></pre>
-
-<h4>🔸 Step 2: Use it in another file</h4>
-<p>📝 <strong>main.py</strong></p>
-<pre><code>import mytools
-
-print(mytools.greet("Aman"))      # Output: Hello, Aman!
-print(mytools.add(10, 5))         # Output: 15
-print(mytools.pi)                 # Output: 3.14159</code></pre>
-
-<h3>✅ You can also import specific functions:</h3>
-<pre><code>from mytools import greet, pi
-
-print(greet("Raj"))
-print(pi)</code></pre>
-
-<h3>🔹 How It Works:</h3>
-<ul>
-  <li>Python searches for <strong>mytools.py</strong> in the current folder or <strong>sys.path</strong>.</li>
-  <li>It loads the module once and caches it.</li>
-  <li>A <strong>.pyc</strong> (compiled) version may also be created for faster loading.</li>
-</ul>
-
-<h3>🧠 Tips:</h3>
-<ul>
-  <li>File name becomes module name: <strong>mymodule.py → import mymodule</strong></li>
-  <li>Avoid spaces or special characters in filenames.</li>
-  <li>Good for organizing large programs into smaller pieces.</li>
-</ul>
-
-<h2>❓ Practice Questions:</h2>
-
-<div class="quiz-question">
-  <p>1. A module created by the programmer is called?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) Built-in module</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) Pre-installed module</li>
-    <li onclick="checkAnswer(this, 'correct')">C) User-defined module</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) System module</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>2. You created <code>math_ops.py</code>. How do you import it?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">A) include math_ops</li>
-    <li onclick="checkAnswer(this, 'wrong')">B) using math_ops</li>
-    <li onclick="checkAnswer(this, 'correct')">C) import math_ops</li>
-    <li onclick="checkAnswer(this, 'wrong')">D) run math_ops</li>
-  </ul>
-</div>
-
-<div class="quiz-question">
-  <p>3. True or False: You can reuse your own <strong>.py</strong> file as a module.</p>
-  <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
-    <div class="answer" style="display: none;">
-  <p><strong>✅ Answer:</strong> ✅ True</p>
-    </div>
-</div>
-
-<h2>🧠 Built-in Functions You Should Know</h2>
-<table>
-  <thead>
-    <tr><th>Function</th><th>Description</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>print()</strong></td><td>Print to console</td></tr>
-    <tr><td><strong>input()</strong></td><td>Take user input</td></tr>
-    <tr><td><strong>len()</strong></td><td>Length of a string/list</td></tr>
-    <tr><td><strong>type()</strong></td><td>Type of a variable</td></tr>
-    <tr><td><strong>range()</strong></td><td>Generate a sequence of numbers</td></tr>
-    <tr><td><strong>int(), str(), float()</strong></td><td>Convert data types</td></tr>
-  </tbody>
-</table>
-
-<blockquote>😆 <strong>Joke Time!</strong><br/>
-Why do Python devs love functions?<br/>
-Because they like to reuse their charm, not retype it! 😎
-</blockquote>
-
-<h2>🧪 Practice Task 1: Calculator Function</h2>
-<pre><code>def calculator(a, b, operation):
-    if operation == 'add':
-        return a + b
-    elif operation == 'sub':
-        return a - b
-    elif operation == 'mul':
-        return a * b
-    elif operation == 'div':
-        return a / b
+<!-- ── Challenges ─── -->
+<div class="card-section">
+  <h2>&#129514; Coding Challenges</h2>
+
+  <div class="practice-zone">
+    <strong>&#128640; Challenge 1: Tom's Chase Tracker</strong><br>
+    Write <code>chase_report(tom_speed, jerry_speed)</code>. Returns <em>"Tom wins"</em> if Tom faster, <em>"Jerry escapes... again"</em> if Jerry faster, <em>"DRAW — wall hits both"</em> if equal.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def chase_report(tom_speed, jerry_speed):
+    if tom_speed > jerry_speed:
+        return "Tom wins! (episode never made)"
+    elif jerry_speed > tom_speed:
+        return "Jerry escapes... again"
     else:
-        return "Invalid Operation"
+        return "DRAW — wall hits both"
 
-print(calculator(10, 5, 'add'))  # Output: 15
-</code></pre>
+print(chase_report(80, 100))   # Jerry escapes
+print(chase_report(90, 90))    # DRAW</code></pre>
+  </div>
 
-<h2>✅ Quick Quiz</h2>
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 2: Bugs Bunny IQ Sorter</strong><br>
+    Given list of <code>(name, iq)</code> tuples, use <code>sorted()</code> with a <code>lambda</code> key to sort by IQ descending. Print each name + IQ.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>looney_tunes = [
+    ("Bugs Bunny",  200),
+    ("Elmer Fudd",   30),
+    ("Tweety Bird", 140),
+    ("Daffy Duck",   80),
+    ("Road Runner", 175),
+]
 
-<div class="quiz-question">
-  <p>1. What keyword is used to define a function in Python?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) define</li>
-    <li onclick="checkAnswer(this, 'wrong')">b) function</li>
-    <li onclick="checkAnswer(this, 'correct')">c) def</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) fun</li>
-  </ul>
+ranked = sorted(looney_tunes, key=lambda x: x[1], reverse=True)
+for name, iq in ranked:
+    print(f"{name}: IQ {iq}")</code></pre>
+    <div class="callout tip">
+      <span>&#128161;</span>
+      <span><code>key=lambda x: x[1]</code> tells <code>sorted()</code> to compare tuples by their second element (IQ). <code>reverse=True</code> = highest first.</span>
+    </div>
+  </div>
+
+  <div class="practice-zone practice-gap">
+    <strong>&#128640; Challenge 3: Scooby-Doo Mystery Module</strong><br>
+    Create functions: <code>investigate(location)</code>, <code>unmask(villain)</code>, <code>celebrate()</code>. Call all three for one complete mystery.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def investigate(location):
+    return f"Gang heads to {location}... it's probably nothing."
+
+def unmask(villain):
+    return f"JINKIES! It was {villain} all along!"
+
+def celebrate(solved=True):
+    if solved:
+        return "Scooby-Dooby-Doo! &#127829;&#127829;&#127829;"
+    return "We'll get 'em next time, gang."
+
+# Run a complete mystery
+print(investigate("Haunted Amusement Park"))
+print(unmask("The Park Manager, Old Jenkins"))
+print(celebrate())</code></pre>
+  </div>
 </div>
 
-<div class="quiz-question">
-  <p>2. Which of these is a built-in module?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) superpower</li>
-    <li onclick="checkAnswer(this, 'correct')">b) random</li>
-    <li onclick="checkAnswer(this, 'wrong')">c) magic</li>
-    <li onclick="checkAnswer(this, 'wrong')">d) matrix</li>
-  </ul>
+<!-- ── Summary ─── -->
+<div class="summary-box">
+  <h3>&#9997;&#65039; Chapter Summary</h3>
+  <table>
+    <thead><tr><th>Concept</th><th>Syntax</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Define function</td><td><code>def name(params): ...</code></td><td>Reusable code block</td></tr>
+      <tr><td>Call function</td><td><code>name(args)</code></td><td>Execute it</td></tr>
+      <tr><td>Return value</td><td><code>return value</code></td><td>Send result back</td></tr>
+      <tr><td>Default arg</td><td><code>def f(x="hi")</code></td><td>Fallback value</td></tr>
+      <tr><td>Variable args</td><td><code>*args, **kwargs</code></td><td>Flexible argument count</td></tr>
+      <tr><td>Lambda</td><td><code>lambda x: x*2</code></td><td>Anonymous one-liner</td></tr>
+      <tr><td>Import module</td><td><code>import math</code></td><td>Use external code</td></tr>
+      <tr><td>Partial import</td><td><code>from math import pi</code></td><td>Import specific items</td></tr>
+    </tbody>
+  </table>
 </div>
 
-<div class="quiz-question">
-  <p>3. What does a <code>return</code> statement do?</p>
-  <ul>
-    <li onclick="checkAnswer(this, 'wrong')">a) Prints a result</li>
-    <li onclick="checkAnswer(this, 'wrong')">b) Loops a value</li>
-    <li onclick="checkAnswer(this, 'wrong')">c) Exits the program</li>
-    <li onclick="checkAnswer(this, 'correct')">d) Sends a value back</li>
-  </ul>
+<!-- ── Completion ─── -->
+<div class="completion-banner">
+  <h3>&#127881; Chapter 4 Complete!</h3>
+  <p>Your code is now organized like Bugs Bunny's escape routes — always ready, never repeating itself.</p>
+  <span class="next-badge">&#9654; Next: Data Structures</span>
 </div>
-
-<blockquote>😆 <strong>Joke Time!</strong><br/>
-Why do Python devs love functions?<br/>
-Because they like to reuse their charm, not retype it! 😎
-</blockquote>
-
-<h2>🧪 Practice Task 1: Calculator Function</h2>
-<pre><code>def calculator(a, b, operation):
-    if operation == 'add':
-        return a + b
-    elif operation == 'sub':
-        return a - b
-    elif operation == 'mul':
-        return a * b
-    elif operation == 'div':
-        return a / b
-    else:
-        return "Invalid Operation"
-
-print(calculator(10, 5, 'add'))  # Output: 15
-</code></pre>
-
-
-<h2>🎯 Challenge Task</h2>
-<p>Create a program with 3 functions:</p>
-<ul>
-  <li><strong>get_marks()</strong> – asks user for 3 subject marks</li>
-  <li><strong>calculate_avg()</strong> – takes marks, returns average</li>
-  <li><strong>display_result()</strong> – prints final result and grade</li>
-</ul>
-
-<h2>📌 Summary</h2>
-<table>
-  <thead>
-    <tr><th>Concept</th><th>Description</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Function</strong></td><td>Block of reusable code using <code>def</code></td></tr>
-    <tr><td><strong>Parameters</strong></td><td>Inputs passed to a function</td></tr>
-    <tr><td><strong>Return</strong></td><td>Sends a value back from a function</td></tr>
-    <tr><td><strong>Lambda</strong></td><td>Small anonymous one-line function</td></tr>
-    <tr><td><strong>Module</strong></td><td>A Python file containing reusable code</td></tr>
-    <tr><td><strong>Import</strong></td><td>Bring in external code using <code>import</code></td></tr>
-  </tbody>
-</table>
-
-<div class="tip"><strong>😆 Joke Time!</strong> Why did the Python function go to therapy? Because it had too many unresolved arguments! 🐍</div>
-
-<div class="tip"><strong>🤔 Did You Know?</strong> You can assign a function to a variable in Python and call it using that variable name!</div>
