@@ -1,24 +1,7 @@
 <!-- ── Chapter 0: Setup & Installation ── -->
 <style>
-.chapter-header { margin-bottom: 1.5em; }
-.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
-.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
-
-.chapter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, #f59e0b, #ef4444);
-  color: #fff;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72em;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
+/* ── Badge override ─── */
+.chapter-badge { background: linear-gradient(135deg, #f59e0b, #ef4444); }
 
 /* ── OS tabs ─── */
 .os-tabs { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
@@ -136,30 +119,6 @@ body.dark .ext-card { background: rgba(33,38,45,0.8); }
   font-family: var(--font-mono);
   font-size: 0.9em;
   margin: 8px 0;
-}
-
-.completion-banner {
-  text-align: center;
-  margin-top: 2.5em;
-  padding: 1.8em;
-  background: linear-gradient(135deg, #0d1117, #161b22);
-  border: 1px solid #30363d;
-  border-bottom: 3px solid #2ea043;
-  border-radius: var(--r-xl, 18px);
-  color: #e6edf3;
-}
-.completion-banner h3 { color: #3fb950; font-family: var(--font-mono); font-size: 1.3em; margin-bottom: 8px; }
-.completion-banner p  { color: #8b949e; margin: 4px 0; }
-.next-badge {
-  display: inline-block;
-  margin-top: 10px;
-  background: var(--accent, #00d4aa);
-  color: #0d1117;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.85em;
-  padding: 6px 16px;
-  border-radius: 20px;
 }
 
 @media (max-width: 600px) { .ext-grid { grid-template-columns: 1fr; } }

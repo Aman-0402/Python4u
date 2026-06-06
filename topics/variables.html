@@ -1,27 +1,5 @@
 <!-- ── Chapter 2: Variables, Data Types & Operators ── -->
 <style>
-/* ── Chapter header ─── */
-.chapter-header { margin-bottom: 1.5em; }
-.chapter-header h1 { margin: 0; font-size: clamp(1.4em, 3vw, 2em); }
-.chapter-header p  { color: var(--text-muted); margin: 4px 0 0; font-size: 0.95em; }
-
-/* ── Chapter badge ─── */
-.chapter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, var(--accent, #00d4aa), #7c3aed);
-  color: #fff;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72em;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
 /* ── Data type cards ─── */
 .dtype-grid {
   display: grid;
@@ -71,6 +49,22 @@ body.dark .dtype-card {
   color: #ce9178;
 }
 
+/* ── dtype color variants ─── */
+.dtype-card-float { border-top-color: #7c3aed; }
+.dtype-card-float .dtype-tag { color: #a78bfa; }
+.dtype-card-str   { border-top-color: #f59e0b; }
+.dtype-card-str   .dtype-tag { color: #f59e0b; }
+.dtype-card-bool  { border-top-color: #ef4444; }
+.dtype-card-bool  .dtype-tag { color: #ef4444; }
+.dtype-card-list  { border-top-color: #3b82f6; }
+.dtype-card-list  .dtype-tag { color: #3b82f6; }
+.dtype-card-tuple { border-top-color: #10b981; }
+.dtype-card-tuple .dtype-tag { color: #10b981; }
+.dtype-card-dict  { border-top-color: #ec4899; }
+.dtype-card-dict  .dtype-tag { color: #ec4899; }
+.dtype-card-set   { border-top-color: #f97316; }
+.dtype-card-set   .dtype-tag { color: #f97316; }
+
 /* ── Operator symbol cell ─── */
 .op-sym-cell {
   font-family: var(--font-mono, monospace);
@@ -85,37 +79,8 @@ body.dark .dtype-card {
   display: inline-block;
 }
 
-/* ── Completion banner ─── */
-.completion-banner {
-  text-align: center;
-  margin-top: 2.5em;
-  padding: 1.8em;
-  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-  border: 1px solid #30363d;
-  border-bottom: 3px solid #2ea043;
-  border-radius: var(--r-xl, 18px);
-  color: #e6edf3;
-}
-
-.completion-banner h3 { color: #3fb950; font-family: var(--font-mono, monospace); font-size: 1.3em; margin-bottom: 8px; }
-.completion-banner p  { color: #8b949e; margin: 4px 0; }
-
-.next-badge {
-  display: inline-block;
-  margin-top: 10px;
-  background: var(--accent, #00d4aa);
-  color: #0d1117;
-  font-family: var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: 0.85em;
-  padding: 6px 16px;
-  border-radius: 20px;
-}
-
-/* ── Answers hidden ─── */
-.answer { display: none; }
-.answer .callout { margin-top: 0.8em; }
-.practice-gap { margin-top: 1.2em; }
+/* ── Hero icon ─── */
+.hero-icon { font-size: 3em; margin-bottom: 12px; }
 
 @media (max-width: 600px) {
   .dtype-grid { grid-template-columns: 1fr 1fr; }
@@ -131,7 +96,7 @@ body.dark .dtype-card {
 
 <!-- ── Hero ─── -->
 <div class="hero-section">
-  <div style="font-size: 3em; margin-bottom: 12px;">&#129519;</div>
+  <div class="hero-icon">&#129519;</div>
   <h1>&#128230; Variables — Python's Memory Box</h1>
   <p>Store anything. Change it anytime. Python won't judge you. <em>(Unlike Java.)</em></p>
 </div>
@@ -198,38 +163,38 @@ Is Hokage? True</div>
       <div class="dtype-desc">Whole numbers. No drama, no decimals.</div>
       <div class="dtype-ex">power_level = 9001</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #7c3aed;">
-      <span class="dtype-tag" style="color:#a78bfa;">float</span>
+    <div class="dtype-card dtype-card-float">
+      <span class="dtype-tag">float</span>
       <div class="dtype-desc">Decimal numbers. Fancy integers.</div>
       <div class="dtype-ex">accuracy = 97.3</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #f59e0b;">
-      <span class="dtype-tag" style="color:#f59e0b;">str</span>
+    <div class="dtype-card dtype-card-str">
+      <span class="dtype-tag">str</span>
       <div class="dtype-desc">Text. Wrapped in quotes like a burrito.</div>
       <div class="dtype-ex">hero = "Iron Man"</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #ef4444;">
-      <span class="dtype-tag" style="color:#ef4444;">bool</span>
+    <div class="dtype-card dtype-card-bool">
+      <span class="dtype-tag">bool</span>
       <div class="dtype-desc">True or False. No maybe. Python doesn't do "maybe".</div>
       <div class="dtype-ex">is_alive = True</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #3b82f6;">
-      <span class="dtype-tag" style="color:#3b82f6;">list</span>
+    <div class="dtype-card dtype-card-list">
+      <span class="dtype-tag">list</span>
       <div class="dtype-desc">Ordered, changeable collection. Like the Avengers roster.</div>
       <div class="dtype-ex">avengers = ["Tony", "Steve"]</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #10b981;">
-      <span class="dtype-tag" style="color:#10b981;">tuple</span>
+    <div class="dtype-card dtype-card-tuple">
+      <span class="dtype-tag">tuple</span>
       <div class="dtype-desc">List but frozen. Immutable. Like Thanos's decision.</div>
       <div class="dtype-ex">infinity_stones = (6,)</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #ec4899;">
-      <span class="dtype-tag" style="color:#ec4899;">dict</span>
+    <div class="dtype-card dtype-card-dict">
+      <span class="dtype-tag">dict</span>
       <div class="dtype-desc">Key-value pairs. Pokemon stats sheet.</div>
       <div class="dtype-ex">pikachu = {"hp": 35}</div>
     </div>
-    <div class="dtype-card" style="border-top-color: #f97316;">
-      <span class="dtype-tag" style="color:#f97316;">set</span>
+    <div class="dtype-card dtype-card-set">
+      <span class="dtype-tag">set</span>
       <div class="dtype-desc">Unique values only. No duplicates. Like DNA.</div>
       <div class="dtype-ex">unique_moves = {1, 2, 3}</div>
     </div>
