@@ -1,0 +1,195 @@
+<!-- ── Chapter 37: Sorting Algorithms ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #f59e0b, #d97706); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔀 Chapter 37</span>
+  <h1>Sorting Algorithms</h1>
+  <p><code>sorted()</code> does it in one line — here's what's actually happening, and why some approaches are much faster than others.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔀</div>
+  <h1>🔀 Putting Things in Order</h1>
+  <p>Sorting shows up everywhere — leaderboards, search results, scheduling. Simple sorts are easy to understand but slow at scale; smarter sorts trade a bit of complexity for real speed.</p>
+</div>
+
+<div class="card-section">
+  <h2>🫧 1. Bubble Sort — Simple but Slow</h2>
+  <p>Repeatedly compare neighboring pairs and swap if they're in the wrong order. Large values "bubble" toward the end each pass.</p>
+
+  <pre><code>def bubble_sort(items):
+    n = len(items)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if items[j] > items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]   # swap
+    return items
+
+marks = [64, 25, 12, 22, 11]
+print(bubble_sort(marks))</code></pre>
+  <div class="output-block">[11, 12, 22, 25, 64]</div>
+
+  <p>Nested loop over the same list — this is <a href="#" onclick="loadTopic('big-o.html'); return false;">O(n²)</a>. Fine for small lists, painfully slow for large ones.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 2. Selection Sort</h2>
+  <p>Find the smallest remaining item, swap it to the front, then repeat for the rest of the list.</p>
+
+  <pre><code>def selection_sort(items):
+    n = len(items)
+    for i in range(n):
+        min_index = i
+        for j in range(i + 1, n):
+            if items[j] < items[min_index]:
+                min_index = j
+        items[i], items[min_index] = items[min_index], items[i]
+    return items
+
+marks = [64, 25, 12, 22, 11]
+print(selection_sort(marks))</code></pre>
+  <div class="output-block">[11, 12, 22, 25, 64]</div>
+
+  <p>Also O(n²) — still a nested loop — but makes fewer actual swaps than bubble sort (one swap per outer pass instead of many).</p>
+</div>
+
+<div class="card-section">
+  <h2>✂️ 3. Merge Sort — Divide and Conquer</h2>
+  <p>Split the list in half repeatedly until each piece has 1 item (already "sorted"), then merge the pieces back together in order.</p>
+
+  <pre><code>def merge_sort(items):
+    if len(items) <= 1:
+        return items                    # base case: 1 item is already sorted
+
+    mid = len(items) // 2
+    left = merge_sort(items[:mid])      # recursively sort left half
+    right = merge_sort(items[mid:])     # recursively sort right half
+
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])             # add any leftovers
+    result.extend(right[j:])
+    return result
+
+marks = [64, 25, 12, 22, 11, 90, 5]
+print(merge_sort(marks))</code></pre>
+  <div class="output-block">[5, 11, 12, 22, 25, 64, 90]</div>
+
+  <p>Splitting takes O(log n) levels, and merging at each level costs O(n) — together that's <a href="#" onclick="loadTopic('big-o.html'); return false;">O(n log n)</a>, dramatically faster than O(n²) for large lists.</p>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>This is a textbook use of <a href="#" onclick="loadTopic('recursion.html'); return false;">recursion</a> — the base case is a 1-item list, the recursive case splits the problem in half.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📊 4. Comparing the Algorithms</h2>
+  <table>
+    <thead><tr><th>Algorithm</th><th>Time Complexity</th><th>Easy to understand?</th><th>Good for</th></tr></thead>
+    <tbody>
+      <tr><td>Bubble Sort</td><td>O(n²)</td><td>Very</td><td>Teaching, tiny lists</td></tr>
+      <tr><td>Selection Sort</td><td>O(n²)</td><td>Very</td><td>Teaching, tiny lists</td></tr>
+      <tr><td>Merge Sort</td><td>O(n log n)</td><td>Moderate</td><td>Large lists, guaranteed performance</td></tr>
+      <tr><td>Python's <code>sorted()</code></td><td>O(n log n)</td><td>—</td><td>Real code — always use this</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>In real projects, always use Python's built-in <code>sorted()</code> or <code>list.sort()</code> — it's a highly optimized O(n log n) algorithm (Timsort) written in C. Writing your own sort is for learning how sorting works, not for production code.</span>
+  </div>
+
+  <pre><code>marks = [64, 25, 12, 22, 11]
+print(sorted(marks))                       # ascending
+print(sorted(marks, reverse=True))         # descending
+print(sorted(marks, key=lambda x: -x))     # custom rule</code></pre>
+  <div class="output-block">[11, 12, 22, 25, 64]
+[64, 25, 22, 12, 11]
+[64, 25, 22, 12, 11]</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What is the time complexity of bubble sort?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) O(n)</li>
+      <li onclick="checkAnswer(this,'correct')">b) O(n²)</li>
+      <li onclick="checkAnswer(this,'wrong')">c) O(log n)</li>
+      <li onclick="checkAnswer(this,'wrong')">d) O(1)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What technique does merge sort use to achieve O(n log n)?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Checking every pair of items</li>
+      <li onclick="checkAnswer(this,'correct')">b) Splitting the list in half recursively, then merging sorted halves</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Random shuffling until sorted</li>
+      <li onclick="checkAnswer(this,'wrong')">d) It doesn't — merge sort is also O(n²)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. In real Python code, what should you use to sort a list?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Always write your own bubble sort</li>
+      <li onclick="checkAnswer(this,'correct')">b) Python's built-in sorted() / .sort()</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Selection sort, since it's simplest</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Sorting isn't built into Python</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Use <code>sorted()</code> with a <code>key</code> to sort a list of student dicts by their "marks" value, highest first.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>students = [
+    {"name": "Ravi", "marks": 78},
+    {"name": "Sita", "marks": 92},
+    {"name": "Amit", "marks": 65},
+]
+
+ranked = sorted(students, key=lambda s: s["marks"], reverse=True)
+for s in ranked:
+    print(s["name"], s["marks"])
+# Sita 92
+# Ravi 78
+# Amit 65</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Bubble sort &amp; selection sort — simple, O(n²), fine for small lists</li>
+    <li>Merge sort — splits &amp; merges recursively, O(n log n), scales much better</li>
+    <li>Always use <code>sorted()</code> / <code>.sort()</code> in real code — highly optimized built-in</li>
+    <li><code>key=</code> lets you sort by any custom rule, not just default ordering</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 37 Complete!</h3>
+  <p>You now understand what's happening behind sorted() — and when to trust it completely.</p>
+  <span class="next-badge">▶ Next: Stack &amp; Queue</span>
+</div>
