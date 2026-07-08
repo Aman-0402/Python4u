@@ -40,6 +40,28 @@ print(response.text[:100])    # first 100 characters of HTML</code></pre>
       <tr><td>500</td><td>Server error</td></tr>
     </tbody>
   </table>
+
+  <h3>⚠️ Handling Request Failures</h3>
+  <p>Scraping means hitting servers you don't control — timeouts, blocks, and dead links are normal. Never assume the request worked.</p>
+
+  <pre><code>import requests
+
+try:
+    response = requests.get("https://example.com/books", timeout=5)
+    response.raise_for_status()   # raises an error for 4xx/5xx status codes
+except requests.exceptions.Timeout:
+    print("Server took too long to respond.")
+except requests.exceptions.ConnectionError:
+    print("Could not reach the site — check the URL or your connection.")
+except requests.exceptions.HTTPError as e:
+    print(f"Site returned an error: {e}")
+else:
+    print("Page fetched successfully")</code></pre>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Without <code>timeout=</code>, a hanging server can freeze your script forever. Without <code>raise_for_status()</code>, a 404 page's HTML gets parsed as if it were real data — leading to confusing empty results instead of a clear error.</span>
+  </div>
 </div>
 
 <div class="card-section">
@@ -112,7 +134,67 @@ print(books)</code></pre>
 </div>
 
 <div class="card-section">
-  <h2>📤 5. Getting Data From an API Instead</h2>
+  <h2>🎯 5. <code>.select()</code> — CSS Selectors Instead of find/find_all</h2>
+  <p>If you know CSS selectors (from HTML/CSS work), <code>.select()</code> is often faster to write than chained <code>find()</code> calls — especially for nested or specific elements.</p>
+
+  <pre><code>from bs4 import BeautifulSoup
+
+html = """
+&lt;div class="book-card"&gt;
+  &lt;h2 class="title"&gt;Python Basics&lt;/h2&gt;
+  &lt;span class="price"&gt;₹450&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="book-card"&gt;
+  &lt;h2 class="title"&gt;Advanced Python&lt;/h2&gt;
+  &lt;span class="price"&gt;₹899&lt;/span&gt;
+&lt;/div&gt;
+"""
+
+soup = BeautifulSoup(html, "html.parser")
+
+titles = soup.select("div.book-card h2.title")   # tag.class syntax, just like CSS
+print([t.text for t in titles])
+
+first_price = soup.select_one(".price")           # first match only
+print(first_price.text)</code></pre>
+  <div class="output-block">['Python Basics', 'Advanced Python']
+₹450</div>
+
+  <table>
+    <thead><tr><th>Selector</th><th>Matches</th></tr></thead>
+    <tbody>
+      <tr><td><code>"div"</code></td><td>Every <code>&lt;div&gt;</code> tag</td></tr>
+      <tr><td><code>".price"</code></td><td>Every element with <code>class="price"</code></td></tr>
+      <tr><td><code>"#main"</code></td><td>The element with <code>id="main"</code></td></tr>
+      <tr><td><code>"div.book-card h2"</code></td><td>Any <code>&lt;h2&gt;</code> nested inside a <code>div</code> with class <code>book-card</code></td></tr>
+    </tbody>
+  </table>
+
+  <p><code>select()</code> returns a list (like <code>find_all()</code>), <code>select_one()</code> returns a single element (like <code>find()</code>).</p>
+</div>
+
+<div class="card-section">
+  <h2>🚧 6. The JavaScript Trap</h2>
+  <p><code>requests</code> only downloads the raw HTML the server sends — it does <strong>not</strong> run any JavaScript. Many modern sites load their real content <em>after</em> the page loads, using JavaScript. Scraping those with just <code>requests</code> + BeautifulSoup silently returns an almost-empty page.</p>
+
+  <pre><code>import requests
+from bs4 import BeautifulSoup
+
+response = requests.get("https://a-js-heavy-site.example.com")
+soup = BeautifulSoup(response.text, "html.parser")
+
+print(soup.find("div", id="app"))   # often just an empty shell, e.g. &lt;div id="app"&gt;&lt;/div&gt;
+# The real content was inserted by JavaScript AFTER the page loaded —
+# requests never saw it because it doesn't execute JS.</code></pre>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>If your scraper finds nothing where the browser clearly shows data, this is almost always why. The fix is a browser-automation tool like <code>Selenium</code> or <code>Playwright</code>, which actually opens a real browser, waits for JavaScript to run, then reads the final HTML.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📤 7. Getting Data From an API Instead</h2>
   <p>Many sites offer a JSON API — cleaner and more reliable than scraping HTML when it's available (covered in the Web APIs chapter).</p>
   <pre><code>import requests
 
@@ -152,6 +234,24 @@ print(data)</code></pre>
       <li onclick="checkAnswer(this,'correct')">b) find() returns the first match, find_all() returns every match</li>
       <li onclick="checkAnswer(this,'wrong')">c) find() is for CSS, find_all() is for HTML</li>
       <li onclick="checkAnswer(this,'wrong')">d) find_all() returns a string</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. Why does scraping a JavaScript-heavy site with just <code>requests</code> often return empty content?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) requests is too slow</li>
+      <li onclick="checkAnswer(this,'correct')">b) requests doesn't execute JavaScript, so content added after page load never appears</li>
+      <li onclick="checkAnswer(this,'wrong')">c) BeautifulSoup blocks JavaScript sites</li>
+      <li onclick="checkAnswer(this,'wrong')">d) It never happens</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. What does <code>soup.select("div.book-card h2.title")</code> use to find elements?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Regular expressions</li>
+      <li onclick="checkAnswer(this,'correct')">b) CSS selector syntax</li>
+      <li onclick="checkAnswer(this,'wrong')">c) XPath</li>
+      <li onclick="checkAnswer(this,'wrong')">d) SQL queries</li>
     </ul>
   </div>
 </div>
