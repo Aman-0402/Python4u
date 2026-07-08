@@ -95,6 +95,110 @@ print("Temperature:", data['current']['temp_c'], "°C")</code></pre>
 </div>
 
 <div class="card-section">
+  <h2>&#9888;&#65039; Handling Errors — Requests Fail Too</h2>
+  <p>Networks drop, servers go down, wrong URLs happen. Never assume <code>requests.get()</code> always succeeds.</p>
+
+  <pre><code>import requests
+
+try:
+    response = requests.get("https://api.agify.io/?name=aman", timeout=5)
+    response.raise_for_status()   # raises an error if status is 4xx or 5xx
+    data = response.json()
+    print("Predicted Age:", data["age"])
+except requests.exceptions.Timeout:
+    print("Request took too long — server didn't respond in time.")
+except requests.exceptions.ConnectionError:
+    print("No internet connection or server unreachable.")
+except requests.exceptions.HTTPError as e:
+    print(f"Server returned an error: {e}")</code></pre>
+  <div class="output-block">Predicted Age: 25</div>
+
+  <table>
+    <thead><tr><th>Status Code</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>200</td><td>OK — request succeeded</td></tr>
+      <tr><td>400</td><td>Bad Request — your request was malformed</td></tr>
+      <tr><td>401</td><td>Unauthorized — missing/invalid API key</td></tr>
+      <tr><td>404</td><td>Not Found — wrong URL/endpoint</td></tr>
+      <tr><td>500</td><td>Server Error — problem on their end, not yours</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span><code>timeout=5</code> stops your program from hanging forever if the server never responds. Always set one for real projects.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>&#128273; Headers, Params &amp; Authentication</h2>
+  <p>Many APIs need extra information sent along with the request — an API key, or query filters.</p>
+
+  <pre><code>import requests
+
+url = "https://api.example.com/students"
+headers = {"Authorization": "Bearer YOUR_API_KEY"}
+params = {"grade": "A", "limit": 10}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.url)   # shows the final URL with params attached</code></pre>
+  <div class="output-block">https://api.example.com/students?grade=A&limit=10</div>
+
+  <p><code>params</code> is safer and cleaner than manually building a URL with f-strings — <code>requests</code> handles the <code>?key=value&amp;key2=value2</code> formatting and character escaping for you.</p>
+</div>
+
+<div class="card-section">
+  <h2>&#128228; POST — Sending Data to an API</h2>
+  <p><code>GET</code> asks for data. <code>POST</code> sends new data — like submitting a form (creating a student record, posting a comment).</p>
+
+  <pre><code>import requests
+
+url = "https://api.example.com/students"
+new_student = {"name": "Ravi", "grade": "A", "marks": 88}
+
+response = requests.post(url, json=new_student)
+print(response.status_code)
+print(response.json())</code></pre>
+  <div class="output-block">201
+{'id': 42, 'name': 'Ravi', 'grade': 'A', 'marks': 88}</div>
+
+  <p><code>json=new_student</code> automatically converts the dict to a JSON string and sets the right content-type header. Status <code>201</code> means "Created" — a new resource was successfully added.</p>
+</div>
+
+<div class="card-section">
+  <h2>&#128220; The <code>json</code> Module — Working With JSON as Text</h2>
+  <p>Not all JSON comes from an API call. You'll sometimes have raw JSON text (from a file or a string) that needs converting.</p>
+
+  <pre><code>import json
+
+# JSON text -> Python dict
+json_text = '{"name": "Aman", "age": 20, "subjects": ["Math", "Python"]}'
+data = json.loads(json_text)
+print(data["name"])
+print(type(data))</code></pre>
+  <div class="output-block">Aman
+&lt;class 'dict'&gt;</div>
+
+  <pre><code># Python dict -> JSON text
+student = {"name": "Sita", "age": 21}
+json_text = json.dumps(student, indent=2)
+print(json_text)</code></pre>
+  <div class="output-block">{
+  "name": "Sita",
+  "age": 21
+}</div>
+
+  <table>
+    <thead><tr><th>Function</th><th>Direction</th></tr></thead>
+    <tbody>
+      <tr><td><code>json.loads(text)</code></td><td>JSON string &#8594; Python dict/list</td></tr>
+      <tr><td><code>json.dumps(obj)</code></td><td>Python dict/list &#8594; JSON string</td></tr>
+      <tr><td><code>response.json()</code></td><td>Shortcut: does <code>json.loads()</code> on an API response automatically</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
   <h2>&#127918; Quiz Time!</h2>
   <div class="quiz-question">
     <p>1. What is an API?</p>
@@ -118,6 +222,22 @@ print("Temperature:", data['current']['temp_c'], "°C")</code></pre>
       <li onclick="checkAnswer(this, 'wrong')">a) json</li>
       <li onclick="checkAnswer(this, 'wrong')">b) api</li>
       <li onclick="checkAnswer(this, 'correct')">c) requests</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. What does <code>requests.post(url, json=data)</code> do compared to <code>requests.get()</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) Fetches existing data, same as GET</li>
+      <li onclick="checkAnswer(this, 'correct')">b) Sends new data to the server to create/update something</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) Deletes data</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. What does <code>json.loads(text)</code> do?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) Converts a dict into JSON text</li>
+      <li onclick="checkAnswer(this, 'correct')">b) Converts JSON text into a Python dict/list</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) Sends a GET request</li>
     </ul>
   </div>
 </div>
