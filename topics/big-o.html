@@ -1,0 +1,203 @@
+<!-- ── Chapter 34: Big-O / Time Complexity ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #ec4899, #db2777); }
+.bigo-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 6px;
+  background: rgba(236,72,153,0.12);
+  color: #f472b6;
+  border: 1px solid rgba(236,72,153,0.25);
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">📈 Chapter 34</span>
+  <h1>Big-O / Time Complexity</h1>
+  <p>A common language for describing how an algorithm's speed changes as input size grows.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">📈</div>
+  <h1>📈 How Slow Does It Get?</h1>
+  <p>Two functions can both "work" but behave very differently with 10,000,000 items instead of 10. Big-O describes that growth pattern, not exact seconds.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Why Not Just Time It?</h2>
+  <p>Timing a function tells you about one machine, one moment. Big-O tells you how the <em>work</em> grows as input size (<code>n</code>) grows — true on any computer, forever.</p>
+
+  <pre><code>def print_first(items):
+    print(items[0])   # 1 step, no matter how big items is
+
+def print_all(items):
+    for item in items:
+        print(item)    # n steps — grows with input size</code></pre>
+
+  <p><code>print_first</code> takes the same time whether the list has 5 items or 5 million. <code>print_all</code> takes longer as the list grows. Big-O captures exactly this difference.</p>
+</div>
+
+<div class="card-section">
+  <h2>📊 2. Common Big-O Classes — Fastest to Slowest</h2>
+  <table>
+    <thead><tr><th>Notation</th><th>Name</th><th>Meaning</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><span class="bigo-tag">O(1)</span></td><td>Constant</td><td>Same time regardless of input size</td><td><code>items[0]</code></td></tr>
+      <tr><td><span class="bigo-tag">O(log n)</span></td><td>Logarithmic</td><td>Cuts the problem in half each step</td><td>Binary search</td></tr>
+      <tr><td><span class="bigo-tag">O(n)</span></td><td>Linear</td><td>Time grows directly with input size</td><td>Loop through a list once</td></tr>
+      <tr><td><span class="bigo-tag">O(n log n)</span></td><td>Linearithmic</td><td>Slightly worse than linear</td><td>Merge sort, quick sort (avg)</td></tr>
+      <tr><td><span class="bigo-tag">O(n²)</span></td><td>Quadratic</td><td>Time grows with the square of input size</td><td>Nested loop over the same list</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Big-O describes the <strong>worst case</strong> growth trend, ignoring constants. <code>O(2n)</code> and <code>O(n)</code> are both just written <code>O(n)</code> — Big-O cares about the shape of growth, not the exact multiplier.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🔍 3. O(1) — Constant Time</h2>
+  <pre><code>def get_first_student(students):
+    return students[0]   # always exactly 1 step
+
+students = ["Ravi", "Sita", "Amit"] * 1000
+print(get_first_student(students))   # instant, regardless of list size</code></pre>
+  <div class="output-block">Ravi</div>
+</div>
+
+<div class="card-section">
+  <h2>➡️ 4. O(n) — Linear Time</h2>
+  <pre><code>def find_student(students, name):
+    for student in students:      # worst case: check every single item
+        if student == name:
+            return True
+    return False
+
+students = ["Ravi", "Sita", "Amit"]
+print(find_student(students, "Amit"))   # 3 steps worst case
+print(find_student(["A"] * 1000000, "Z"))   # 1,000,000 steps worst case</code></pre>
+  <div class="output-block">True
+False</div>
+  <p>Double the list size, double the worst-case work — that's the signature of O(n).</p>
+</div>
+
+<div class="card-section">
+  <h2>🔀 5. O(n²) — Quadratic Time (Watch Out!)</h2>
+  <pre><code>def has_duplicate(items):
+    for i in range(len(items)):
+        for j in range(len(items)):
+            if i != j and items[i] == items[j]:
+                return True
+    return False
+
+print(has_duplicate([1, 2, 3, 4]))          # false, but checked 16 pairs
+print(has_duplicate([1, 2, 3, 3]))          # true</code></pre>
+  <div class="output-block">False
+True</div>
+
+  <p>A nested loop over the same data means for every item, you scan every OTHER item — <code>n * n</code> total steps. 10 items = 100 checks. 1,000 items = 1,000,000 checks. This is the classic beginner performance trap.</p>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>The same "find duplicates" problem can be solved in O(n) using a <code>set</code> to track seen items instead of a nested loop — see the practice challenge below.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🪓 6. O(log n) — Logarithmic Time</h2>
+  <p>Binary search cuts the search space in half every step, instead of checking one item at a time.</p>
+
+  <pre><code>def binary_search(sorted_list, target):
+    low, high = 0, len(sorted_list) - 1
+    steps = 0
+    while low <= high:
+        steps += 1
+        mid = (low + high) // 2
+        if sorted_list[mid] == target:
+            print(f"Found in {steps} steps")
+            return mid
+        elif sorted_list[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+numbers = list(range(1, 1000001))   # 1 million sorted numbers
+binary_search(numbers, 999999)</code></pre>
+  <div class="output-block">Found in 20 steps</div>
+
+  <p>Finding one item among 1,000,000 took only 20 comparisons — because each step eliminates half the remaining data. See <a href="#" onclick="loadTopic('searching.html'); return false;">Searching</a> for the full walkthrough.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does Big-O describe?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Exact seconds a program takes</li>
+      <li onclick="checkAnswer(this,'correct')">b) How the amount of work grows as input size grows</li>
+      <li onclick="checkAnswer(this,'wrong')">c) How much RAM a computer has</li>
+      <li onclick="checkAnswer(this,'wrong')">d) The programming language used</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. A single loop through a list of n items is what complexity?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) O(1)</li>
+      <li onclick="checkAnswer(this,'correct')">b) O(n)</li>
+      <li onclick="checkAnswer(this,'wrong')">c) O(n²)</li>
+      <li onclick="checkAnswer(this,'wrong')">d) O(log n)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Two nested loops both scanning the same n-item list is what complexity?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) O(n)</li>
+      <li onclick="checkAnswer(this,'wrong')">b) O(log n)</li>
+      <li onclick="checkAnswer(this,'correct')">c) O(n²)</li>
+      <li onclick="checkAnswer(this,'wrong')">d) O(1)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Rewrite <code>has_duplicate</code> from section 5 to run in O(n) instead of O(n²), using a <code>set</code>.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def has_duplicate(items):
+    seen = set()
+    for item in items:          # single pass — O(n)
+        if item in seen:        # set lookup is O(1)
+            return True
+        seen.add(item)
+    return False
+
+print(has_duplicate([1, 2, 3, 3]))   # True, and much faster on large lists</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Big-O describes growth trend, not exact timing</li>
+    <li>O(1) — constant, O(log n) — logarithmic, O(n) — linear, O(n log n), O(n²) — quadratic</li>
+    <li>Nested loops over the same data are a common O(n²) trap</li>
+    <li><code>set</code>/<code>dict</code> lookups are O(1) — a frequent way to speed up O(n²) code to O(n)</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 34 Complete!</h3>
+  <p>You can now reason about how your code will scale, not just whether it works.</p>
+  <span class="next-badge">▶ Next: Recursion</span>
+</div>
