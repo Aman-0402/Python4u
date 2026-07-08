@@ -1,0 +1,171 @@
+<!-- ── Chapter 24: Type Hints & typing ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🏷️ Chapter 24</span>
+  <h1>Type Hints &amp; the <code>typing</code> Module</h1>
+  <p>Tell readers (and tools) what type of data a function expects and returns — without changing how Python runs.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🏷️</div>
+  <h1>🏷️ Labels, Not Rules</h1>
+  <p>Python stays dynamically typed — type hints don't stop wrong types at runtime. They're labels that help humans and editors catch mistakes before running the code.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Basic Type Hints</h2>
+
+  <h3>Without hints</h3>
+  <pre><code>def add(a, b):
+    return a + b</code></pre>
+  <p>Works, but unclear: are <code>a</code> and <code>b</code> numbers? Strings? Lists?</p>
+
+  <h3>With hints</h3>
+  <pre><code>def add(a: int, b: int) -> int:
+    return a + b
+
+print(add(3, 5))</code></pre>
+  <div class="output-block">8</div>
+
+  <p><code>a: int</code> and <code>b: int</code> say the parameters should be integers. <code>-> int</code> says the function returns an integer.</p>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Type hints are NOT enforced at runtime. <code>add("hi", "bye")</code> still runs and returns <code>"hibye"</code> — hints are documentation + tooling, not a type checker built into Python itself.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📦 2. Variable Hints</h2>
+  <pre><code>student_name: str = "Ravi"
+age: int = 21
+gpa: float = 8.7
+is_enrolled: bool = True</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>📚 3. Collections — <code>list</code>, <code>dict</code>, <code>tuple</code></h2>
+  <pre><code>def average_marks(marks: list[int]) -> float:
+    return sum(marks) / len(marks)
+
+def student_grades() -> dict[str, int]:
+    return {"Ravi": 78, "Sita": 92}
+
+print(average_marks([70, 80, 90]))
+print(student_grades())</code></pre>
+  <div class="output-block">80.0
+{'Ravi': 78, 'Sita': 92}</div>
+
+  <table>
+    <thead><tr><th>Hint</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>list[int]</code></td><td>A list containing integers</td></tr>
+      <tr><td><code>dict[str, int]</code></td><td>A dict with string keys, integer values</td></tr>
+      <tr><td><code>tuple[int, str]</code></td><td>A tuple: first item int, second item str</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🔀 4. Optional and Union Types</h2>
+  <p>Use <code>|</code> (Python 3.10+) or <code>Optional</code> to say a value could be one of several types, or missing.</p>
+
+  <pre><code>def find_student(student_id: int) -> str | None:
+    students = {1: "Ravi", 2: "Sita"}
+    return students.get(student_id)   # returns None if not found
+
+print(find_student(1))   # Ravi
+print(find_student(99))  # None</code></pre>
+  <div class="output-block">Ravi
+None</div>
+
+  <p><code>str | None</code> means "returns a string, or possibly nothing."</p>
+</div>
+
+<div class="card-section">
+  <h2>🛠️ 5. Checking Hints With <code>mypy</code></h2>
+  <p>Type hints become useful when a checker like <code>mypy</code> reads your code and flags mismatches before you run it.</p>
+
+  <pre><code># bad_example.py
+def add(a: int, b: int) -> int:
+    return a + b
+
+add("3", "5")   # wrong types passed in</code></pre>
+  <pre><code># terminal
+$ mypy bad_example.py
+bad_example.py:4: error: Argument 1 to "add" has incompatible type "str"; expected "int"</code></pre>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Install with <code>pip install mypy</code>, then run <code>mypy your_file.py</code> to catch type mismatches before they become runtime bugs.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Does Python enforce type hints at runtime by default?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Yes, always</li>
+      <li onclick="checkAnswer(this,'correct')">b) No, they're just labels unless checked by a tool like mypy</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Only for integers</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Only inside classes</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does <code>-> int</code> after a function signature mean?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) The function takes an int argument</li>
+      <li onclick="checkAnswer(this,'correct')">b) The function returns an int</li>
+      <li onclick="checkAnswer(this,'wrong')">c) The function is named "int"</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing, it's a comment</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What does <code>str | None</code> mean as a return type?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Always returns a string</li>
+      <li onclick="checkAnswer(this,'correct')">b) Returns a string, or possibly nothing (None)</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Returns two strings</li>
+      <li onclick="checkAnswer(this,'wrong')">d) A syntax error</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Add type hints to this function: <code>def get_full_name(first, last): return first + " " + last</code>
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def get_full_name(first: str, last: str) -> str:
+    return first + " " + last
+
+print(get_full_name("Ravi", "Kumar"))   # Ravi Kumar</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>param: type</code> hints a parameter's expected type</li>
+    <li><code>-> type</code> hints the return type</li>
+    <li><code>list[int]</code>, <code>dict[str, int]</code> — hint collection contents</li>
+    <li><code>str | None</code> — hints a value could be missing</li>
+    <li>Hints are checked by tools like <code>mypy</code>, not by Python itself</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 24 Complete!</h3>
+  <p>Your functions now document their own expected inputs and outputs.</p>
+  <span class="next-badge">▶ Next: Virtual Environments &amp; Packaging</span>
+</div>
