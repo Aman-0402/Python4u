@@ -33,6 +33,22 @@ A single-page interactive eBook covering Python from scratch to advanced topics,
 | 15 | Capstone Mini Project |
 | 16 | Full Stack Project |
 | 17 | Revision & IBM Certification Practice Tests |
+| 18 | Comprehensions |
+| 19 | Iterators & Generators |
+| 20 | Decorators & Closures |
+| 21 | Context Managers |
+| 22 | Regular Expressions |
+| 23 | Concurrency (Threading, Multiprocessing, asyncio) |
+| 24 | Type Hints & typing |
+| 25 | Virtual Environments & Packaging |
+| 26 | Testing (unittest & pytest) |
+| 27 | Magic / Dunder Methods |
+| 28 | Functional Tools (map, filter, reduce) |
+| 29 | Date & Time |
+| 30 | Web Scraping |
+| 31 | Command-line Arguments |
+| 32 | Logging |
+| 33 | Memory & Performance |
 
 ---
 

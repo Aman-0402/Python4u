@@ -1,0 +1,204 @@
+<!-- ── Chapter 33: Memory & Performance ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #059669, #047857); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🚀 Chapter 33</span>
+  <h1>Memory &amp; Performance</h1>
+  <p>Understand where your program spends time and memory, and simple ways to reduce both.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🚀</div>
+  <h1>🚀 Measure Before You Optimize</h1>
+  <p>Don't guess what's slow — measure it. Python gives you simple tools to time code and inspect memory, so you fix the actual bottleneck instead of the wrong line.</p>
+</div>
+
+<div class="card-section">
+  <h2>⏱️ 1. Timing Code</h2>
+  <pre><code>import time
+
+start = time.time()
+
+total = 0
+for i in range(1_000_000):
+    total += i
+
+end = time.time()
+print(f"Loop took {end - start:.4f} seconds")</code></pre>
+  <div class="output-block">Loop took 0.0821 seconds</div>
+
+  <h3>Comparing two approaches</h3>
+  <pre><code>import time
+
+start = time.time()
+squares = [n * n for n in range(1_000_000)]
+print(f"List comprehension: {time.time() - start:.4f}s")
+
+start = time.time()
+squares = []
+for n in range(1_000_000):
+    squares.append(n * n)
+print(f"For loop: {time.time() - start:.4f}s")</code></pre>
+  <div class="output-block">List comprehension: 0.0512s
+For loop: 0.0894s</div>
+</div>
+
+<div class="card-section">
+  <h2>💾 2. Memory — Checking Object Size</h2>
+  <pre><code>import sys
+
+small_list = [1, 2, 3]
+big_list = list(range(1000))
+
+print(sys.getsizeof(small_list))   # bytes used by the list itself
+print(sys.getsizeof(big_list))</code></pre>
+  <div class="output-block">88
+8856</div>
+</div>
+
+<div class="card-section">
+  <h2>🌀 3. Generators Save Memory</h2>
+  <pre><code>import sys
+
+list_version = [n * n for n in range(100000)]
+gen_version  = (n * n for n in range(100000))
+
+print(sys.getsizeof(list_version))   # holds ALL 100,000 results
+print(sys.getsizeof(gen_version))    # holds almost nothing — lazy</code></pre>
+  <div class="output-block">824456
+200</div>
+
+  <p>The list stores every value now. The generator stores almost nothing — it produces values one at a time, only when asked. See <a href="#" onclick="loadTopic('iterators-generators.html'); return false;">Iterators &amp; Generators</a> for more.</p>
+</div>
+
+<div class="card-section">
+  <h2>📦 4. <code>__slots__</code> — Slimmer Objects</h2>
+  <p>By default, every object stores its attributes in a flexible dictionary. For classes creating thousands of small objects, <code>__slots__</code> removes that overhead.</p>
+
+  <pre><code>import sys
+
+class StudentNormal:
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+class StudentSlim:
+    __slots__ = ("name", "marks")
+    def __init__(self, name, marks):
+        self.name = name
+        self.marks = marks
+
+a = StudentNormal("Ravi", 78)
+b = StudentSlim("Ravi", 78)
+
+print(sys.getsizeof(a.__dict__))   # normal object keeps a dict
+print(sys.getsizeof(b))            # slotted object skips the dict</code></pre>
+  <div class="output-block">104
+56</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Only worth using <code>__slots__</code> when creating many thousands of instances of a small class — the memory savings add up. Adds a rule: no new attributes beyond the ones listed.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧭 5. Quick Wins Checklist</h2>
+  <table>
+    <thead><tr><th>Situation</th><th>Do this</th></tr></thead>
+    <tbody>
+      <tr><td>Building a list just to loop over it once</td><td>Use a generator instead</td></tr>
+      <tr><td>Repeatedly concatenating strings in a loop</td><td>Use <code>"".join(list_of_strings)</code></td></tr>
+      <tr><td>Looking up items by value often</td><td>Use a <code>set</code> or <code>dict</code>, not a list (O(1) vs O(n))</td></tr>
+      <tr><td>Not sure what's slow</td><td>Time it first — don't guess</td></tr>
+    </tbody>
+  </table>
+
+  <h3>String joining example</h3>
+  <pre><code># Slow — creates a new string every iteration
+result = ""
+for word in ["Python", "is", "fun"]:
+    result += word + " "
+
+# Fast — builds once
+result = " ".join(["Python", "is", "fun"])
+print(result)</code></pre>
+  <div class="output-block">Python is fun</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What should you do before optimizing code?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Rewrite everything in another language</li>
+      <li onclick="checkAnswer(this,'correct')">b) Measure where the actual time/memory is spent</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Add more comments</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Guess based on code length</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Why do generators use less memory than lists?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) They compress data</li>
+      <li onclick="checkAnswer(this,'correct')">b) They produce one value at a time instead of storing them all</li>
+      <li onclick="checkAnswer(this,'wrong')">c) They use a different programming language</li>
+      <li onclick="checkAnswer(this,'wrong')">d) No real difference</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Why is <code>"".join(list)</code> faster than <code>+=</code> in a loop for building strings?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) join() is written in a faster language</li>
+      <li onclick="checkAnswer(this,'correct')">b) += creates a brand new string every time, join() builds it once</li>
+      <li onclick="checkAnswer(this,'wrong')">c) They perform identically</li>
+      <li onclick="checkAnswer(this,'wrong')">d) join() skips characters</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Time how long it takes to check if <code>999999</code> is in a <code>list</code> of 1,000,000 numbers vs a <code>set</code> of the same numbers.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>import time
+
+numbers_list = list(range(1000000))
+numbers_set = set(numbers_list)
+
+start = time.time()
+999999 in numbers_list
+print(f"List lookup: {time.time() - start:.6f}s")
+
+start = time.time()
+999999 in numbers_set
+print(f"Set lookup: {time.time() - start:.6f}s")
+# Set lookup is dramatically faster — O(1) vs O(n)</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>time.time()</code> — measure how long code takes</li>
+    <li><code>sys.getsizeof()</code> — check an object's memory footprint</li>
+    <li>Generators use far less memory than building a full list</li>
+    <li><code>__slots__</code> shrinks memory for classes with many instances</li>
+    <li>Use <code>set</code>/<code>dict</code> for fast lookups instead of scanning a <code>list</code></li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 33 Complete!</h3>
+  <p>You've now covered every core topic — from the basics to memory and performance tuning.</p>
+  <span class="next-badge">▶ All topics complete!</span>
+</div>
