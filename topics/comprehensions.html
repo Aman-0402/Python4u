@@ -1,0 +1,177 @@
+<!-- ── Chapter 18: Comprehensions ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🧮 Chapter 18</span>
+  <h1>Comprehensions</h1>
+  <p>Build a new list, dict, or set in one readable line instead of a multi-line loop.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🧮</div>
+  <h1>🧮 One Line, One Result</h1>
+  <p>A comprehension takes a loop + a condition and squeezes them into a single expression. Same result, less code, easier to read once you know the pattern.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. List Comprehension</h2>
+  <p>Pattern: <code>[expression for item in iterable if condition]</code></p>
+
+  <h3>Without comprehension</h3>
+  <pre><code>numbers = [1, 2, 3, 4, 5, 6]
+squares = []
+for n in numbers:
+    squares.append(n * n)
+print(squares)</code></pre>
+  <div class="output-block">[1, 4, 9, 16, 25, 36]</div>
+
+  <h3>With comprehension</h3>
+  <pre><code>numbers = [1, 2, 3, 4, 5, 6]
+squares = [n * n for n in numbers]
+print(squares)</code></pre>
+  <div class="output-block">[1, 4, 9, 16, 25, 36]</div>
+
+  <div class="analogy-box">
+    <h3>📋 Student Marks Example</h3>
+    <pre><code>marks = [55, 90, 42, 78, 61, 30]
+passed = [m for m in marks if m >= 40]
+print(passed)</code></pre>
+    <div class="output-block">[55, 90, 42, 78, 61]</div>
+    <p>Only marks &gt;= 40 (the condition) make it into the new list.</p>
+  </div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Use a comprehension when the loop body is just "build a list from this." If the loop does several things (print, save to file, update a counter), keep the normal <code>for</code> loop.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🗂️ 2. Dictionary Comprehension</h2>
+  <p>Pattern: <code>{key: value for item in iterable}</code></p>
+
+  <pre><code>names = ["Ravi", "Sita", "Amit"]
+name_lengths = {name: len(name) for name in names}
+print(name_lengths)</code></pre>
+  <div class="output-block">{'Ravi': 4, 'Sita': 4, 'Amit': 4}</div>
+
+  <h3>Building from two lists</h3>
+  <pre><code>students = ["Ravi", "Sita", "Amit"]
+scores   = [78, 92, 65]
+
+report = {student: score for student, score in zip(students, scores)}
+print(report)</code></pre>
+  <div class="output-block">{'Ravi': 78, 'Sita': 92, 'Amit': 65}</div>
+</div>
+
+<div class="card-section">
+  <h2>🔷 3. Set Comprehension</h2>
+  <p>Same idea, but wrapped in <code>{ }</code> without a colon — produces unique values only.</p>
+
+  <pre><code>words = ["apple", "banana", "apple", "cherry", "banana"]
+unique_lengths = {len(w) for w in words}
+print(unique_lengths)</code></pre>
+  <div class="output-block">{5, 6}</div>
+</div>
+
+<div class="card-section">
+  <h2>🌀 4. Nested Comprehension</h2>
+  <p>Flatten a list of lists — common with grid or matrix data.</p>
+
+  <pre><code>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flat = [num for row in matrix for num in row]
+print(flat)</code></pre>
+  <div class="output-block">[1, 2, 3, 4, 5, 6, 7, 8, 9]</div>
+
+  <table>
+    <thead><tr><th>Type</th><th>Syntax</th><th>Returns</th></tr></thead>
+    <tbody>
+      <tr><td>List</td><td><code>[x for x in y]</code></td><td>list</td></tr>
+      <tr><td>Dict</td><td><code>{k: v for x in y}</code></td><td>dict</td></tr>
+      <tr><td>Set</td><td><code>{x for x in y}</code></td><td>set</td></tr>
+      <tr><td>Generator</td><td><code>(x for x in y)</code></td><td>generator object</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Don't nest more than 2 levels — it gets hard to read. If it stops fitting on one clear line, go back to a normal loop.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does <code>[x for x in range(5)]</code> produce?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) (0, 1, 2, 3, 4)</li>
+      <li onclick="checkAnswer(this,'correct')">b) [0, 1, 2, 3, 4]</li>
+      <li onclick="checkAnswer(this,'wrong')">c) {0, 1, 2, 3, 4}</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Error</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Which syntax creates a dictionary comprehension?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) [k: v for x in y]</li>
+      <li onclick="checkAnswer(this,'correct')">b) {k: v for x in y}</li>
+      <li onclick="checkAnswer(this,'wrong')">c) (k: v for x in y)</li>
+      <li onclick="checkAnswer(this,'wrong')">d) &lt;k: v for x in y&gt;</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What does <code>[m for m in marks if m >= 40]</code> keep?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Only marks below 40</li>
+      <li onclick="checkAnswer(this,'correct')">b) Only marks 40 and above</li>
+      <li onclick="checkAnswer(this,'wrong')">c) All marks</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge 1:</strong> Given <code>prices = [250, 40, 999, 15, 620]</code>, build a list of only prices above 100 using a list comprehension.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>prices = [250, 40, 999, 15, 620]
+expensive = [p for p in prices if p > 100]
+print(expensive)   # [250, 999, 620]</code></pre>
+  </div>
+
+  <div class="practice-zone practice-gap">
+    <strong>🚀 Challenge 2:</strong> Given <code>words = ["cat", "elephant", "dog", "hippopotamus"]</code>, build a dict mapping each word to its length.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>words = ["cat", "elephant", "dog", "hippopotamus"]
+lengths = {w: len(w) for w in words}
+print(lengths)   # {'cat': 3, 'elephant': 8, 'dog': 3, 'hippopotamus': 12}</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>[expr for x in y]</code> — list comprehension</li>
+    <li><code>{k: v for x in y}</code> — dict comprehension</li>
+    <li><code>{expr for x in y}</code> — set comprehension</li>
+    <li>Add <code>if condition</code> at the end to filter</li>
+    <li>Keep it to one clear line — otherwise use a normal loop</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 18 Complete!</h3>
+  <p>You can now turn loops into single-line comprehensions.</p>
+  <span class="next-badge">▶ Next: Iterators &amp; Generators</span>
+</div>

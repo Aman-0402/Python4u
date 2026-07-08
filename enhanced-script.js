@@ -128,7 +128,7 @@ function markTopicCompleted(topicFile) {
     }
     
     // Check progress achievements
-    const progress = (completedTopics.length / 18) * 100;
+    const progress = (completedTopics.length / 19) * 100;
     if (progress >= 25 && progress < 50) {
       awardAchievement('progress25');
     } else if (progress >= 50 && progress < 75) {
@@ -146,7 +146,7 @@ function markTopicCompleted(topicFile) {
 // Update progress display
 function updateProgress() {
   const completedTopics = JSON.parse(localStorage.getItem('completedTopics') || '[]');
-  const total = 18;
+  const total = 19;
   const percent = Math.round((completedTopics.length / total) * 100);
   
   const completedElement = document.getElementById('completedTopics');
