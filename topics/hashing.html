@@ -1,0 +1,177 @@
+<!-- ── Chapter 41: Hashing ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #ea580c, #c2410c); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔑 Chapter 41</span>
+  <h1>Hashing</h1>
+  <p>Why <code>dict</code> and <code>set</code> lookups are O(1) — the trick behind Python's fastest data structures.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔑</div>
+  <h1>🔑 Instant Lookup, No Searching</h1>
+  <p>A list has to scan item by item to find something. A hash-based structure jumps straight to where the item should be — no searching required.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. The Problem With Searching Lists</h2>
+  <pre><code>students = ["Ravi", "Sita", "Amit", "Priya", "Karan"]   # a list
+print("Amit" in students)   # has to check each item — O(n)</code></pre>
+
+  <pre><code>students = {"Ravi", "Sita", "Amit", "Priya", "Karan"}   # a set
+print("Amit" in students)   # jumps straight there — O(1)</code></pre>
+
+  <p>Same question, same data, wildly different speed at scale. A <code>set</code> and <code>dict</code> use <span class="highlight">hashing</span> to achieve this.</p>
+</div>
+
+<div class="card-section">
+  <h2>🧮 2. What is a Hash Function?</h2>
+  <p>A <span class="highlight">hash function</span> takes any value and converts it into a number (a "hash"). That number decides exactly which "slot" in memory the value belongs to — so finding it later means computing the hash again and jumping straight there.</p>
+
+  <pre><code>print(hash("Amit"))
+print(hash("Ravi"))
+print(hash(42))</code></pre>
+  <div class="output-block">-3798261444673148797
+7183294756192834561
+42</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>The exact numbers vary by Python run — what matters is that the SAME input always produces the SAME hash within one run. That consistency is what lets Python find the value again instantly.</span>
+  </div>
+
+  <div class="analogy-box">
+    <h3>📚 Real-Life Analogy</h3>
+    <p>A library that shelves books by a formula based on the title, instead of alphabetically searching every shelf. Given a title, you compute which shelf it's on directly — no browsing required.</p>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🗺️ 3. How <code>dict</code> Uses Hashing</h2>
+  <pre><code>student_grades = {"Ravi": 78, "Sita": 92, "Amit": 65}
+
+print(student_grades["Amit"])</code></pre>
+  <div class="output-block">65</div>
+
+  <p>Behind the scenes: Python computes <code>hash("Amit")</code>, uses that number to jump directly to the right internal slot, and reads the value there — no scanning through "Ravi" and "Sita" first. That's why dict lookups don't get slower as the dict grows.</p>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Only <span class="highlight">immutable</span> types can be hashed — strings, numbers, tuples. Lists and dicts can't be dict keys or set members because they can change after being added, which would break their hash.</span>
+  </div>
+
+  <pre><code>bad_key = {[1, 2]: "value"}   # TypeError: unhashable type: 'list'</code></pre>
+  <div class="output-block">Traceback...
+TypeError: unhashable type: 'list'</div>
+</div>
+
+<div class="card-section">
+  <h2>💥 4. Hash Collisions</h2>
+  <p>Two different values can sometimes produce the same hash (or the same slot after some math) — a <span class="highlight">collision</span>. Python handles this automatically, but it's worth knowing it happens.</p>
+
+  <pre><code># Conceptually — not exact Python internals, but the idea:
+# if hash("Amit") % table_size == hash("Karan") % table_size:
+#     both compete for the same slot
+#     Python stores both and checks equality when looking one up
+</code></pre>
+
+  <div class="callout info">
+    <span>ℹ️</span>
+    <span>You never write collision-handling code yourself — <code>dict</code> and <code>set</code> handle it internally. The only practical impact: a badly-designed custom <code>__hash__</code> (rare, advanced) with too many collisions can slow lookups toward O(n).</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🚀 5. Real Example — Speeding Up "Find Duplicates"</h2>
+  <p>This mirrors the O(n²) → O(n) fix from <a href="#" onclick="loadTopic('big-o.html'); return false;">Big-O</a>, using hashing to skip repeated scanning.</p>
+
+  <pre><code># Slow — O(n²): for every item, scan the whole list again
+def has_duplicate_slow(items):
+    for i in range(len(items)):
+        for j in range(len(items)):
+            if i != j and items[i] == items[j]:
+                return True
+    return False
+
+# Fast — O(n): a set gives O(1) "have I seen this before?" checks
+def has_duplicate_fast(items):
+    seen = set()
+    for item in items:
+        if item in seen:      # O(1) thanks to hashing
+            return True
+        seen.add(item)
+    return False
+
+numbers = list(range(100000)) + [500]   # one duplicate at the end
+print(has_duplicate_fast(numbers))      # runs instantly</code></pre>
+  <div class="output-block">True</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Why is <code>"x" in my_set</code> faster than <code>"x" in my_list</code> for large data?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Sets store fewer items</li>
+      <li onclick="checkAnswer(this,'correct')">b) Sets use hashing to jump straight to the right slot instead of scanning</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Lists don't support the "in" keyword</li>
+      <li onclick="checkAnswer(this,'wrong')">d) No real difference</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Why can't a list be used as a dictionary key?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Dictionaries only accept strings as keys</li>
+      <li onclick="checkAnswer(this,'correct')">b) Lists are mutable, so their hash could change after being stored</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Lists are too large to hash</li>
+      <li onclick="checkAnswer(this,'wrong')">d) There's no actual restriction</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What is a hash collision?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) A program crash</li>
+      <li onclick="checkAnswer(this,'correct')">b) Two different values producing the same hash/slot</li>
+      <li onclick="checkAnswer(this,'wrong')">c) A syntax error</li>
+      <li onclick="checkAnswer(this,'wrong')">d) When a dict runs out of memory</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write <code>count_unique_words(text)</code> that returns how many DISTINCT words are in a string, using a set.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def count_unique_words(text):
+    words = text.lower().split()
+    unique = set(words)      # hashing removes duplicates automatically
+    return len(unique)
+
+print(count_unique_words("the cat sat on the mat the cat ran"))   # 5</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Hash function — converts a value into a number that decides its storage slot</li>
+    <li><code>dict</code>/<code>set</code> lookups are O(1) because of this direct jump — no scanning</li>
+    <li>Only immutable types (str, int, tuple) can be hashed / used as dict keys</li>
+    <li>Swapping a list-scan for a set membership check is a common O(n²) → O(n) fix</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 41 Complete!</h3>
+  <p>You now know exactly why dict and set are Python's fastest lookup tools.</p>
+  <span class="next-badge">▶ Next: Graphs</span>
+</div>
