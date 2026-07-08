@@ -102,6 +102,56 @@ print(flat)</code></pre>
 </div>
 
 <div class="card-section">
+  <h2>🔀 5. Conditional Expression — <code>if / else</code> Inside the Comprehension</h2>
+  <p>This is different from the filtering <code>if</code> in section 1. That one <em>drops</em> items. This one <em>transforms every item</em> into one of two values — it sits right after the expression, before the <code>for</code>.</p>
+
+  <p>Pattern: <code>[value_if_true if condition else value_if_false for item in iterable]</code></p>
+
+  <pre><code>marks = [55, 90, 42, 30, 78]
+results = ["Pass" if m >= 40 else "Fail" for m in marks]
+print(results)</code></pre>
+  <div class="output-block">['Pass', 'Pass', 'Pass', 'Fail', 'Pass']</div>
+
+  <p>Notice the list is still the same length as <code>marks</code> — nothing was dropped, every mark became a label.</p>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Easy to confuse the two forms. Filtering <code>if</code> goes at the <strong>end</strong> and removes items: <code>[m for m in marks if m >= 40]</code>. Conditional <code>if/else</code> goes at the <strong>start</strong> and transforms items: <code>[x if x >= 40 else 0 for x in marks]</code>. You can even combine both in one comprehension if needed.</span>
+  </div>
+
+  <h3>Combining both forms</h3>
+  <pre><code># Keep only failing students, label them clearly
+failed = [f"{m} - Needs improvement" if m < 40 else f"{m} - OK" for m in marks if m < 60]
+print(failed)</code></pre>
+  <div class="output-block">['30 - Needs improvement']</div>
+</div>
+
+<div class="card-section">
+  <h2>⚖️ 6. List Comprehension vs Generator Expression</h2>
+  <p>Both use nearly identical syntax, but they behave very differently — this matters once your data gets large.</p>
+
+  <pre><code>numbers = range(1000000)
+
+list_version = [n * n for n in numbers]      # builds all 1,000,000 results NOW, in memory
+gen_version  = (n * n for n in numbers)      # builds nothing yet — produces values on demand</code></pre>
+
+  <table>
+    <thead><tr><th></th><th>List comprehension <code>[ ]</code></th><th>Generator expression <code>( )</code></th></tr></thead>
+    <tbody>
+      <tr><td>Memory</td><td>Stores every result at once</td><td>Stores almost nothing — lazy</td></tr>
+      <tr><td>Speed to create</td><td>Slower for huge data (builds now)</td><td>Instant (nothing computed yet)</td></tr>
+      <tr><td>Can loop over it twice?</td><td>Yes, reusable</td><td>No — exhausted after one pass</td></tr>
+      <tr><td>Use when</td><td>You need the full list, indexing, or multiple passes</td><td>You're processing once, or the data is huge/infinite</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Rule of thumb: if you're about to pass the result straight into <code>sum()</code>, <code>max()</code>, or a single <code>for</code> loop and never need it again, use a generator expression — it's more memory-efficient with no downside. See <a href="#" onclick="loadTopic('iterators-generators.html'); return false;">Iterators &amp; Generators</a> for the full picture.</span>
+  </div>
+</div>
+
+<div class="card-section">
   <h2>🎯 Mini Quiz</h2>
 
   <div class="quiz-question">
@@ -131,6 +181,24 @@ print(flat)</code></pre>
       <li onclick="checkAnswer(this,'correct')">b) Only marks 40 and above</li>
       <li onclick="checkAnswer(this,'wrong')">c) All marks</li>
       <li onclick="checkAnswer(this,'wrong')">d) Nothing</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. What does <code>["Pass" if m >= 40 else "Fail" for m in marks]</code> produce, compared to the filtering version?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Removes failing marks from the list</li>
+      <li onclick="checkAnswer(this,'correct')">b) Same length as marks — every item becomes "Pass" or "Fail"</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Raises an error</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Returns only the number 40</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. When is a generator expression <code>( )</code> preferred over a list comprehension <code>[ ]</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) When you need to loop over the result multiple times</li>
+      <li onclick="checkAnswer(this,'correct')">b) When you only need to process the data once and want to save memory</li>
+      <li onclick="checkAnswer(this,'wrong')">c) When you need to index into specific items</li>
+      <li onclick="checkAnswer(this,'wrong')">d) They're always interchangeable with no tradeoff</li>
     </ul>
   </div>
 </div>
