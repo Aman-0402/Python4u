@@ -1,0 +1,168 @@
+<!-- ── Chapter 25: Virtual Environments & Packaging ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">📦 Chapter 25</span>
+  <h1>Virtual Environments &amp; Packaging</h1>
+  <p>Keep each project's dependencies isolated, and share your code with others correctly.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">📦</div>
+  <h1>📦 One Toolbox Per Project</h1>
+  <p>Without isolation, every project shares the same global set of installed packages — install a new version for one project and you might break another. A virtual environment gives each project its own private toolbox.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Creating a Virtual Environment</h2>
+  <pre><code># Create a virtual environment named "venv"
+python -m venv venv
+
+# Activate it
+# Windows:
+venv\Scripts\activate
+
+# macOS / Linux:
+source venv/bin/activate</code></pre>
+
+  <p>Once activated, your terminal prompt usually shows <code>(venv)</code> — any <code>pip install</code> now only affects this project, not your whole system.</p>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Deactivate anytime with the command <code>deactivate</code>. It just turns off the isolation — nothing is deleted.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📥 2. Installing Packages</h2>
+  <pre><code># Inside the activated venv
+pip install requests
+pip install pandas==2.1.0   # specific version
+
+pip list                    # see installed packages
+pip show requests           # details about one package</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>📄 3. requirements.txt — Sharing Your Setup</h2>
+  <p>Save the exact packages your project needs so anyone else can install the same versions.</p>
+
+  <pre><code># Save current packages to a file
+pip freeze > requirements.txt</code></pre>
+
+  <pre><code># requirements.txt
+requests==2.31.0
+pandas==2.1.0
+flask==3.0.0</code></pre>
+
+  <pre><code># Someone else installs everything at once
+pip install -r requirements.txt</code></pre>
+
+  <div class="callout info">
+    <span>ℹ️</span>
+    <span>Always commit <code>requirements.txt</code> to your repo, but never commit the <code>venv/</code> folder itself — add it to <code>.gitignore</code>.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧭 4. Modern Way — <code>pyproject.toml</code></h2>
+  <p>Newer projects describe dependencies and metadata in one standard file instead of <code>requirements.txt</code>.</p>
+
+  <pre><code># pyproject.toml
+[project]
+name = "student-tracker"
+version = "1.0.0"
+description = "Track student attendance and grades"
+dependencies = [
+    "requests>=2.31.0",
+    "pandas>=2.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"</code></pre>
+
+  <p>Tools like <code>pip</code>, <code>poetry</code>, and <code>uv</code> can all read this same file to install dependencies and build your package.</p>
+</div>
+
+<div class="card-section">
+  <h2>🗂️ 5. Typical Project Layout</h2>
+  <pre><code>student_tracker/
+├── venv/                 # virtual environment (not committed)
+├── student_tracker/      # your actual package code
+│   ├── __init__.py
+│   └── main.py
+├── tests/
+│   └── test_main.py
+├── requirements.txt
+├── pyproject.toml
+└── README.md</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Why use a virtual environment?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It makes Python run faster</li>
+      <li onclick="checkAnswer(this,'correct')">b) It isolates one project's packages from another</li>
+      <li onclick="checkAnswer(this,'wrong')">c) It's required to run any Python file</li>
+      <li onclick="checkAnswer(this,'wrong')">d) It replaces pip</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does <code>pip freeze > requirements.txt</code> do?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Deletes all packages</li>
+      <li onclick="checkAnswer(this,'correct')">b) Saves installed packages and versions to a file</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Installs packages from the internet</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Locks the Python version</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What should you add to <code>.gitignore</code> for a Python project using venv?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) requirements.txt</li>
+      <li onclick="checkAnswer(this,'correct')">b) venv/</li>
+      <li onclick="checkAnswer(this,'wrong')">c) main.py</li>
+      <li onclick="checkAnswer(this,'wrong')">d) pyproject.toml</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write the exact terminal commands to: create a venv, activate it (Windows), install <code>requests</code>, and save a requirements file.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>python -m venv venv
+venv\Scripts\activate
+pip install requests
+pip freeze > requirements.txt</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>python -m venv venv</code> — create an isolated environment</li>
+    <li><code>venv\Scripts\activate</code> / <code>source venv/bin/activate</code> — turn it on</li>
+    <li><code>pip freeze > requirements.txt</code> — record dependencies</li>
+    <li><code>pip install -r requirements.txt</code> — install everything on another machine</li>
+    <li><code>pyproject.toml</code> — modern standard for project metadata + dependencies</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 25 Complete!</h3>
+  <p>Your projects now have clean, reproducible dependency setups.</p>
+  <span class="next-badge">▶ Next: Testing</span>
+</div>
