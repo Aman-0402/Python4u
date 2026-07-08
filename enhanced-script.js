@@ -333,50 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
   enhanceDarkModeToggle();
   enhanceSidebarToggle();
   enhanceTopicLinks();
-  showWelcomeDialog();
 });
-
-function showWelcomeDialog() {
-  if (typeof Swal === 'undefined') return;
-
-  Swal.fire({
-    title: '👋 Hey there!',
-    html: '<p style="margin:0 0 4px;">What\'s your name?</p>',
-    input: 'text',
-    inputPlaceholder: 'Enter your name...',
-    inputAttributes: { autocomplete: 'off' },
-    confirmButtonText: 'Continue →',
-    confirmButtonColor: '#00d4aa',
-    background: '#161b22',
-    color: '#e6edf3',
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-    inputValidator: (value) => {
-      if (!value || !value.trim()) return 'Please enter your name!';
-    }
-  }).then((result) => {
-    if (!result.isConfirmed) return;
-    const name = result.value.trim();
-    const isNidhi = name.toLowerCase() === 'nidhi sharma';
-
-    Swal.fire({
-      title: isNidhi
-        ? '😏 Ohhh, You\'re Back!'
-        : `🎉 Welcome, ${name}!`,
-      html: isNidhi
-        ? `<p style="font-size:1.05em;margin:0 0 8px;">You came back to back me <strong>Finally</strong> 😂</p>
-           <p style="color:#8b949e;font-size:0.92em;margin:0;">If you want to learn — Go ahead! 🚀</p>`
-        : `<p style="font-size:1.05em;margin:0 0 8px;">Welcome to <strong>Study Me</strong> 🐍</p>
-           <p style="color:#8b949e;font-size:0.92em;margin:0;">Happy you started learning! Let's go 🤖✨</p>`,
-      icon: isNidhi ? 'info' : 'success',
-      confirmButtonText: isNidhi ? "Fine, let's go 😤" : "Let's Go! 🚀",
-      confirmButtonColor: '#00d4aa',
-      background: '#161b22',
-      color: '#e6edf3',
-      iconColor: isNidhi ? '#f59e0b' : '#00d4aa'
-    });
-  });
-}
 
 // Export functions for use in main script
 window.loadTopic = loadTopic;
