@@ -1,0 +1,200 @@
+<!-- ── Chapter 27: Magic / Dunder Methods ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #d946ef, #a855f7); }
+.dunder-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(217,70,239,0.12);
+  color: #e879f9;
+  border: 1px solid rgba(217,70,239,0.25);
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">✨ Chapter 27</span>
+  <h1>Magic / Dunder Methods</h1>
+  <p>Special methods (like <code>__str__</code>, <code>__len__</code>) that let your own classes work with Python's built-in functions and operators.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">✨</div>
+  <h1>✨ Making Your Objects Behave Like Built-ins</h1>
+  <p>"Dunder" = double underscore. These methods are never called directly — Python calls them automatically when you use <code>print()</code>, <code>len()</code>, <code>+</code>, <code>==</code> and more on your objects.</p>
+</div>
+
+<div class="card-section">
+  <h2>🖨️ 1. <span class="dunder-tag">__str__</span> — Readable Printing</h2>
+
+  <h3>Without it</h3>
+  <pre><code>class Student:
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+s = Student("Ravi", "A")
+print(s)</code></pre>
+  <div class="output-block">&lt;__main__.Student object at 0x000001A2B3C4D5E6&gt;</div>
+
+  <h3>With <code>__str__</code></h3>
+  <pre><code>class Student:
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+    def __str__(self):
+        return f"Student({self.name}, grade={self.grade})"
+
+s = Student("Ravi", "A")
+print(s)</code></pre>
+  <div class="output-block">Student(Ravi, grade=A)</div>
+
+  <p><code>print()</code> automatically calls <code>__str__</code> on any object.</p>
+</div>
+
+<div class="card-section">
+  <h2>📏 2. <span class="dunder-tag">__len__</span> — Works with <code>len()</code></h2>
+  <pre><code>class Classroom:
+    def __init__(self, students):
+        self.students = students
+
+    def __len__(self):
+        return len(self.students)
+
+room = Classroom(["Ravi", "Sita", "Amit"])
+print(len(room))</code></pre>
+  <div class="output-block">3</div>
+</div>
+
+<div class="card-section">
+  <h2>⚖️ 3. <span class="dunder-tag">__eq__</span> — Works with <code>==</code></h2>
+  <pre><code>class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+p1 = Point(2, 3)
+p2 = Point(2, 3)
+print(p1 == p2)</code></pre>
+  <div class="output-block">True</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Without <code>__eq__</code>, <code>==</code> compares object identity (are they the same object in memory) — <code>p1 == p2</code> would be <code>False</code> even with identical values.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>➕ 4. <span class="dunder-tag">__add__</span> — Works with <code>+</code></h2>
+  <pre><code>class Money:
+    def __init__(self, amount):
+        self.amount = amount
+
+    def __add__(self, other):
+        return Money(self.amount + other.amount)
+
+    def __str__(self):
+        return f"₹{self.amount}"
+
+wallet = Money(500) + Money(250)
+print(wallet)</code></pre>
+  <div class="output-block">₹750</div>
+</div>
+
+<div class="card-section">
+  <h2>📋 5. Common Dunder Methods</h2>
+  <table>
+    <thead><tr><th>Method</th><th>Triggered by</th></tr></thead>
+    <tbody>
+      <tr><td><code>__init__</code></td><td>Creating an object: <code>Student("Ravi")</code></td></tr>
+      <tr><td><code>__str__</code></td><td><code>print(obj)</code>, <code>str(obj)</code></td></tr>
+      <tr><td><code>__len__</code></td><td><code>len(obj)</code></td></tr>
+      <tr><td><code>__eq__</code></td><td><code>obj1 == obj2</code></td></tr>
+      <tr><td><code>__add__</code></td><td><code>obj1 + obj2</code></td></tr>
+      <tr><td><code>__lt__</code></td><td><code>obj1 &lt; obj2</code></td></tr>
+      <tr><td><code>__getitem__</code></td><td><code>obj[0]</code></td></tr>
+      <tr><td><code>__contains__</code></td><td><code>x in obj</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which method controls what <code>print(obj)</code> shows?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) __print__</li>
+      <li onclick="checkAnswer(this,'correct')">b) __str__</li>
+      <li onclick="checkAnswer(this,'wrong')">c) __show__</li>
+      <li onclick="checkAnswer(this,'wrong')">d) __display__</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Without defining <code>__eq__</code>, what does <code>==</code> compare on custom objects?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Their string value</li>
+      <li onclick="checkAnswer(this,'correct')">b) Whether they're the exact same object in memory</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Their length</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing, it errors</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Which method lets <code>len(obj)</code> work?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) __size__</li>
+      <li onclick="checkAnswer(this,'correct')">b) __len__</li>
+      <li onclick="checkAnswer(this,'wrong')">c) __count__</li>
+      <li onclick="checkAnswer(this,'wrong')">d) __length__</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Add <code>__str__</code> and <code>__len__</code> to a <code>Playlist</code> class holding a list of songs.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>class Playlist:
+    def __init__(self, name, songs):
+        self.name = name
+        self.songs = songs
+
+    def __str__(self):
+        return f"Playlist '{self.name}' with {len(self.songs)} songs"
+
+    def __len__(self):
+        return len(self.songs)
+
+p = Playlist("Road Trip", ["Song A", "Song B", "Song C"])
+print(p)        # Playlist 'Road Trip' with 3 songs
+print(len(p))   # 3</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Dunder methods = double-underscore methods Python calls automatically</li>
+    <li><code>__str__</code> — controls <code>print()</code> output</li>
+    <li><code>__len__</code> — controls <code>len()</code></li>
+    <li><code>__eq__</code>, <code>__lt__</code> — control comparisons</li>
+    <li><code>__add__</code> — controls the <code>+</code> operator</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 27 Complete!</h3>
+  <p>Your classes can now work naturally with Python's built-in functions and operators.</p>
+  <span class="next-badge">▶ Next: Functional Tools</span>
+</div>
