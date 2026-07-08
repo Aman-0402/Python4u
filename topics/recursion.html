@@ -1,0 +1,208 @@
+<!-- ── Chapter 35: Recursion ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🌀 Chapter 35</span>
+  <h1>Recursion</h1>
+  <p>A function that calls itself to break a big problem into smaller identical ones.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🌀</div>
+  <h1>🌀 Solve the Small Case, Trust the Rest</h1>
+  <p>Recursion means a function calls itself with a smaller version of the same problem, until it hits a case simple enough to answer directly.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. The Two Required Parts</h2>
+  <p>Every recursive function needs exactly two things, or it never stops.</p>
+
+  <table>
+    <thead><tr><th>Part</th><th>Job</th></tr></thead>
+    <tbody>
+      <tr><td><span class="highlight">Base case</span></td><td>The simplest input — answered directly, no further recursion</td></tr>
+      <tr><td><span class="highlight">Recursive case</span></td><td>Calls itself with a smaller/simpler input, moving toward the base case</td></tr>
+    </tbody>
+  </table>
+
+  <pre><code>def countdown(n):
+    if n <= 0:              # base case — stops the recursion
+        print("Liftoff!")
+        return
+    print(n)
+    countdown(n - 1)        # recursive case — smaller problem
+
+countdown(3)</code></pre>
+  <div class="output-block">3
+2
+1
+Liftoff!</div>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Forget the base case, or never actually move toward it, and you get infinite recursion — Python stops you with <code>RecursionError: maximum recursion depth exceeded</code>.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🔢 2. Classic Example — Factorial</h2>
+  <p><code>factorial(5)</code> = 5 × 4 × 3 × 2 × 1. Notice: <code>factorial(5) = 5 × factorial(4)</code> — the problem contains a smaller version of itself.</p>
+
+  <pre><code>def factorial(n):
+    if n == 0 or n == 1:        # base case
+        return 1
+    return n * factorial(n - 1)  # recursive case
+
+print(factorial(5))</code></pre>
+  <div class="output-block">120</div>
+</div>
+
+<div class="card-section">
+  <h2>📚 3. Tracing the Call Stack</h2>
+  <p>Each recursive call pauses and waits for the one below it to finish — Python keeps track of all the paused calls on the <span class="highlight">call stack</span>.</p>
+
+  <pre><code>factorial(4)
+= 4 * factorial(3)
+      = 4 * (3 * factorial(2))
+            = 4 * (3 * (2 * factorial(1)))
+                  = 4 * (3 * (2 * 1))            &lt;- base case hit, unwinding begins
+            = 4 * (3 * 2)
+      = 4 * 6
+= 24</code></pre>
+
+  <p>Calls go "down" (4 → 3 → 2 → 1) until the base case, then results multiply back "up" as each paused call resumes with the answer it was waiting for.</p>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Python's default recursion limit is 1000 calls deep (<code>sys.getrecursionlimit()</code>). Very deep recursion (like processing 100,000 items one-by-one) will crash — a loop is usually the safer choice for that.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🍯 4. Fibonacci — Multiple Recursive Calls</h2>
+  <p>Each Fibonacci number is the sum of the two before it: 0, 1, 1, 2, 3, 5, 8, 13...</p>
+
+  <pre><code>def fibonacci(n):
+    if n <= 1:                                # base case
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)  # two recursive calls
+
+for i in range(8):
+    print(fibonacci(i), end=" ")</code></pre>
+  <div class="output-block">0 1 1 2 3 5 8 13</div>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>This version recalculates the same values many times — <code>fibonacci(5)</code> calls <code>fibonacci(3)</code> twice, <code>fibonacci(2)</code> three times, and so on. It's O(2ⁿ) — extremely slow for large n. Fixed below.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧠 5. Speeding It Up — Memoization</h2>
+  <p>Cache results you've already computed so repeated sub-problems are answered instantly instead of recalculated.</p>
+
+  <pre><code>def fibonacci_fast(n, cache={}):
+    if n in cache:
+        return cache[n]
+    if n <= 1:
+        return n
+    result = fibonacci_fast(n - 1, cache) + fibonacci_fast(n - 2, cache)
+    cache[n] = result
+    return result
+
+print(fibonacci_fast(50))   # instant, vs. plain recursion which would take ages</code></pre>
+  <div class="output-block">12586269025</div>
+
+  <p>This turns O(2ⁿ) into O(n) — each Fibonacci number gets computed exactly once, ever.</p>
+</div>
+
+<div class="card-section">
+  <h2>📁 6. Real Use — Exploring Nested Folders</h2>
+  <p>Recursion shines whenever data contains smaller versions of itself — folders containing folders, for example.</p>
+
+  <pre><code>import os
+
+def list_files(folder, depth=0):
+    for item in os.listdir(folder):
+        path = os.path.join(folder, item)
+        print("  " * depth + item)
+        if os.path.isdir(path):
+            list_files(path, depth + 1)   # recurse into the subfolder
+
+list_files("my_project")</code></pre>
+  <div class="output-block">main.py
+utils
+  helpers.py
+  config.py
+tests
+  test_main.py</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What happens if a recursive function has no base case?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It runs once and stops</li>
+      <li onclick="checkAnswer(this,'correct')">b) It recurses forever until Python raises RecursionError</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Python fixes it automatically</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing, it works fine</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Why is memoization useful for <code>fibonacci</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It makes the code shorter</li>
+      <li onclick="checkAnswer(this,'correct')">b) It avoids recalculating the same sub-problems repeatedly</li>
+      <li onclick="checkAnswer(this,'wrong')">c) It removes the need for a base case</li>
+      <li onclick="checkAnswer(this,'wrong')">d) It has no real effect</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. In <code>factorial(4)</code>, what triggers the "unwinding" (multiplying results back up)?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Calling factorial(5) first</li>
+      <li onclick="checkAnswer(this,'correct')">b) Reaching the base case</li>
+      <li onclick="checkAnswer(this,'wrong')">c) An error occurring</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing triggers it</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a recursive function <code>sum_digits(n)</code> that returns the sum of a number's digits (e.g. <code>sum_digits(1234)</code> → 10).
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def sum_digits(n):
+    if n < 10:                  # base case — single digit
+        return n
+    return n % 10 + sum_digits(n // 10)   # last digit + rest of the number
+
+print(sum_digits(1234))   # 1+2+3+4 = 10</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Every recursive function needs a base case (stops it) and a recursive case (shrinks the problem)</li>
+    <li>Each call pauses on the call stack until the base case is hit, then results unwind back up</li>
+    <li>Naive recursion can repeat work — memoization (caching) fixes this</li>
+    <li>Good fit for self-similar data: folders, trees, nested lists</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 35 Complete!</h3>
+  <p>You can now break big problems into smaller versions of themselves.</p>
+  <span class="next-badge">▶ Next: Searching Algorithms</span>
+</div>
