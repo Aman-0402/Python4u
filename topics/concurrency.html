@@ -1,0 +1,189 @@
+<!-- ── Chapter 23: Concurrency ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">⚡ Chapter 23</span>
+  <h1>Concurrency — Threading, Multiprocessing &amp; asyncio</h1>
+  <p>Do multiple things "at the same time" — waiting on network calls, crunching numbers, or handling many tasks at once.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">⚡</div>
+  <h1>⚡ Three Ways to Do Things Concurrently</h1>
+  <p>Not every "run multiple things at once" problem needs the same tool. Python gives you three, each suited to a different kind of work.</p>
+</div>
+
+<div class="card-section">
+  <h2>🧵 1. Threading — Good for Waiting (I/O)</h2>
+  <p>Use <span class="highlight">threading</span> when your program spends time <em>waiting</em> — for a file, a network response, a database. Threads share memory and let one thread run while another waits.</p>
+
+  <pre><code>import threading
+import time
+
+def download_file(name):
+    print(f"Starting download: {name}")
+    time.sleep(2)   # pretend this is a slow network call
+    print(f"Finished: {name}")
+
+t1 = threading.Thread(target=download_file, args=("report.pdf",))
+t2 = threading.Thread(target=download_file, args=("data.csv",))
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+print("All downloads done")</code></pre>
+  <div class="output-block">Starting download: report.pdf
+Starting download: data.csv
+Finished: report.pdf
+Finished: data.csv
+All downloads done</div>
+
+  <p>Both downloads take ~2 seconds total (not 4), because they wait at the same time instead of one after another.</p>
+</div>
+
+<div class="card-section">
+  <h2>🖥️ 2. Multiprocessing — Good for Heavy CPU Work</h2>
+  <p>Python threads can't run Python code on multiple CPU cores at once (the GIL). For CPU-heavy work — big calculations, image processing — use separate <span class="highlight">processes</span> instead.</p>
+
+  <pre><code>from multiprocessing import Process
+
+def calculate_squares(numbers):
+    result = [n * n for n in numbers]
+    print(f"Squares of {numbers}: {result}")
+
+if __name__ == "__main__":
+    p1 = Process(target=calculate_squares, args=([1, 2, 3],))
+    p2 = Process(target=calculate_squares, args=([4, 5, 6],))
+
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()</code></pre>
+  <div class="output-block">Squares of [1, 2, 3]: [1, 4, 9]
+Squares of [4, 5, 6]: [16, 25, 36]</div>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Each process has its own memory — no automatic variable sharing like threads. Use <code>multiprocessing.Queue</code> to pass data between processes.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🌀 3. asyncio — Good for Many I/O Tasks at Once</h2>
+  <p><span class="highlight">asyncio</span> runs many waiting tasks on a single thread, switching between them while each one waits. Great for handling hundreds of network requests.</p>
+
+  <pre><code>import asyncio
+
+async def fetch_data(name, delay):
+    print(f"Fetching {name}...")
+    await asyncio.sleep(delay)   # non-blocking wait
+    print(f"Got {name}")
+    return name
+
+async def main():
+    results = await asyncio.gather(
+        fetch_data("users", 2),
+        fetch_data("orders", 1),
+        fetch_data("products", 3),
+    )
+    print("All done:", results)
+
+asyncio.run(main())</code></pre>
+  <div class="output-block">Fetching users...
+Fetching orders...
+Fetching products...
+Got orders
+Got users
+Got products
+All done: ['users', 'orders', 'products']</div>
+
+  <p>All three fetches happen concurrently — total time is ~3 seconds (the slowest one), not 6.</p>
+</div>
+
+<div class="card-section">
+  <h2>🧭 4. Which One Should You Use?</h2>
+  <table>
+    <thead><tr><th>Tool</th><th>Best for</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Threading</td><td>Waiting on I/O, simple to add</td><td>Downloading a few files</td></tr>
+      <tr><td>Multiprocessing</td><td>Heavy CPU calculation</td><td>Processing images, big math</td></tr>
+      <tr><td>asyncio</td><td>Many concurrent I/O tasks</td><td>Web server handling 1000s of requests</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which tool is best for CPU-heavy work like image processing?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) threading</li>
+      <li onclick="checkAnswer(this,'correct')">b) multiprocessing</li>
+      <li onclick="checkAnswer(this,'wrong')">c) asyncio</li>
+      <li onclick="checkAnswer(this,'wrong')">d) None of these help</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What keyword pauses an async function without blocking others?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) pause</li>
+      <li onclick="checkAnswer(this,'correct')">b) await</li>
+      <li onclick="checkAnswer(this,'wrong')">c) sleep</li>
+      <li onclick="checkAnswer(this,'wrong')">d) yield</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Why do threads work well for downloading multiple files?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) They use more CPU cores</li>
+      <li onclick="checkAnswer(this,'correct')">b) One thread can wait while another runs</li>
+      <li onclick="checkAnswer(this,'wrong')">c) They run faster than the CPU clock</li>
+      <li onclick="checkAnswer(this,'wrong')">d) They don't actually help</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write an <code>asyncio</code> program that fetches "weather" and "news" concurrently, each taking 1 second, and prints both results.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>import asyncio
+
+async def fetch(name):
+    await asyncio.sleep(1)
+    return f"{name} data ready"
+
+async def main():
+    weather, news = await asyncio.gather(fetch("weather"), fetch("news"))
+    print(weather)
+    print(news)
+
+asyncio.run(main())</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Threading — best for waiting on I/O (network, files)</li>
+    <li>Multiprocessing — best for heavy CPU calculations, uses multiple cores</li>
+    <li>asyncio — best for many concurrent I/O tasks on one thread</li>
+    <li><code>await</code> pauses an async task without blocking the whole program</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 23 Complete!</h3>
+  <p>You now know which concurrency tool fits which job.</p>
+  <span class="next-badge">▶ Next: Type Hints</span>
+</div>
