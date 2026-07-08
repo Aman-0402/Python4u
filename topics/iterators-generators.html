@@ -36,7 +36,57 @@ StopIteration</div>
 </div>
 
 <div class="card-section">
-  <h2>🌱 2. Generator Functions — <code>yield</code></h2>
+  <h2>🛠️ 2. Building Your Own Iterator — <code>__iter__</code> &amp; <code>__next__</code></h2>
+  <p>This is the actual protocol behind every <code>for</code> loop. Any class that implements both these methods can be looped over with <code>for</code>, just like a list.</p>
+
+  <pre><code>class Countdown:
+    def __init__(self, start):
+        self.current = start
+
+    def __iter__(self):
+        return self          # the object itself is the iterator
+
+    def __next__(self):
+        if self.current <= 0:
+            raise StopIteration     # tells the for-loop to stop
+        value = self.current
+        self.current -= 1
+        return value
+
+for num in Countdown(3):
+    print(num)</code></pre>
+  <div class="output-block">3
+2
+1</div>
+
+  <table>
+    <thead><tr><th>Method</th><th>Job</th></tr></thead>
+    <tbody>
+      <tr><td><code>__iter__(self)</code></td><td>Called once at the start of the loop — must return an object with <code>__next__</code></td></tr>
+      <tr><td><code>__next__(self)</code></td><td>Called each time the loop needs the next value — raises <code>StopIteration</code> when done</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>A generator function (using <code>yield</code>, shown next) does exactly this same job automatically — Python writes the <code>__iter__</code>/<code>__next__</code> machinery for you behind the scenes. That's why generators are the easier, more common way to build one of these.</span>
+  </div>
+
+  <h3>Manually driving it with <code>next()</code></h3>
+  <pre><code>counter = Countdown(2)
+it = iter(counter)      # calls __iter__
+
+print(next(it))         # calls __next__ -> 2
+print(next(it))         # calls __next__ -> 1
+print(next(it))         # calls __next__ -> raises StopIteration</code></pre>
+  <div class="output-block">2
+1
+Traceback...
+StopIteration</div>
+</div>
+
+<div class="card-section">
+  <h2>🌱 3. Generator Functions — <code>yield</code></h2>
   <p>A function with <code>yield</code> instead of <code>return</code> becomes a generator. Each call to <code>next()</code> resumes right where it left off.</p>
 
   <h3>Regular function (builds full list)</h3>
@@ -71,7 +121,7 @@ for num in get_even_numbers(10):
 </div>
 
 <div class="card-section">
-  <h2>📄 3. Real Example — Reading a Big File Line by Line</h2>
+  <h2>📄 4. Real Example — Reading a Big File Line by Line</h2>
   <pre><code>def read_large_file(filename):
     with open(filename) as f:
         for line in f:
@@ -88,7 +138,7 @@ for line in read_large_file("orders.txt"):
 </div>
 
 <div class="card-section">
-  <h2>🧪 4. Generator Expressions</h2>
+  <h2>🧪 5. Generator Expressions</h2>
   <p>Same idea as a list comprehension, but with <code>( )</code> instead of <code>[ ]</code> — values are made lazily, not all at once.</p>
 
   <pre><code>squares_list = [n * n for n in range(1000000)]   # builds all 1,000,000 now
@@ -134,7 +184,16 @@ print(next(squares_gen))   # 1</code></pre>
   </div>
 
   <div class="quiz-question">
-    <p>3. Why use a generator over a list for a huge file?</p>
+    <p>3. Which two methods must a class implement to work with a <code>for</code> loop directly?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) __init__ and __del__</li>
+      <li onclick="checkAnswer(this,'correct')">b) __iter__ and __next__</li>
+      <li onclick="checkAnswer(this,'wrong')">c) __start__ and __stop__</li>
+      <li onclick="checkAnswer(this,'wrong')">d) __loop__ and __end__</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. Why use a generator over a list for a huge file?</p>
     <ul>
       <li onclick="checkAnswer(this,'wrong')">a) Generators are always faster to write</li>
       <li onclick="checkAnswer(this,'correct')">b) Generators don't hold the whole file in memory</li>
