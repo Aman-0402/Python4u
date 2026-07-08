@@ -239,6 +239,115 @@ df.shape       # (rows, columns)</code></pre>
 </div>
 
 <div class="card-section">
+  <h2>&#128269; 5. Filtering Rows</h2>
+  <p>Put a condition inside <code>[ ]</code> to keep only the rows that match — this is how you answer "which students scored above 85?"</p>
+
+  <pre><code>data = {"Name": ["Aman", "Elon", "John", "Priya"], "Marks": [90, 85, 60, 95]}
+df = pd.DataFrame(data)
+
+toppers = df[df["Marks"] > 85]
+print(toppers)</code></pre>
+  <div class="output-block">    Name  Marks
+0   Aman     90
+3  Priya     95</div>
+
+  <p>Combine conditions with <code>&amp;</code> (and) / <code>|</code> (or) — wrap each condition in its own parentheses.</p>
+  <pre><code>result = df[(df["Marks"] > 60) &amp; (df["Marks"] < 95)]
+print(result)</code></pre>
+  <div class="output-block">   Name  Marks
+0  Aman     90
+1  Elon     85</div>
+</div>
+
+<div class="card-section">
+  <h2>&#10133; 6. Adding &amp; Dropping Columns</h2>
+  <pre><code>df["Grade"] = ["A", "A", "C", "A"]        # add a new column
+print(df)</code></pre>
+  <div class="output-block">    Name  Marks Grade
+0   Aman     90     A
+1   Elon     85     A
+2   John     60     C
+3  Priya     95     A</div>
+
+  <pre><code>df["Bonus"] = df["Marks"] + 5             # new column built from another
+df = df.drop("Bonus", axis=1)             # drop a column (axis=1 = column)
+print(df.columns)</code></pre>
+  <div class="output-block">Index(['Name', 'Marks', 'Grade'], dtype='object')</div>
+</div>
+
+<div class="card-section">
+  <h2>&#128202; 7. groupby — Summarize by Category</h2>
+  <p><code>groupby()</code> answers questions like "average marks per grade." It splits the data into groups, applies a calculation to each, then combines the results.</p>
+
+  <pre><code>data = {
+    "Name": ["Aman", "Elon", "John", "Priya"],
+    "Grade": ["A", "A", "C", "B"],
+    "Marks": [90, 85, 60, 78]
+}
+df = pd.DataFrame(data)
+
+avg_by_grade = df.groupby("Grade")["Marks"].mean()
+print(avg_by_grade)</code></pre>
+  <div class="output-block">Grade
+A    87.5
+B    78.0
+C    60.0
+Name: Marks, dtype: float64</div>
+</div>
+
+<div class="card-section">
+  <h2>&#10067; 8. Handling Missing Data</h2>
+  <p>Real data often has gaps. pandas represents a missing value as <code>NaN</code>.</p>
+
+  <pre><code>import numpy as np
+
+data = {"Name": ["Aman", "Elon", "John"], "Marks": [90, np.nan, 60]}
+df = pd.DataFrame(data)
+
+print(df.isnull())          # True where data is missing</code></pre>
+  <div class="output-block">    Name  Marks
+0  False  False
+1  False   True
+2  False  False</div>
+
+  <pre><code>df_clean = df.dropna()              # remove rows with any missing value
+print(df_clean)
+
+df_filled = df.fillna(0)            # replace missing values with 0
+print(df_filled)</code></pre>
+  <div class="output-block">   Name  Marks
+0  Aman   90.0
+2  John   60.0
+
+   Name  Marks
+0  Aman   90.0
+1  Elon    0.0
+2  John   60.0</div>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span><code>dropna()</code> throws away incomplete rows — use when missing data is rare. <code>fillna()</code> keeps every row but guesses a value — use when you have a sensible default (0, average, "Unknown").</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>&#128279; 9. Merging Two DataFrames</h2>
+  <p>Combine two tables that share a common column — like a SQL join.</p>
+
+  <pre><code>students = pd.DataFrame({"ID": [1, 2, 3], "Name": ["Aman", "Elon", "John"]})
+marks = pd.DataFrame({"ID": [1, 2, 3], "Marks": [90, 85, 60]})
+
+combined = pd.merge(students, marks, on="ID")
+print(combined)</code></pre>
+  <div class="output-block">   ID  Name  Marks
+0   1  Aman     90
+1   2  Elon     85
+2   3  John     60</div>
+
+  <p><code>on="ID"</code> tells pandas which column links the two tables — rows are matched by that shared value.</p>
+</div>
+
+<div class="card-section">
   <h2>&#128218; Mini Quiz — pandas</h2>
   <div class="quiz-question">
     <p>Q1. What does <code>df["Name"]</code> return?</p>
@@ -306,6 +415,22 @@ df.shape       # (rows, columns)</code></pre>
       <li onclick="checkAnswer(this, 'wrong')">a) install pandas</li>
       <li onclick="checkAnswer(this, 'correct')">b) pip install pandas</li>
       <li onclick="checkAnswer(this, 'wrong')">c) python install pandas</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. Which method fills missing (NaN) values with a default instead of removing rows?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) dropna()</li>
+      <li onclick="checkAnswer(this, 'correct')">b) fillna()</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) isnull()</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. What does <code>df.groupby("Grade")["Marks"].mean()</code> compute?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) Overall average marks</li>
+      <li onclick="checkAnswer(this, 'correct')">b) Average marks per grade group</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) Highest mark overall</li>
     </ul>
   </div>
 </div>
