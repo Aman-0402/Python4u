@@ -45,8 +45,71 @@ All downloads done</div>
 </div>
 
 <div class="card-section">
-  <h2>🖥️ 2. Multiprocessing — Good for Heavy CPU Work</h2>
-  <p>Python threads can't run Python code on multiple CPU cores at once (the GIL). For CPU-heavy work — big calculations, image processing — use separate <span class="highlight">processes</span> instead.</p>
+  <h2>⚠️ 2. Race Conditions — When Threads Fight Over the Same Data</h2>
+  <p>Threads share the same memory. If two threads read and update the same variable at the same time, updates can get lost — this is a <span class="highlight">race condition</span>.</p>
+
+  <pre><code>import threading
+
+balance = 0
+
+def deposit():
+    global balance
+    for _ in range(100000):
+        balance += 1   # NOT atomic: read balance, add 1, write balance back
+
+t1 = threading.Thread(target=deposit)
+t2 = threading.Thread(target=deposit)
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+print(balance)   # expected 200000 — often prints something LESS</code></pre>
+  <div class="output-block">187342</div>
+
+  <p><code>balance += 1</code> looks like one step, but it's really three: read the value, add 1, write it back. If both threads read the same old value before either writes, one update gets overwritten — some deposits silently vanish.</p>
+
+  <h3>🔒 Fixing it with a Lock</h3>
+  <pre><code>import threading
+
+balance = 0
+lock = threading.Lock()
+
+def deposit():
+    global balance
+    for _ in range(100000):
+        with lock:          # only one thread can be inside at a time
+            balance += 1
+
+t1 = threading.Thread(target=deposit)
+t2 = threading.Thread(target=deposit)
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+print(balance)   # always 200000</code></pre>
+  <div class="output-block">200000</div>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>A <code>Lock</code> forces threads to take turns around the risky code — one thread finishes its read-modify-write before another is allowed to start. This fixes correctness but reduces parallelism for that section, so lock only the smallest piece of code that actually needs protecting.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🖥️ 3. Multiprocessing — Good for Heavy CPU Work</h2>
+  <p>Python threads can't run Python code on multiple CPU cores at once — because of something called the <span class="highlight">GIL</span> (Global Interpreter Lock).</p>
+
+  <div class="analogy-box">
+    <h3>🔑 What is the GIL?</h3>
+    <p>The GIL is a single lock built into the standard Python interpreter (CPython) that only lets <strong>one thread run Python bytecode at a time</strong>, even on a multi-core CPU. It exists to keep Python's internal memory management simple and safe.</p>
+    <p>That's why threading in section 1 helped — the threads were mostly <em>waiting</em> (for the network), not competing to run Python code at the same instant. But for CPU-bound work — actual number crunching — the GIL means threads take turns on one core instead of truly running in parallel.</p>
+  </div>
+
+  <p>For CPU-heavy work — big calculations, image processing — use separate <span class="highlight">processes</span> instead.</p>
 
   <pre><code>from multiprocessing import Process
 
@@ -72,7 +135,7 @@ Squares of [4, 5, 6]: [16, 25, 36]</div>
 </div>
 
 <div class="card-section">
-  <h2>🌀 3. asyncio — Good for Many I/O Tasks at Once</h2>
+  <h2>🌀 4. asyncio — Good for Many I/O Tasks at Once</h2>
   <p><span class="highlight">asyncio</span> runs many waiting tasks on a single thread, switching between them while each one waits. Great for handling hundreds of network requests.</p>
 
   <pre><code>import asyncio
@@ -104,7 +167,7 @@ All done: ['users', 'orders', 'products']</div>
 </div>
 
 <div class="card-section">
-  <h2>🧭 4. Which One Should You Use?</h2>
+  <h2>🧭 5. Which One Should You Use?</h2>
   <table>
     <thead><tr><th>Tool</th><th>Best for</th><th>Example</th></tr></thead>
     <tbody>
@@ -145,6 +208,24 @@ All done: ['users', 'orders', 'products']</div>
       <li onclick="checkAnswer(this,'correct')">b) One thread can wait while another runs</li>
       <li onclick="checkAnswer(this,'wrong')">c) They run faster than the CPU clock</li>
       <li onclick="checkAnswer(this,'wrong')">d) They don't actually help</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. What does the GIL prevent, even on a multi-core machine?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Any use of multiple threads at all</li>
+      <li onclick="checkAnswer(this,'correct')">b) Two threads running Python bytecode at the exact same instant</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Network requests from working</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing — it doesn't restrict anything</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. Why does <code>balance += 1</code> cause a race condition across threads without a Lock?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It's actually a single atomic step, so it can't</li>
+      <li onclick="checkAnswer(this,'correct')">b) It's really 3 steps (read, add, write) — threads can interleave between them and lose updates</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Python forbids += on shared variables</li>
+      <li onclick="checkAnswer(this,'wrong')">d) It only happens with multiprocessing, not threading</li>
     </ul>
   </div>
 </div>
