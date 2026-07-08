@@ -1,0 +1,197 @@
+<!-- ── Chapter 38: Stack & Queue ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🥞 Chapter 38</span>
+  <h1>Stack &amp; Queue</h1>
+  <p>Two simple ways to store items where the ORDER you remove them matters as much as what's stored.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🥞</div>
+  <h1>🥞 Last In vs First In</h1>
+  <p>A stack and a queue hold the exact same kind of data — the only difference is which end you're allowed to remove from.</p>
+</div>
+
+<div class="card-section">
+  <h2>🥞 1. Stack — LIFO (Last In, First Out)</h2>
+  <p>Think of a stack of plates: you add to the top, and you take from the top. The last plate you put down is the first one you pick back up.</p>
+
+  <pre><code>stack = []
+
+stack.append("Page A")   # visit page A
+stack.append("Page B")   # visit page B
+stack.append("Page C")   # visit page C
+
+print(stack)
+
+last_page = stack.pop()  # go "back" — removes from the END
+print(f"Went back from: {last_page}")
+print(stack)</code></pre>
+  <div class="output-block">['Page A', 'Page B', 'Page C']
+Went back from: Page C
+['Page A', 'Page B']</div>
+
+  <p>A regular Python <code>list</code> is already a perfectly good stack — <code>append()</code> to push, <code>pop()</code> to pop, both O(1) at the end.</p>
+
+  <div class="analogy-box">
+    <h3>🌐 Real Use: Browser "Back" Button</h3>
+    <p>Every page you visit gets pushed onto a stack. Clicking "Back" pops the most recent page off — exactly LIFO behavior. Undo/redo in editors works the same way.</p>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🚶 2. Queue — FIFO (First In, First Out)</h2>
+  <p>Think of a line at a ticket counter: whoever joined first gets served first. New people join the back; service happens from the front.</p>
+
+  <pre><code>from collections import deque
+
+queue = deque()
+
+queue.append("Ravi")   # joins the back of the line
+queue.append("Sita")
+queue.append("Amit")
+
+print(queue)
+
+next_person = queue.popleft()   # serve from the FRONT
+print(f"Now serving: {next_person}")
+print(queue)</code></pre>
+  <div class="output-block">deque(['Ravi', 'Sita', 'Amit'])
+Now serving: Ravi
+deque(['Sita', 'Amit'])</div>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Don't use a plain <code>list</code> with <code>.pop(0)</code> for a queue — removing from the front of a list is O(n) because every remaining item has to shift over. <code>collections.deque</code> is built for this: both ends are O(1).</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>⚖️ 3. Stack vs Queue Side by Side</h2>
+  <table>
+    <thead><tr><th></th><th>Stack</th><th>Queue</th></tr></thead>
+    <tbody>
+      <tr><td>Order</td><td>LIFO — Last In, First Out</td><td>FIFO — First In, First Out</td></tr>
+      <tr><td>Add</td><td><code>append()</code> — end</td><td><code>append()</code> — back</td></tr>
+      <tr><td>Remove</td><td><code>pop()</code> — end</td><td><code>popleft()</code> — front</td></tr>
+      <tr><td>Python type</td><td><code>list</code></td><td><code>collections.deque</code></td></tr>
+      <tr><td>Real example</td><td>Browser back button, undo</td><td>Print queue, task scheduling, ticket lines</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>✅ 4. Real Example — Balanced Brackets (Stack)</h2>
+  <p>A classic stack use: checking that every opening bracket has a matching closing one, in the right order.</p>
+
+  <pre><code>def is_balanced(text):
+    stack = []
+    pairs = {")": "(", "]": "[", "}": "{"}
+
+    for char in text:
+        if char in "([{":
+            stack.append(char)
+        elif char in ")]}":
+            if not stack or stack.pop() != pairs[char]:
+                return False
+
+    return len(stack) == 0   # nothing left un-closed
+
+print(is_balanced("(a + [b * c])"))   # True
+print(is_balanced("(a + [b * c)"))    # False — mismatched</code></pre>
+  <div class="output-block">True
+False</div>
+
+  <p>Every open bracket gets pushed. Every close bracket must match the most recently pushed open bracket — exactly the LIFO behavior a stack provides.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎫 5. Real Example — Task Queue (Queue)</h2>
+  <pre><code>from collections import deque
+
+print_queue = deque()
+
+print_queue.append("Document1.pdf")
+print_queue.append("Document2.pdf")
+print_queue.append("Document3.pdf")
+
+while print_queue:
+    job = print_queue.popleft()
+    print(f"Printing: {job}")</code></pre>
+  <div class="output-block">Printing: Document1.pdf
+Printing: Document2.pdf
+Printing: Document3.pdf</div>
+  <p>Jobs print in the order they were submitted — fair, first-come-first-served processing.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does LIFO stand for, and which structure uses it?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) First In First Out — Queue</li>
+      <li onclick="checkAnswer(this,'correct')">b) Last In First Out — Stack</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Last In First Out — Queue</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Neither uses this</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Why use <code>collections.deque</code> instead of a plain list for a queue?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Lists can't store strings</li>
+      <li onclick="checkAnswer(this,'correct')">b) Removing from the front of a list is O(n); deque does it in O(1)</li>
+      <li onclick="checkAnswer(this,'wrong')">c) deque is required by Python syntax</li>
+      <li onclick="checkAnswer(this,'wrong')">d) No real difference</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Checking balanced brackets like <code>(a[b]c)</code> naturally uses which structure?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Queue</li>
+      <li onclick="checkAnswer(this,'correct')">b) Stack</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Neither</li>
+      <li onclick="checkAnswer(this,'wrong')">d) A sorted list</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Use a stack to reverse a string (push every character, then pop them all off).
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def reverse_string(text):
+    stack = list(text)     # push all characters
+    reversed_text = ""
+    while stack:
+        reversed_text += stack.pop()   # pop from the end, one at a time
+    return reversed_text
+
+print(reverse_string("python"))   # nohtyp</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Stack — LIFO, use a <code>list</code> with <code>append()</code>/<code>pop()</code></li>
+    <li>Queue — FIFO, use <code>collections.deque</code> with <code>append()</code>/<code>popleft()</code></li>
+    <li>Stack: browser back button, undo, bracket matching</li>
+    <li>Queue: print jobs, task scheduling, anything "first come, first served"</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 38 Complete!</h3>
+  <p>You now know exactly which structure fits "last one wins" vs "first one wins" problems.</p>
+  <span class="next-badge">▶ Next: Linked List</span>
+</div>
