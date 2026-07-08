@@ -49,6 +49,15 @@ A single-page interactive eBook covering Python from scratch to advanced topics,
 | 31 | Command-line Arguments |
 | 32 | Logging |
 | 33 | Memory & Performance |
+| 34 | Big-O / Time Complexity |
+| 35 | Recursion |
+| 36 | Searching Algorithms |
+| 37 | Sorting Algorithms |
+| 38 | Stack & Queue |
+| 39 | Linked List |
+| 40 | Trees (Binary Tree & BST) |
+| 41 | Hashing |
+| 42 | Graphs (BFS & DFS) |
 
 ---
 

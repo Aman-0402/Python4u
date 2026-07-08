@@ -1,0 +1,225 @@
+<!-- ── Chapter 42: Graphs ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🕸️ Chapter 42</span>
+  <h1>Graphs — BFS &amp; DFS</h1>
+  <p>Nodes connected by edges — for anything that isn't a straight line or a strict hierarchy. Friend networks, maps, dependencies.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🕸️</div>
+  <h1>🕸️ Connections, Not Order</h1>
+  <p>A tree has one parent per node and no cycles. A graph is more general — any node can connect to any other node, in any pattern, including loops.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. What is a Graph?</h2>
+  <table>
+    <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>Node (vertex)</td><td>A single point — a person, a city, a webpage</td></tr>
+      <tr><td>Edge</td><td>A connection between two nodes</td></tr>
+      <tr><td>Directed graph</td><td>Edges have a direction (A → B doesn't mean B → A) — e.g. "follows" on social media</td></tr>
+      <tr><td>Undirected graph</td><td>Edges go both ways — e.g. "friends with" is mutual</td></tr>
+    </tbody>
+  </table>
+
+  <div class="analogy-box">
+    <h3>🗺️ Real-Life Analogy</h3>
+    <p>A road map: cities are nodes, roads are edges. Google Maps finding a route is literally a graph search problem.</p>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧱 2. Representing a Graph — Adjacency List</h2>
+  <p>The simplest way: a dictionary mapping each node to a list of its neighbors.</p>
+
+  <pre><code>graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "D"],
+    "D": ["B", "C", "E"],
+    "E": ["D"]
+}
+# A connects to B and C
+# B connects to A and D
+# ...and so on</code></pre>
+
+  <p>Visually: A—B, A—C, B—D, C—D, D—E. This is exactly how <a href="#" onclick="loadTopic('hashing.html'); return false;">dict hashing</a> makes graph lookups fast — <code>graph["D"]</code> instantly gives you D's neighbors.</p>
+</div>
+
+<div class="card-section">
+  <h2>🌊 3. Breadth-First Search (BFS) — Explore Level by Level</h2>
+  <p>Visit all neighbors first, then their neighbors, then theirs — spreading outward in rings. Uses a <a href="#" onclick="loadTopic('stack-queue.html'); return false;">queue</a>.</p>
+
+  <pre><code>from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    order = []
+
+    while queue:
+        node = queue.popleft()      # FIFO — process oldest-added first
+        order.append(node)
+
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+    return order
+
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "D"],
+    "D": ["B", "C", "E"],
+    "E": ["D"]
+}
+
+print(bfs(graph, "A"))</code></pre>
+  <div class="output-block">['A', 'B', 'C', 'D', 'E']</div>
+
+  <p>BFS explores A's neighbors (B, C) completely before moving on to D — that's the "level by level" pattern. BFS is what finds the <strong>shortest path</strong> in an unweighted graph.</p>
+</div>
+
+<div class="card-section">
+  <h2>🕳️ 4. Depth-First Search (DFS) — Go Deep First</h2>
+  <p>Follow one path as far as possible before backtracking. Uses a <a href="#" onclick="loadTopic('stack-queue.html'); return false;">stack</a> — or, just as naturally, recursion.</p>
+
+  <pre><code>def dfs(graph, start, visited=None, order=None):
+    if visited is None:
+        visited = set()
+        order = []
+
+    visited.add(start)
+    order.append(start)
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited, order)   # go deep before backtracking
+
+    return order
+
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "D"],
+    "D": ["B", "C", "E"],
+    "E": ["D"]
+}
+
+print(dfs(graph, "A"))</code></pre>
+  <div class="output-block">['A', 'B', 'D', 'C', 'E']</div>
+
+  <p>DFS dives from A → B → D → E before backtracking to check C — the opposite exploration pattern from BFS, even on the same graph.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚖️ 5. BFS vs DFS</h2>
+  <table>
+    <thead><tr><th></th><th>BFS</th><th>DFS</th></tr></thead>
+    <tbody>
+      <tr><td>Explores</td><td>Level by level (breadth)</td><td>One path fully, then backtracks (depth)</td></tr>
+      <tr><td>Data structure</td><td>Queue</td><td>Stack (or recursion)</td></tr>
+      <tr><td>Finds shortest path?</td><td>Yes (unweighted graphs)</td><td>No guarantee</td></tr>
+      <tr><td>Good for</td><td>Shortest path, "closest" connections, level-order tasks</td><td>Exploring all paths, cycle detection, maze solving</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>The <code>visited</code> set in both algorithms isn't optional — without it, a graph with cycles (A connects to B, B connects back to A) would loop forever. It's the same O(1) hashing trick from the <a href="#" onclick="loadTopic('hashing.html'); return false;">Hashing</a> chapter, used to remember where you've already been.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which data structure does BFS use to explore level by level?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Stack</li>
+      <li onclick="checkAnswer(this,'correct')">b) Queue</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Linked list</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Binary tree</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Which algorithm guarantees the shortest path in an unweighted graph?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) DFS</li>
+      <li onclick="checkAnswer(this,'correct')">b) BFS</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Neither</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Both, always</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Why is a <code>visited</code> set required in graph traversal?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It's optional, just good style</li>
+      <li onclick="checkAnswer(this,'correct')">b) Without it, cycles in the graph cause infinite loops</li>
+      <li onclick="checkAnswer(this,'wrong')">c) It makes the code run in O(n²)</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Python requires it by syntax</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write <code>is_connected(graph, start, target)</code> using BFS — return <code>True</code> if <code>target</code> is reachable from <code>start</code>.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>from collections import deque
+
+def is_connected(graph, start, target):
+    visited = set([start])
+    queue = deque([start])
+
+    while queue:
+        node = queue.popleft()
+        if node == target:
+            return True
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+    return False
+
+graph = {
+    "A": ["B", "C"], "B": ["A", "D"], "C": ["A", "D"],
+    "D": ["B", "C", "E"], "E": ["D"], "F": []
+}
+
+print(is_connected(graph, "A", "E"))   # True
+print(is_connected(graph, "A", "F"))   # False — F is isolated</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Graph — nodes (vertices) connected by edges, directed or undirected</li>
+    <li>Adjacency list — a dict mapping each node to its neighbors</li>
+    <li>BFS — queue-based, explores level by level, finds shortest path</li>
+    <li>DFS — stack/recursion-based, explores one path fully before backtracking</li>
+    <li>Always track <code>visited</code> nodes to avoid infinite loops on cycles</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 42 Complete!</h3>
+  <p>You've now completed the full DSA series — from Big-O all the way to graph traversal.</p>
+  <span class="next-badge">▶ All DSA topics complete!</span>
+</div>
