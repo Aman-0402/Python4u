@@ -1,0 +1,181 @@
+<!-- ── Chapter 22: Regular Expressions ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.regex-token {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(239,68,68,0.12);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.25);
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔍 Chapter 22</span>
+  <h1>Regular Expressions</h1>
+  <p>Search, validate, and extract text patterns using the <code>re</code> module.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔍</div>
+  <h1>🔍 Pattern Matching for Text</h1>
+  <p>A regular expression (regex) is a mini-language for describing text patterns — "a word, then digits, then an @ sign" — instead of writing manual loops.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Basic Search</h2>
+  <pre><code>import re
+
+text = "My phone number is 98765 43210"
+match = re.search(r"\d+", text)
+
+print(match.group())</code></pre>
+  <div class="output-block">98765</div>
+
+  <p><code>\d+</code> means "one or more digits." <code>re.search()</code> finds the first match anywhere in the string.</p>
+
+  <table>
+    <thead><tr><th>Pattern</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><span class="regex-token">\d</span></td><td>Any digit (0-9)</td></tr>
+      <tr><td><span class="regex-token">\w</span></td><td>Any letter, digit, or underscore</td></tr>
+      <tr><td><span class="regex-token">\s</span></td><td>Any whitespace (space, tab)</td></tr>
+      <tr><td><span class="regex-token">.</span></td><td>Any single character</td></tr>
+      <tr><td><span class="regex-token">+</span></td><td>One or more of the previous</td></tr>
+      <tr><td><span class="regex-token">*</span></td><td>Zero or more of the previous</td></tr>
+      <tr><td><span class="regex-token">?</span></td><td>Zero or one of the previous (optional)</td></tr>
+      <tr><td><span class="regex-token">^</span></td><td>Start of string</td></tr>
+      <tr><td><span class="regex-token">$</span></td><td>End of string</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>✅ 2. Validating Input — Email Check</h2>
+  <pre><code>import re
+
+def is_valid_email(email):
+    pattern = r"^[\w.]+@[\w]+\.[a-z]+$"
+    return bool(re.match(pattern, email))
+
+print(is_valid_email("student@example.com"))   # True
+print(is_valid_email("not-an-email"))          # False</code></pre>
+  <div class="output-block">True
+False</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span><code>re.match()</code> checks the pattern from the start of the string. <code>re.fullmatch()</code> requires the whole string to match. <code>re.search()</code> looks anywhere.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🔎 3. Finding All Matches</h2>
+  <pre><code>import re
+
+text = "Contact: ravi@mail.com, sita@school.org, admin@site.net"
+emails = re.findall(r"[\w.]+@[\w.]+", text)
+
+print(emails)</code></pre>
+  <div class="output-block">['ravi@mail.com', 'sita@school.org', 'admin@site.net']</div>
+</div>
+
+<div class="card-section">
+  <h2>✂️ 4. Replacing Text</h2>
+  <pre><code>import re
+
+text = "Call 9876543210 or 8765432109 for support"
+masked = re.sub(r"\d{10}", "**PHONE HIDDEN**", text)
+
+print(masked)</code></pre>
+  <div class="output-block">Call **PHONE HIDDEN** or **PHONE HIDDEN** for support</div>
+</div>
+
+<div class="card-section">
+  <h2>📦 5. Groups — Extracting Parts</h2>
+  <p>Parentheses <code>( )</code> capture parts of the match separately.</p>
+
+  <pre><code>import re
+
+log_line = "2024-03-15 ERROR Database connection failed"
+match = re.match(r"(\d{4}-\d{2}-\d{2}) (\w+) (.+)", log_line)
+
+print(match.group(1))   # date
+print(match.group(2))   # level
+print(match.group(3))   # message</code></pre>
+  <div class="output-block">2024-03-15
+ERROR
+Database connection failed</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does <code>\d+</code> match?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) One digit only</li>
+      <li onclick="checkAnswer(this,'correct')">b) One or more digits</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Any letter</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Zero digits</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Which function returns a list of ALL matches?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) re.search()</li>
+      <li onclick="checkAnswer(this,'wrong')">b) re.match()</li>
+      <li onclick="checkAnswer(this,'correct')">c) re.findall()</li>
+      <li onclick="checkAnswer(this,'wrong')">d) re.check()</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What does <code>re.sub(r"\d{10}", "X", text)</code> do?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Deletes 10 characters</li>
+      <li onclick="checkAnswer(this,'correct')">b) Replaces any 10-digit number with "X"</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Counts digits</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing, invalid syntax</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a function <code>extract_hashtags(text)</code> that returns all hashtags (words starting with <code>#</code>) from a sentence.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>import re
+
+def extract_hashtags(text):
+    return re.findall(r"#\w+", text)
+
+print(extract_hashtags("Loving #python and #coding today! #100DaysOfCode"))
+# ['#python', '#coding', '#100DaysOfCode']</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>re.search()</code> — find first match anywhere</li>
+    <li><code>re.match()</code> — match from the start of the string</li>
+    <li><code>re.findall()</code> — return every match as a list</li>
+    <li><code>re.sub()</code> — replace matches with new text</li>
+    <li><code>( )</code> groups let you pull out specific parts of a match</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 22 Complete!</h3>
+  <p>You can now search, validate, and extract text patterns with regex.</p>
+  <span class="next-badge">▶ Next: Concurrency</span>
+</div>
