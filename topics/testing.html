@@ -1,0 +1,199 @@
+<!-- ── Chapter 26: Testing ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #22c55e, #16a34a); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🧪 Chapter 26</span>
+  <h1>Testing — unittest &amp; pytest</h1>
+  <p>Write code that checks your code, so bugs get caught automatically instead of by users.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🧪</div>
+  <h1>🧪 Trust, But Verify</h1>
+  <p>A test is a small piece of code that calls your function and checks the result is what you expect. Run all your tests in seconds, anytime you change code.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. The Function We'll Test</h2>
+  <pre><code># calculator.py
+def add(a, b):
+    return a + b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>🐍 2. Testing with <code>unittest</code> (built-in)</h2>
+  <pre><code># test_calculator.py
+import unittest
+from calculator import add, divide
+
+class TestCalculator(unittest.TestCase):
+
+    def test_add(self):
+        self.assertEqual(add(2, 3), 5)
+
+    def test_add_negative(self):
+        self.assertEqual(add(-1, -1), -2)
+
+    def test_divide(self):
+        self.assertEqual(divide(10, 2), 5)
+
+    def test_divide_by_zero(self):
+        with self.assertRaises(ValueError):
+            divide(10, 0)
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+
+  <pre><code># terminal
+$ python -m unittest test_calculator.py -v</code></pre>
+  <div class="output-block">test_add (test_calculator.TestCalculator) ... ok
+test_add_negative (test_calculator.TestCalculator) ... ok
+test_divide (test_calculator.TestCalculator) ... ok
+test_divide_by_zero (test_calculator.TestCalculator) ... ok
+
+Ran 4 tests in 0.001s
+
+OK</div>
+</div>
+
+<div class="card-section">
+  <h2>🚀 3. Testing with <code>pytest</code> (simpler syntax)</h2>
+  <p><code>pytest</code> is a popular third-party library — plain functions with plain <code>assert</code>, no class required.</p>
+
+  <pre><code># pip install pytest
+
+# test_calculator.py
+from calculator import add, divide
+import pytest
+
+def test_add():
+    assert add(2, 3) == 5
+
+def test_add_negative():
+    assert add(-1, -1) == -2
+
+def test_divide():
+    assert divide(10, 2) == 5
+
+def test_divide_by_zero():
+    with pytest.raises(ValueError):
+        divide(10, 0)</code></pre>
+
+  <pre><code># terminal
+$ pytest test_calculator.py -v</code></pre>
+  <div class="output-block">test_calculator.py::test_add PASSED
+test_calculator.py::test_add_negative PASSED
+test_calculator.py::test_divide PASSED
+test_calculator.py::test_divide_by_zero PASSED
+
+4 passed in 0.01s</div>
+</div>
+
+<div class="card-section">
+  <h2>🔁 4. Fixtures — Reusable Setup</h2>
+  <p>When multiple tests need the same starting data, a <code>fixture</code> builds it once per test.</p>
+
+  <pre><code>import pytest
+
+@pytest.fixture
+def sample_students():
+    return {"Ravi": 78, "Sita": 92, "Amit": 65}
+
+def test_student_count(sample_students):
+    assert len(sample_students) == 3
+
+def test_top_student(sample_students):
+    top = max(sample_students, key=sample_students.get)
+    assert top == "Sita"</code></pre>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Each test function that takes <code>sample_students</code> as a parameter gets a fresh copy — tests don't accidentally affect each other.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📊 5. Why Bother Testing?</h2>
+  <table>
+    <thead><tr><th>Without tests</th><th>With tests</th></tr></thead>
+    <tbody>
+      <tr><td>Manually re-check everything after a change</td><td>Run one command, get a pass/fail report</td></tr>
+      <tr><td>Bugs found by users in production</td><td>Bugs found before you even commit</td></tr>
+      <tr><td>Scared to refactor old code</td><td>Refactor confidently — tests catch breakage</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which module is built into Python for testing (no install needed)?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'correct')">a) unittest</li>
+      <li onclick="checkAnswer(this,'wrong')">b) pytest</li>
+      <li onclick="checkAnswer(this,'wrong')">c) testcase</li>
+      <li onclick="checkAnswer(this,'wrong')">d) checker</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. In pytest, how do you check a function raises an error?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) assert error(func())</li>
+      <li onclick="checkAnswer(this,'correct')">b) with pytest.raises(ErrorType):</li>
+      <li onclick="checkAnswer(this,'wrong')">c) try: func() except: pass</li>
+      <li onclick="checkAnswer(this,'wrong')">d) assert func() == error</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What's the purpose of a pytest fixture?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) To slow down tests</li>
+      <li onclick="checkAnswer(this,'correct')">b) To provide reusable setup data to multiple tests</li>
+      <li onclick="checkAnswer(this,'wrong')">c) To delete test files</li>
+      <li onclick="checkAnswer(this,'wrong')">d) To print results</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a pytest test for a function <code>is_even(n)</code> that returns <code>True</code> for even numbers.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def is_even(n):
+    return n % 2 == 0
+
+def test_is_even():
+    assert is_even(4) is True
+    assert is_even(7) is False</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>unittest</code> — built-in, class-based tests with <code>self.assertEqual()</code></li>
+    <li><code>pytest</code> — third-party, plain functions with <code>assert</code></li>
+    <li><code>pytest.raises()</code> / <code>assertRaises()</code> — test that an error is raised</li>
+    <li>Fixtures provide reusable setup data for multiple tests</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 26 Complete!</h3>
+  <p>Your code can now check itself, every time you make a change.</p>
+  <span class="next-badge">▶ Next: Magic/Dunder Methods</span>
+</div>
