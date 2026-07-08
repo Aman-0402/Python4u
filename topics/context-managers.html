@@ -1,0 +1,169 @@
+<!-- ── Chapter 21: Context Managers ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #10b981, #059669); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔐 Chapter 21</span>
+  <h1>Context Managers</h1>
+  <p>The <code>with</code> statement — guaranteed setup and cleanup, even if something crashes in between.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔐</div>
+  <h1>🔐 Setup, Use, Cleanup — Automatically</h1>
+  <p>Opening a file, a database connection, or a lock all follow the same pattern: open it, use it, close it. <code>with</code> guarantees the "close it" part always happens.</p>
+</div>
+
+<div class="card-section">
+  <h2>📁 1. The Problem Without <code>with</code></h2>
+
+  <pre><code>f = open("notes.txt", "w")
+f.write("Hello")
+# if an error happens here, f.close() never runs!
+f.close()</code></pre>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>If an exception happens between <code>open()</code> and <code>close()</code>, the file stays open — a resource leak.</span>
+  </div>
+
+  <h3>Fixed with <code>with</code></h3>
+  <pre><code>with open("notes.txt", "w") as f:
+    f.write("Hello")
+# file is automatically closed here, even if an error occurred</code></pre>
+
+  <p><code>with</code> calls <code>f.close()</code> for you automatically when the block ends — success or failure.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚙️ 2. Building Your Own Context Manager (Class)</h2>
+  <p>Any class with <code>__enter__</code> and <code>__exit__</code> methods can be used with <code>with</code>.</p>
+
+  <pre><code>class Timer:
+    def __enter__(self):
+        import time
+        self.start = time.time()
+        print("Timer started")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        import time
+        elapsed = time.time() - self.start
+        print(f"Timer stopped: {elapsed:.4f}s")
+
+with Timer():
+    total = sum(range(1000000))
+    print(f"Sum: {total}")</code></pre>
+  <div class="output-block">Timer started
+Sum: 499999500000
+Timer stopped: 0.0512s</div>
+
+  <table>
+    <thead><tr><th>Method</th><th>Runs when</th></tr></thead>
+    <tbody>
+      <tr><td><code>__enter__</code></td><td>At the start of the <code>with</code> block (setup)</td></tr>
+      <tr><td><code>__exit__</code></td><td>At the end, always — even after an error (cleanup)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>✨ 3. Simpler Way — <code>@contextmanager</code></h2>
+  <p>Using a generator function with the <code>contextlib</code> decorator avoids writing a whole class.</p>
+
+  <pre><code>from contextlib import contextmanager
+
+@contextmanager
+def db_connection(name):
+    print(f"Opening connection to {name}")
+    yield f"connection:{name}"     # this value goes to "as conn"
+    print(f"Closing connection to {name}")
+
+with db_connection("students_db") as conn:
+    print(f"Using {conn}")</code></pre>
+  <div class="output-block">Opening connection to students_db
+Using connection:students_db
+Closing connection to students_db</div>
+
+  <p>Code before <code>yield</code> = setup. Code after <code>yield</code> = cleanup, and it still runs even if the block raises an error.</p>
+</div>
+
+<div class="card-section">
+  <h2>🔗 4. Multiple Context Managers</h2>
+  <pre><code>with open("input.txt") as infile, open("output.txt", "w") as outfile:
+    for line in infile:
+        outfile.write(line.upper())</code></pre>
+  <p>Both files are opened, used, then both are closed automatically — even if writing fails halfway through.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does <code>with open(...) as f:</code> guarantee?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) The file is faster to read</li>
+      <li onclick="checkAnswer(this,'correct')">b) The file gets closed automatically, even on error</li>
+      <li onclick="checkAnswer(this,'wrong')">c) The file can't be edited</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing special</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Which two methods make a class work with <code>with</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>__init__</code> and <code>__del__</code></li>
+      <li onclick="checkAnswer(this,'correct')">b) <code>__enter__</code> and <code>__exit__</code></li>
+      <li onclick="checkAnswer(this,'wrong')">c) <code>__open__</code> and <code>__close__</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) <code>__start__</code> and <code>__stop__</code></li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. In a <code>@contextmanager</code> generator, what does the code after <code>yield</code> represent?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Code that never runs</li>
+      <li onclick="checkAnswer(this,'correct')">b) Cleanup code, runs after the with-block finishes</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Setup code</li>
+      <li onclick="checkAnswer(this,'wrong')">d) An error handler only</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a <code>@contextmanager</code> function <code>announce(task)</code> that prints "Starting: task" before and "Finished: task" after the block runs.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>from contextlib import contextmanager
+
+@contextmanager
+def announce(task):
+    print(f"Starting: {task}")
+    yield
+    print(f"Finished: {task}")
+
+with announce("backup database"):
+    print("...doing the work...")</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>with</code> guarantees cleanup code runs, even on error</li>
+    <li>Class-based: implement <code>__enter__</code> and <code>__exit__</code></li>
+    <li>Function-based: use <code>@contextmanager</code> + <code>yield</code></li>
+    <li>Common uses: files, database connections, locks, timers</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 21 Complete!</h3>
+  <p>You can now guarantee cleanup with <code>with</code> instead of hoping <code>close()</code> gets called.</p>
+  <span class="next-badge">▶ Next: Regular Expressions</span>
+</div>
