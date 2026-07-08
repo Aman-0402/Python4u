@@ -44,6 +44,16 @@ plt.xlabel("X Axis")
 plt.ylabel("Y Axis")
 plt.show()</code></pre>
   <div class="output-block">&#128994; A simple line chart with labeled axes and title.</div>
+
+  <table>
+    <thead><tr><th>Part</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>plt.plot(x, y)</code></td><td>Draws the line connecting each (x, y) point</td></tr>
+      <tr><td><code>plt.title(...)</code></td><td>Text shown above the chart</td></tr>
+      <tr><td><code>plt.xlabel()</code> / <code>plt.ylabel()</code></td><td>Labels for each axis, so readers know the units</td></tr>
+      <tr><td><code>plt.show()</code></td><td>Opens a window/renders the finished chart — nothing appears without it</td></tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="card-section">
@@ -58,6 +68,11 @@ plt.show()</code></pre>
       <tr><td>Scatter Plot</td><td><code>scatter()</code></td><td>Show relationships</td></tr>
     </tbody>
   </table>
+
+  <div class="callout tip">
+    <span>&#128161;</span>
+    <span>Ask "what am I comparing?" — trend over time → line. Comparing separate categories → bar. Parts of one whole (percentages that add to 100%) → pie. Is X related to Y? → scatter. How spread out are my values? → histogram.</span>
+  </div>
 </div>
 
 <div class="card-section">
@@ -70,6 +85,55 @@ plt.title("Student Marks")
 plt.xlabel("Names")
 plt.ylabel("Marks")
 plt.show()</code></pre>
+  <p><code>color='skyblue'</code> sets the bar fill color — accepts named colors ("red", "green") or hex codes ("#ff5733").</p>
+</div>
+
+<div class="card-section">
+  <h2>&#128200; Multiple Lines &amp; Legends</h2>
+  <p>Plot several series on the same chart by calling <code>plt.plot()</code> more than once before <code>plt.show()</code>. Use <code>label=</code> and <code>plt.legend()</code> so readers know which line is which.</p>
+
+  <pre><code>days = [1, 2, 3, 4, 5]
+maths_marks = [60, 70, 75, 80, 85]
+science_marks = [65, 68, 74, 78, 90]
+
+plt.plot(days, maths_marks, label="Maths", color="blue", marker="o")
+plt.plot(days, science_marks, label="Science", color="green", marker="o")
+plt.title("Marks Over 5 Tests")
+plt.xlabel("Test Number")
+plt.ylabel("Marks")
+plt.legend()      # shows the label box so lines are distinguishable
+plt.show()</code></pre>
+  <div class="output-block">&#128994; Two colored lines (blue = Maths, green = Science) with a legend box in the corner.</div>
+
+  <table>
+    <thead><tr><th>Parameter</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td><code>label="Maths"</code></td><td>Text shown for this line in the legend</td></tr>
+      <tr><td><code>marker="o"</code></td><td>Draws a dot at each data point (try "s" for square, "^" for triangle)</td></tr>
+      <tr><td><code>plt.legend()</code></td><td>Renders the label box — without it, labels are set but never shown</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>&#128209; Figure Size &amp; Multiple Subplots</h2>
+  <pre><code>plt.figure(figsize=(8, 4))   # width=8 inches, height=4 inches — call before plotting
+plt.plot(days, maths_marks)
+plt.title("Wider Chart")
+plt.show()</code></pre>
+
+  <p>To show two charts side by side, use <code>plt.subplot(rows, cols, position)</code>:</p>
+  <pre><code>plt.subplot(1, 2, 1)          # 1 row, 2 columns, this is chart #1
+plt.plot(days, maths_marks)
+plt.title("Maths")
+
+plt.subplot(1, 2, 2)          # this is chart #2
+plt.bar(students, marks)
+plt.title("Marks by Student")
+
+plt.tight_layout()            # prevents titles/labels overlapping
+plt.show()</code></pre>
+  <div class="output-block">&#128994; Two separate charts rendered side by side in one figure.</div>
 </div>
 
 <div class="card-section">
@@ -79,6 +143,9 @@ time_spent = [5, 3, 2]
 plt.pie(time_spent, labels=subjects, autopct='%1.1f%%')
 plt.title("Time Spent per Subject")
 plt.show()</code></pre>
+  <div class="output-block">&#128994; A pie chart with 3 slices, each labeled with its subject name and percentage (e.g. "50.0%").</div>
+
+  <p><code>autopct='%1.1f%%'</code> tells matplotlib to print the percentage on each slice, rounded to 1 decimal place. It's a format string: <code>%1.1f</code> means "1 digit before the decimal, 1 after," and <code>%%</code> prints a literal <code>%</code> sign. Without <code>autopct</code>, slices show only their label — no numbers.</p>
 </div>
 
 <div class="card-section">
@@ -121,6 +188,22 @@ plt.show()</code></pre>
       <li onclick="checkAnswer(this, 'wrong')">a) plt.make()</li>
       <li onclick="checkAnswer(this, 'wrong')">b) plt.view()</li>
       <li onclick="checkAnswer(this, 'correct')">c) plt.show()</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. What does <code>autopct='%1.1f%%'</code> do on a pie chart?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) Changes slice colors</li>
+      <li onclick="checkAnswer(this, 'correct')">b) Prints each slice's percentage, rounded to 1 decimal</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) Sorts the slices</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. Without calling <code>plt.legend()</code>, what happens to lines plotted with <code>label=</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) The program crashes</li>
+      <li onclick="checkAnswer(this, 'correct')">b) The labels are set but never shown on the chart</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) The lines don't get drawn</li>
     </ul>
   </div>
 </div>
