@@ -1,0 +1,199 @@
+<!-- ── Chapter 20: Decorators & Closures ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🎁 Chapter 20</span>
+  <h1>Decorators &amp; Closures</h1>
+  <p>Wrap a function with extra behaviour — logging, timing, access checks — without changing its code.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🎁</div>
+  <h1>🎁 Functions Wrapping Functions</h1>
+  <p>In Python, functions are just values. You can pass them around, return them, and wrap one function inside another. That's the whole trick behind decorators.</p>
+</div>
+
+<div class="card-section">
+  <h2>🔒 1. Closures — A Function That Remembers</h2>
+  <p>A <span class="highlight">closure</span> is an inner function that remembers variables from its enclosing function, even after that function has finished running.</p>
+
+  <pre><code>def make_multiplier(factor):
+    def multiply(number):
+        return number * factor   # remembers "factor"
+    return multiply
+
+double = make_multiplier(2)
+triple = make_multiplier(3)
+
+print(double(5))   # 10
+print(triple(5))   # 15</code></pre>
+  <div class="output-block">10
+15</div>
+
+  <p><code>multiply</code> keeps a private copy of <code>factor</code> from when it was created. <code>double</code> and <code>triple</code> are separate functions with separate memories.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎁 2. Decorators — Wrapping a Function</h2>
+  <p>A decorator is a function that takes another function, adds behaviour around it, and returns the wrapped version.</p>
+
+  <h3>Step by step, without <code>@</code></h3>
+  <pre><code>def log_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} finished")
+        return result
+    return wrapper
+
+def add(a, b):
+    return a + b
+
+add = log_call(add)   # manually wrap
+print(add(2, 3))</code></pre>
+  <div class="output-block">Calling add
+add finished
+5</div>
+
+  <h3>Same thing with <code>@</code> syntax</h3>
+  <pre><code>def log_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} finished")
+        return result
+    return wrapper
+
+@log_call
+def add(a, b):
+    return a + b
+
+print(add(2, 3))</code></pre>
+  <div class="output-block">Calling add
+add finished
+5</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span><code>@log_call</code> above <code>def add(...)</code> is just shorthand for <code>add = log_call(add)</code>.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>⏱️ 3. Practical Example — Timing a Function</h2>
+  <pre><code>import time
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__} took {end - start:.4f} seconds")
+        return result
+    return wrapper
+
+@timer
+def process_orders(count):
+    total = sum(range(count))
+    return total
+
+process_orders(1000000)</code></pre>
+  <div class="output-block">process_orders took 0.0123 seconds</div>
+</div>
+
+<div class="card-section">
+  <h2>🔑 4. Decorator With Arguments</h2>
+  <p>Add a third layer if the decorator itself needs settings.</p>
+
+  <pre><code>def require_role(role):
+    def decorator(func):
+        def wrapper(user_role, *args, **kwargs):
+            if user_role != role:
+                return f"Access denied. Needs role: {role}"
+            return func(user_role, *args, **kwargs)
+        return wrapper
+    return decorator
+
+@require_role("admin")
+def delete_user(user_role, username):
+    return f"{username} deleted"
+
+print(delete_user("admin", "test_account"))
+print(delete_user("student", "test_account"))</code></pre>
+  <div class="output-block">test_account deleted
+Access denied. Needs role: admin</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does a closure "remember"?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Global variables only</li>
+      <li onclick="checkAnswer(this,'correct')">b) Variables from its enclosing function</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Nothing after the function ends</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Only numbers</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. <code>@log_call</code> above a function is shorthand for what?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) <code>log_call()</code></li>
+      <li onclick="checkAnswer(this,'correct')">b) <code>func = log_call(func)</code></li>
+      <li onclick="checkAnswer(this,'wrong')">c) <code>import log_call</code></li>
+      <li onclick="checkAnswer(this,'wrong')">d) It does nothing special</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Why does the inner wrapper use <code>*args, **kwargs</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Required by Python syntax</li>
+      <li onclick="checkAnswer(this,'correct')">b) So the decorator works on functions with any number of arguments</li>
+      <li onclick="checkAnswer(this,'wrong')">c) To make the code longer</li>
+      <li onclick="checkAnswer(this,'wrong')">d) It's optional and never needed</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a decorator <code>uppercase_result</code> that converts a function's string return value to uppercase.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def uppercase_result(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper()
+    return wrapper
+
+@uppercase_result
+def greet(name):
+    return f"hello, {name}"
+
+print(greet("ravi"))   # HELLO, RAVI</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Closure — inner function that remembers outer function's variables</li>
+    <li>Decorator — a function that wraps another function to add behaviour</li>
+    <li><code>@decorator</code> is shorthand for <code>func = decorator(func)</code></li>
+    <li>Use <code>*args, **kwargs</code> in the wrapper to support any function signature</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 20 Complete!</h3>
+  <p>You can now wrap functions with reusable extra behaviour.</p>
+  <span class="next-badge">▶ Next: Context Managers</span>
+</div>
