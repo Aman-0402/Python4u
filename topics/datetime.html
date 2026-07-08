@@ -1,0 +1,173 @@
+<!-- ── Chapter 29: Date & Time ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #f97316, #f59e0b); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">📅 Chapter 29</span>
+  <h1>Date &amp; Time</h1>
+  <p>Work with dates, times, and durations using the <code>datetime</code> module.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">📅</div>
+  <h1>📅 Today, Tomorrow, and Everything Between</h1>
+  <p>Booking systems, attendance trackers, deadlines — almost every real app needs to store and calculate dates. Python's <code>datetime</code> module handles it.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Getting the Current Date &amp; Time</h2>
+  <pre><code>from datetime import datetime
+
+now = datetime.now()
+print(now)
+print(now.year, now.month, now.day)
+print(now.hour, now.minute, now.second)</code></pre>
+  <div class="output-block">2026-07-09 14:32:07.812345
+2026 7 9
+14 32 7</div>
+</div>
+
+<div class="card-section">
+  <h2>🎨 2. Formatting Dates — <code>strftime</code></h2>
+  <pre><code>from datetime import datetime
+
+now = datetime.now()
+print(now.strftime("%d-%m-%Y"))          # 09-07-2026
+print(now.strftime("%A, %B %d, %Y"))     # Thursday, July 09, 2026
+print(now.strftime("%H:%M:%S"))          # 14:32:07</code></pre>
+  <div class="output-block">09-07-2026
+Thursday, July 09, 2026
+14:32:07</div>
+
+  <table>
+    <thead><tr><th>Code</th><th>Meaning</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>%Y</code></td><td>4-digit year</td><td>2026</td></tr>
+      <tr><td><code>%m</code></td><td>2-digit month</td><td>07</td></tr>
+      <tr><td><code>%d</code></td><td>2-digit day</td><td>09</td></tr>
+      <tr><td><code>%A</code></td><td>Full weekday name</td><td>Thursday</td></tr>
+      <tr><td><code>%B</code></td><td>Full month name</td><td>July</td></tr>
+      <tr><td><code>%H:%M:%S</code></td><td>24-hour time</td><td>14:32:07</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>📥 3. Parsing a Date From Text — <code>strptime</code></h2>
+  <pre><code>from datetime import datetime
+
+text = "15-08-2026"
+date_obj = datetime.strptime(text, "%d-%m-%Y")
+
+print(date_obj)
+print(date_obj.year)</code></pre>
+  <div class="output-block">2026-08-15 00:00:00
+2026</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span><code>strftime</code> = date object → text. <code>strptime</code> = text → date object. Same format codes, opposite direction.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>➕ 4. Date Math — <code>timedelta</code></h2>
+  <pre><code>from datetime import datetime, timedelta
+
+today = datetime(2026, 7, 9)
+exam_date = today + timedelta(days=30)
+
+print(exam_date)
+
+due = datetime(2026, 7, 20)
+days_left = (due - today).days
+print(f"{days_left} days left")</code></pre>
+  <div class="output-block">2026-08-08 00:00:00
+11 days left</div>
+
+  <p><code>timedelta</code> represents a duration — add or subtract it from dates, or subtract two dates to get a duration.</p>
+</div>
+
+<div class="card-section">
+  <h2>⏱️ 5. Measuring Elapsed Time</h2>
+  <pre><code>import time
+
+start = time.time()
+
+total = sum(range(10_000_000))   # some work
+
+end = time.time()
+print(f"Took {end - start:.4f} seconds")</code></pre>
+  <div class="output-block">Took 0.6213 seconds</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which function converts a datetime object into a formatted string?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) strptime()</li>
+      <li onclick="checkAnswer(this,'correct')">b) strftime()</li>
+      <li onclick="checkAnswer(this,'wrong')">c) format_date()</li>
+      <li onclick="checkAnswer(this,'wrong')">d) to_string()</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does <code>%Y</code> represent in a format string?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) 2-digit year</li>
+      <li onclick="checkAnswer(this,'correct')">b) 4-digit year</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Full weekday name</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Month number</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What does subtracting two <code>datetime</code> objects give you?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) An error</li>
+      <li onclick="checkAnswer(this,'correct')">b) A timedelta representing the duration between them</li>
+      <li onclick="checkAnswer(this,'wrong')">c) A string</li>
+      <li onclick="checkAnswer(this,'wrong')">d) A boolean</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a function <code>days_until_birthday(birthday_str)</code> that takes a date like <code>"25-12-2026"</code> and returns how many days from today until then.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>from datetime import datetime
+
+def days_until_birthday(birthday_str):
+    birthday = datetime.strptime(birthday_str, "%d-%m-%Y")
+    today = datetime.now()
+    return (birthday - today).days
+
+print(days_until_birthday("25-12-2026"))</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>datetime.now()</code> — current date and time</li>
+    <li><code>strftime(fmt)</code> — date object → formatted string</li>
+    <li><code>strptime(text, fmt)</code> — string → date object</li>
+    <li><code>timedelta(days=..)</code> — a duration you can add/subtract from dates</li>
+    <li><code>time.time()</code> — measure elapsed seconds</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 29 Complete!</h3>
+  <p>You can now read, format, and calculate with dates and times.</p>
+  <span class="next-badge">▶ Next: Web Scraping</span>
+</div>
