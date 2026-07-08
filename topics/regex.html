@@ -109,6 +109,117 @@ print(match.group(3))   # message</code></pre>
   <div class="output-block">2024-03-15
 ERROR
 Database connection failed</div>
+
+  <h3>Named groups — clearer than <code>group(1)</code>, <code>group(2)</code></h3>
+  <pre><code>match = re.match(r"(?P<date>\d{4}-\d{2}-\d{2}) (?P<level>\w+) (?P<message>.+)", log_line)
+
+print(match.group("date"))
+print(match.group("level"))
+print(match["message"])   # subscript syntax also works</code></pre>
+  <div class="output-block">2024-03-15
+ERROR
+Database connection failed</div>
+  <p><code>(?P&lt;name&gt;...)</code> names a group — much easier to read than counting parentheses when there are several groups.</p>
+</div>
+
+<div class="card-section">
+  <h2>🧩 6. Character Classes — Matching a Set of Characters</h2>
+  <p>Square brackets <code>[ ]</code> mean "match one character from this set." Great when <code>\d</code>/<code>\w</code> are too broad or too narrow.</p>
+
+  <pre><code>import re
+
+# [aeiou] = match any single vowel
+vowels = re.findall(r"[aeiou]", "Hello World")
+print(vowels)
+
+# [^0-9] = match anything that is NOT a digit (^ inside [] means "not")
+non_digits = re.findall(r"[^0-9]", "abc123xyz")
+print(non_digits)
+
+# [A-Z] = match any single uppercase letter
+caps = re.findall(r"[A-Z]", "Hello World From Python")
+print(caps)</code></pre>
+  <div class="output-block">['e', 'o', 'o']
+['a', 'b', 'c', 'x', 'y', 'z']
+['H', 'W', 'F', 'P']</div>
+
+  <table>
+    <thead><tr><th>Pattern</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><span class="regex-token">[abc]</span></td><td>Match a, b, or c</td></tr>
+      <tr><td><span class="regex-token">[a-z]</span></td><td>Match any lowercase letter</td></tr>
+      <tr><td><span class="regex-token">[^abc]</span></td><td>Match anything EXCEPT a, b, or c</td></tr>
+      <tr><td><span class="regex-token">[0-9A-Fa-f]</span></td><td>Match a hex digit (combine multiple ranges)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🔢 7. Quantifier Ranges &amp; Word Boundaries</h2>
+  <pre><code>import re
+
+# {n,m} = between n and m repeats
+print(re.findall(r"\d{2,4}", "1 12 123 12345"))
+
+# \b = word boundary — matches at the edge of a word, matches nothing itself
+print(re.findall(r"\bcat\b", "cat category concatenate cat"))</code></pre>
+  <div class="output-block">['12', '123', '1234']
+['cat', 'cat']</div>
+
+  <p>Without <code>\b</code>, <code>re.findall(r"cat", ...)</code> would also match "cat" inside "category" and "concatenate" — <code>\b</code> makes sure it's a whole word, not just a substring.</p>
+
+  <table>
+    <thead><tr><th>Pattern</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><span class="regex-token">{3}</span></td><td>Exactly 3 repeats</td></tr>
+      <tr><td><span class="regex-token">{2,4}</span></td><td>Between 2 and 4 repeats</td></tr>
+      <tr><td><span class="regex-token">{2,}</span></td><td>2 or more repeats, no upper limit</td></tr>
+      <tr><td><span class="regex-token">\b</span></td><td>Word boundary (start/end of a word)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🎣 8. Greedy vs Non-Greedy Matching</h2>
+  <p>By default, <code>*</code> and <code>+</code> are <span class="highlight">greedy</span> — they grab as much text as possible. Add <code>?</code> to make them <span class="highlight">non-greedy</span> — grab as little as possible.</p>
+
+  <pre><code>import re
+
+html = "&lt;b&gt;Bold&lt;/b&gt; and &lt;i&gt;Italic&lt;/i&gt;"
+
+greedy = re.findall(r"&lt;.+&gt;", html)
+print(greedy)
+
+non_greedy = re.findall(r"&lt;.+?&gt;", html)
+print(non_greedy)</code></pre>
+  <div class="output-block">['<b>Bold</b> and <i>Italic</i>']
+['<b>', '</b>', '<i>', '</i>']</div>
+
+  <p>Greedy <code>.+</code> stretched from the very first <code>&lt;</code> to the very last <code>&gt;</code> — matching way more than intended. Non-greedy <code>.+?</code> stops at the first <code>&gt;</code> it finds, giving four separate correct matches.</p>
+</div>
+
+<div class="card-section">
+  <h2>♻️ 9. <code>re.compile()</code> — Reusing a Pattern</h2>
+  <p>If you use the same pattern many times (e.g. validating thousands of emails in a loop), compile it once instead of re-parsing the pattern text every call.</p>
+
+  <pre><code>import re
+
+email_pattern = re.compile(r"^[\w.]+@[\w]+\.[a-z]+$")
+
+emails = ["ravi@mail.com", "not-an-email", "sita@school.org"]
+for email in emails:
+    if email_pattern.match(email):
+        print(f"{email}: valid")
+    else:
+        print(f"{email}: invalid")</code></pre>
+  <div class="output-block">ravi@mail.com: valid
+not-an-email: invalid
+sita@school.org: valid</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span><code>re.compile(pattern)</code> returns a pattern object with the same methods (<code>.match()</code>, <code>.search()</code>, <code>.findall()</code>) — faster when reused, and it's a good place to put a pattern you'll reference more than once.</span>
+  </div>
 </div>
 
 <div class="card-section">
@@ -141,6 +252,24 @@ Database connection failed</div>
       <li onclick="checkAnswer(this,'correct')">b) Replaces any 10-digit number with "X"</li>
       <li onclick="checkAnswer(this,'wrong')">c) Counts digits</li>
       <li onclick="checkAnswer(this,'wrong')">d) Nothing, invalid syntax</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. What does <code>[^0-9]</code> match?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Any digit</li>
+      <li onclick="checkAnswer(this,'correct')">b) Any character that is NOT a digit</li>
+      <li onclick="checkAnswer(this,'wrong')">c) The characters 0 through 9 literally</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing, invalid syntax</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. Why does <code>.+?</code> (non-greedy) match less than <code>.+</code> (greedy)?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) They behave identically</li>
+      <li onclick="checkAnswer(this,'correct')">b) Non-greedy stops at the first possible match instead of grabbing as much as possible</li>
+      <li onclick="checkAnswer(this,'wrong')">c) ? always means "optional character"</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Non-greedy is a syntax error</li>
     </ul>
   </div>
 </div>
