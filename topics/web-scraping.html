@@ -1,0 +1,196 @@
+<!-- ── Chapter 30: Web Scraping ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #84cc16, #22c55e); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🕸️ Chapter 30</span>
+  <h1>Web Scraping</h1>
+  <p>Download a web page and pull out the data you need using <code>requests</code> and <code>BeautifulSoup</code>.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🕸️</div>
+  <h1>🕸️ Turning Web Pages Into Data</h1>
+  <p>A web page is just HTML text. <code>requests</code> downloads that text, and <code>BeautifulSoup</code> parses it so you can search for specific tags, classes, and content.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Fetching a Page</h2>
+  <pre><code># pip install requests
+
+import requests
+
+response = requests.get("https://example.com")
+
+print(response.status_code)   # 200 = success
+print(response.text[:100])    # first 100 characters of HTML</code></pre>
+  <div class="output-block">200
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Example Domain&lt;/title&gt;</div>
+
+  <table>
+    <thead><tr><th>Status Code</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>200</td><td>OK — request succeeded</td></tr>
+      <tr><td>404</td><td>Not Found</td></tr>
+      <tr><td>403</td><td>Forbidden — access denied</td></tr>
+      <tr><td>500</td><td>Server error</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🍜 2. Parsing HTML — BeautifulSoup</h2>
+  <pre><code># pip install beautifulsoup4
+
+from bs4 import BeautifulSoup
+
+html = """
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Book Store&lt;/h1&gt;
+    &lt;p class="price"&gt;₹450&lt;/p&gt;
+    &lt;p class="price"&gt;₹899&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+"""
+
+soup = BeautifulSoup(html, "html.parser")
+
+title = soup.find("h1").text
+print(title)</code></pre>
+  <div class="output-block">Book Store</div>
+</div>
+
+<div class="card-section">
+  <h2>🔎 3. Finding Multiple Elements</h2>
+  <pre><code>from bs4 import BeautifulSoup
+
+html = """
+&lt;div&gt;
+  &lt;p class="price"&gt;₹450&lt;/p&gt;
+  &lt;p class="price"&gt;₹899&lt;/p&gt;
+  &lt;p class="price"&gt;₹120&lt;/p&gt;
+&lt;/div&gt;
+"""
+
+soup = BeautifulSoup(html, "html.parser")
+prices = soup.find_all("p", class_="price")
+
+for p in prices:
+    print(p.text)</code></pre>
+  <div class="output-block">₹450
+₹899
+₹120</div>
+
+  <p><code>find()</code> returns the first match. <code>find_all()</code> returns every match as a list.</p>
+</div>
+
+<div class="card-section">
+  <h2>🛠️ 4. Putting It Together — Real Scrape</h2>
+  <pre><code>import requests
+from bs4 import BeautifulSoup
+
+response = requests.get("https://example.com/books")
+soup = BeautifulSoup(response.text, "html.parser")
+
+books = []
+for item in soup.find_all("div", class_="book-card"):
+    title = item.find("h2").text.strip()
+    price = item.find("span", class_="price").text.strip()
+    books.append({"title": title, "price": price})
+
+print(books)</code></pre>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Always check a site's <code>robots.txt</code> and terms of service before scraping. Add delays between requests (<code>time.sleep()</code>) so you don't overload the server.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📤 5. Getting Data From an API Instead</h2>
+  <p>Many sites offer a JSON API — cleaner and more reliable than scraping HTML when it's available (covered in the Web APIs chapter).</p>
+  <pre><code>import requests
+
+response = requests.get("https://api.example.com/books")
+data = response.json()   # parses JSON directly into a dict/list
+
+print(data)</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which library downloads a web page's HTML?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) BeautifulSoup</li>
+      <li onclick="checkAnswer(this,'correct')">b) requests</li>
+      <li onclick="checkAnswer(this,'wrong')">c) re</li>
+      <li onclick="checkAnswer(this,'wrong')">d) json</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does status code 200 mean?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Page not found</li>
+      <li onclick="checkAnswer(this,'correct')">b) Request succeeded</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Server error</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Access denied</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What's the difference between <code>find()</code> and <code>find_all()</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) No difference</li>
+      <li onclick="checkAnswer(this,'correct')">b) find() returns the first match, find_all() returns every match</li>
+      <li onclick="checkAnswer(this,'wrong')">c) find() is for CSS, find_all() is for HTML</li>
+      <li onclick="checkAnswer(this,'wrong')">d) find_all() returns a string</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Given this HTML string, extract all quote texts into a list.
+    <pre><code>html = """
+&lt;div&gt;
+  &lt;span class="quote"&gt;Stay hungry, stay foolish&lt;/span&gt;
+  &lt;span class="quote"&gt;Code is poetry&lt;/span&gt;
+&lt;/div&gt;
+"""</code></pre>
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html, "html.parser")
+quotes = [q.text for q in soup.find_all("span", class_="quote")]
+print(quotes)
+# ['Stay hungry, stay foolish', 'Code is poetry']</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>requests.get(url)</code> — download a page's HTML</li>
+    <li><code>BeautifulSoup(html, "html.parser")</code> — parse HTML into a searchable tree</li>
+    <li><code>find()</code> / <code>find_all()</code> — locate elements by tag and class</li>
+    <li>Respect <code>robots.txt</code> and rate-limit your requests</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 30 Complete!</h3>
+  <p>You can now pull structured data out of any web page.</p>
+  <span class="next-badge">▶ Next: Command-line Arguments</span>
+</div>
