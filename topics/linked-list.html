@@ -1,0 +1,235 @@
+<!-- ── Chapter 39: Linked List ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+.node-box {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(168,85,247,0.12);
+  color: #c084fc;
+  border: 1px solid rgba(168,85,247,0.25);
+}
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔗 Chapter 39</span>
+  <h1>Linked List</h1>
+  <p>A chain of nodes, each pointing to the next — a different way to store a sequence than a Python list.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔗</div>
+  <h1>🔗 A Chain, Not a Row</h1>
+  <p>A Python <code>list</code> stores items in one continuous memory block. A linked list scatters items anywhere in memory, connected by pointers — trading fast random access for fast insertion.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Why Linked Lists Exist</h2>
+  <p>A Python <code>list</code> is actually a dynamic array — inserting at the front means shifting every other item over, which is O(n). A linked list can insert at the front in O(1) — it just rewires one pointer, nothing moves.</p>
+
+  <table>
+    <thead><tr><th>Operation</th><th>Python list (array)</th><th>Linked list</th></tr></thead>
+    <tbody>
+      <tr><td>Access item by index</td><td>O(1)</td><td>O(n) — must walk from the start</td></tr>
+      <tr><td>Insert/delete at front</td><td>O(n) — shifts everything</td><td>O(1) — just rewires a pointer</td></tr>
+      <tr><td>Insert/delete at end</td><td>O(1) (amortized)</td><td>O(n) unless you track the tail</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>In everyday Python code, use the built-in <code>list</code> — it's fast and simple for almost everything. Linked lists matter for understanding how data structures trade off different operations, and they show up in interviews and lower-level systems code.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧱 2. Building a Node</h2>
+  <p>Each <span class="highlight">node</span> holds a value and a pointer (<code>next</code>) to the next node in the chain. The last node points to <code>None</code>.</p>
+
+  <pre><code>class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None</code></pre>
+
+  <p>Visually: <span class="node-box">10</span> → <span class="node-box">20</span> → <span class="node-box">30</span> → None</p>
+</div>
+
+<div class="card-section">
+  <h2>🔗 3. Building the Linked List Class</h2>
+  <pre><code>class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None    # points to the first node
+
+    def append(self, value):
+        new_node = Node(value)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:          # walk to the last node
+            current = current.next
+        current.next = new_node      # attach the new node at the end
+
+    def print_list(self):
+        current = self.head
+        values = []
+        while current:
+            values.append(str(current.value))
+            current = current.next
+        print(" -> ".join(values))
+
+ll = LinkedList()
+ll.append(10)
+ll.append(20)
+ll.append(30)
+ll.print_list()</code></pre>
+  <div class="output-block">10 -> 20 -> 30</div>
+</div>
+
+<div class="card-section">
+  <h2>➕ 4. Inserting at the Front — O(1)</h2>
+  <pre><code>class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def prepend(self, value):
+        new_node = Node(value)
+        new_node.next = self.head    # new node points to old first node
+        self.head = new_node         # new node becomes the first node
+
+ll = LinkedList()
+ll.append(20)
+ll.append(30)
+ll.prepend(10)
+ll.print_list()</code></pre>
+  <div class="output-block">10 -> 20 -> 30</div>
+
+  <p>No shifting happened — just two pointer assignments, regardless of how long the list is. Compare that to <code>python_list.insert(0, value)</code>, which is O(n) because everything after index 0 has to shift right.</p>
+</div>
+
+<div class="card-section">
+  <h2>🗑️ 5. Deleting a Node</h2>
+  <pre><code>class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def delete(self, value):
+        if self.head is None:
+            return
+
+        if self.head.value == value:      # deleting the first node
+            self.head = self.head.next
+            return
+
+        current = self.head
+        while current.next:
+            if current.next.value == value:
+                current.next = current.next.next   # skip over the deleted node
+                return
+            current = current.next
+
+ll = LinkedList()
+ll.append(10)
+ll.append(20)
+ll.append(30)
+ll.delete(20)
+ll.print_list()</code></pre>
+  <div class="output-block">10 -> 30</div>
+
+  <p>Deleting means re-pointing <code>current.next</code> to skip the target node — the node itself is simply abandoned (Python's garbage collector cleans it up), nothing needs to shift.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does each node in a linked list store?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Only a value</li>
+      <li onclick="checkAnswer(this,'correct')">b) A value and a pointer to the next node</li>
+      <li onclick="checkAnswer(this,'wrong')">c) An index number</li>
+      <li onclick="checkAnswer(this,'wrong')">d) A pointer to every other node</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. Why is inserting at the front O(1) for a linked list but O(n) for a Python list?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Linked lists are always faster at everything</li>
+      <li onclick="checkAnswer(this,'correct')">b) A linked list just rewires a pointer; an array must shift every existing item over</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Python lists can't insert at the front</li>
+      <li onclick="checkAnswer(this,'wrong')">d) There's no real difference</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Why is accessing item #5000 slower in a linked list than a Python list?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It isn't slower</li>
+      <li onclick="checkAnswer(this,'correct')">b) A linked list must walk node-by-node from the head to reach it — O(n)</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Linked lists don't support numbers</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Python lists can't hold 5000 items</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Add a method <code>find(value)</code> to <code>LinkedList</code> that returns <code>True</code> if the value exists in the list, <code>False</code> otherwise.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, value):
+        new_node = Node(value)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+    def find(self, value):
+        current = self.head
+        while current:
+            if current.value == value:
+                return True
+            current = current.next
+        return False
+
+ll = LinkedList()
+ll.append(10)
+ll.append(20)
+print(ll.find(20))   # True
+print(ll.find(99))   # False</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Linked list — a chain of nodes, each pointing to the next</li>
+    <li>Fast insert/delete at the front — O(1), no shifting</li>
+    <li>Slow random access — O(n), must walk from the head</li>
+    <li>Python's built-in <code>list</code> is an array — opposite tradeoffs</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 39 Complete!</h3>
+  <p>You now understand the pointer-chasing tradeoff behind linked lists.</p>
+  <span class="next-badge">▶ Next: Trees</span>
+</div>
