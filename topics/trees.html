@@ -1,0 +1,221 @@
+<!-- ── Chapter 40: Trees ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #22c55e, #16a34a); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🌳 Chapter 40</span>
+  <h1>Trees — Binary Tree &amp; BST</h1>
+  <p>A branching structure — one root, each node with children — perfect for hierarchical data and fast lookups.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🌳</div>
+  <h1>🌳 Data That Branches</h1>
+  <p>File systems, org charts, HTML — real-world data is often hierarchical, not a flat line. A tree models "one parent, many children" naturally.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Tree Vocabulary</h2>
+  <table>
+    <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>Root</td><td>The top node — has no parent</td></tr>
+      <tr><td>Node</td><td>Any single element in the tree</td></tr>
+      <tr><td>Child</td><td>A node directly connected below another node</td></tr>
+      <tr><td>Leaf</td><td>A node with no children</td></tr>
+      <tr><td>Binary Tree</td><td>Each node has AT MOST 2 children ("left" and "right")</td></tr>
+    </tbody>
+  </table>
+
+  <div class="analogy-box">
+    <h3>🗂️ Real-Life Analogy</h3>
+    <p>A company org chart: the CEO is the root, managers are children of the CEO, employees are children of managers. Anyone with no one reporting to them is a leaf.</p>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧱 2. Building a Binary Tree</h2>
+  <pre><code>class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+# Build this tree manually:
+#         10
+#        /  \\
+#       5    15
+#      / \\     \\
+#     3   7     20
+
+root = TreeNode(10)
+root.left = TreeNode(5)
+root.right = TreeNode(15)
+root.left.left = TreeNode(3)
+root.left.right = TreeNode(7)
+root.right.right = TreeNode(20)</code></pre>
+</div>
+
+<div class="card-section">
+  <h2>🔍 3. Binary Search Tree (BST) — Ordering Rule</h2>
+  <p>A BST adds one rule: for every node, everything in its <strong>left</strong> subtree is smaller, everything in its <strong>right</strong> subtree is bigger. This makes searching fast.</p>
+
+  <pre><code>class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, value):
+        if self.root is None:
+            self.root = TreeNode(value)
+        else:
+            self._insert(self.root, value)
+
+    def _insert(self, node, value):
+        if value < node.value:
+            if node.left is None:
+                node.left = TreeNode(value)
+            else:
+                self._insert(node.left, value)
+        else:
+            if node.right is None:
+                node.right = TreeNode(value)
+            else:
+                self._insert(node.right, value)
+
+bst = BST()
+for num in [10, 5, 15, 3, 7, 20]:
+    bst.insert(num)</code></pre>
+  <p>Each <code>insert</code> compares the new value against the current node and recurses left or right — this is <a href="#" onclick="loadTopic('recursion.html'); return false;">recursion</a> in action, walking down the tree.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 4. Searching a BST — O(log n)</h2>
+  <pre><code>    def search(self, value):
+        return self._search(self.root, value)
+
+    def _search(self, node, value):
+        if node is None:
+            return False
+        if node.value == value:
+            return True
+        elif value < node.value:
+            return self._search(node.left, value)    # only look left
+        else:
+            return self._search(node.right, value)   # only look right
+
+bst = BST()
+for num in [10, 5, 15, 3, 7, 20]:
+    bst.insert(num)
+
+print(bst.search(7))     # True
+print(bst.search(100))   # False</code></pre>
+  <div class="output-block">True
+False</div>
+
+  <p>Just like <a href="#" onclick="loadTopic('searching.html'); return false;">binary search</a> on a sorted list, each comparison eliminates half the remaining tree — O(log n) on a balanced tree, instead of checking every node.</p>
+</div>
+
+<div class="card-section">
+  <h2>🚶 5. Traversals — Visiting Every Node</h2>
+  <p>Three common orders to walk through a tree, each recursive.</p>
+
+  <pre><code>    def inorder(self, node, result=None):
+        if result is None:
+            result = []
+        if node:
+            self.inorder(node.left, result)
+            result.append(node.value)
+            self.inorder(node.right, result)
+        return result
+
+bst = BST()
+for num in [10, 5, 15, 3, 7, 20]:
+    bst.insert(num)
+
+print(bst.inorder(bst.root))</code></pre>
+  <div class="output-block">[3, 5, 7, 10, 15, 20]</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span><strong>In-order</strong> (left, node, right) on a BST always visits values in sorted order — a free side effect of the BST ordering rule. <strong>Pre-order</strong> (node, left, right) is used to copy a tree. <strong>Post-order</strong> (left, right, node) is used to safely delete a tree bottom-up.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. In a Binary Search Tree, where do values SMALLER than a node go?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Right subtree</li>
+      <li onclick="checkAnswer(this,'correct')">b) Left subtree</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Anywhere</li>
+      <li onclick="checkAnswer(this,'wrong')">d) They can't be added</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What is a "leaf" node?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) The root of the tree</li>
+      <li onclick="checkAnswer(this,'correct')">b) A node with no children</li>
+      <li onclick="checkAnswer(this,'wrong')">c) A node with exactly 2 children</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Any node in the middle</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What does an in-order traversal of a BST produce?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Values in random order</li>
+      <li onclick="checkAnswer(this,'correct')">b) Values in sorted (ascending) order</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Only the leaf nodes</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Only the root value</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a method <code>find_min(node)</code> that returns the smallest value in a BST (hint: keep going left).
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>    def find_min(self, node):
+        current = node
+        while current.left:      # smallest value is always the leftmost node
+            current = current.left
+        return current.value
+
+bst = BST()
+for num in [10, 5, 15, 3, 7, 20]:
+    bst.insert(num)
+
+print(bst.find_min(bst.root))   # 3</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Tree — root, nodes, children, leaves; binary tree — max 2 children per node</li>
+    <li>BST rule — left subtree smaller, right subtree bigger than the node</li>
+    <li>BST search/insert — O(log n) on a balanced tree, using the same halving idea as binary search</li>
+    <li>In-order traversal of a BST always yields sorted order</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 40 Complete!</h3>
+  <p>You can now model and search hierarchical data efficiently.</p>
+  <span class="next-badge">▶ Next: Hashing</span>
+</div>
