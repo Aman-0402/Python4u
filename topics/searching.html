@@ -1,0 +1,176 @@
+<!-- ── Chapter 36: Searching Algorithms ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔎 Chapter 36</span>
+  <h1>Searching Algorithms</h1>
+  <p>Two ways to find an item in a list — one that checks everything, one that's much smarter.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔎</div>
+  <h1>🔎 Finding a Needle in a List</h1>
+  <p><code>in</code> and <code>.index()</code> already search for you — but understanding how searching actually works explains why some lookups are instant and others crawl.</p>
+</div>
+
+<div class="card-section">
+  <h2>➡️ 1. Linear Search — Check Everything</h2>
+  <p>Start at the first item, check each one in order, stop when found (or the list runs out). Works on ANY list — sorted or not.</p>
+
+  <pre><code>def linear_search(items, target):
+    for index, value in enumerate(items):
+        if value == target:
+            return index          # found it — return position
+    return -1                     # not found
+
+names = ["Ravi", "Sita", "Amit", "Priya"]
+print(linear_search(names, "Amit"))    # 2
+print(linear_search(names, "Karan"))   # -1</code></pre>
+  <div class="output-block">2
+-1</div>
+
+  <p>Worst case: the target is last, or missing entirely — every item gets checked. That's <a href="#" onclick="loadTopic('big-o.html'); return false;">O(n)</a>.</p>
+</div>
+
+<div class="card-section">
+  <h2>🪓 2. Binary Search — Divide and Conquer</h2>
+  <p>Requires a <strong>sorted</strong> list. Check the middle item: if the target is smaller, ignore the entire right half; if bigger, ignore the entire left half. Repeat.</p>
+
+  <pre><code>def binary_search(sorted_items, target):
+    low, high = 0, len(sorted_items) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if sorted_items[mid] == target:
+            return mid
+        elif sorted_items[mid] < target:
+            low = mid + 1          # target is in the right half
+        else:
+            high = mid - 1         # target is in the left half
+
+    return -1
+
+numbers = [2, 5, 8, 12, 16, 23, 38, 45, 56, 72, 91]
+print(binary_search(numbers, 23))   # 5
+print(binary_search(numbers, 100))  # -1</code></pre>
+  <div class="output-block">5
+-1</div>
+
+  <h3>Tracing it step by step, searching for 23</h3>
+  <table>
+    <thead><tr><th>Step</th><th>low</th><th>high</th><th>mid value</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>0</td><td>10</td><td>23 (index 5)</td><td>Found immediately!</td></tr>
+    </tbody>
+  </table>
+
+  <p>Tracing a miss (searching for 20) shows the halving in action:</p>
+  <table>
+    <thead><tr><th>Step</th><th>low</th><th>high</th><th>mid value</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>0</td><td>10</td><td>23 (index 5)</td><td>20 &lt; 23 → search left half</td></tr>
+      <tr><td>2</td><td>0</td><td>4</td><td>8 (index 2)</td><td>20 &gt; 8 → search right half</td></tr>
+      <tr><td>3</td><td>3</td><td>4</td><td>16 (index 4)</td><td>20 &gt; 16 → search right half</td></tr>
+      <tr><td>4</td><td>5</td><td>4</td><td>—</td><td>low &gt; high → not found</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Each step throws away half the remaining data — that's why binary search is <a href="#" onclick="loadTopic('big-o.html'); return false;">O(log n)</a>. Searching 1,000,000 sorted items takes at most ~20 comparisons, not 1,000,000.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>⚖️ 3. Linear vs Binary — When to Use Which</h2>
+  <table>
+    <thead><tr><th></th><th>Linear Search</th><th>Binary Search</th></tr></thead>
+    <tbody>
+      <tr><td>Requires sorted data?</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Time complexity</td><td>O(n)</td><td>O(log n)</td></tr>
+      <tr><td>Works on</td><td>Any list</td><td>Sorted lists/arrays only</td></tr>
+      <tr><td>Best for</td><td>Small or unsorted data, one-off search</td><td>Large sorted data, repeated searches</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>If your data isn't sorted and you only need to search it once, sorting first just to binary search is usually more expensive overall than a single linear search. Binary search wins when the data is already sorted, or you'll search it many times.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What must be true about the data before using binary search?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) It must contain only numbers</li>
+      <li onclick="checkAnswer(this,'correct')">b) It must already be sorted</li>
+      <li onclick="checkAnswer(this,'wrong')">c) It must have fewer than 100 items</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing special is required</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What is the time complexity of linear search in the worst case?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) O(1)</li>
+      <li onclick="checkAnswer(this,'correct')">b) O(n)</li>
+      <li onclick="checkAnswer(this,'wrong')">c) O(log n)</li>
+      <li onclick="checkAnswer(this,'wrong')">d) O(n²)</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. In binary search, if the middle value is LESS than the target, what happens next?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Search stops — not found</li>
+      <li onclick="checkAnswer(this,'wrong')">b) Search the left half next</li>
+      <li onclick="checkAnswer(this,'correct')">c) Search the right half next</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Start over from the beginning</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write <code>binary_search_recursive(sorted_items, target, low, high)</code> — same logic as above, but using recursion instead of a while loop.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def binary_search_recursive(sorted_items, target, low, high):
+    if low > high:
+        return -1                       # base case: not found
+
+    mid = (low + high) // 2
+    if sorted_items[mid] == target:
+        return mid                      # base case: found
+    elif sorted_items[mid] < target:
+        return binary_search_recursive(sorted_items, target, mid + 1, high)
+    else:
+        return binary_search_recursive(sorted_items, target, low, mid - 1)
+
+numbers = [2, 5, 8, 12, 16, 23, 38, 45]
+print(binary_search_recursive(numbers, 38, 0, len(numbers) - 1))   # 6</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li>Linear search — checks every item in order, O(n), works on any list</li>
+    <li>Binary search — repeatedly halves the search space, O(log n), needs sorted data</li>
+    <li>Binary search wins on large, sorted, or repeatedly-searched data</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 36 Complete!</h3>
+  <p>You now know two fundamentally different ways to find data, and when each one wins.</p>
+  <span class="next-badge">▶ Next: Sorting Algorithms</span>
+</div>
