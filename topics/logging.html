@@ -1,0 +1,192 @@
+<!-- ── Chapter 32: Logging ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #78716c, #57534e); }
+.log-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.85em;
+}
+.log-debug { background: rgba(100,116,139,0.15); color: #94a3b8; }
+.log-info { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.log-warning { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.log-error { background: rgba(239,68,68,0.15); color: #f87171; }
+.log-critical { background: rgba(220,38,38,0.2); color: #ef4444; }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🪵 Chapter 32</span>
+  <h1>Logging</h1>
+  <p>Record what your program is doing — with severity levels, timestamps, and file output — instead of scattering <code>print()</code> everywhere.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🪵</div>
+  <h1>🪵 Better Than print()</h1>
+  <p><code>print()</code> is fine for quick checks. But real programs need a permanent, filterable record of what happened — that's what the <code>logging</code> module gives you.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. Basic Logging</h2>
+  <pre><code>import logging
+
+logging.basicConfig(level=logging.INFO)
+
+logging.debug("This won't show — below INFO level")
+logging.info("Server started")
+logging.warning("Disk space running low")
+logging.error("Failed to connect to database")
+logging.critical("System is shutting down")</code></pre>
+  <div class="output-block">INFO:root:Server started
+WARNING:root:Disk space running low
+ERROR:root:Failed to connect to database
+CRITICAL:root:System is shutting down</div>
+
+  <p><code>logging.debug()</code> was skipped because the configured level is <code>INFO</code> — only messages at that level or higher are shown.</p>
+</div>
+
+<div class="card-section">
+  <h2>📊 2. Log Levels — Lowest to Highest</h2>
+  <table>
+    <thead><tr><th>Level</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td><span class="log-tag log-debug">DEBUG</span></td><td>Detailed info for diagnosing problems</td></tr>
+      <tr><td><span class="log-tag log-info">INFO</span></td><td>Confirmation that things are working normally</td></tr>
+      <tr><td><span class="log-tag log-warning">WARNING</span></td><td>Something unexpected, but program still works</td></tr>
+      <tr><td><span class="log-tag log-error">ERROR</span></td><td>A serious problem — some function failed</td></tr>
+      <tr><td><span class="log-tag log-critical">CRITICAL</span></td><td>Program may not be able to continue</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Setting <code>level=logging.WARNING</code> shows WARNING, ERROR, and CRITICAL — but hides DEBUG and INFO. Set the level based on how much detail you want to see.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🎨 3. Custom Format With Timestamps</h2>
+  <pre><code>import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logging.info("Attendance marked for Ravi")
+logging.warning("Late submission from Sita")</code></pre>
+  <div class="output-block">2026-07-09 14:20:11,502 - INFO - Attendance marked for Ravi
+2026-07-09 14:20:11,503 - WARNING - Late submission from Sita</div>
+</div>
+
+<div class="card-section">
+  <h2>📄 4. Logging to a File</h2>
+  <pre><code>import logging
+
+logging.basicConfig(
+    filename="app.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logging.info("Application started")
+logging.error("Payment gateway timeout")
+# messages are written to app.log instead of the terminal</code></pre>
+
+  <div class="callout info">
+    <span>ℹ️</span>
+    <span>File logs stay after the program closes — great for debugging issues that happened while nobody was watching the terminal.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧭 5. Named Loggers (Per Module)</h2>
+  <pre><code>import logging
+
+logger = logging.getLogger("student_service")
+logger.setLevel(logging.INFO)
+
+handler = logging.StreamHandler()
+formatter = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+logger.info("Student record created")</code></pre>
+  <div class="output-block">student_service - INFO - Student record created</div>
+
+  <p>Named loggers let large projects tell which module a message came from.</p>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. Which log level is the LOWEST severity?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'correct')">a) DEBUG</li>
+      <li onclick="checkAnswer(this,'wrong')">b) ERROR</li>
+      <li onclick="checkAnswer(this,'wrong')">c) CRITICAL</li>
+      <li onclick="checkAnswer(this,'wrong')">d) WARNING</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. If <code>level=logging.WARNING</code>, which messages show?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Only DEBUG</li>
+      <li onclick="checkAnswer(this,'wrong')">b) All levels</li>
+      <li onclick="checkAnswer(this,'correct')">c) WARNING, ERROR, and CRITICAL</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Nothing</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What's a key advantage of logging to a file over using print()?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Files run faster</li>
+      <li onclick="checkAnswer(this,'correct')">b) Logs persist after the program closes, and can be filtered by level</li>
+      <li onclick="checkAnswer(this,'wrong')">c) print() doesn't work in Python 3</li>
+      <li onclick="checkAnswer(this,'wrong')">d) No real advantage</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Set up logging that writes INFO and above to a file called <code>orders.log</code>, with timestamp and level in each line. Log one INFO message "Order #101 placed" and one ERROR message "Payment failed for #101".
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>import logging
+
+logging.basicConfig(
+    filename="orders.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logging.info("Order #101 placed")
+logging.error("Payment failed for #101")</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>logging.basicConfig(level=..)</code> — set minimum severity to show</li>
+    <li>Levels, low to high: DEBUG, INFO, WARNING, ERROR, CRITICAL</li>
+    <li><code>filename="app.log"</code> — write logs to a file instead of the terminal</li>
+    <li><code>format="..."</code> — customize timestamp and message layout</li>
+    <li><code>logging.getLogger(name)</code> — named logger for larger projects</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 32 Complete!</h3>
+  <p>Your programs now keep a proper, filterable record of what happened.</p>
+  <span class="next-badge">▶ Next: Memory &amp; Performance</span>
+</div>
