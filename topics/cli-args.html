@@ -1,0 +1,176 @@
+<!-- ── Chapter 31: Command-line Arguments ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #64748b, #334155); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">💻 Chapter 31</span>
+  <h1>Command-line Arguments</h1>
+  <p>Let people configure your script from the terminal instead of editing the code every time.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">💻</div>
+  <h1>💻 Scripts That Take Instructions</h1>
+  <p>Instead of hardcoding a filename or a number inside your script, let the user pass it in when they run the program — just like real command-line tools do.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. The Raw Way — <code>sys.argv</code></h2>
+  <pre><code># greet.py
+import sys
+
+name = sys.argv[1]
+print(f"Hello, {name}!")</code></pre>
+
+  <pre><code># terminal
+$ python greet.py Ravi</code></pre>
+  <div class="output-block">Hello, Ravi!</div>
+
+  <p><code>sys.argv</code> is a list of everything typed on the command line. <code>sys.argv[0]</code> is the script name itself, <code>sys.argv[1]</code> is the first argument, and so on.</p>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>If the user forgets to pass an argument, <code>sys.argv[1]</code> raises <code>IndexError</code>. No built-in help text, no type checking — that's why <code>argparse</code> is preferred for real tools.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🛠️ 2. The Proper Way — <code>argparse</code></h2>
+  <pre><code># greet.py
+import argparse
+
+parser = argparse.ArgumentParser(description="Greet someone by name")
+parser.add_argument("name", help="the person's name")
+parser.add_argument("--formal", action="store_true", help="use a formal greeting")
+
+args = parser.parse_args()
+
+if args.formal:
+    print(f"Good day, {args.name}.")
+else:
+    print(f"Hey {args.name}!")</code></pre>
+
+  <pre><code># terminal
+$ python greet.py Ravi
+$ python greet.py Ravi --formal</code></pre>
+  <div class="output-block">Hey Ravi!
+Good day, Ravi.</div>
+</div>
+
+<div class="card-section">
+  <h2>🆓 3. Free Help Text</h2>
+  <pre><code># terminal
+$ python greet.py --help</code></pre>
+  <div class="output-block">usage: greet.py [-h] [--formal] name
+
+Greet someone by name
+
+positional arguments:
+  name        the person's name
+
+options:
+  -h, --help  show this help message and exit
+  --formal    use a formal greeting</div>
+
+  <p><code>argparse</code> generates this <code>--help</code> output automatically from your <code>add_argument()</code> calls — no extra work needed.</p>
+</div>
+
+<div class="card-section">
+  <h2>🔢 4. Optional Arguments With Values</h2>
+  <pre><code>import argparse
+
+parser = argparse.ArgumentParser(description="Calculate simple interest")
+parser.add_argument("principal", type=float, help="loan amount")
+parser.add_argument("--rate", type=float, default=5.0, help="interest rate percent (default 5.0)")
+parser.add_argument("--years", type=int, default=1, help="number of years (default 1)")
+
+args = parser.parse_args()
+interest = args.principal * args.rate / 100 * args.years
+print(f"Interest: {interest}")</code></pre>
+
+  <pre><code># terminal
+$ python interest.py 10000 --rate 8 --years 3</code></pre>
+  <div class="output-block">Interest: 2400.0</div>
+
+  <table>
+    <thead><tr><th>Feature</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Required argument</td><td><code>parser.add_argument("name")</code></td></tr>
+      <tr><td>Optional flag</td><td><code>parser.add_argument("--formal", action="store_true")</code></td></tr>
+      <tr><td>Optional value with default</td><td><code>parser.add_argument("--rate", type=float, default=5.0)</code></td></tr>
+      <tr><td>Type conversion</td><td><code>type=int</code>, <code>type=float</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does <code>sys.argv[0]</code> contain?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) The first user argument</li>
+      <li onclick="checkAnswer(this,'correct')">b) The script's own filename</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Nothing, it's always empty</li>
+      <li onclick="checkAnswer(this,'wrong')">d) The last argument</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does <code>argparse</code> generate automatically that <code>sys.argv</code> doesn't?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Faster execution</li>
+      <li onclick="checkAnswer(this,'correct')">b) --help text and type validation</li>
+      <li onclick="checkAnswer(this,'wrong')">c) A GUI</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Internet access</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. What does <code>action="store_true"</code> do for an argument?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Requires a value after the flag</li>
+      <li onclick="checkAnswer(this,'correct')">b) Makes it a simple True/False flag with no value needed</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Saves the argument to a file</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Converts it to a string</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Build a CLI tool <code>square.py</code> that takes a required integer <code>number</code> and prints its square.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>import argparse
+
+parser = argparse.ArgumentParser(description="Print the square of a number")
+parser.add_argument("number", type=int, help="the number to square")
+args = parser.parse_args()
+
+print(args.number ** 2)
+
+# terminal: python square.py 7  -->  49</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>sys.argv</code> — raw list of command-line words, no validation</li>
+    <li><code>argparse</code> — parses arguments, auto-generates <code>--help</code></li>
+    <li><code>add_argument("name")</code> — required positional argument</li>
+    <li><code>add_argument("--flag", action="store_true")</code> — optional on/off flag</li>
+    <li><code>type=int</code> / <code>type=float</code> — auto-converts input text</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 31 Complete!</h3>
+  <p>Your scripts can now be configured from the terminal like real CLI tools.</p>
+  <span class="next-badge">▶ Next: Logging</span>
+</div>
