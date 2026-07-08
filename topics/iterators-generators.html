@@ -1,0 +1,180 @@
+<!-- ── Chapter 19: Iterators & Generators ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">🔁 Chapter 19</span>
+  <h1>Iterators &amp; Generators</h1>
+  <p>How <code>for</code> loops actually work under the hood, and how to build memory-efficient data streams.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">🔁</div>
+  <h1>🔁 One Value at a Time</h1>
+  <p>A generator produces values one at a time, on demand, instead of building the whole list in memory first. Useful for big data or infinite sequences.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. What is an Iterator?</h2>
+  <p>An <span class="highlight">iterator</span> is any object you can loop over with <code>next()</code>. Lists, strings, dicts are <em>iterable</em> — call <code>iter()</code> on them to get an iterator.</p>
+
+  <pre><code>numbers = [10, 20, 30]
+it = iter(numbers)
+
+print(next(it))   # 10
+print(next(it))   # 20
+print(next(it))   # 30
+print(next(it))   # raises StopIteration</code></pre>
+  <div class="output-block">10
+20
+30
+Traceback...
+StopIteration</div>
+
+  <p>A <code>for</code> loop does this automatically — it calls <code>iter()</code>, then <code>next()</code> repeatedly, and stops when it catches <code>StopIteration</code>.</p>
+</div>
+
+<div class="card-section">
+  <h2>🌱 2. Generator Functions — <code>yield</code></h2>
+  <p>A function with <code>yield</code> instead of <code>return</code> becomes a generator. Each call to <code>next()</code> resumes right where it left off.</p>
+
+  <h3>Regular function (builds full list)</h3>
+  <pre><code>def get_even_numbers(limit):
+    result = []
+    for n in range(limit):
+        if n % 2 == 0:
+            result.append(n)
+    return result
+
+print(get_even_numbers(10))</code></pre>
+  <div class="output-block">[0, 2, 4, 6, 8]</div>
+
+  <h3>Generator function (produces one at a time)</h3>
+  <pre><code>def get_even_numbers(limit):
+    for n in range(limit):
+        if n % 2 == 0:
+            yield n
+
+for num in get_even_numbers(10):
+    print(num)</code></pre>
+  <div class="output-block">0
+2
+4
+6
+8</div>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>The generator never stores the whole list in memory — it hands out one value, pauses, and waits for the next <code>next()</code> call. Great for huge files or endless streams.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>📄 3. Real Example — Reading a Big File Line by Line</h2>
+  <pre><code>def read_large_file(filename):
+    with open(filename) as f:
+        for line in f:
+            yield line.strip()
+
+# Only one line is in memory at a time, even for a 10 GB file
+for line in read_large_file("orders.txt"):
+    print(line)</code></pre>
+
+  <div class="callout info">
+    <span>ℹ️</span>
+    <span>Loading a huge file with <code>.readlines()</code> puts every line in RAM at once. A generator reads and processes one line, then discards it.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧪 4. Generator Expressions</h2>
+  <p>Same idea as a list comprehension, but with <code>( )</code> instead of <code>[ ]</code> — values are made lazily, not all at once.</p>
+
+  <pre><code>squares_list = [n * n for n in range(1000000)]   # builds all 1,000,000 now
+squares_gen  = (n * n for n in range(1000000))    # builds nothing yet
+
+print(next(squares_gen))   # 0
+print(next(squares_gen))   # 1</code></pre>
+  <div class="output-block">0
+1</div>
+
+  <table>
+    <thead><tr><th>Feature</th><th>List</th><th>Generator</th></tr></thead>
+    <tbody>
+      <tr><td>Memory</td><td>Stores everything</td><td>Stores nothing extra</td></tr>
+      <tr><td>Speed to create</td><td>Slower (builds now)</td><td>Instant (builds on demand)</td></tr>
+      <tr><td>Reusable</td><td>Yes</td><td>No — exhausted after one pass</td></tr>
+      <tr><td>Syntax</td><td><code>[x for x in y]</code></td><td><code>(x for x in y)</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What keyword turns a function into a generator?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) return</li>
+      <li onclick="checkAnswer(this,'correct')">b) yield</li>
+      <li onclick="checkAnswer(this,'wrong')">c) generate</li>
+      <li onclick="checkAnswer(this,'wrong')">d) next</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What error does <code>next()</code> raise when there are no more values?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) IndexError</li>
+      <li onclick="checkAnswer(this,'correct')">b) StopIteration</li>
+      <li onclick="checkAnswer(this,'wrong')">c) ValueError</li>
+      <li onclick="checkAnswer(this,'wrong')">d) EOFError</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Why use a generator over a list for a huge file?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Generators are always faster to write</li>
+      <li onclick="checkAnswer(this,'correct')">b) Generators don't hold the whole file in memory</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Lists can't read files</li>
+      <li onclick="checkAnswer(this,'wrong')">d) No difference</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Write a generator <code>countdown(n)</code> that yields numbers from <code>n</code> down to <code>1</code>.
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+for num in countdown(5):
+    print(num)
+# 5 4 3 2 1</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>iter()</code> gets an iterator; <code>next()</code> pulls one value</li>
+    <li><code>yield</code> pauses a function and returns a value — resumes on next call</li>
+    <li>Generator expressions: <code>(x for x in y)</code> — lazy, memory-friendly</li>
+    <li>Use generators for large or infinite data streams</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 19 Complete!</h3>
+  <p>You now understand how loops work internally and how to stream data lazily.</p>
+  <span class="next-badge">▶ Next: Decorators &amp; Closures</span>
+</div>
