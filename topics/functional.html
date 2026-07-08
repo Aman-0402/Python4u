@@ -1,0 +1,163 @@
+<!-- ── Chapter 28: Functional Tools ── -->
+<style>
+.chapter-badge { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+</style>
+
+<div class="chapter-header">
+  <span class="chapter-badge">λ Chapter 28</span>
+  <h1>Functional Tools — lambda, map, filter, reduce</h1>
+  <p>Short throwaway functions and quick ways to transform or filter data without writing loops.</p>
+</div>
+
+<div class="hero-section">
+  <div class="hero-icon-lg">λ</div>
+  <h1>λ Small Functions, Big Reuse</h1>
+  <p>Sometimes you need a tiny one-line function just to pass somewhere else. Python has a compact syntax for that, plus tools that use it to transform lists.</p>
+</div>
+
+<div class="card-section">
+  <h2>⚡ 1. <code>lambda</code> — Anonymous Functions</h2>
+
+  <h3>Normal function</h3>
+  <pre><code>def square(x):
+    return x * x
+
+print(square(5))</code></pre>
+  <div class="output-block">25</div>
+
+  <h3>Same thing as a lambda</h3>
+  <pre><code>square = lambda x: x * x
+print(square(5))</code></pre>
+  <div class="output-block">25</div>
+
+  <p><code>lambda arguments: expression</code> — no <code>def</code>, no <code>return</code>, always a single expression.</p>
+
+  <div class="callout tip">
+    <span>💡</span>
+    <span>Use <code>lambda</code> for short, throwaway functions passed as arguments. For anything longer than one line, write a normal <code>def</code> function.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🔄 2. <code>map()</code> — Transform Every Item</h2>
+  <pre><code>prices = [100, 250, 75, 500]
+with_tax = list(map(lambda p: p * 1.18, prices))
+
+print(with_tax)</code></pre>
+  <div class="output-block">[118.0, 295.0, 88.5, 590.0]</div>
+
+  <p><code>map(function, iterable)</code> applies the function to every item and returns a map object — wrap in <code>list()</code> to see results.</p>
+</div>
+
+<div class="card-section">
+  <h2>🔎 3. <code>filter()</code> — Keep Only Matching Items</h2>
+  <pre><code>marks = [55, 90, 42, 30, 78, 61]
+passed = list(filter(lambda m: m >= 40, marks))
+
+print(passed)</code></pre>
+  <div class="output-block">[55, 90, 42, 78, 61]</div>
+
+  <p><code>filter(function, iterable)</code> keeps only items where the function returns <code>True</code>.</p>
+
+  <div class="callout info">
+    <span>ℹ️</span>
+    <span>The same result can be written as a list comprehension: <code>[m for m in marks if m >= 40]</code> — comprehensions are usually preferred in modern Python for readability.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>➕ 4. <code>reduce()</code> — Combine All Items Into One</h2>
+  <pre><code>from functools import reduce
+
+cart = [250, 40, 999, 15, 620]
+total = reduce(lambda acc, price: acc + price, cart)
+
+print(total)</code></pre>
+  <div class="output-block">1924</div>
+
+  <p><code>reduce(function, iterable)</code> repeatedly applies the function, carrying an accumulator, until one final value remains.</p>
+
+  <table>
+    <thead><tr><th>Step</th><th>acc</th><th>price</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>250</td><td>40</td><td>290</td></tr>
+      <tr><td>2</td><td>290</td><td>999</td><td>1289</td></tr>
+      <tr><td>3</td><td>1289</td><td>15</td><td>1304</td></tr>
+      <tr><td>4</td><td>1304</td><td>620</td><td>1924</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
+  <h2>📊 5. Sorting With a Key Function</h2>
+  <pre><code>students = [("Ravi", 78), ("Sita", 92), ("Amit", 65)]
+
+by_score = sorted(students, key=lambda s: s[1], reverse=True)
+print(by_score)</code></pre>
+  <div class="output-block">[('Sita', 92), ('Ravi', 78), ('Amit', 65)]</div>
+</div>
+
+<div class="card-section">
+  <h2>🎯 Mini Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. What does <code>lambda x: x * 2</code> represent?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) A loop</li>
+      <li onclick="checkAnswer(this,'correct')">b) A small anonymous function that doubles its input</li>
+      <li onclick="checkAnswer(this,'wrong')">c) A class definition</li>
+      <li onclick="checkAnswer(this,'wrong')">d) A syntax error</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. What does <code>filter()</code> return items based on?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Alphabetical order</li>
+      <li onclick="checkAnswer(this,'correct')">b) Whether the function returns True for that item</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Random selection</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Item length only</li>
+    </ul>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. Which module provides <code>reduce()</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) itertools</li>
+      <li onclick="checkAnswer(this,'correct')">b) functools</li>
+      <li onclick="checkAnswer(this,'wrong')">c) collections</li>
+      <li onclick="checkAnswer(this,'wrong')">d) math</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🧑‍💻 Practice</h2>
+
+  <div class="practice-zone">
+    <strong>🚀 Challenge:</strong> Given <code>names = ["ravi", "SITA", "Amit"]</code>, use <code>map</code> and a <code>lambda</code> to capitalize every name properly (first letter uppercase, rest lowercase).
+  </div>
+  <button type="button" class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+  <div class="answer">
+    <pre><code>names = ["ravi", "SITA", "Amit"]
+fixed = list(map(lambda n: n.capitalize(), names))
+print(fixed)   # ['Ravi', 'Sita', 'Amit']</code></pre>
+  </div>
+</div>
+
+<div class="summary-box">
+  <h3>✍️ Chapter Summary</h3>
+  <ul>
+    <li><code>lambda args: expr</code> — short, unnamed, single-expression function</li>
+    <li><code>map(func, iterable)</code> — transform every item</li>
+    <li><code>filter(func, iterable)</code> — keep items where func returns True</li>
+    <li><code>reduce(func, iterable)</code> — combine all items into one value</li>
+    <li><code>sorted(data, key=lambda x: ...)</code> — sort by a custom rule</li>
+  </ul>
+</div>
+
+<div class="completion-banner">
+  <h3>🎉 Chapter 28 Complete!</h3>
+  <p>You can now transform and combine data with functional-style tools.</p>
+  <span class="next-badge">▶ Next: Date &amp; Time</span>
+</div>
