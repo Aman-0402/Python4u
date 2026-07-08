@@ -153,6 +153,112 @@ conn.close()</code></pre>
 </div>
 
 <div class="card-section">
+  <h2>&#128737;&#65039; Why <code>?</code> Instead of an f-string — SQL Injection</h2>
+  <p>Every insert above used <code>VALUES (?, ?)</code> plus a separate tuple of values — that's not just style, it's a security requirement.</p>
+
+  <h3>&#10060; The Dangerous Way</h3>
+  <pre><code>name = "Aman'); DROP TABLE student; --"
+cur.execute(f"INSERT INTO student (name, grade) VALUES ('{name}', 90)")
+# The attacker's input closes the string early and injects a NEW SQL command —
+# this can delete your entire table.</code></pre>
+
+  <h3>&#9989; The Safe Way</h3>
+  <pre><code>name = "Aman'); DROP TABLE student; --"
+cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", (name, 90))
+# The ? placeholder treats "name" as plain data, never as SQL code —
+# it gets inserted literally, harmlessly, as a weird-looking name.</code></pre>
+
+  <div class="callout danger">
+    <span>&#128680;</span>
+    <span>Never build SQL with f-strings or <code>+</code> concatenation using outside input (form fields, API data, user typing). Always use <code>?</code> placeholders — this attack is called <strong>SQL injection</strong> and is one of the most common real-world security bugs.</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>&#8617;&#65039; Transactions &amp; Rollback</h2>
+  <p>A <span class="highlight">transaction</span> groups several changes together — either all of them save, or none do. Useful when one action depends on another succeeding (like transferring marks between two students).</p>
+
+  <pre><code>import sqlite3
+
+conn = sqlite3.connect('school.db')
+cur = conn.cursor()
+
+try:
+    cur.execute("UPDATE student SET grade = grade - 10 WHERE name = 'Aman'")
+    cur.execute("UPDATE student SET grade = grade + 10 WHERE name = 'Preet'")
+    conn.commit()          # both updates saved together
+    print("Transfer successful")
+except sqlite3.Error as e:
+    conn.rollback()         # undo BOTH updates if anything failed
+    print(f"Transfer failed, rolled back: {e}")</code></pre>
+
+  <p>If the second <code>UPDATE</code> fails (e.g. Preet doesn't exist), <code>rollback()</code> undoes the first one too — Aman doesn't lose marks for nothing.</p>
+</div>
+
+<div class="card-section">
+  <h2>&#128279; Joins &amp; Foreign Keys — Linking Tables</h2>
+  <p>Real apps split data across multiple tables and connect them with a shared ID — a <span class="highlight">foreign key</span>.</p>
+
+  <pre><code>cur.execute('''
+CREATE TABLE IF NOT EXISTS class (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    class_name TEXT NOT NULL
+)
+''')
+
+cur.execute('''
+CREATE TABLE IF NOT EXISTS student (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    grade INTEGER NOT NULL,
+    class_id INTEGER,
+    FOREIGN KEY (class_id) REFERENCES class(id)
+)
+''')
+
+cur.execute("INSERT INTO class (class_name) VALUES ('10-A')")
+cur.execute("INSERT INTO student (name, grade, class_id) VALUES (?, ?, ?)", ("Ravi", 88, 1))
+conn.commit()</code></pre>
+
+  <p><code>class_id</code> in <code>student</code> points to the <code>id</code> in <code>class</code> — that link is the foreign key. Use <code>JOIN</code> to pull matching rows from both tables in one query:</p>
+
+  <pre><code>cur.execute('''
+SELECT student.name, student.grade, class.class_name
+FROM student
+JOIN class ON student.class_id = class.id
+''')
+print(cur.fetchall())</code></pre>
+  <div class="output-block">[('Ravi', 88, '10-A')]</div>
+</div>
+
+<div class="card-section">
+  <h2>&#9888;&#65039; Handling Database Errors</h2>
+  <pre><code>import sqlite3
+
+conn = sqlite3.connect('school.db')
+cur = conn.cursor()
+
+try:
+    cur.execute("INSERT INTO student (name, grade) VALUES (?, ?)", (None, 90))
+    conn.commit()
+except sqlite3.IntegrityError as e:
+    print(f"Data rule violated: {e}")   # e.g. NOT NULL constraint failed
+except sqlite3.OperationalError as e:
+    print(f"SQL/table problem: {e}")    # e.g. table doesn't exist, bad syntax
+finally:
+    conn.close()</code></pre>
+  <div class="output-block">Data rule violated: NOT NULL constraint failed: student.name</div>
+
+  <table>
+    <thead><tr><th>Exception</th><th>Common cause</th></tr></thead>
+    <tbody>
+      <tr><td><code>IntegrityError</code></td><td>Violated a rule like NOT NULL, UNIQUE, or a foreign key constraint</td></tr>
+      <tr><td><code>OperationalError</code></td><td>Bad SQL syntax, or table/column doesn't exist</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-section">
   <h2>&#127918; Quiz Time!</h2>
   <div class="quiz-question">
     <p>1. Which module is used in Python for SQLite?</p>
@@ -216,6 +322,22 @@ conn.close()</code></pre>
       <li onclick="checkAnswer(this, 'correct')">a) To filter specific rows</li>
       <li onclick="checkAnswer(this, 'wrong')">b) To change table name</li>
       <li onclick="checkAnswer(this, 'wrong')">c) To join two tables</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>9. Why use <code>?</code> placeholders instead of building SQL with an f-string?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) It's shorter to type</li>
+      <li onclick="checkAnswer(this, 'correct')">b) It prevents SQL injection from user input</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) f-strings don't work with sqlite3</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>10. What does <code>conn.rollback()</code> do?</p>
+    <ul>
+      <li onclick="checkAnswer(this, 'wrong')">a) Saves all pending changes</li>
+      <li onclick="checkAnswer(this, 'correct')">b) Undoes changes made since the last commit</li>
+      <li onclick="checkAnswer(this, 'wrong')">c) Deletes the whole database file</li>
     </ul>
   </div>
 </div>
