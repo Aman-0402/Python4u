@@ -82,7 +82,83 @@ add finished
 </div>
 
 <div class="card-section">
-  <h2>⏱️ 3. Practical Example — Timing a Function</h2>
+  <h2>🎭 3. The Hidden Gotcha — <code>functools.wraps</code></h2>
+  <p>After decorating, <code>add</code> is now literally the <code>wrapper</code> function, not the original. That breaks introspection — anything checking the function's name or docstring gets the wrong answer.</p>
+
+  <h3>The problem</h3>
+  <pre><code>def log_call(func):
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+    return wrapper
+
+@log_call
+def add(a, b):
+    """Add two numbers together."""
+    return a + b
+
+print(add.__name__)   # expected "add"
+print(add.__doc__)    # expected "Add two numbers together."</code></pre>
+  <div class="output-block">wrapper
+None</div>
+
+  <p>The function's identity got silently swapped for the wrapper's — confusing for debugging, documentation tools, and anything using <code>func.__name__</code>.</p>
+
+  <h3>The fix</h3>
+  <pre><code>from functools import wraps
+
+def log_call(func):
+    @wraps(func)              # copies __name__, __doc__, etc. from func onto wrapper
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+    return wrapper
+
+@log_call
+def add(a, b):
+    """Add two numbers together."""
+    return a + b
+
+print(add.__name__)   # add
+print(add.__doc__)    # Add two numbers together.</code></pre>
+  <div class="output-block">add
+Add two numbers together.</div>
+
+  <div class="callout warning">
+    <span>⚠️</span>
+    <span>Always add <code>@wraps(func)</code> to a decorator's inner wrapper. It costs one line and prevents a real, commonly-hit bug in any code that introspects functions (debuggers, API doc generators, some testing frameworks).</span>
+  </div>
+</div>
+
+<div class="card-section">
+  <h2>🥞 4. Stacking Multiple Decorators</h2>
+  <p>You can apply more than one decorator to the same function — they wrap from the bottom up, closest to the function first.</p>
+
+  <pre><code>from functools import wraps
+
+def bold(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"&lt;b&gt;{func(*args, **kwargs)}&lt;/b&gt;"
+    return wrapper
+
+def italic(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"&lt;i&gt;{func(*args, **kwargs)}&lt;/i&gt;"
+    return wrapper
+
+@bold
+@italic
+def greet(name):
+    return f"Hello, {name}"
+
+print(greet("Ravi"))</code></pre>
+  <div class="output-block">&lt;b&gt;&lt;i&gt;Hello, Ravi&lt;/i&gt;&lt;/b&gt;</div>
+
+  <p>Order matters: <code>italic</code> runs first (closest to the function), wrapping the result in <code>&lt;i&gt;</code>. Then <code>bold</code> wraps that entire result in <code>&lt;b&gt;</code>. Reading bottom-to-top tells you the actual execution order.</p>
+</div>
+
+<div class="card-section">
+  <h2>⏱️ 5. Practical Example — Timing a Function</h2>
   <pre><code>import time
 
 def timer(func):
@@ -104,7 +180,7 @@ process_orders(1000000)</code></pre>
 </div>
 
 <div class="card-section">
-  <h2>🔑 4. Decorator With Arguments</h2>
+  <h2>🔑 6. Decorator With Arguments</h2>
   <p>Add a third layer if the decorator itself needs settings.</p>
 
   <pre><code>def require_role(role):
@@ -156,6 +232,24 @@ Access denied. Needs role: admin</div>
       <li onclick="checkAnswer(this,'correct')">b) So the decorator works on functions with any number of arguments</li>
       <li onclick="checkAnswer(this,'wrong')">c) To make the code longer</li>
       <li onclick="checkAnswer(this,'wrong')">d) It's optional and never needed</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>4. Without <code>@wraps(func)</code>, what happens to a decorated function's <code>__name__</code>?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) Stays correct automatically</li>
+      <li onclick="checkAnswer(this,'correct')">b) Becomes "wrapper" instead of the real function name</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Raises an error</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Becomes None</li>
+    </ul>
+  </div>
+  <div class="quiz-question">
+    <p>5. In <code>@bold</code> above <code>@italic</code> above a function, which decorator's wrapping is applied first?</p>
+    <ul>
+      <li onclick="checkAnswer(this,'wrong')">a) bold, since it's listed first</li>
+      <li onclick="checkAnswer(this,'correct')">b) italic, since it's closest to the function</li>
+      <li onclick="checkAnswer(this,'wrong')">c) Both run at the same time</li>
+      <li onclick="checkAnswer(this,'wrong')">d) Neither runs</li>
     </ul>
   </div>
 </div>
